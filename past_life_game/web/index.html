@@ -1,0 +1,1618 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>나의 전생은 누구였을까</title>
+<meta name="description" content="스무 개의 철학적 딜레마로 읽어 내는 가상의 전생 이야기.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="나의 전생은 누구였을까 — 철학이 밝혀내는 또 하나의 나">
+<meta property="og:description" content="스무 개의 딜레마에 답하면, 당신과 가장 닮은 가상의 전생 인물과 그의 삶을 들려드립니다.">
+<meta name="theme-color" content="#14121b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Song+Myung&display=swap">
+<style>
+/* Layout: one narrow reading column on an ink-dark night; a red-seal "portrait" for each character; result reads top to bottom like a scroll. Single dark look by choice. */
+:root {
+  --ink: #14121b;
+  --panel: #211d2b;
+  --line: #3a3448;
+  --paper: #efe6d2;
+  --dim: #a89f8c;
+  --gold: #d9b45b;
+  --display: "Song Myung", "Gowun Batang", "Apple SD Gothic Neo", serif;
+  --body: "Gowun Batang", "Apple SD Gothic Neo", "Malgun Gothic", serif;
+  color-scheme: dark;
+}
+[hidden] { display: none !important; }
+html { height: 100%; }
+body {
+  margin: 0; min-height: 100%;
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(217, 180, 91, 0.12), transparent 55%),
+    radial-gradient(ellipse at 80% 110%, rgba(120, 90, 160, 0.14), transparent 50%),
+    var(--ink);
+  background-attachment: fixed;
+  color: var(--paper);
+  font-family: var(--body);
+  line-height: 1.75;
+  -webkit-tap-highlight-color: transparent;
+}
+.wrap { max-width: 720px; margin: 0 auto; box-sizing: border-box; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 56px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.25; text-wrap: balance; margin: 0; }
+.eyebrow { color: var(--gold); letter-spacing: 0.3em; font-size: 12px; }
+.small { color: var(--dim); font-size: 14px; }
+button { font-family: var(--body); }
+button:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.btn { appearance: none; border: 0; border-radius: 14px; padding: 15px 18px; font-size: 18px; cursor: pointer; background: var(--gold); color: #241a05; font-weight: 700; width: 100%; }
+.btn.ghost { background: transparent; color: var(--paper); border: 1px solid var(--line); font-weight: 400; }
+
+/* intro */
+.intro { min-height: calc(100vh - 84px); display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+.intro h1 { font-size: clamp(40px, 10vw, 68px); }
+.intro .sub { font-family: var(--display); color: var(--gold); font-size: clamp(20px, 4.5vw, 28px); }
+.credit { color: var(--dim); }
+.credit b { color: var(--gold); font-weight: 400; font-family: var(--display); font-size: 1.1em; }
+.lede { font-size: 17px; max-width: 60ch; }
+.disclaimer { color: var(--dim); font-size: 14px; border-left: 2px solid rgba(217,180,91,0.4); padding-left: 12px; margin: 0; max-width: 62ch; }
+.seals { display: flex; gap: 8px; flex-wrap: wrap; }
+.seal { display: grid; place-items: center; font-family: var(--display); color: #fff3e0; border-radius: 12px; box-shadow: inset 0 0 0 3px rgba(255,255,255,0.22), 0 8px 24px rgba(0,0,0,0.5); flex: none; }
+.seals .seal { width: 40px; height: 40px; font-size: 22px; border-radius: 8px; opacity: 0.85; }
+
+/* question */
+.progress { height: 4px; background: var(--line); border-radius: 999px; overflow: hidden; margin: 8px 0 22px; }
+.progress i { display: block; height: 100%; background: var(--gold); transition: width 0.3s ease; }
+.qhead { display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: var(--dim); font-variant-numeric: tabular-nums; }
+.qcard { background: var(--panel); border: 1px solid rgba(217,180,91,0.22); border-radius: 18px; padding: 22px 22px 20px; margin-bottom: 16px; }
+.qcard h2 { font-size: clamp(26px, 6vw, 34px); margin: 6px 0 10px; }
+.qcard .situation { font-size: 18px; margin: 0 0 8px; }
+.options { display: flex; flex-direction: column; gap: 10px; }
+.opt { appearance: none; text-align: left; display: flex; gap: 12px; align-items: baseline; background: rgba(255,255,255,0.03); border: 1px solid var(--line); color: var(--paper); border-radius: 14px; padding: 14px 16px; font-size: 17px; line-height: 1.6; cursor: pointer; transition: border-color 0.15s, background 0.15s, transform 0.15s; }
+.opt b { font-family: var(--display); color: var(--gold); font-weight: 400; font-size: 19px; }
+.opt:hover { border-color: rgba(217,180,91,0.6); }
+.opt.on { background: rgba(217,180,91,0.16); border-color: var(--gold); }
+.opt:active { transform: scale(0.99); }
+.qnav { display: flex; justify-content: space-between; margin-top: 16px; }
+.linkbtn { appearance: none; background: none; border: 0; color: var(--dim); font-size: 15px; cursor: pointer; padding: 8px 0; }
+.fade { animation: fade 0.35s ease; }
+@keyframes fade { from { opacity: 0; transform: translateY(8px); } }
+
+/* result */
+.hero { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; margin: 14px 0 6px; }
+.hero .seal { width: 120px; height: 120px; font-size: 70px; border-radius: 16px; transform: rotate(-4deg); animation: stamp 0.7s cubic-bezier(.3,1.6,.5,1) both; }
+@keyframes stamp { from { transform: rotate(-20deg) scale(1.8); opacity: 0; } }
+.hero h1 { font-size: clamp(34px, 8vw, 50px); }
+.meta { color: var(--dim); }
+.quote { font-family: var(--display); color: var(--gold); font-size: clamp(20px, 4.6vw, 26px); margin: 20px 0 6px; }
+section.block { margin-top: 34px; }
+section.block > h2 { font-size: 26px; margin-bottom: 10px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+section.block > h2 small { font-family: var(--body); font-size: 13px; color: var(--dim); letter-spacing: 0.05em; }
+.story p { font-size: 18px; margin: 0 0 14px; max-width: 64ch; }
+.facts { display: grid; gap: 8px; margin-top: 8px; }
+.fact { display: grid; grid-template-columns: 84px 1fr; gap: 10px; align-items: baseline; }
+.fact span:first-child { color: var(--gold); font-size: 13px; border: 1px solid rgba(217,180,91,0.45); border-radius: 999px; text-align: center; padding: 1px 0; }
+.personal p { margin: 0 0 10px; }
+.conflict { background: var(--panel); border-radius: 14px; padding: 16px 18px; margin-bottom: 10px; border-left: 3px solid var(--gold); }
+.conflict h3 { font-size: 20px; margin-bottom: 6px; }
+.conflict .ev { color: var(--dim); font-size: 14px; margin-top: 8px; }
+.profile { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; align-items: center; }
+@media (max-width: 560px) { .profile { grid-template-columns: 1fr; } }
+.radar { width: 100%; max-width: 340px; margin: 0 auto; display: block; }
+.bars { display: grid; gap: 10px; }
+.bar .top { display: flex; justify-content: space-between; font-size: 15px; font-variant-numeric: tabular-nums; }
+.bar .track { height: 8px; background: var(--line); border-radius: 999px; position: relative; overflow: hidden; }
+.bar .track i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--gold); border-radius: 999px; }
+.bar .track em { position: absolute; top: -2px; bottom: -2px; width: 2px; background: #b9b0d0; }
+.legend { display: flex; gap: 14px; font-size: 13px; color: var(--dim); justify-content: center; flex-wrap: wrap; }
+.legend span::before { content: ""; display: inline-block; width: 12px; height: 3px; margin-right: 6px; vertical-align: middle; background: var(--c); }
+details { background: var(--panel); border-radius: 14px; padding: 4px 18px; margin-bottom: 10px; }
+summary { cursor: pointer; padding: 12px 0; font-family: var(--display); font-size: 19px; list-style: none; display: flex; justify-content: space-between; gap: 10px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "＋"; color: var(--gold); font-family: var(--body); }
+details[open] summary::after { content: "－"; }
+details .inner { padding-bottom: 14px; }
+details .inner p { margin: 0 0 8px; }
+details .inner b { color: var(--gold); font-weight: 400; }
+.refs { color: var(--dim); font-size: 13px; }
+.evidence h3 { font-size: 19px; margin: 14px 0 6px; }
+.evidence ul { margin: 0; padding-left: 20px; }
+.evidence li { margin-bottom: 4px; }
+.alt { margin-bottom: 14px; }
+.alt .top { display: flex; justify-content: space-between; font-variant-numeric: tabular-nums; }
+.alt .track { height: 6px; background: var(--line); border-radius: 999px; overflow: hidden; margin: 4px 0; }
+.alt .track i { display: block; height: 100%; background: linear-gradient(90deg, #8f86a8, var(--gold)); }
+.cotop { background: rgba(217,180,91,0.12); border: 1px solid rgba(217,180,91,0.4); border-radius: 12px; padding: 10px 14px; margin-top: 14px; font-size: 15px; }
+.share { background: linear-gradient(140deg, #2b2338, #1b1824); border: 1px solid rgba(217,180,91,0.4); border-radius: 18px; padding: 26px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.share .seal { width: 84px; height: 84px; font-size: 48px; margin-bottom: 6px; }
+.share h3 { font-size: 30px; }
+.actions { display: grid; gap: 10px; margin-top: 14px; }
+.toast { position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); transform: translateX(-50%); background: var(--paper); color: var(--ink); padding: 10px 18px; border-radius: 999px; font-size: 15px; z-index: 50; max-width: calc(100% - 32px); text-align: center; }
+.history { display: grid; gap: 8px; }
+.history h3 { font-size: 20px; }
+.hist { appearance: none; display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 10px 14px; color: var(--paper); cursor: pointer; font-size: 16px; }
+.hist .seal { width: 36px; height: 36px; font-size: 20px; border-radius: 8px; }
+.hist small { display: block; color: var(--dim); font-size: 13px; }
+.linkbanner { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; background: rgba(217,180,91,0.12); border: 1px solid rgba(217,180,91,0.45); border-radius: 14px; padding: 12px 14px; margin-bottom: 14px; }
+.linkbanner .btn { width: auto; padding: 10px 16px; font-size: 16px; }
+.kakao { background: #fee500; color: #191600; }
+.share-text { width: 100%; box-sizing: border-box; font: 14px var(--body); background: var(--ink); color: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 10px; resize: none; }
+@media (prefers-reduced-motion: reduce) { .fade, .hero .seal { animation: none; } }
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const DATA = {"questions":{
+  "version": "1.0",
+  "dimensions": [
+    {"id": "J", "name": "정의와 원칙", "desc": "공정성, 규칙, 책임을 얼마나 중시하는가"},
+    {"id": "C", "name": "공동체 지향", "desc": "개인의 이익과 공동체의 이익을 어떻게 조정하는가"},
+    {"id": "K", "name": "탐구와 지식", "desc": "진실 탐색, 학습, 분석을 얼마나 우선하는가"},
+    {"id": "B", "name": "용기와 행동", "desc": "위험을 감수하고 행동하는 경향이 있는가"},
+    {"id": "R", "name": "돌봄과 관계", "desc": "가족, 친구, 약자와의 관계를 얼마나 중시하는가"},
+    {"id": "F", "name": "자유와 독립", "desc": "권위에 대한 비판과 자율적 판단을 얼마나 중시하는가"}
+  ],
+  "themes": {
+    "distribution": "정의와 분배",
+    "rules": "규칙과 책임",
+    "risk": "위험과 희생",
+    "truth": "진실과 지식",
+    "power": "권력과 저항",
+    "loyalty": "관계와 충성",
+    "identity": "죽음과 정체성"
+  },
+  "display_order": ["q01", "q04", "q07", "q10", "q13", "q16", "q19", "q02", "q05", "q08", "q11", "q14", "q17", "q20", "q03", "q06", "q09", "q12", "q15", "q18"],
+  "questions": [
+    {
+      "id": "q01", "theme": "distribution", "title": "굶주린 겨울",
+      "situation": "마을에 식량이 부족해졌다. 창고에는 모든 주민을 먹일 양이 없고, 일부를 먼저 구하면 나머지는 굶게 된다. 창고 열쇠는 당신이 맡고 있다.",
+      "prompt": "가장 먼저 할 일을 하나 고른다.",
+      "debate": "모두에게 똑같이 나누는 평등의 원칙과, 가장 많은 사람을 살리는 결과 중심 판단이 정면으로 부딪히는 고전적인 배분 문제다. 가장 약한 사람부터 지키는 선택은 롤스가 말한 '가장 불리한 처지의 사람' 우선 논의와 맞닿아 있다.",
+      "options": [
+        {"id": "A", "text": "모든 주민에게 최소한의 식량을 공평하게 나눈다.", "note": "정의·공동체·원칙을 중시하는 선택", "scores": {"J": 2, "C": 1, "K": 0, "B": 0, "R": 1, "F": 0}, "stance": "deont", "tags": ["principle"]},
+        {"id": "B", "text": "가장 많은 사람을 살릴 수 있는 집단에 먼저 나눈다.", "note": "결과와 생존 효과를 중시하는 선택", "scores": {"J": 0, "C": 2, "K": 1, "B": 1, "R": 0, "F": 0}, "stance": "util", "tags": ["outcome"]},
+        {"id": "C", "text": "노약자와 어린이처럼 가장 약한 주민부터 지킨다.", "note": "돌봄과 취약성에 대한 책임을 중시하는 선택", "scores": {"J": 0, "C": 1, "K": 0, "B": 0, "R": 2, "F": 0}, "stance": "care", "tags": []},
+        {"id": "D", "text": "열쇠를 내려놓고 주민들이 함께 결정하게 한다.", "note": "자율성·참여·권력의 분산을 중시하는 선택", "scores": {"J": 1, "C": 1, "K": 0, "B": 0, "R": 0, "F": 2}, "stance": "liberty", "tags": []}
+      ]
+    },
+    {
+      "id": "q02", "theme": "distribution", "title": "전투가 끝난 뒤의 금화",
+      "situation": "전투가 끝나고 영주가 금화 한 상자를 내렸다. 최전선에서 목숨을 걸고 싸운 소수의 병사와, 뒤에서 식량과 무기를 나른 다수의 병사가 있다. 나누는 일은 당신 몫이다.",
+      "prompt": "금화를 어떻게 나눌까?",
+      "debate": "아리스토텔레스는 분배의 정의를 '각자의 몫에 비례하는 것'으로 보았다. 그러나 무엇을 공적으로 볼지, 공적보다 필요나 공동의 이익이 앞서는 때가 있는지는 지금도 논쟁거리다.",
+      "options": [
+        {"id": "A", "text": "세운 공에 따라 차등을 두어 나눈다.", "note": "공적에 비례하는 분배를 중시하는 선택", "scores": {"J": 2, "C": 0, "K": 0, "B": 1, "R": 0, "F": 0}, "stance": "virtue", "tags": ["principle"]},
+        {"id": "B", "text": "모두에게 똑같이 나눈다. 다 함께 싸운 전투다.", "note": "평등과 연대를 중시하는 선택", "scores": {"J": 1, "C": 2, "K": 0, "B": 0, "R": 0, "F": 0}, "stance": "deont", "tags": []},
+        {"id": "C", "text": "전사한 병사의 가족에게 먼저 보낸다.", "note": "잃은 사람들에 대한 돌봄을 중시하는 선택", "scores": {"J": 0, "C": 1, "K": 0, "B": 0, "R": 2, "F": 0}, "stance": "care", "tags": []},
+        {"id": "D", "text": "금화를 녹여 무너진 다리를 다시 놓는다.", "note": "개인 보상보다 공동의 이익을 앞세우는 선택", "scores": {"J": -1, "C": 2, "K": 1, "B": 0, "R": 0, "F": 0}, "stance": "util", "tags": ["outcome", "community"]}
+      ]
+    },
+    {
+      "id": "q03", "theme": "distribution", "title": "마르지 않는 우물",
+      "situation": "가뭄이 석 달째다. 마을 우물이 모두 말랐는데, 당신 집 마당의 우물에서만 아직 물이 난다.",
+      "prompt": "이 우물을 어떻게 할까?",
+      "debate": "로크는 자기 노동을 섞은 것을 자기 소유로 보면서도, 남에게 '충분하고 좋은 것'을 남겨야 한다는 단서를 달았다. 모두가 목마른 때에 사적 소유는 어디까지 지켜져야 할까?",
+      "options": [
+        {"id": "A", "text": "대문을 활짝 열고 누구나 길어 가게 한다.", "note": "공동체를 위해 내 것을 내놓는 선택", "scores": {"J": 0, "C": 2, "K": 0, "B": 0, "R": 1, "F": 0}, "stance": "care", "tags": ["community"]},
+        {"id": "B", "text": "집집마다 하루 몇 동이씩, 순번과 규칙을 정한다.", "note": "공정한 규칙을 세우는 선택", "scores": {"J": 2, "C": 1, "K": 1, "B": 0, "R": 0, "F": 0}, "stance": "deont", "tags": ["principle"]},
+        {"id": "C", "text": "가족과 친척에게 먼저 주고, 남는 물을 이웃과 나눈다.", "note": "가까운 사람을 먼저 지키는 선택", "scores": {"J": 0, "C": -1, "K": 0, "B": 0, "R": 2, "F": 1}, "stance": "care", "tags": ["kin"]},
+        {"id": "D", "text": "물값을 조금 받아, 그 돈으로 새 우물을 판다.", "note": "장기적인 결과를 계산하는 선택", "scores": {"J": -1, "C": 1, "K": 1, "B": 0, "R": 0, "F": 1}, "stance": "util", "tags": ["outcome"]}
+      ]
+    },
+    {
+      "id": "q04", "theme": "rules", "title": "시험장의 비밀",
+      "situation": "관리를 뽑는 시험에서 오랜 친구가 부정행위를 하는 것을 보았다. 친구는 무너진 집안을 일으킬 마지막 기회라고 했다.",
+      "prompt": "당신은 어떻게 할까?",
+      "debate": "칸트라면 '모두가 그렇게 해도 되는가'를 물을 것이다. 반면 돌봄 윤리는 추상적인 규칙보다 구체적인 관계와 그 사람의 사정을 먼저 보라고 말한다.",
+      "options": [
+        {"id": "A", "text": "감독관에게 사실대로 알린다.", "note": "규칙과 공정성을 지키는 선택", "scores": {"J": 2, "C": 1, "K": 0, "B": 0, "R": -1, "F": 0}, "stance": "deont", "tags": ["principle", "community"]},
+        {"id": "B", "text": "친구에게 스스로 밝히라고 설득한다.", "note": "상대가 옳은 일을 하도록 돕는 선택", "scores": {"J": 1, "C": 0, "K": 0, "B": 1, "R": 1, "F": 0}, "stance": "virtue", "tags": []},
+        {"id": "C", "text": "모른 척한다. 친구의 사정을 누구보다 잘 안다.", "note": "관계를 원칙보다 앞세우는 선택", "scores": {"J": -2, "C": 0, "K": 0, "B": 0, "R": 2, "F": 0}, "stance": "care", "tags": ["kin"]},
+        {"id": "D", "text": "부정이 쉬운 시험 제도의 허점 자체를 고발한다.", "note": "개인보다 제도를 비판하는 선택", "scores": {"J": 1, "C": 0, "K": 1, "B": 0, "R": 0, "F": 2}, "stance": "liberty", "tags": ["conscience"]}
+      ]
+    },
+    {
+      "id": "q05", "theme": "rules", "title": "닫힌 성문",
+      "situation": "영주가 새 법을 내렸다. 해가 지면 성문을 열지 않는다. 문지기인 당신 앞에서, 밤늦게 도착한 피난민 가족이 성문을 두드린다. 밖에는 도적 떼가 있다는 소문이 돈다.",
+      "prompt": "성문 앞에서 당신은?",
+      "debate": "법을 지킬 의무와 눈앞의 생명을 구할 의무가 충돌한다. 법이 만들어진 목적(성 안의 안전)과 법의 문자(밤에는 열지 않는다)가 어긋날 때 무엇을 따라야 하는지는 법철학의 오래된 물음이다.",
+      "options": [
+        {"id": "A", "text": "법대로 문을 열지 않는다. 성 안 사람들의 안전도 걸려 있다.", "note": "정해진 규칙을 지키는 선택", "scores": {"J": 2, "C": 1, "K": 0, "B": -1, "R": -1, "F": 0}, "stance": "deont", "tags": ["obey", "principle"]},
+        {"id": "B", "text": "아무도 모르게 문을 열어 들인다.", "note": "법보다 눈앞의 사람을 택하는 선택", "scores": {"J": -1, "C": 0, "K": 0, "B": 1, "R": 2, "F": 1}, "stance": "care", "tags": ["conscience"]},
+        {"id": "C", "text": "상관에게 급히 알리고 허락을 기다린다.", "note": "절차 안에서 답을 찾는 선택", "scores": {"J": 1, "C": 1, "K": 1, "B": 0, "R": 0, "F": -1}, "stance": "deont", "tags": ["obey", "caution"]},
+        {"id": "D", "text": "문 밖으로 나가 밤새 그 가족 곁을 지킨다.", "note": "법도 지키고 사람도 지키려 위험을 지는 선택", "scores": {"J": 1, "C": 0, "K": 0, "B": 2, "R": 1, "F": 0}, "stance": "virtue", "tags": ["risk"]}
+      ]
+    },
+    {
+      "id": "q06", "theme": "rules", "title": "스승의 오류",
+      "situation": "스승이 평생 쌓아 온 연구에서 결정적인 오류를 발견했다. 스승은 다음 달 나라에서 가장 큰 상을 받기로 되어 있다.",
+      "prompt": "이 사실을 어떻게 할까?",
+      "debate": "진리를 밝히는 일과 은혜를 갚는 일이 부딪힌다. 공개의 시점과 방식까지 생각하면, 정직함에도 여러 모양이 있다는 것을 알 수 있다.",
+      "options": [
+        {"id": "A", "text": "바로 공개한다. 진실이 먼저다.", "note": "진실을 원칙으로 삼는 선택", "scores": {"J": 1, "C": 0, "K": 2, "B": 0, "R": -1, "F": 1}, "stance": "deont", "tags": ["truth", "principle"]},
+        {"id": "B", "text": "스승에게 먼저 조용히 알린다.", "note": "관계 안에서 진실을 다루는 선택", "scores": {"J": 0, "C": 0, "K": 1, "B": 0, "R": 2, "F": 0}, "stance": "care", "tags": []},
+        {"id": "C", "text": "상을 받은 뒤에 스승과 함께 바로잡는다.", "note": "모두에게 덜 해로운 순서를 고르는 선택", "scores": {"J": -1, "C": 1, "K": 1, "B": 0, "R": 1, "F": 0}, "stance": "util", "tags": ["outcome", "comfort"]},
+        {"id": "D", "text": "스승과 다른 길을 걸으며, 반박하는 연구를 낸다.", "note": "권위에서 독립하는 선택", "scores": {"J": 0, "C": 0, "K": 1, "B": 1, "R": -1, "F": 2}, "stance": "liberty", "tags": ["conscience"]}
+      ]
+    },
+    {
+      "id": "q07", "theme": "risk", "title": "강물 속의 아이",
+      "situation": "불어난 강물에 낯선 아이가 휩쓸려 간다. 당신은 헤엄을 잘 치지 못한다.",
+      "prompt": "그 순간 당신은?",
+      "debate": "아리스토텔레스는 용기를 무모함과 비겁함 사이의 중용으로 보았다. 같은 구조 행동도 상황을 읽는 실천적 지혜가 있느냐에 따라 용기가 되기도, 무모함이 되기도 한다.",
+      "options": [
+        {"id": "A", "text": "생각할 틈도 없이 뛰어든다.", "note": "위험을 무릅쓰고 행동하는 선택", "scores": {"J": 0, "C": 0, "K": -1, "B": 2, "R": 2, "F": 0}, "stance": "virtue", "tags": ["risk"]},
+        {"id": "B", "text": "소리쳐 사람들을 모으고 밧줄을 찾는다.", "note": "함께 해결하는 방법을 고르는 선택", "scores": {"J": 0, "C": 2, "K": 1, "B": 0, "R": 1, "F": 0}, "stance": "util", "tags": ["caution"]},
+        {"id": "C", "text": "물살을 읽고 하류로 달려가 긴 장대를 내민다.", "note": "판단과 행동을 함께 쓰는 선택", "scores": {"J": 0, "C": 0, "K": 2, "B": 1, "R": 1, "F": 0}, "stance": "virtue", "tags": []},
+        {"id": "D", "text": "내가 다치면 가족이 무너진다. 도움을 부르러 마을로 달린다.", "note": "자신과 가족의 안전을 먼저 셈하는 선택", "scores": {"J": 0, "C": 0, "K": 0, "B": -2, "R": 1, "F": 1}, "stance": "self", "tags": ["kin", "caution"]}
+      ]
+    },
+    {
+      "id": "q08", "theme": "risk", "title": "역병의 고을로",
+      "situation": "이웃 고을에 역병이 돌아 약을 전할 사람이 필요하다. 가면 돌아오지 못할 수도 있다.",
+      "prompt": "누가 가야 할까?",
+      "debate": "의무를 넘어서는 희생을 철학에서는 '의무 이상의 행위'라고 부른다. 칭찬받을 일이지만, 누구에게나 요구할 수는 없는 일이다.",
+      "options": [
+        {"id": "A", "text": "내가 가겠다고 나선다.", "note": "공동체를 위해 위험을 지는 선택", "scores": {"J": 0, "C": 1, "K": 0, "B": 2, "R": 1, "F": 0}, "stance": "virtue", "tags": ["risk", "community"]},
+        {"id": "B", "text": "가족 곁에 남는 대신, 약값과 짐을 모두 댄다.", "note": "가족을 지키며 다른 방식으로 돕는 선택", "scores": {"J": 0, "C": 1, "K": 0, "B": -1, "R": 2, "F": 0}, "stance": "care", "tags": ["kin", "caution"]},
+        {"id": "C", "text": "공정하게 제비를 뽑아 정하자고 한다.", "note": "위험을 공평하게 나누는 선택", "scores": {"J": 2, "C": 1, "K": 0, "B": 0, "R": 0, "F": 0}, "stance": "deont", "tags": ["principle"]},
+        {"id": "D", "text": "역병을 이겨 낸 적 있는 사람을 찾아 보낸다.", "note": "성공 확률을 따지는 선택", "scores": {"J": 0, "C": 1, "K": 2, "B": 0, "R": 0, "F": 0}, "stance": "util", "tags": ["outcome"]}
+      ]
+    },
+    {
+      "id": "q09", "theme": "risk", "title": "대신 벌을 받는 동료",
+      "situation": "당신의 실수로 곡식 창고에 불이 났다. 그런데 범인을 찾지 못하자 함께 일하던 동료들이 대신 매를 맞게 되었다.",
+      "prompt": "당신은 어떻게 할까?",
+      "debate": "책임을 진다는 것은 무엇일까? 잘못을 밝히는 용기, 함께 해결하려는 연대, 벌 자체가 정당한지 묻는 비판은 모두 '책임'이라는 말로 불릴 수 있다.",
+      "options": [
+        {"id": "A", "text": "나서서 내 잘못이라고 밝힌다.", "note": "책임을 원칙대로 지는 선택", "scores": {"J": 2, "C": 0, "K": 0, "B": 2, "R": 1, "F": 0}, "stance": "deont", "tags": ["principle", "risk"]},
+        {"id": "B", "text": "동료들과 먼저 의논해 함께 길을 찾는다.", "note": "공동의 해결을 찾는 선택", "scores": {"J": 0, "C": 2, "K": 0, "B": 0, "R": 1, "F": 0}, "stance": "care", "tags": []},
+        {"id": "C", "text": "실수 하나에 매질하는 법이 잘못되었다고 항의한다.", "note": "처벌의 정당성을 묻는 선택", "scores": {"J": 1, "C": 0, "K": 0, "B": 1, "R": 0, "F": 2}, "stance": "liberty", "tags": ["conscience"]},
+        {"id": "D", "text": "조용히 동료들의 가족을 돌보며 빚을 갚는다.", "note": "드러나지 않게 보상하는 선택", "scores": {"J": -1, "C": 0, "K": 0, "B": -1, "R": 2, "F": 0}, "stance": "care", "tags": ["caution"]}
+      ]
+    },
+    {
+      "id": "q10", "theme": "truth", "title": "승전의 기록",
+      "situation": "왕이 지난 전쟁을 '대승'으로 기록하라고 명했다. 기록을 맡은 당신은 그 전쟁이 참패였고 수많은 백성이 죽었다는 것을 안다.",
+      "prompt": "붓을 든 당신은?",
+      "debate": "플라톤은 『국가』에서 공동체의 안정을 위한 '고귀한 거짓말'을 말했다. 반대로 칸트는 거짓말이 상대를 수단으로만 대하는 일이라고 보았다. 기록의 진실과 공동체의 안정 중 무엇이 먼저일까?",
+      "options": [
+        {"id": "A", "text": "본 그대로 기록한다.", "note": "진실을 지키는 선택", "scores": {"J": 2, "C": 0, "K": 2, "B": 1, "R": -1, "F": 0}, "stance": "deont", "tags": ["truth", "conscience"]},
+        {"id": "B", "text": "명대로 쓰되, 진짜 기록을 따로 숨겨 둔다.", "note": "지금을 버티고 훗날을 기약하는 선택", "scores": {"J": -1, "C": 0, "K": 2, "B": 0, "R": 0, "F": 1}, "stance": "util", "tags": ["outcome", "caution"]},
+        {"id": "C", "text": "왕명을 따른다. 백성의 사기도 중요하다.", "note": "공동체의 안정을 앞세우는 선택", "scores": {"J": -1, "C": 2, "K": -1, "B": 0, "R": 1, "F": 0}, "stance": "util", "tags": ["obey", "comfort"]},
+        {"id": "D", "text": "붓을 꺾고 관직을 떠난다.", "note": "거짓에 가담하지 않고 물러나는 선택", "scores": {"J": 1, "C": 0, "K": 0, "B": 0, "R": 0, "F": 2}, "stance": "liberty", "tags": ["conscience"]}
+      ]
+    },
+    {
+      "id": "q11", "theme": "truth", "title": "금지된 의서",
+      "situation": "병을 고칠 방법이 적힌 책이 있다. 그러나 그 책은 금서여서, 읽다가 들키면 이단으로 몰린다.",
+      "prompt": "당신은 그 책을?",
+      "debate": "밀은 『자유론』에서 생각과 토론의 자유가 진리를 찾는 데 꼭 필요하다고 주장했다. 하지만 검증되지 않은 지식을 바로 쓰는 일에는 다른 사람의 생명이 걸린다.",
+      "options": [
+        {"id": "A", "text": "몰래 읽고 아픈 사람들을 고친다.", "note": "규칙보다 결과를 택하는 선택", "scores": {"J": -1, "C": 0, "K": 2, "B": 1, "R": 1, "F": 0}, "stance": "util", "tags": ["outcome", "risk"]},
+        {"id": "B", "text": "금서를 풀어 달라고 공개적으로 청한다.", "note": "지식의 자유를 요구하는 선택", "scores": {"J": 0, "C": 0, "K": 1, "B": 1, "R": 0, "F": 2}, "stance": "liberty", "tags": ["conscience"]},
+        {"id": "C", "text": "금지는 금지다. 읽지 않는다.", "note": "정해진 질서를 따르는 선택", "scores": {"J": 2, "C": 1, "K": -1, "B": -1, "R": 0, "F": 0}, "stance": "deont", "tags": ["obey", "caution"]},
+        {"id": "D", "text": "믿을 만한 몇 사람과 함께 검증한 뒤 조금씩 쓴다.", "note": "신중하게 지식을 다루는 선택", "scores": {"J": 0, "C": 1, "K": 1, "B": 0, "R": 1, "F": 0}, "stance": "virtue", "tags": ["caution"]}
+      ]
+    },
+    {
+      "id": "q12", "theme": "truth", "title": "마지막 물음",
+      "situation": "숨을 거두기 직전의 노인이 묻는다. \"내 아들이 전쟁터에서 살아 돌아오고 있느냐?\" 당신은 그 아들이 전사했다는 것을 안다.",
+      "prompt": "노인에게 뭐라고 말할까?",
+      "debate": "칸트는 살인자가 문 앞에 와도 거짓말을 해서는 안 된다고 했다가 많은 반론을 받았다. 공리주의는 거짓말이 고통을 줄인다면 허용될 수 있다고 본다. 진실과 위로가 부딪히는 대표적인 장면이다.",
+      "options": [
+        {"id": "A", "text": "사실을 말한다.", "note": "진실을 원칙으로 지키는 선택", "scores": {"J": 2, "C": 0, "K": 1, "B": 0, "R": -1, "F": 0}, "stance": "deont", "tags": ["truth", "principle"]},
+        {"id": "B", "text": "\"곧 돌아올 겁니다\" 하고 손을 잡아 준다.", "note": "마지막 순간의 평안을 택하는 선택", "scores": {"J": -1, "C": 0, "K": 0, "B": 0, "R": 2, "F": 0}, "stance": "care", "tags": ["comfort", "outcome"]},
+        {"id": "C", "text": "\"잘 모르겠습니다\" 하고 끝까지 곁을 지킨다.", "note": "거짓도 상처도 피하는 선택", "scores": {"J": 1, "C": 0, "K": 0, "B": 0, "R": 1, "F": 0}, "stance": "virtue", "tags": ["caution"]},
+        {"id": "D", "text": "아들이 마지막까지 용감했다는 이야기를 들려준다.", "note": "진실을 위로가 되는 방식으로 전하는 선택", "scores": {"J": 0, "C": 0, "K": 1, "B": 1, "R": 1, "F": 0}, "stance": "virtue", "tags": ["truth"]}
+      ]
+    },
+    {
+      "id": "q13", "theme": "power", "title": "비밀 모임의 초대",
+      "situation": "백성을 짓밟는 군주를 몰아내자는 비밀 모임에서 당신을 부른다. 실패하면 가문 전체가 위험해진다.",
+      "prompt": "당신의 대답은?",
+      "debate": "홉스는 혼란보다 강한 주권이 낫다고 보았고, 로크는 『통치론』에서 정부가 신탁을 저버리면 사람들에게 저항할 권리가 있다고 주장했다.",
+      "options": [
+        {"id": "A", "text": "가담한다.", "note": "부당한 권력에 맞서는 선택", "scores": {"J": 1, "C": 0, "K": 0, "B": 2, "R": -1, "F": 2}, "stance": "liberty", "tags": ["risk", "conscience"]},
+        {"id": "B", "text": "거절하고, 합법적인 상소를 올린다.", "note": "질서 안에서 바꾸려는 선택", "scores": {"J": 2, "C": 1, "K": 0, "B": -1, "R": 0, "F": 0}, "stance": "deont", "tags": ["obey", "caution"]},
+        {"id": "C", "text": "가족을 위해 거리를 둔다.", "note": "가족의 안전을 먼저 지키는 선택", "scores": {"J": 0, "C": 0, "K": 0, "B": -1, "R": 2, "F": -1}, "stance": "self", "tags": ["kin", "caution"]},
+        {"id": "D", "text": "가담하지 않고, 모든 일을 기록으로 남긴다.", "note": "증언자로 남는 선택", "scores": {"J": 0, "C": 0, "K": 2, "B": 0, "R": 0, "F": 1}, "stance": "virtue", "tags": ["truth"]}
+      ]
+    },
+    {
+      "id": "q14", "theme": "power", "title": "높은 자리의 대가",
+      "situation": "새 권력자가 당신에게 높은 관직을 주겠다고 한다. 대신 옛 동료들의 비밀을 넘기라고 한다.",
+      "prompt": "당신의 선택은?",
+      "debate": "'안에 들어가서 바꾸겠다'는 생각은 목적이 수단을 정당화할 수 있는가라는 물음을 부른다. 철학에서는 이를 '더러운 손'의 문제라고 부르기도 한다.",
+      "options": [
+        {"id": "A", "text": "단호히 거절한다.", "note": "원칙과 신의를 지키는 선택", "scores": {"J": 2, "C": 0, "K": 0, "B": 1, "R": 1, "F": 0}, "stance": "deont", "tags": ["principle"]},
+        {"id": "B", "text": "받아들이고, 안에서 세상을 바꾼다.", "note": "더 큰 결과를 위해 타협하는 선택", "scores": {"J": -1, "C": 1, "K": 1, "B": 1, "R": -1, "F": -1}, "stance": "util", "tags": ["outcome", "obey"]},
+        {"id": "C", "text": "동료들에게 알리고 함께 몸을 피한다.", "note": "동료를 지키는 선택", "scores": {"J": 0, "C": 0, "K": 0, "B": 1, "R": 2, "F": 1}, "stance": "care", "tags": ["kin"]},
+        {"id": "D", "text": "이 제안을 세상에 폭로한다.", "note": "권력에 공개적으로 맞서는 선택", "scores": {"J": 1, "C": 0, "K": 0, "B": 2, "R": -1, "F": 2}, "stance": "liberty", "tags": ["conscience", "risk"]}
+      ]
+    },
+    {
+      "id": "q15", "theme": "power", "title": "흉년의 세금",
+      "situation": "흉년인데도 왕이 세금을 두 배로 올렸다. 당신은 세금을 걷는 관리다.",
+      "prompt": "당신은 어떻게 할까?",
+      "debate": "소로는 『시민 불복종』에서 부당한 법에는 따르지 않을 의무가 있다고 썼다. 그러나 법을 어기는 일이 질서를 무너뜨려 더 약한 사람에게 피해를 줄 수 있다는 반론도 있다.",
+      "options": [
+        {"id": "A", "text": "징수를 거부한다.", "note": "부당한 명령을 따르지 않는 선택", "scores": {"J": 1, "C": 0, "K": 0, "B": 1, "R": 0, "F": 2}, "stance": "liberty", "tags": ["conscience", "risk"]},
+        {"id": "B", "text": "걷기는 하되, 가장 가난한 집은 몰래 빼 준다.", "note": "조용히 약자를 보호하는 선택", "scores": {"J": -1, "C": 1, "K": 0, "B": 0, "R": 2, "F": 0}, "stance": "care", "tags": ["outcome"]},
+        {"id": "C", "text": "법대로 걷되, 세금을 줄여 달라고 상소한다.", "note": "질서를 지키며 바로잡으려는 선택", "scores": {"J": 2, "C": 1, "K": 0, "B": 0, "R": 0, "F": -1}, "stance": "deont", "tags": ["obey", "principle"]},
+        {"id": "D", "text": "장부를 공개해 세금이 어디에 쓰이는지 알린다.", "note": "투명성을 무기로 삼는 선택", "scores": {"J": 1, "C": 0, "K": 2, "B": 0, "R": 0, "F": 1}, "stance": "liberty", "tags": ["truth"]}
+      ]
+    },
+    {
+      "id": "q16", "theme": "loyalty", "title": "동생의 재판",
+      "situation": "당신은 고을의 재판관이다. 오늘 재판정에 선 피고는 당신의 친동생이다.",
+      "prompt": "판결을 앞둔 당신은?",
+      "debate": "『논어』에는 아버지와 아들이 서로의 잘못을 숨겨 주는 것이 곧음이라는 공자의 말이 나온다. 법 앞의 평등과 가족에 대한 의리가 정면으로 부딪히는 대목이다.",
+      "options": [
+        {"id": "A", "text": "법대로 엄정하게 판결한다.", "note": "가족보다 법을 앞세우는 선택", "scores": {"J": 2, "C": 1, "K": 0, "B": 0, "R": -2, "F": 0}, "stance": "deont", "tags": ["principle", "community"]},
+        {"id": "B", "text": "이 재판에서 스스로 물러난다.", "note": "공정성을 지키려 판단을 내려놓는 선택", "scores": {"J": 1, "C": 0, "K": 1, "B": 0, "R": 0, "F": 0}, "stance": "virtue", "tags": ["caution"]},
+        {"id": "C", "text": "사정을 헤아려 형을 줄인다.", "note": "가족을 지키는 선택", "scores": {"J": -1, "C": 0, "K": 0, "B": 0, "R": 2, "F": 0}, "stance": "care", "tags": ["kin"]},
+        {"id": "D", "text": "동생과 함께 피해자를 찾아가 용서를 구하고 배상한다.", "note": "처벌보다 회복을 택하는 선택", "scores": {"J": 1, "C": 1, "K": 0, "B": 1, "R": 1, "F": 0}, "stance": "virtue", "tags": []}
+      ]
+    },
+    {
+      "id": "q17", "theme": "loyalty", "title": "전쟁과 병든 부모",
+      "situation": "나라에 전쟁이 나서 마을 장정들이 모두 떠난다. 당신까지 떠나면 집에는 병든 부모 혼자 남는다.",
+      "prompt": "당신은 어떻게 할까?",
+      "debate": "사르트르는 『실존주의는 휴머니즘이다』에서 이와 똑같은 고민을 털어놓은 제자의 이야기를 들려준다. 그의 답은 '어떤 윤리 이론도 대신 골라 주지 않는다, 네가 선택하고 그 선택이 너를 만든다'였다.",
+      "options": [
+        {"id": "A", "text": "출정한다. 공동체가 무너지면 가족도 없다.", "note": "공동체에 대한 책임을 앞세우는 선택", "scores": {"J": 0, "C": 2, "K": 0, "B": 1, "R": -1, "F": 0}, "stance": "util", "tags": ["community", "risk"]},
+        {"id": "B", "text": "부모 곁에 남는다.", "note": "가족에 대한 책임을 앞세우는 선택", "scores": {"J": 0, "C": -1, "K": 0, "B": 0, "R": 2, "F": 0}, "stance": "care", "tags": ["kin"]},
+        {"id": "C", "text": "남아서 마을의 식량과 부상자를 돌보는 일을 맡는다.", "note": "둘 다 지킬 길을 찾는 선택", "scores": {"J": 0, "C": 1, "K": 1, "B": 0, "R": 1, "F": 0}, "stance": "virtue", "tags": []},
+        {"id": "D", "text": "이 전쟁이 옳은지부터 묻고 반대한다.", "note": "전쟁의 정당성을 따지는 선택", "scores": {"J": 1, "C": 0, "K": 0, "B": 1, "R": 0, "F": 2}, "stance": "liberty", "tags": ["conscience"]}
+      ]
+    },
+    {
+      "id": "q18", "theme": "loyalty", "title": "친구의 틀린 주장",
+      "situation": "마을 회의에서 오랜 친구가 틀린 주장을 한다. 친구의 체면이 걸린 자리다.",
+      "prompt": "당신은 어떻게 할까?",
+      "debate": "아리스토텔레스는 『니코마코스 윤리학』에서 친구와 진리가 둘 다 소중하지만 진리를 더 존중하는 것이 옳다고 했다. 이 말은 훗날 '플라톤은 친구지만 진리는 더 친한 친구'라는 격언이 되었다.",
+      "options": [
+        {"id": "A", "text": "그 자리에서 반대 근거를 댄다.", "note": "관계보다 진실을 앞세우는 선택", "scores": {"J": 1, "C": 0, "K": 1, "B": 1, "R": -1, "F": 1}, "stance": "deont", "tags": ["truth"]},
+        {"id": "B", "text": "회의가 끝난 뒤 친구에게 따로 말한다.", "note": "관계를 지키며 진실을 전하는 선택", "scores": {"J": 0, "C": 0, "K": 1, "B": 0, "R": 2, "F": 0}, "stance": "care", "tags": ["comfort"]},
+        {"id": "C", "text": "다른 사람이 반박할 수 있게 근거만 슬쩍 건넨다.", "note": "충돌을 피하며 결과를 챙기는 선택", "scores": {"J": 0, "C": 1, "K": 1, "B": -1, "R": 0, "F": 0}, "stance": "util", "tags": ["caution"]},
+        {"id": "D", "text": "친구 편을 든다. 우정이 먼저다.", "note": "충성을 앞세우는 선택", "scores": {"J": -1, "C": -1, "K": 0, "B": 0, "R": 2, "F": 0}, "stance": "care", "tags": ["kin"]}
+      ]
+    },
+    {
+      "id": "q19", "theme": "identity", "title": "망각의 약",
+      "situation": "신비한 약이 있다. 마시면 지금까지의 기억을 모두 잃고, 고통 없이 새 삶을 시작한다.",
+      "prompt": "당신은 이 약을?",
+      "debate": "로크는 기억이 이어져야 같은 사람이라고 보았다. 흄은 '나'가 지각들의 다발일 뿐이라고 의심했고, 불교는 고정된 자아 없이도 행위의 흐름은 이어진다고 말한다. 기억을 잃은 당신은 여전히 당신일까?",
+      "options": [
+        {"id": "A", "text": "마시지 않는다. 기억이 곧 나다.", "note": "기억의 연속성을 정체성으로 보는 선택", "scores": {"J": 1, "C": 0, "K": 2, "B": 0, "R": 0, "F": 0}, "stance": null, "lens": "locke", "tags": []},
+        {"id": "B", "text": "마신다. 나는 기억이 아니라 지금 이 순간의 나다.", "note": "고정된 자아에서 벗어나는 선택", "scores": {"J": 0, "C": 0, "K": 0, "B": 1, "R": 0, "F": 2}, "stance": null, "lens": "buddhism", "tags": ["risk"]},
+        {"id": "C", "text": "사랑하는 사람들과의 기억만은 남기겠다고 한다.", "note": "관계 속의 나를 지키는 선택", "scores": {"J": 0, "C": 0, "K": 0, "B": 0, "R": 2, "F": 0}, "stance": null, "lens": "relation", "tags": []},
+        {"id": "D", "text": "기억을 글로 남겨 둔 뒤에 마신다.", "note": "기록으로 나를 이어 가는 선택", "scores": {"J": 0, "C": 1, "K": 1, "B": 0, "R": 0, "F": 1}, "stance": null, "lens": "hume", "tags": []}
+      ]
+    },
+    {
+      "id": "q20", "theme": "identity", "title": "남기고 싶은 단 하나",
+      "situation": "생의 마지막 날이다. 세상에 단 하나만 남길 수 있다.",
+      "prompt": "무엇을 남길까?",
+      "debate": "플라톤의 『파이돈』에서 소크라테스는 죽음 앞에서도 철학하는 삶을 이야기했다. 우리가 남기는 것은 원칙일 수도, 관계일 수도, 지식일 수도, 한 번뿐인 삶을 스스로 살았다는 사실일 수도 있다.",
+      "options": [
+        {"id": "A", "text": "끝까지 지킨 약속과 원칙.", "note": "원칙을 삶의 유산으로 보는 선택", "scores": {"J": 2, "C": 0, "K": 0, "B": 1, "R": 0, "F": 0}, "stance": null, "lens": "principle", "tags": []},
+        {"id": "B", "text": "함께 일군 마을과 그곳의 사람들.", "note": "공동체를 유산으로 보는 선택", "scores": {"J": 0, "C": 2, "K": 0, "B": 0, "R": 1, "F": 0}, "stance": null, "lens": "relation", "tags": []},
+        {"id": "C", "text": "평생에 걸쳐 알아낸 진실 하나.", "note": "지식을 유산으로 보는 선택", "scores": {"J": 0, "C": 0, "K": 2, "B": 0, "R": 0, "F": 1}, "stance": null, "lens": "locke", "tags": []},
+        {"id": "D", "text": "누구에게도 매이지 않고 살았다는 사실.", "note": "자유를 유산으로 보는 선택", "scores": {"J": 0, "C": 0, "K": 0, "B": 1, "R": 0, "F": 2}, "stance": null, "lens": "buddhism", "tags": []}
+      ]
+    }
+  ]
+}
+,"characters":{
+  "version": "1.0",
+  "alpha": {
+    "J": 1,
+    "C": 1,
+    "K": 1,
+    "B": 1,
+    "R": 1,
+    "F": 1
+  },
+  "tie_margin": 3,
+  "shrink": 0.3,
+  "note": "target은 tools/calibrate.py가 각 인물의 weights로 응답을 시뮬레이션해 계산한다. 인물 서사는 모두 창작이며 실존 인물이 아니다.",
+  "dimension_lines": {
+    "top": {
+      "J": "당신의 응답에서는 원칙을 쉽게 굽히지 않는 결이 가장 강하게 드러났다. 이야기 속 {name}에게 그것은 흔들리는 순간마다 돌아갈 기준점이었다.",
+      "C": "당신의 응답에서는 여럿이 함께 사는 법을 먼저 생각하는 결이 가장 강하게 드러났다. 이야기 속 {name}에게 그것은 '나'보다 '우리'를 먼저 세는 습관이었다.",
+      "K": "당신의 응답에서는 끝까지 묻고 따지는 결이 가장 강하게 드러났다. 이야기 속 {name}에게 그것은 남들이 지나치는 것 앞에 오래 멈춰 서는 습관이었다.",
+      "B": "당신의 응답에서는 두려움보다 행동이 먼저 나가는 결이 가장 강하게 드러났다. 이야기 속 {name}에게 그것은 위기가 오면 가장 먼저 움직이는 몸이었다.",
+      "R": "당신의 응답에서는 가까운 사람과 약한 사람을 먼저 챙기는 결이 가장 강하게 드러났다. 이야기 속 {name}에게 그것은 한 사람의 얼굴을 끝내 잊지 못하는 마음이었다.",
+      "F": "당신의 응답에서는 누구의 말이든 그대로 받아들이지 않는 결이 가장 강하게 드러났다. 이야기 속 {name}에게 그것은 정해진 길 대신 스스로 길을 내는 고집이었다."
+    },
+    "low": "반대로 '{dim}' 쪽 응답은 가장 조용했다. 부족하다는 뜻이 아니라, 이 이야기에서 그 자리가 다른 가치에 양보되었다는 뜻이다."
+  },
+  "characters": [
+    {
+      "id": "scholar",
+      "name": "기록하는 사관",
+      "seal": "史",
+      "emoji": "📜",
+      "color": "#7a5c2e",
+      "era": "14세기 · 고려 말",
+      "region": "개경",
+      "occupation": "사관(史官)",
+      "life": "왕의 곁에서 보고 들은 것을 빠짐없이 적는 삶",
+      "summary": "진실을 적어 남긴 사람",
+      "story": [
+        "고려가 저물어 가던 무렵, 개경의 궁궐에는 왕의 말과 행동을 날마다 적는 젊은 사관이 있었다. 그는 붓 한 자루로 권력자보다 오래 남는 것을 지킨다고 믿었다. 왕이 사냥터에서 백성의 밭을 짓밟은 날에도, 신하들이 서로를 모함한 날에도 그의 기록은 빠짐이 없었다.",
+        "어느 해 왕은 북방 원정의 패배를 승리로 고쳐 쓰라고 명했다. 그는 명대로 적은 초고를 올리고, 밤마다 진짜 기록을 따로 베껴 산사 깊은 곳에 숨겼다. 수십 년 뒤 그 기록이 세상에 나왔을 때, 잊혔던 병사들의 이름이 비로소 제자리를 찾았다."
+      ],
+      "key_event": "고쳐 쓰라는 왕명을 받은 밤, 두 벌의 기록을 만들기로 결심한 일",
+      "conflict": "진실을 지키는 일이 언제나 옳다고 믿었지만, 숨긴 기록 때문에 가족과 제자들까지 위험해질 수 있다는 사실이 그를 오래 괴롭혔다.",
+      "quote": "오늘 적지 않으면, 내일은 아무도 기억하지 못한다.",
+      "plato_echo": "옛 문서나 손글씨를 볼 때 이유 없이 마음이 끌린다면",
+      "karma": "보고, 적고, 남긴다",
+      "weights": {
+        "K": 1.0,
+        "J": 0.8,
+        "F": 0.5,
+        "R": -0.2,
+        "C": 0.1
+      },
+      "target": {
+        "J": 55,
+        "C": 34,
+        "K": 50,
+        "B": 43,
+        "R": 33,
+        "F": 46
+      }
+    },
+    {
+      "id": "healer",
+      "name": "역병 속의 치유자",
+      "seal": "醫",
+      "emoji": "🌿",
+      "color": "#4f7a4a",
+      "era": "1348년 · 흑사병 시기",
+      "region": "토스카나의 산골 마을",
+      "occupation": "약초 치유사",
+      "life": "약초를 캐고, 아픈 이웃의 곁을 지키는 삶",
+      "summary": "끝까지 곁을 지킨 사람",
+      "story": [
+        "흑사병이 이탈리아를 휩쓸던 해, 토스카나의 한 산골 마을에 약초를 다루는 여인이 있었다. 의사들이 도시를 버리고 떠났을 때, 그녀는 쑥과 로즈메리를 태운 연기 속에서 열에 들뜬 이웃들의 이마를 식혔다.",
+        "그녀는 고칠 수 없는 병 앞에서도 사람을 혼자 죽게 두지 않는 것을 자기 일로 여겼다. 마을 사람들이 병자를 마을 밖으로 내보내자고 했을 때, 그녀는 마을 끝 헛간을 치료소로 바꾸고 그곳에서 겨울을 났다."
+      ],
+      "key_event": "병자를 내쫓자는 마을 회의에서 홀로 반대하고, 헛간을 치료소로 바꾼 일",
+      "conflict": "한 사람이라도 더 돌보려는 마음과, 마을 전체를 병에서 지켜야 한다는 책임이 매일 부딪혔다. 그녀는 자기 안전을 지키는 일조차 이기심처럼 느꼈다.",
+      "quote": "고칠 수 없어도, 곁에 있을 수는 있다.",
+      "plato_echo": "약초 향을 맡거나 아픈 사람의 손을 잡을 때 낯선 익숙함을 느낀다면",
+      "karma": "곁을 지킨다",
+      "weights": {
+        "R": 1.0,
+        "C": 0.7,
+        "B": 0.4,
+        "K": 0.3
+      },
+      "target": {
+        "J": 38,
+        "C": 46,
+        "K": 34,
+        "B": 40,
+        "R": 57,
+        "F": 31
+      }
+    },
+    {
+      "id": "merchant",
+      "name": "길 위의 상인",
+      "seal": "商",
+      "emoji": "🐫",
+      "color": "#a8642a",
+      "era": "8세기 · 당나라 시대",
+      "region": "실크로드, 사마르칸트에서 장안까지",
+      "occupation": "소그드인 대상(隊商)의 우두머리",
+      "life": "낙타 행렬을 이끌고 국경과 언어를 넘나드는 삶",
+      "summary": "길과 신뢰를 이은 사람",
+      "story": [
+        "사마르칸트에서 태어난 그는 열네 살에 처음 낙타 행렬을 따라 사막을 건넜다. 비단과 은, 향료와 종이를 실어 나르며 그는 다섯 개의 언어로 값을 흥정하는 법과, 낯선 사람을 믿어도 되는지 한눈에 알아보는 법을 배웠다.",
+        "그의 대상은 오아시스 도시마다 우물을 파고 쉼터를 세웠다. 이익을 남기는 것이 장사지만, 길이 무너지면 장사도 없다는 것이 그의 계산이었다. 장안에 자리 잡은 뒤에도 그는 고향 상인들을 위한 공동 금고를 끝까지 지켰다."
+      ],
+      "key_event": "도적에게 짐을 빼앗긴 다른 나라 상단에 자기 낙타를 빌려준 일. 그 신뢰가 훗날 그의 목숨을 구했다.",
+      "conflict": "어디에도 매이지 않는 자유를 사랑했지만, 그가 세운 길과 사람들은 점점 그를 한곳에 묶어 두었다. 자유와 책임 사이의 줄다리기가 평생 이어졌다.",
+      "quote": "좋은 거래는 두 사람을 모두 다시 오게 만든다.",
+      "plato_echo": "지도나 낯선 시장 골목에 이유 없이 끌린다면",
+      "karma": "신뢰를 주고받는다",
+      "weights": {
+        "F": 0.6,
+        "C": 0.7,
+        "K": 0.5,
+        "B": -0.3,
+        "J": -0.2
+      },
+      "target": {
+        "J": 43,
+        "C": 44,
+        "K": 51,
+        "B": 36,
+        "R": 39,
+        "F": 41
+      }
+    },
+    {
+      "id": "guardian",
+      "name": "변방의 수호자",
+      "seal": "守",
+      "emoji": "🛡️",
+      "color": "#5b6b7a",
+      "era": "5세기 · 고구려",
+      "region": "요동의 변방 성",
+      "occupation": "성을 지키는 부장(副將)",
+      "life": "가장 먼저 위험 앞에 서고 가장 늦게 쉬는 삶",
+      "summary": "가장 앞에 섰던 사람",
+      "story": [
+        "고구려의 서쪽 끝, 요동 벌판을 내려다보는 작은 성에 한 부장이 있었다. 그는 적이 쳐들어올 때마다 성문 맨 앞에 섰고, 성 아래 마을 사람들의 이름을 하나하나 외우고 있었다.",
+        "어느 겨울, 성주는 마을을 버리고 성문을 걸어 잠그라고 명했다. 그는 명령을 어기지 않으면서도 마을을 지킬 길을 찾아, 밤새 군사를 나누어 피난민을 성 뒤쪽 골짜기로 옮겼다. 다음 날 아침 적이 닿았을 때 마을은 비어 있었다."
+      ],
+      "key_event": "성문을 잠그라는 명령이 내려진 겨울밤, 피난민을 골짜기로 옮긴 일",
+      "conflict": "명령에 대한 복종과 눈앞의 사람을 지키라는 양심 사이에서 그는 늘 줄타기를 했다. 군인으로서의 의무와 한 사람으로서의 정이 그의 칼끝을 무겁게 했다.",
+      "quote": "성벽은 돌로 쌓지만, 지키는 것은 사람이다.",
+      "plato_echo": "높은 곳에서 넓은 들판을 내려다볼 때 가슴이 뛴다면",
+      "karma": "앞에 선다",
+      "weights": {
+        "B": 1.0,
+        "R": 0.6,
+        "J": 0.5,
+        "C": 0.4,
+        "F": -0.3
+      },
+      "target": {
+        "J": 52,
+        "C": 37,
+        "K": 35,
+        "B": 53,
+        "R": 47,
+        "F": 31
+      }
+    },
+    {
+      "id": "judge",
+      "name": "저울을 든 판관",
+      "seal": "判",
+      "emoji": "⚖️",
+      "color": "#3d4f7a",
+      "era": "11세기 · 북송",
+      "region": "강남의 작은 고을",
+      "occupation": "지현(知縣), 고을의 수령이자 재판관",
+      "life": "법과 장부로 고을의 질서를 세우는 삶",
+      "summary": "기울지 않는 저울을 든 사람",
+      "story": [
+        "북송 시대 강남의 한 고을에 새 지현이 부임했다. 그는 부임 첫날 관아의 장부를 모두 꺼내 밤새 대조했고, 사라진 곡식이 어디로 갔는지 찾아냈다. 그 곡식은 고을 유지들의 창고에 있었다.",
+        "그는 신분이 높든 낮든 같은 법으로 재판했다. 뇌물을 들고 온 사람에게는 그 금액을 판결문에 그대로 적어 주었다. 그가 떠난 뒤에도 고을 사람들은 오래도록 '그 시절의 저울'을 이야기했다."
+      ],
+      "key_event": "고을에서 가장 힘 있는 집안을 법대로 처벌한 판결",
+      "conflict": "누구에게나 같은 법을 적용하려 했지만, 법이 사람을 구하지 못하는 순간이 있었다. 원칙을 지키는 것과 눈앞의 사정을 헤아리는 것 사이에서 그는 판결마다 고민했다.",
+      "quote": "저울이 기울면, 가장 약한 사람이 먼저 떨어진다.",
+      "plato_echo": "규칙을 세우고 장부를 정리할 때 묘한 편안함을 느낀다면",
+      "karma": "공정하게 가른다",
+      "weights": {
+        "J": 1.0,
+        "C": 0.6,
+        "K": 0.4,
+        "R": -0.3,
+        "F": -0.2
+      },
+      "target": {
+        "J": 62,
+        "C": 45,
+        "K": 38,
+        "B": 39,
+        "R": 34,
+        "F": 31
+      }
+    },
+    {
+      "id": "rebel",
+      "name": "깃발을 든 대장장이",
+      "seal": "旗",
+      "emoji": "🚩",
+      "color": "#a83232",
+      "era": "1381년 · 잉글랜드 농민 봉기",
+      "region": "켄트의 마을들",
+      "occupation": "대장장이이자 봉기의 연설가",
+      "life": "광장에서 외치고, 길 위에서 사람을 모으는 삶",
+      "summary": "부당함 앞에서 깃발을 든 사람",
+      "story": [
+        "1381년 여름, 잉글랜드에 세 번째 인두세가 매겨지자 켄트의 농민들이 들고일어났다. 그 무리 속에 떠돌이 설교자 존 볼의 말을 외워 다니던 젊은 대장장이가 있었다. 그는 마을 광장마다 서서 그 물음을 다시 외쳤다. \"아담이 밭 갈고 이브가 길쌈할 때, 누가 귀족이었는가?\"",
+        "그의 외침에 이웃들이 망치와 낫을 들고 런던으로 걸어갔다. 왕은 요구를 들어주겠다고 약속했지만 약속은 지켜지지 않았고, 봉기는 피로 끝났다. 그러나 그가 광장에 남긴 물음은 오래도록 사라지지 않았다."
+      ],
+      "key_event": "인두세에 반대하는 첫 연설을 한 날, 그의 뒤를 따라 마을 사람들이 깃발을 든 일",
+      "conflict": "부당한 권력에 맞서는 일은 옳았지만, 그를 따른 사람들이 치른 대가는 너무 컸다. 그는 자유를 외치는 목소리가 다른 사람의 목숨을 걸게 한다는 사실을 끝내 내려놓지 못했다.",
+      "quote": "누가 처음부터 주인이었는가?",
+      "plato_echo": "부당한 장면 앞에서 몸이 먼저 뜨거워진다면",
+      "karma": "부당함 앞에서 목소리를 낸다",
+      "weights": {
+        "F": 1.0,
+        "B": 0.7,
+        "J": 0.5,
+        "C": 0.4
+      },
+      "target": {
+        "J": 52,
+        "C": 33,
+        "K": 34,
+        "B": 54,
+        "R": 37,
+        "F": 53
+      }
+    },
+    {
+      "id": "monk",
+      "name": "산사의 수행자",
+      "seal": "禪",
+      "emoji": "🪷",
+      "color": "#6a5a8c",
+      "era": "8세기 · 통일신라",
+      "region": "경주 남산의 작은 암자",
+      "occupation": "경전을 옮겨 적고 사람들의 고민을 들어 주던 승려",
+      "life": "세상과 조금 떨어져 묻고 듣고 생각하는 삶",
+      "summary": "묻고 들어 준 사람",
+      "story": [
+        "통일신라가 가장 번성하던 무렵, 경주 남산의 바위틈 작은 암자에 한 수행자가 살았다. 그는 낮에는 경전을 옮겨 적고, 저녁이면 산을 오르내리는 사람들의 고민을 들어 주었다. 왕족도, 노비도 그 앞에서는 같은 자리에 앉았다.",
+        "그는 '나'라는 것이 정말 있는지 평생 물었다. 답을 얻었다고 말한 적은 없지만, 그에게 다녀간 사람들은 조금 가벼워진 얼굴로 산을 내려갔다. 그가 남긴 것은 책이 아니라, 바위에 새긴 작은 부처 하나였다."
+      ],
+      "key_event": "도성의 큰절 주지 자리를 사양하고 암자에 남기로 한 일",
+      "conflict": "세상의 고통을 덜고 싶었지만, 그 방법이 세상 한가운데로 들어가는 것인지 물러나 있는 것인지 끝내 확신하지 못했다. 고요함을 지키는 일이 때로는 외면처럼 느껴졌다.",
+      "quote": "묻는 사람이 있는 한, 답은 서두르지 않아도 된다.",
+      "plato_echo": "고요한 산사나 오래된 돌부처 앞에서 시간이 멈춘 듯 느껴진다면",
+      "karma": "묻고 듣는다",
+      "weights": {
+        "K": 0.8,
+        "R": 0.5,
+        "F": 0.5,
+        "B": -0.6,
+        "C": -0.2
+      },
+      "target": {
+        "J": 40,
+        "C": 30,
+        "K": 46,
+        "B": 36,
+        "R": 53,
+        "F": 39
+      }
+    },
+    {
+      "id": "navigator",
+      "name": "별을 읽는 항해사",
+      "seal": "星",
+      "emoji": "🧭",
+      "color": "#2e5f7a",
+      "era": "15세기 · 인도양 교역 시대",
+      "region": "아라비아해에서 동아프리카 해안까지",
+      "occupation": "다우선의 항해사",
+      "life": "별과 바람을 계산해 아무도 가 보지 않은 바다를 건너는 삶",
+      "summary": "별로 길을 찾은 사람",
+      "story": [
+        "15세기 인도양에는 계절풍을 타고 오가는 다우선들이 있었다. 그 배들 가운데 한 척에 별의 높이를 손가락 폭으로 재는 항해사가 있었다. 그는 바다를 건널 때마다 별의 위치와 해류를 공책에 적어, 누구보다 정확한 항로를 만들어 냈다.",
+        "선주들은 그를 '바다의 학자'라고 불렀다. 그는 폭풍이 오면 누구보다 먼저 돛을 내렸고, 위험한 항로가 더 빠르다는 것을 알면서도 선원들의 목숨을 걸지 않았다. 대신 그 위험을 혼자 미리 건너 보는 쪽을 택했다."
+      ],
+      "key_event": "선원들을 항구에 남겨 두고, 작은 배로 새 항로를 먼저 시험한 항해",
+      "conflict": "미지를 알고 싶은 갈망과, 배에 탄 사람들의 목숨을 책임져야 한다는 무게가 늘 부딪혔다. 그는 호기심이 누군가의 희생이 되지 않기를 바랐다.",
+      "quote": "바다는 계산할 수 있다. 다만 겸손하게.",
+      "plato_echo": "밤하늘의 별자리나 수평선을 볼 때 설명할 수 없는 그리움이 든다면",
+      "karma": "미지를 재고 기록한다",
+      "weights": {
+        "K": 1.0,
+        "B": 0.7,
+        "F": 0.3,
+        "J": -0.4,
+        "R": -0.2
+      },
+      "target": {
+        "J": 42,
+        "C": 38,
+        "K": 54,
+        "B": 45,
+        "R": 38,
+        "F": 41
+      }
+    },
+    {
+      "id": "matriarch",
+      "name": "종가의 안주인",
+      "seal": "家",
+      "emoji": "🏮",
+      "color": "#8c4a3a",
+      "era": "18세기 · 조선 후기",
+      "region": "안동의 종가",
+      "occupation": "대가족 살림과 문중의 대소사를 맡은 종부(宗婦)",
+      "life": "수십 명의 식구와 손님, 제사와 흉년을 한 손으로 꾸려 가는 삶",
+      "summary": "모두를 먹여 살린 사람",
+      "story": [
+        "조선 후기 안동의 한 종가에 열여덟에 시집온 종부가 있었다. 그녀는 백 명이 넘는 식구와 끊이지 않는 손님, 일 년 내내 이어지는 제사를 꾸려 가며, 곳간 열쇠 꾸러미를 평생 허리에서 내려놓지 않았다.",
+        "큰 흉년이 든 해, 문중 어른들은 곳간을 지키자고 했다. 그녀는 장부를 펼쳐 놓고 문중이 버틸 수 있는 양을 계산한 뒤, 나머지를 마을 사람들에게 죽으로 쑤어 나누었다. 그해 겨울 그 마을에서는 굶어 죽은 사람이 없었다."
+      ],
+      "key_event": "흉년에 곳간을 열어 마을에 죽을 나눈 겨울",
+      "conflict": "집안을 지키는 일과 집 밖의 사람들을 돌보는 일 사이에서 그녀는 늘 저울질했다. 가족에게는 엄격했고 남에게는 너그러웠다는 말이, 칭찬이자 상처로 남았다.",
+      "quote": "곳간은 잠그라고 있는 것이 아니라, 열 때를 알라고 있는 것이다.",
+      "plato_echo": "오래된 한옥이나 북적이는 명절 부엌에서 이상하게 마음이 놓인다면",
+      "karma": "품고 먹인다",
+      "weights": {
+        "R": 1.0,
+        "C": 0.8,
+        "J": 0.4,
+        "F": -0.5,
+        "B": -0.2
+      },
+      "target": {
+        "J": 44,
+        "C": 48,
+        "K": 32,
+        "B": 36,
+        "R": 55,
+        "F": 28
+      }
+    },
+    {
+      "id": "performer",
+      "name": "남사당패의 꼭두쇠",
+      "seal": "樂",
+      "emoji": "🎭",
+      "color": "#b0457a",
+      "era": "19세기 · 조선 말",
+      "region": "경기·충청의 장터와 고갯길",
+      "occupation": "떠돌이 놀이패의 우두머리(꼭두쇠)",
+      "life": "장터에서 장터로 떠돌며 웃음과 풍자를 나누는 삶",
+      "summary": "웃음으로 사람을 품은 사람",
+      "story": [
+        "조선 말, 장날이면 고갯길을 넘어 남사당패가 들어왔다. 그 무리를 이끄는 꼭두쇠는 줄타기와 탈놀음으로 사람들을 웃기면서, 양반과 탐관오리를 우스꽝스럽게 흉내 내 장터를 뒤집어 놓곤 했다.",
+        "그는 패에 들어온 아이들을 친자식처럼 거두었다. 갈 곳 없는 아이도, 집에서 쫓겨난 아이도, 이름조차 없는 아이도 그의 패에서는 한 식구였다. 관아에서 놀이를 막으면 그는 다음 장터로 옮겨 갔을 뿐, 판을 멈추지 않았다."
+      ],
+      "key_event": "관아의 금지령을 피해 밤새 고개를 넘어 다음 장터에서 판을 벌인 일",
+      "conflict": "어디에도 매이지 않는 자유가 그를 살게 했지만, 그가 거둔 아이들에게는 머물 곳이 필요했다. 떠도는 삶과 지켜야 할 식구 사이에서 그는 늘 길 위에 있었다.",
+      "quote": "웃는 동안만큼은 양반도 상놈도 없다.",
+      "plato_echo": "북소리나 탈춤 장단에 몸이 먼저 반응한다면",
+      "karma": "웃음으로 사람을 품는다",
+      "weights": {
+        "F": 0.9,
+        "R": 0.8,
+        "J": -0.7,
+        "B": 0.3,
+        "C": -0.2
+      },
+      "target": {
+        "J": 37,
+        "C": 30,
+        "K": 32,
+        "B": 45,
+        "R": 55,
+        "F": 41
+      }
+    },
+    {
+      "id": "artisan",
+      "name": "다리를 놓는 장인",
+      "seal": "匠",
+      "emoji": "🌉",
+      "color": "#6b6b5a",
+      "era": "2세기 · 로마 제국",
+      "region": "갈리아 속주(지금의 프랑스 남부)",
+      "occupation": "석공들을 이끄는 우두머리 장인",
+      "life": "돌을 다듬어 사람들이 오갈 길과 물길을 놓는 삶",
+      "summary": "모두가 건널 다리를 놓은 사람",
+      "story": [
+        "로마 제국이 가장 넓었던 시절, 갈리아의 한 강가에서 석공들이 수도교를 쌓고 있었다. 그들을 이끈 장인은 돌 하나의 기울기까지 직접 쟀고, 일꾼들의 이름과 고향을 모두 알고 있었다.",
+        "그는 자신의 이름을 다리에 새기지 않았다. 대신 다리가 완성되던 날, 마을 사람들과 일꾼들이 함께 강을 건너는 모습을 오래도록 바라보았다. 그가 놓은 물길은 수백 년 동안 도시에 물을 대었다."
+      ],
+      "key_event": "총독이 공사를 서두르라 했을 때, 기초를 다시 놓기 위해 공사를 석 달 늦춘 일",
+      "conflict": "모두를 위한 일을 한다는 믿음으로 일했지만, 그 '모두'를 위해 일꾼 한 사람 한 사람의 고단함을 모른 척해야 하는 날도 있었다. 공동의 이익과 개인의 몫 사이의 셈이 늘 그를 붙잡았다.",
+      "quote": "좋은 다리는 그것을 놓은 사람보다 오래 산다.",
+      "plato_echo": "오래된 돌다리나 정교한 건축물 앞에서 손끝이 근질거린다면",
+      "karma": "함께 쓸 것을 짓는다",
+      "weights": {
+        "C": 1.0,
+        "K": 0.6,
+        "J": 0.3,
+        "F": -0.2
+      },
+      "target": {
+        "J": 51,
+        "C": 53,
+        "K": 44,
+        "B": 37,
+        "R": 36,
+        "F": 27
+      }
+    },
+    {
+      "id": "mediator",
+      "name": "두 언어의 역관",
+      "seal": "和",
+      "emoji": "🤝",
+      "color": "#4a7a6e",
+      "era": "17세기 · 조선과 일본 사이",
+      "region": "부산 동래의 왜관",
+      "occupation": "조선과 일본 사이를 오간 역관(통역관)",
+      "life": "어느 한쪽에 서지 않고 두 세계 사이의 말을 잇는 삶",
+      "summary": "두 세계 사이를 이은 사람",
+      "story": [
+        "임진왜란이 끝나고 몇십 년이 지난 뒤, 부산 동래의 왜관에는 조선과 일본의 말을 모두 하는 역관이 있었다. 전쟁의 상처가 아직 아물지 않은 때였지만, 그는 두 나라 사람들이 다시 마주 앉을 수 있도록 말 한마디 한마디를 고르고 또 골랐다.",
+        "그는 정의만으로도, 이익만으로도, 정만으로도 협상이 끝나지 않는다는 것을 알았다. 그래서 어느 한 가치에 기대지 않고 그때그때 저울의 무게를 다시 쟀다. 사람들은 그를 줏대 없다고도, 가장 믿을 만하다고도 했다."
+      ],
+      "key_event": "사절단과 대마도 관리 사이의 다툼을 밤새 중재해 협상을 이어 간 일",
+      "conflict": "누구의 편도 들지 않는다는 것은 누구에게서도 온전히 받아들여지지 않는다는 뜻이기도 했다. 균형을 지키는 일은 그에게 가장 큰 재능이자 가장 깊은 외로움이었다.",
+      "quote": "말을 옮기는 일은, 마음을 옮기는 일이다.",
+      "plato_echo": "서로 다른 사람들 사이에서 자연스럽게 다리 역할을 맡게 된다면",
+      "karma": "잇고 맞춘다",
+      "calibration": "mean",
+      "target": {
+        "J": 47,
+        "C": 39,
+        "K": 38,
+        "B": 41,
+        "R": 44,
+        "F": 38
+      }
+    }
+  ]
+}
+,"philosophy":{
+  "version": "1.0",
+  "disclaimer": "이 게임은 실제 전생을 판별하지 않습니다. 철학적 사고 실험과 자기 성찰을 위한 놀이이며, 인물과 이야기는 모두 창작입니다. 점수는 응답에서 드러난 판단 경향을 게임 규칙에 따라 계산한 값일 뿐, 성격이나 신념을 확정하지 않고 전생일 확률도 아닙니다.",
+  "entries": [
+    {
+      "id": "plato", "name": "플라톤", "thinkers": "플라톤 (기원전 427~347)",
+      "core": "영혼의 선재와 상기",
+      "argument": "플라톤은 『메논』에서 배움이란 영혼이 태어나기 전에 이미 알던 것을 다시 떠올리는 '상기'라고 주장했다. 『파이돈』에서는 이를 근거로 영혼이 몸보다 먼저 있었다고 논증한다.",
+      "counter": "아리스토텔레스 이후 많은 철학자는 지식이 경험에서 생긴다고 보았다. 친숙함은 전생의 기억이 아니라 지금 삶의 경험과 상상으로 충분히 설명된다.",
+      "game_use": "결과 이야기의 '어쩐지 낯익은 느낌'은 상기설을 빌린 서사 장치다. 실제 기억이라는 주장이 아니다.",
+      "references": ["플라톤, 『메논』 81a–86c", "플라톤, 『파이돈』 72e–77a", "플라톤, 『국가』 10권, 에르 신화"]
+    },
+    {
+      "id": "aristotle", "name": "아리스토텔레스의 덕 윤리", "thinkers": "아리스토텔레스 (기원전 384~322)",
+      "core": "덕과 품성, 실천적 지혜",
+      "argument": "옳은 행동은 규칙이나 계산보다 좋은 품성에서 나온다. 용기는 무모함과 비겁함 사이의 중용이며, 상황에 맞는 중용을 알아보는 능력이 실천적 지혜다.",
+      "counter": "무엇이 중용인지는 상황마다 달라서, 덕 윤리는 막상 결정해야 할 때 구체적인 답을 주지 못한다는 비판을 받는다.",
+      "game_use": "위험과 희생, 관계와 충성 문항에서 '상황을 읽고 균형을 찾는' 선택을 해석하는 근거로 쓴다.",
+      "references": ["아리스토텔레스, 『니코마코스 윤리학』 2권(중용), 3권 6–9장(용기), 6권(실천적 지혜)"]
+    },
+    {
+      "id": "utilitarianism", "name": "벤담과 밀의 공리주의", "thinkers": "제러미 벤담 (1748~1832), 존 스튜어트 밀 (1806~1873)",
+      "core": "행위의 결과와 최대 다수의 행복",
+      "argument": "행위의 옳고 그름은 그 결과가 얼마나 많은 행복을 낳고 고통을 줄이는지로 판단한다. 모든 사람의 행복은 똑같이 하나로 센다.",
+      "counter": "다수의 이익을 위해 소수의 권리를 희생시켜도 된다는 결론이 나올 수 있다. 결과를 미리 다 알 수 없다는 문제도 있다.",
+      "game_use": "더 많은 사람을 살리거나 장기적인 결과를 계산하는 선택을 '결과를 따지는 판단'으로 분류하는 근거다.",
+      "references": ["제러미 벤담, 『도덕과 입법의 원리 서설』(1789)", "존 스튜어트 밀, 『공리주의』(1863)"]
+    },
+    {
+      "id": "kant", "name": "칸트의 의무 윤리", "thinkers": "이마누엘 칸트 (1724~1804)",
+      "core": "의무와 보편적인 도덕 원칙",
+      "argument": "옳은 행동은 결과가 아니라 원칙에서 나온다. '모두가 그렇게 해도 되는 원칙'에 따라 행동하고, 사람을 결코 수단으로만 대하지 말아야 한다.",
+      "counter": "원칙끼리 부딪힐 때 어느 쪽을 따를지 알려 주지 않는다. 살인자에게도 거짓말을 해서는 안 된다는 칸트의 결론은 지나치게 경직되었다는 비판을 받았다.",
+      "game_use": "결과가 불리해도 규칙과 진실을 지키는 선택을 '원칙과 의무를 지키는 판단'으로 분류하는 근거다.",
+      "references": ["이마누엘 칸트, 『도덕형이상학 정초』(1785)", "이마누엘 칸트, 「인간애 때문에 거짓말할 수 있다는 잘못 생각된 권리에 대하여」(1797)"]
+    },
+    {
+      "id": "care_ethics", "name": "돌봄 윤리", "thinkers": "캐럴 길리건 (1936~), 넬 나딩스 (1929~2022)",
+      "core": "관계와 응답의 책임",
+      "argument": "도덕은 추상적인 원칙보다 구체적인 관계 속에서 시작된다. 상처받기 쉬운 사람의 필요에 응답하고 관계를 지키는 일이 윤리의 중심이다.",
+      "counter": "가까운 사람을 우선하다 보면 공정성을 해칠 수 있다. 낯선 다수에 대한 책임을 어떻게 설명할지가 과제로 남는다.",
+      "game_use": "가족, 친구, 약자를 먼저 지키는 선택을 '관계와 돌봄을 앞세우는 판단'으로 분류하는 근거다.",
+      "references": ["캐럴 길리건, 『다른 목소리로』(1982)", "넬 나딩스, 『배려』(1984)"]
+    },
+    {
+      "id": "mill_liberty", "name": "밀의 자유론", "thinkers": "존 스튜어트 밀 (1806~1873)",
+      "core": "개인의 자유와 토론의 가치",
+      "argument": "다른 사람에게 해를 끼치지 않는 한 개인의 자유는 제한되어서는 안 된다(위해 원칙). 틀린 의견이라도 자유롭게 말해야 진리가 더 단단해진다.",
+      "counter": "무엇이 '해'인지의 경계가 분명하지 않다. 공동체의 결속이나 약자 보호를 위해 자유를 제한해야 하는 때도 있다.",
+      "game_use": "권위에 질문하고 스스로 판단하려는 선택을 '자율과 비판을 중시하는 판단'으로 분류하는 근거다.",
+      "references": ["존 스튜어트 밀, 『자유론』(1859) 1장, 2장"]
+    },
+    {
+      "id": "hobbes", "name": "홉스의 자기보존", "thinkers": "토머스 홉스 (1588~1679)",
+      "core": "자기보존과 질서",
+      "argument": "모든 사람에게는 자기 생명을 지킬 권리가 있다. 사람들이 강한 주권에 권리를 맡기는 이유도 결국 자기보존을 위해서다.",
+      "counter": "자기보존만으로는 남을 위한 희생이나 연대를 설명하기 어렵다. 로크는 주권이 신탁을 저버리면 저항할 수 있다고 반박했다.",
+      "game_use": "자신과 가족의 안전을 먼저 계산하는 선택을 '자신과 가족의 안전을 지키는 판단'으로 분류하는 근거다. 이 선택은 감점되지 않는다.",
+      "references": ["토머스 홉스, 『리바이어던』(1651) 13–14장", "존 로크, 『통치론』(1689) 2부 19장"]
+    },
+    {
+      "id": "locke", "name": "로크의 인격 동일성", "thinkers": "존 로크 (1632~1704)",
+      "core": "기억과 인격 동일성",
+      "argument": "같은 사람이라는 것은 같은 몸이나 같은 영혼이 아니라 의식, 특히 기억이 이어지는 데 달려 있다.",
+      "counter": "토머스 리드는 기억이 끊겨도 같은 사람일 수 있다는 '용감한 장교' 반례를 들었다. 기억은 잊히고 왜곡되기도 한다.",
+      "game_use": "기억이 없는 전생을 과연 '나'라고 부를 수 있는지 묻는 보조 콘텐츠다. 이 게임의 전생 인물이 당신과 같은 사람이라는 주장이 아니다.",
+      "references": ["존 로크, 『인간지성론』 2판(1694) 2권 27장 「동일성과 차이에 관하여」", "토머스 리드, 『인간의 지적 능력에 관한 시론』(1785) 3장 6절"]
+    },
+    {
+      "id": "hume", "name": "흄의 자아 다발론", "thinkers": "데이비드 흄 (1711~1776)",
+      "core": "고정된 자아에 대한 회의",
+      "argument": "내 안을 아무리 들여다봐도 발견되는 것은 끊임없이 바뀌는 지각들뿐이다. '나'는 그 지각들의 다발이며, 하나로 고정된 자아는 관찰되지 않는다.",
+      "counter": "지각들을 '다발'로 묶는 것이 무엇인지 설명하지 못한다는 비판이 있다. 흄 자신도 부록에서 이 설명에 만족하지 못했다고 고백했다.",
+      "game_use": "스무 개의 응답으로 만든 점수가 고정된 '당신'을 확정할 수 없다는 해설의 근거다. 다른 날 하면 다른 결과가 나올 수 있다.",
+      "references": ["데이비드 흄, 『인간 본성에 관한 논고』(1739) 1권 4부 6절 「인격 동일성에 관하여」, 부록"]
+    },
+    {
+      "id": "buddhism", "name": "불교의 무아와 업", "thinkers": "초기 불교 전통",
+      "core": "고정된 자아 없이 이어지는 행위의 흐름",
+      "argument": "변하지 않는 자아(아트만)는 없다. 그러나 행위(업)와 그 결과는 원인과 조건에 따라 이어진다. 『밀린다왕문경』은 이것을 한 등불에서 다른 등불로 옮겨 붙는 불꽃에 비유한다.",
+      "counter": "자아가 없다면 무엇이 업의 결과를 받는지 묻는 반론이 오래 이어졌다. 불교 안에서도 이 문제를 두고 여러 해석이 있다.",
+      "game_use": "'누가 다시 태어났는가'가 아니라 '어떤 행위가 이어지는가'로 결과를 다시 읽는 별도의 해석 경로다.",
+      "references": ["『밀린다왕문경(밀린다팡하)』 2권, 등불과 수레의 비유", "『상윳따 니까야』 22:59 「무아상경」"]
+    }
+  ],
+  "stances": {
+    "util": {"label": "결과를 따지는 판단", "entry": "utilitarianism"},
+    "deont": {"label": "원칙과 의무를 지키는 판단", "entry": "kant"},
+    "virtue": {"label": "상황에 맞는 품성을 찾는 판단", "entry": "aristotle"},
+    "care": {"label": "관계와 돌봄을 앞세우는 판단", "entry": "care_ethics"},
+    "liberty": {"label": "자율과 비판을 중시하는 판단", "entry": "mill_liberty"},
+    "self": {"label": "자신과 가족의 안전을 지키는 판단", "entry": "hobbes"}
+  },
+  "lenses": {
+    "locke": {"entry": "locke", "text": "'망각의 약' 문항에서 당신은 기억을 정체성의 중심에 두었다. 로크의 관점에 가까운 선택이다. 그렇다면 기억이 남아 있지 않은 전생을 '나'라고 부를 수 있을까? 이 질문이 이 게임의 가장 큰 역설이다."},
+    "hume": {"entry": "hume", "text": "'망각의 약' 문항에서 당신은 기억을 기록으로 바깥에 남기는 쪽을 골랐다. '나'를 머릿속 하나의 실체보다 이어지는 흔적들로 본 셈이다. 흄의 다발론과 닮은 데가 있다."},
+    "buddhism": {"entry": "buddhism", "text": "'망각의 약' 문항에서 당신은 기억보다 지금 이 순간을 택했다. 고정된 자아에 매이지 않으려는 이 선택은 불교의 무아 사상과 맞닿아 있다."},
+    "relation": {"entry": "care_ethics", "text": "'망각의 약' 문항에서 당신은 사랑하는 사람들과의 기억만은 지키려 했다. '나'를 관계 속에서 찾는 이 관점은 돌봄 윤리의 인간관과 가깝다."}
+  },
+  "conflicts": [
+    {"id": "community_kin", "a": "community", "b": "kin", "title": "공동체적 책임과 사적 관계 사이의 갈등",
+     "text": "당신은 어떤 순간에는 공동체를 위해 가까운 사람을 뒤로 미루었고, 다른 순간에는 가족과 친구를 위해 공동체의 요구에서 한발 물러섰다. 이 게임은 이것을 모순으로 감점하지 않는다. {name}의 삶에서도 이 두 무게는 서로를 지우지 않고 끝까지 함께 있었다."},
+    {"id": "principle_outcome", "a": "principle", "b": "outcome", "title": "원칙과 결과 사이의 갈등",
+     "text": "당신은 어떤 상황에서는 결과가 불리해도 원칙을 지켰고, 다른 상황에서는 더 나은 결과를 위해 원칙을 내려놓았다. 칸트와 공리주의가 수백 년째 다투는 바로 그 자리에, {name}도 서 있었다."},
+    {"id": "truth_comfort", "a": "truth", "b": "comfort", "title": "진실과 위로 사이의 갈등",
+     "text": "당신은 진실을 말해야 한다고 믿으면서도, 어떤 사람 앞에서는 진실보다 위로를 골랐다. {name}에게도 진실은 언제나 옳았지만, 언제나 다정하지는 않았다."},
+    {"id": "conscience_obey", "a": "conscience", "b": "obey", "title": "양심과 복종 사이의 갈등",
+     "text": "당신은 어떤 명령에는 맞섰고, 어떤 명령에는 따랐다. 어디까지 따르고 어디서부터 거부할지의 경계는 {name}의 삶에서도 매번 새로 그어졌다."},
+    {"id": "risk_caution", "a": "risk", "b": "caution", "title": "용기와 신중 사이의 갈등",
+     "text": "당신은 어떤 순간에는 앞뒤 재지 않고 뛰어들었고, 다른 순간에는 한 걸음 물러서 계산했다. 아리스토텔레스라면 그 사이 어딘가에 용기가 있다고 말할 것이다. {name}도 그 중간을 평생 더듬어 찾았다."}
+  ],
+  "caveat_entry": "hume",
+  "karma_entry": "buddhism",
+  "echo_entry": "plato"
+}
+};
+</script>
+<script>
+// JavaScript port of engine/scoring.py, engine/inference.py and engine/narrative.py.
+// tests/test_web_parity.py checks that it gives the same results as the Python engine.
+(function (root) {
+  "use strict";
+  const DIMS = ["J", "C", "K", "B", "R", "F"];
+  const dimIndex = (d) => DIMS.indexOf(d);
+
+  function questionMap(Q) {
+    const m = {};
+    for (const q of Q.questions) m[q.id] = q;
+    return m;
+  }
+  function chosenOption(q, oid) {
+    const o = q.options.find((x) => x.id === oid);
+    if (!o) throw new Error(q.id + " has no option " + oid);
+    return o;
+  }
+  function rawScores(Q, answers) {
+    const qm = questionMap(Q), total = {};
+    for (const d of DIMS) total[d] = 0;
+    for (const qid of Object.keys(answers)) {
+      const o = chosenOption(qm[qid], answers[qid]);
+      for (const d of DIMS) total[d] += o.scores[d];
+    }
+    return total;
+  }
+  function scoreBounds(Q) {
+    const lo = {}, hi = {};
+    for (const d of DIMS) { lo[d] = 0; hi[d] = 0; }
+    for (const q of Q.questions) {
+      for (const d of DIMS) {
+        const vals = q.options.map((o) => o.scores[d]);
+        lo[d] += Math.min(...vals);
+        hi[d] += Math.max(...vals);
+      }
+    }
+    return [lo, hi];
+  }
+  function normalize(raw, bounds) {
+    const [lo, hi] = bounds, out = {};
+    for (const d of DIMS) {
+      const span = hi[d] - lo[d];
+      out[d] = span === 0 ? 0 : ((raw[d] - lo[d]) * 100) / span;
+    }
+    return out;
+  }
+  function stanceCounts(Q, answers) {
+    const qm = questionMap(Q), c = {};
+    for (const qid of Object.keys(answers)) {
+      const s = chosenOption(qm[qid], answers[qid]).stance;
+      if (s) c[s] = (c[s] || 0) + 1;
+    }
+    return c;
+  }
+  function tagHits(Q, answers) {
+    const qm = questionMap(Q), hits = {};
+    for (const qid of Q.display_order) {
+      if (!(qid in answers)) continue;
+      for (const t of chosenOption(qm[qid], answers[qid]).tags || []) (hits[t] = hits[t] || []).push(qid);
+    }
+    return hits;
+  }
+  function contributions(Q, answers, dim) {
+    const qm = questionMap(Q), order = {};
+    Q.display_order.forEach((qid, i) => { order[qid] = i; });
+    const rows = Object.keys(answers).map((qid) => [qid, answers[qid], chosenOption(qm[qid], answers[qid]).scores[dim]]);
+    rows.sort((a, b) => b[2] - a[2] || order[a[0]] - order[b[0]]);
+    return rows;
+  }
+
+  function distance(p, t, alpha) {
+    let s = 0;
+    for (const d of DIMS) s += alpha[d] * (p[d] - t[d]) ** 2;
+    return Math.sqrt(s);
+  }
+  function rank(prof, C) {
+    const rows = C.characters.map((ch, i) => {
+      const dist = distance(prof, ch.target, C.alpha);
+      return { id: ch.id, distance: dist, resonance: Math.max(0, 100 - dist), order: i };
+    });
+    rows.sort((a, b) => a.distance - b.distance || a.order - b.order);
+    return rows;
+  }
+  function coTop(ranked, margin) {
+    const best = ranked[0].distance;
+    return ranked.filter((r) => r.distance - best < margin).map((r) => r.id);
+  }
+
+  function hasBatchim(word) {
+    const w = word.trim();
+    const code = w.charCodeAt(w.length - 1) - 0xac00;
+    return code >= 0 && code <= 11171 && code % 28 !== 0;
+  }
+  function averageProfile(Q) {
+    const [lo, hi] = scoreBounds(Q), out = {};
+    for (const d of DIMS) {
+      let avg = 0;
+      for (const q of Q.questions) avg += q.options.reduce((a, o) => a + o.scores[d], 0) / q.options.length;
+      out[d] = ((avg - lo[d]) * 100) / (hi[d] - lo[d]);
+    }
+    return out;
+  }
+  const fmt = (s, vars) => s.replace(/\{(\w+)\}/g, (_, k) => vars[k]);
+
+  function buildResult(Q, C, P, answers) {
+    const qm = questionMap(Q);
+    const dimName = {};
+    for (const d of Q.dimensions) dimName[d.id] = d.name;
+    const chars = {};
+    for (const c of C.characters) chars[c.id] = c;
+    const entries = {};
+    for (const e of P.entries) entries[e.id] = e;
+
+    const raw = rawScores(Q, answers);
+    const prof = normalize(raw, scoreBounds(Q));
+    const ranked = rank(prof, C);
+    const top = chars[ranked[0].id];
+    const name = top.name;
+
+    const byStrength = DIMS.slice().sort((a, b) => prof[b] - prof[a] || dimIndex(a) - dimIndex(b));
+    const topDim = byStrength[0], lowDim = byStrength[DIMS.length - 1];
+    const lines = C.dimension_lines;
+    const personal = [fmt(lines.top[topDim], { name }), fmt(lines.low, { dim: dimName[lowDim] })];
+
+    const hits = tagHits(Q, answers);
+    const found = [];
+    P.conflicts.forEach((rule, i) => {
+      const a = hits[rule.a] || [], b = hits[rule.b] || [];
+      if (a.length && b.length) found.push([-(a.length + b.length), i, rule, a[0], b[0]]);
+    });
+    found.sort((x, y) => x[0] - y[0] || x[1] - y[1]);
+    const ev = (qid) => ({ qid, title: qm[qid].title, choice: chosenOption(qm[qid], answers[qid]).text });
+    const conflicts = found.slice(0, 2).map(([, , rule, qa, qb]) => ({
+      id: rule.id, title: rule.title, text: fmt(rule.text, { name }), evidence: [ev(qa), ev(qb)]
+    }));
+
+    const counts = stanceCounts(Q, answers);
+    const stanceOrder = Object.keys(P.stances);
+    const stances = Object.keys(counts)
+      .sort((a, b) => counts[b] - counts[a] || stanceOrder.indexOf(a) - stanceOrder.indexOf(b))
+      .slice(0, 2)
+      .map((s) => ({ id: s, label: P.stances[s].label, count: counts[s], entry: entries[P.stances[s].entry] }));
+
+    let identity = null;
+    for (const q of Q.questions) {
+      if (q.theme === "identity" && q.id in answers) {
+        const lens = chosenOption(q, answers[q.id]).lens;
+        if (lens in P.lenses) {
+          identity = { lens, text: P.lenses[lens].text, entry: entries[P.lenses[lens].entry] };
+          break;
+        }
+      }
+    }
+
+    const avg = averageProfile(Q);
+    let lean = DIMS.slice().sort((a, b) => (top.target[b] - avg[b]) - (top.target[a] - avg[a]) || dimIndex(a) - dimIndex(b));
+    if (DIMS.every((d) => Math.abs(top.target[d] - avg[d]) < 1)) lean = byStrength;
+    const evidence = lean.slice(0, 2).map((d) => ({
+      dim: d, dim_name: dimName[d], score: prof[d],
+      answers: contributions(Q, answers, d).filter((r) => r[2] > 0).slice(0, 3)
+        .map(([qid, oid, pts]) => ({ qid, title: qm[qid].title, choice: chosenOption(qm[qid], oid).text, points: pts }))
+    }));
+
+    const alternatives = ranked.slice(1, 3).map((r) => {
+      const alt = chars[r.id];
+      let d = DIMS[0], best = -1;
+      for (const x of DIMS) {
+        const diff = Math.abs(alt.target[x] - top.target[x]);
+        if (diff > best) { best = diff; d = x; }
+      }
+      const more = alt.target[d] > top.target[d];
+      return {
+        id: alt.id, name: alt.name, resonance: r.resonance,
+        why: "'" + dimName[d] + (hasBatchim(dimName[d]) ? "'을" : "'를") + " 조금 " + (more ? "더" : "덜") +
+          " 중시하는 쪽으로 답했다면 '" + alt.name + "'에 더 가까웠을 거예요."
+      };
+    });
+
+    const tops = stances.length ? stances[0].label : "균형 잡힌 판단";
+    const karma = "업의 관점에서 다시 읽으면, 이어지는 것은 '" + name + (hasBatchim(name) ? "'이라는" : "'라는") +
+      " 자아가 아니라 '" + top.karma + "'는 행위의 흐름이다. 당신의 응답에서 가장 자주 나온 판단은 '" + tops +
+      "'이었다. 그 행위가 어디로 이어질지는 이제부터의 선택에 달려 있다.";
+    const echo = top.plato_echo + ", 플라톤식으로 말해 영혼이 오래전에 알던 것을 '상기'하는 순간이라고 상상해 볼 수 있다. 물론 이것은 이야기를 위한 장치일 뿐이다.";
+
+    return {
+      data_version: Q.version, raw, profile: prof, ranking: ranked, co_top: coTop(ranked, C.tie_margin),
+      character: top, personal, conflicts, stances, identity,
+      caveat: entries[P.caveat_entry], karma, echo, evidence, alternatives, disclaimer: P.disclaimer,
+      share: "나의 전생은 「" + name + "」 — " + top.summary + ". (" + top.era + ", " + top.region + ")"
+    };
+  }
+
+  const api = { DIMS, rawScores, scoreBounds, normalize, rank, coTop, buildResult };
+  if (typeof module !== "undefined" && module.exports) module.exports = api;
+  else root.PastLife = api;
+})(this);
+
+</script>
+<script>
+(() => {
+  "use strict";
+  const { questions: Q, characters: C, philosophy: P } = DATA;
+  const E = window.PastLife;
+  const app = document.getElementById("app");
+  const qmap = Object.fromEntries(Q.questions.map((q) => [q.id, q]));
+  const order = Q.display_order.map((id) => qmap[id]);
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const store = {
+    get(k, d) { try { const v = sessionStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set(k, v) { try { sessionStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  };
+  let answers = store.get("pl_answers", {});
+  let idx = 0;
+
+  // A result is the 20 answers in display order (e.g. ABDC…). It travels in the link as #r-ABDC…
+  // so a link sent to yourself or a friend reopens the very same result.
+  const ARTIFACT_URL = "https://bellhkim.github.io/past_life_game/web/";
+  function testUrl() {
+    const host = location.hostname || "";
+    return /^https?:$/.test(location.protocol) && !/claude/.test(host) ? location.href.split("#")[0] : ARTIFACT_URL;
+  }
+  const encode = (a) => order.map((q) => a[q.id] || "").join("");
+  function decode(code) {
+    if (!/^[ABCD]{20}$/.test(code || "")) return null;
+    const a = {};
+    order.forEach((q, i) => { a[q.id] = code[i]; });
+    return a;
+  }
+  const resultUrl = (a) => testUrl() + "#r-" + encode(a);
+  const saved = {
+    list() { try { return JSON.parse(localStorage.getItem("pl_history") || "[]"); } catch (e) { return []; } },
+    add(code, ch) {
+      const list = this.list().filter((x) => x.code !== code);
+      list.unshift({ code, id: ch.id, at: Date.now() });
+      try { localStorage.setItem("pl_history", JSON.stringify(list.slice(0, 10))); } catch (e) {}
+    }
+  };
+  const fmtDate = (t) => { const d = new Date(t); return d.getFullYear() + "." + (d.getMonth() + 1) + "." + d.getDate(); };
+
+  function intro() {
+    app.innerHTML =
+      '<div class="intro fade">' +
+      '<div class="eyebrow">PAST LIFE · PHILOSOPHY</div>' +
+      "<h1>나의 전생은<br>누구였을까</h1>" +
+      '<div class="sub">철학이 밝혀내는 또 하나의 나</div>' +
+      '<div class="credit">만든 사람 · <b>김종현</b></div>' +
+      '<p class="lede">권력, 정의, 생존, 충성, 자유, 희생에 관한 <b>' + order.length + "개의 딜레마</b>에 답해 주세요. 정답은 없습니다. 당신의 선택에서 드러난 판단의 결을 여섯 갈래로 읽고, 가장 닮은 가상의 인물과 그의 삶을 들려드립니다.</p>" +
+      '<div class="seals" aria-hidden="true">' + C.characters.map((c) => '<span class="seal" style="background:' + c.color + '">' + esc(c.seal) + "</span>").join("") + "</div>" +
+      '<p class="disclaimer">' + esc(P.disclaimer) + "</p>" +
+      '<button class="btn" id="start">첫 번째 딜레마로</button>' +
+      '<button class="btn ghost" id="quitApp">끝내기</button>' +
+      (Object.keys(answers).length && Object.keys(answers).length < order.length ? '<button class="btn ghost" id="resume">이어서 하기 (' + Object.keys(answers).length + "/" + order.length + ")</button>" : "") +
+      pastHTML() +
+      "</div>";
+    document.getElementById("start").onclick = () => { if (window.appShell) appShell.enter(); answers = {}; store.set("pl_answers", answers); idx = 0; question(); };
+    document.getElementById("quitApp").onclick = () => { askFeedback(); if (window.appShell) appShell.leaveApp(); };
+    const r = document.getElementById("resume");
+    if (r) r.onclick = () => { if (window.appShell) appShell.enter(); idx = order.findIndex((q) => !(q.id in answers)); question(); };
+    app.querySelectorAll(".hist").forEach((b) => b.addEventListener("click", () => {
+      const a = decode(b.dataset.code);
+      if (a) { answers = a; result("saved"); }
+    }));
+    if (location.hash) { try { history.replaceState(null, "", location.pathname + location.search); } catch (e) { location.hash = ""; } }
+  }
+
+  function pastHTML() {
+    const chars = Object.fromEntries(C.characters.map((c) => [c.id, c]));
+    const list = saved.list().filter((x) => chars[x.id] && decode(x.code)).slice(0, 5);
+    if (!list.length) return "";
+    return '<div class="history"><h3>지난 결과</h3>' + list.map((x) => {
+      const c = chars[x.id];
+      return '<button class="hist" data-code="' + x.code + '"><span class="seal" style="background:' + c.color + '">' + esc(c.seal) + "</span><span>" + esc(c.name) + "<small>" + fmtDate(x.at) + "</small></span></button>";
+    }).join("") + "</div>";
+  }
+
+  function question() {
+    const q = order[idx];
+    app.innerHTML =
+      '<div class="qhead"><span>문항 ' + String(idx + 1).padStart(2, "0") + " · " + esc(Q.themes[q.theme]) + "</span><span>" + (idx + 1) + " / " + order.length + "</span></div>" +
+      '<div class="progress"><i style="width:' + (idx / order.length) * 100 + '%"></i></div>' +
+      '<div class="fade"><div class="qcard"><h2>' + esc(q.title) + '</h2><p class="situation">' + esc(q.situation) + '</p><div class="small">' + esc(q.prompt) + "</div></div>" +
+      '<div class="options" role="group" aria-label="선택지">' +
+      q.options.map((o) => '<button class="opt' + (answers[q.id] === o.id ? " on" : "") + '" data-o="' + o.id + '"><b>' + o.id + "</b><span>" + esc(o.text) + "</span></button>").join("") +
+      "</div>" +
+      '<div class="qnav">' + (idx > 0 ? '<button class="linkbtn" id="back">← 이전 문항</button>' : "<span></span>") + '<button class="linkbtn" id="home">✕ 끝내기</button></div></div>';
+    app.querySelectorAll(".opt").forEach((b) => b.addEventListener("click", () => {
+      answers[q.id] = b.dataset.o;
+      store.set("pl_answers", answers);
+      app.querySelectorAll(".opt").forEach((x) => x.classList.toggle("on", x === b));
+      setTimeout(() => {
+        if (idx + 1 < order.length) { idx++; question(); }
+        else result();
+      }, 220);
+    }));
+    const back = document.getElementById("back");
+    if (back) back.onclick = () => { idx--; question(); };
+    document.getElementById("home").onclick = () => { if (window.appShell) appShell.exit(); intro(); askFeedback(); };
+    window.scrollTo(0, 0);
+    const first = app.querySelector(".opt.on") || app.querySelector(".opt");
+    if (first) first.focus({ preventScroll: true });
+  }
+
+  function radarSVG(prof, target) {
+    const cx = 160, cy = 150, R = 110;
+    const pt = (i, v) => {
+      const a = -Math.PI / 2 + (i * Math.PI) / 3;
+      return [cx + Math.cos(a) * R * v / 100, cy + Math.sin(a) * R * v / 100];
+    };
+    const poly = (vals) => vals.map((v, i) => pt(i, v).map((n) => n.toFixed(1)).join(",")).join(" ");
+    let s = '<svg class="radar" viewBox="0 0 320 300" role="img" aria-label="판단 프로필 육각형 그래프">';
+    for (const lv of [25, 50, 75, 100]) s += '<polygon points="' + poly(Array(6).fill(lv)) + '" fill="none" stroke="#3a3448" stroke-width="1"/>';
+    E.DIMS.forEach((d, i) => {
+      const [x, y] = pt(i, 100), [lx, ly] = pt(i, 122);
+      s += '<line x1="' + cx + '" y1="' + cy + '" x2="' + x.toFixed(1) + '" y2="' + y.toFixed(1) + '" stroke="#3a3448"/>';
+      const name = Q.dimensions[i].name.split("와 ")[0].split("과 ")[0];
+      s += '<text x="' + lx.toFixed(1) + '" y="' + (ly + 4).toFixed(1) + '" fill="#efe6d2" font-size="13" text-anchor="middle" font-family="Gowun Batang, serif">' + esc(name) + "</text>";
+    });
+    s += '<polygon points="' + poly(E.DIMS.map((d) => target[d])) + '" fill="rgba(143,134,168,0.15)" stroke="#b9b0d0" stroke-width="1.5" stroke-dasharray="4 3"/>';
+    s += '<polygon points="' + poly(E.DIMS.map((d) => prof[d])) + '" fill="rgba(217,180,91,0.28)" stroke="#d9b45b" stroke-width="2.5"/>';
+    E.DIMS.forEach((d, i) => { const [x, y] = pt(i, prof[d]); s += '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="3.5" fill="#d9b45b"/>'; });
+    return s + "</svg>";
+  }
+
+  function entryHTML(e) {
+    return "<p><b>핵심 논점</b> · " + esc(e.core) + "</p><p><b>논증</b> · " + esc(e.argument) + "</p><p><b>반론</b> · " + esc(e.counter) + "</p><p><b>이 게임에서의 쓰임</b> · " + esc(e.game_use) + '</p><p class="refs">참고: ' + e.references.map(esc).join(" / ") + "</p>";
+  }
+
+  // from: "play" (just finished), "link" (opened from a shared link) or "saved" (from the list of past results)
+  function result(from = "play") {
+    const r = E.buildResult(Q, C, P, answers);
+    const ch = r.character;
+    const chars = Object.fromEntries(C.characters.map((c) => [c.id, c]));
+    const code = encode(answers);
+    if (from === "play") { saved.add(code, ch); store.set("pl_answers", {}); }
+    if (location.hash !== "#r-" + code) location.hash = "r-" + code;
+    const blocks = [];
+    if (from === "link") blocks.push('<div class="linkbanner"><span>링크로 열어 본 전생 결과예요. 당신의 전생도 궁금하지 않나요?</span><button class="btn" id="tryBtn">나도 테스트하기</button></div>');
+    blocks.push(
+      '<div class="eyebrow">가상 인물 · 가상 생애 · 철학적 추론 결과</div>' +
+      '<div class="hero"><div class="seal" style="background:' + ch.color + '">' + esc(ch.seal) + '</div><div><div class="small">당신의 전생은</div><h1>' + esc(ch.name) + " " + ch.emoji + '</h1><div class="meta">' + esc(ch.era) + " · " + esc(ch.region) + '</div><div class="meta">' + esc(ch.occupation) + "</div></div></div>" +
+      (r.co_top.length > 1 ? '<div class="cotop">판단 프로필이 ' + r.co_top.slice(1).map((id) => "'" + esc(chars[id].name) + "'").join(", ") + "와도 거의 같은 거리에 있어요. 두 삶이 겹쳐 보이는 결과예요.</div>" : "") +
+      '<div class="quote">“' + esc(ch.quote) + "”</div>"
+    );
+    blocks.push('<section class="block"><h2>당신의 전생 이야기</h2><div class="story">' + ch.story.map((p) => "<p>" + esc(p) + "</p>").join("") + "</div>" +
+      '<div class="facts"><div class="fact"><span>삶의 방식</span><span>' + esc(ch.life) + '</span></div><div class="fact"><span>핵심 사건</span><span>' + esc(ch.key_event) + '</span></div><div class="fact"><span>삶의 갈등</span><span>' + esc(ch.conflict) + "</span></div></div>" +
+      '<div class="personal" style="margin-top:16px">' + r.personal.map((p) => "<p>" + esc(p) + "</p>").join("") + "</div></section>");
+    if (r.conflicts.length) {
+      blocks.push('<section class="block"><h2>선택 사이의 충돌 <small>감점이 아니라 내적 갈등으로 읽습니다</small></h2>' +
+        r.conflicts.map((c) => '<div class="conflict"><h3>' + esc(c.title) + "</h3><div>" + esc(c.text) + '</div><div class="ev">' + c.evidence.map((e) => "「" + esc(e.title) + "」 " + esc(e.choice)).join(" ↔ ") + "</div></div>").join("") + "</section>");
+    }
+    blocks.push('<section class="block"><h2>판단 프로필</h2><div class="profile"><div>' + radarSVG(r.profile, ch.target) +
+      '<div class="legend"><span style="--c:#d9b45b">나의 응답</span><span style="--c:#b9b0d0">' + esc(ch.name) + ' 기준</span></div></div><div class="bars">' +
+      Q.dimensions.map((d) => '<div class="bar"><div class="top"><span>' + esc(d.name) + "</span><span>" + Math.round(r.profile[d.id]) + '</span></div><div class="track"><i style="width:' + r.profile[d.id] + '%"></i><em style="left:' + ch.target[d.id] + '%"></em></div></div>').join("") +
+      '</div></div><p class="small">0~100은 이 게임의 문항 안에서 가능한 최저·최고 합계 사이의 위치예요. 막대 위의 세로선은 인물의 기준값이에요. 심리적 특성의 절대적인 강도가 아닙니다.</p></section>');
+    blocks.push('<section class="block"><h2>철학적 해석</h2><p class="disclaimer" style="margin-bottom:12px">' + esc(r.disclaimer) + "</p>" +
+      r.stances.map((s, i) => "<details" + (i === 0 ? " open" : "") + "><summary>" + esc(s.label) + " · " + s.count + "번</summary><div class=\"inner\"><p>당신의 응답 중 " + s.count + "개가 이 경향으로 분류되었어요. 관련된 논의는 <b>" + esc(s.entry.name) + "</b>예요. 그렇다고 당신이 이 사상을 따르는 사람이라는 뜻은 아니에요.</p>" + entryHTML(s.entry) + "</div></details>").join("") +
+      (r.identity ? "<details><summary>기억과 정체성</summary><div class=\"inner\"><p>" + esc(r.identity.text) + "</p>" + entryHTML(r.identity.entry) + "</div></details>" : "") +
+      "<details><summary>업의 관점에서 다시 읽기</summary><div class=\"inner\"><p>" + esc(r.karma) + "</p></div></details>" +
+      "<details><summary>어쩐지 낯익다면</summary><div class=\"inner\"><p>" + esc(r.echo) + "</p></div></details>" +
+      "<details><summary>이 결과를 믿어도 될까</summary><div class=\"inner\"><p>스무 개의 응답으로 만든 점수가 고정된 '당신'을 확정할 수는 없어요. 다른 날, 다른 기분으로 답하면 다른 인물이 나올 수 있어요.</p>" + entryHTML(r.caveat) + "</div></details></section>");
+    blocks.push('<section class="block evidence"><h2>추론 근거</h2>' + r.evidence.map((ev) => "<h3>" + esc(ev.dim_name) + " " + Math.round(ev.score) + ' <span class="small">— \'' + esc(ch.name) + "'의 두드러진 결</span></h3>" +
+      (ev.answers.length ? "<ul>" + ev.answers.map((a) => "<li>「" + esc(a.title) + "」 " + esc(a.choice) + ' <span class="small">(+' + a.points + ")</span></li>").join("") + "</ul>" : '<p class="small">이 차원에 점수를 더한 응답은 없었어요.</p>')).join("") + "</section>");
+    const bar = (nm, res) => '<div class="top"><span>' + esc(nm) + "</span><span>가까움 " + Math.round(res) + '</span></div><div class="track"><i style="width:' + res + '%"></i></div>';
+    blocks.push('<section class="block"><h2>다른 가능성</h2><div class="alt">' + bar(ch.name, r.ranking[0].resonance) + "</div>" +
+      r.alternatives.map((a) => '<div class="alt">' + bar(a.name, a.resonance) + '<div class="small">' + esc(a.why) + "</div></div>").join("") +
+      '<p class="small">가까움은 100에서 판단 프로필 사이의 거리를 뺀 값이에요. 전생일 확률이 아닙니다.</p></section>');
+    blocks.push('<section class="block"><h2>공유 카드</h2><div class="share"><div class="seal" style="background:' + ch.color + '">' + esc(ch.seal) + '</div><div class="small">나의 전생은</div><h3>' + esc(ch.name) + '</h3><div class="quote" style="margin:4px 0 6px;font-size:20px">' + esc(ch.summary) + '</div><div class="small">' + esc(ch.era) + " · 나의 전생은 누구였을까</div></div>" +
+      '<div class="actions"><button class="btn kakao" id="meBtn">카톡 나에게 보내기 (결과 저장)</button><button class="btn" id="shareBtn">친구에게 이 테스트 추천하기</button><textarea class="share-text" id="shareText" rows="5" readonly hidden></textarea><button class="btn ghost" id="again">' + (from === "link" ? "나도 테스트하기" : "처음부터 다시 하기") + "</button></div>" +
+      '<p class="small">결과는 이 기기에도 저장돼서 첫 화면의 \'지난 결과\'에서 다시 볼 수 있어요. 카톡으로 보낸 결과 링크를 누르면 어느 기기에서든 같은 결과가 열려요. 공유 문구에는 이름이나 연락처 같은 개인 정보가 들어가지 않아요.</p></section>');
+    app.innerHTML = '<div class="fade">' + blocks.join("") + "</div>";
+    window.scrollTo(0, 0);
+    const restart = () => { if (window.appShell) appShell.exit(); answers = {}; store.set("pl_answers", answers); intro(); askFeedback(); };
+    document.getElementById("again").onclick = restart;
+    const tryBtn = document.getElementById("tryBtn");
+    if (tryBtn) tryBtn.onclick = restart;
+    const link = resultUrl(answers);
+    document.getElementById("meBtn").onclick = () => share(
+      "📜 [나의 전생 결과 · " + fmtDate(Date.now()) + "]\n" +
+      "나의 전생은 「" + ch.name + "」 " + ch.emoji + "\n" + ch.summary + " (" + ch.era + ", " + ch.region + ")\n" +
+      "“" + ch.quote + "”\n\n결과 다시 보기 👉 " + link,
+      "복사했어요! 카카오톡 '나와의 채팅'에 붙여 넣으면 결과가 저장돼요");
+    document.getElementById("shareBtn").onclick = () => share(
+      "🔮 나의 전생은 「" + ch.name + "」 " + ch.emoji + "이래!\n" + ch.summary + " (" + ch.era + ")\n\n" +
+      "스무 개의 철학 딜레마로 알아보는 전생 테스트 「나의 전생은 누구였을까」\n" +
+      "5분이면 끝나. 너의 전생은 누구였을지 궁금하지 않아? 👇\n" + testUrl() + "\n\n내 결과 보기 👉 " + link,
+      "복사했어요! 친구에게 카톡으로 보내 보세요");
+    if (from === "play") { testsDone++; lastName = ch.name; }
+  }
+
+  // feedback: once per visit, when the player leaves after finishing the test at least once
+  let testsDone = 0, lastName = "";
+  const feedbackOpts = () => testsDone ? { game: "나의 전생은 누구였을까", context: testsDone + "번 완료 · 마지막 결과: " + lastName, accent: "#d9b45b", ink: "#241a05" } : null;
+  const askFeedback = () => { if (window.gameFeedback) gameFeedback.askOnce(feedbackOpts()); };
+  if (window.gameFeedback) gameFeedback.onLeave(feedbackOpts);
+
+  let toastTimer = 0;
+  function toast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg; t.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { t.hidden = true; }, 2400);
+  }
+  function share(text, copiedMsg) {
+    const fallback = () => {
+      const ta = document.getElementById("shareText");
+      ta.value = text; ta.hidden = false; ta.focus(); ta.select();
+      toast("문구를 길게 눌러 복사한 뒤 카톡에 붙여넣으세요");
+    };
+    const copy = () => {
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(() => toast(copiedMsg || "복사했어요! 카톡 대화방에 붙여넣으세요")).catch(fallback);
+      else fallback();
+    };
+    if (navigator.share) navigator.share({ title: "나의 전생은 누구였을까", text }).catch((err) => { if (!err || err.name !== "AbortError") copy(); });
+    else copy();
+  }
+
+  // used by automated tests
+  window.__pl = { answer: (a) => { answers = a; result(); } };
+  // a #r-… link opens that result; our own hash updates (same result) are ignored
+  function route(initial) {
+    const m = /^#r-([ABCD]{20})$/.exec(location.hash);
+    const a = m && decode(m[1]);
+    if (!a) return false;
+    if (initial || encode(answers) !== m[1]) { answers = a; result("link"); }
+    return true;
+  }
+  window.addEventListener("hashchange", () => route(false));
+  if (!route(true)) intro();
+})();
+</script>
+<!-- feedback:start -->
+<!-- feedback popup: shared by every game; inlined before <!-- appshell:start -->
+<!-- app shell: full screen while playing, and a way out; inlined before </body> of each game page -->
+<script>
+// Browsers never let a page remove the address bar itself. Full screen mode hides it where the
+// browser allows it (computers, Android Chrome, KakaoTalk on Android); iPhone Safari does not.
+window.appShell = (() => {
+  const el = document.documentElement;
+  const isFull = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
+  // call from a tap (browsers only allow full screen right after a user gesture)
+  function enter() {
+    if (isFull()) return;
+    try {
+      const p = el.requestFullscreen ? el.requestFullscreen({ navigationUI: "hide" }) : el.webkitRequestFullscreen && el.webkitRequestFullscreen();
+      if (p && p.catch) p.catch(() => {});
+    } catch (e) {}
+  }
+  function exit() {
+    if (!isFull()) return;
+    try {
+      const p = document.exitFullscreen ? document.exitFullscreen() : document.webkitExitFullscreen && document.webkitExitFullscreen();
+      if (p && p.catch) p.catch(() => {});
+    } catch (e) {}
+  }
+  // leave the game altogether: back to the page or chat the link was opened from
+  function leaveApp() {
+    exit();
+    const close = () => {
+      if (/KAKAOTALK/i.test(navigator.userAgent)) location.href = "kakaotalk://inappbrowser/close";
+      else { try { window.close(); } catch (e) {} }
+    };
+    if (history.length > 1) {
+      history.back();
+      setTimeout(() => { if (!document.hidden) close(); }, 500);
+    } else close();
+  }
+  return { enter, exit, isFull, leaveApp };
+})();
+</script>
+<!-- appshell:end -->
+</body> of each game page -->
+<style>
+.fb-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px;
+  background: rgba(12, 10, 24, 0.55);
+}
+.fb-card {
+  width: min(400px, 100%); max-height: 100%; overflow-y: auto; box-sizing: border-box;
+  background: #fffdf8; color: #2b2233;
+  border-radius: 20px; padding: 22px 20px 18px;
+  display: flex; flex-direction: column; gap: 12px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4);
+  font-family: "Gowun Dodum", "Do Hyeon", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  text-align: left;
+  animation: fbIn 0.3s cubic-bezier(.3, 1.4, .5, 1);
+}
+@keyframes fbIn { from { transform: scale(0.85); opacity: 0; } }
+.fb-card h3 { margin: 0; font: 400 24px/1.2 "Black Han Sans", "Jua", "Apple SD Gothic Neo", sans-serif; color: #2b2233; }
+.fb-card p { margin: 0; font-size: 15px; line-height: 1.5; color: #6a5f74; }
+.fb-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.fb-chip {
+  appearance: none; cursor: pointer;
+  border: 1.5px solid #d9d0e2; background: #fff; color: #2b2233;
+  border-radius: 999px; padding: 8px 12px;
+  font: 15px "Gowun Dodum", "Do Hyeon", "Apple SD Gothic Neo", sans-serif;
+}
+.fb-chip[aria-pressed="true"] { background: var(--fb-accent); border-color: var(--fb-accent); color: var(--fb-ink); }
+.fb-card textarea {
+  width: 100%; box-sizing: border-box; resize: vertical; min-height: 76px;
+  border: 1.5px solid #d9d0e2; border-radius: 12px; padding: 10px 12px;
+  font: 15px "Gowun Dodum", "Apple SD Gothic Neo", sans-serif; color: #2b2233; background: #fff;
+  user-select: text; -webkit-user-select: text;
+}
+.fb-btns { display: flex; gap: 8px; }
+.fb-btn {
+  flex: 1; appearance: none; border: 0; cursor: pointer;
+  border-radius: 12px; padding: 13px 10px;
+  font: 400 18px "Black Han Sans", "Jua", "Apple SD Gothic Neo", sans-serif;
+}
+.fb-later { background: #eee8f2; color: #2b2233; }
+.fb-send { background: var(--fb-accent); color: var(--fb-ink); }
+.fb-send:disabled { opacity: 0.45; cursor: default; }
+.fb-chip:focus-visible, .fb-btn:focus-visible, .fb-card textarea:focus-visible { outline: 3px solid #7c5cff; outline-offset: 2px; }
+</style>
+<script>
+// Ask the player what the maker should change. Games call askOnce() when the player leaves
+// (once per visit, after at least one finished game). Feedback reaches the maker through
+// KakaoTalk: the phone's share sheet when the page may open it, otherwise the
+// message is copied for the player to paste into the chat the game link came from.
+window.gameFeedback = (() => {
+  const MAKER = "김종현";
+  const OPTIONS = ["😄 재미있어요", "😵 너무 어려워요", "😴 너무 쉬워요", "🐞 버그가 있어요", "✨ 기능을 추가해 주세요", "🎨 디자인을 바꿔 주세요", "📱 화면이 불편해요"];
+
+  async function deliver(text) {
+    if (navigator.share) {
+      try { await navigator.share({ text }); return "shared"; }
+      catch (e) { if (e && e.name === "AbortError") return "aborted"; }
+    }
+    try { await navigator.clipboard.writeText(text); return "copied"; } catch (e) {}
+    return "manual";
+  }
+
+  function open({ game, context = "", accent = "#ff5d8f", ink = "#ffffff" }) {
+    return new Promise((resolve) => {
+      const prevFocus = document.activeElement;
+      const ov = document.createElement("div");
+      ov.className = "fb-overlay";
+      ov.style.setProperty("--fb-accent", accent);
+      ov.style.setProperty("--fb-ink", ink);
+      ov.setAttribute("role", "dialog");
+      ov.setAttribute("aria-modal", "true");
+      ov.setAttribute("aria-label", MAKER + "님에게 피드백 보내기");
+      const card = document.createElement("div");
+      card.className = "fb-card";
+      ov.appendChild(card);
+      document.body.appendChild(ov);
+      const close = (sent) => {
+        ov.remove();
+        document.removeEventListener("keydown", onKey, true);
+        if (prevFocus && prevFocus.focus) try { prevFocus.focus({ preventScroll: true }); } catch (e) {}
+        resolve(sent);
+      };
+      const onKey = (e) => { if (e.key === "Escape") { e.stopPropagation(); close(false); } };
+      document.addEventListener("keydown", onKey, true);
+
+      function form(picked = [], memo = "") {
+        card.innerHTML =
+          "<h3>만든 사람 " + MAKER + "님에게 한마디</h3>" +
+          "<p>게임 어땠어요? 고쳤으면 하는 점을 골라 주세요. 여러 개 골라도 돼요.</p>" +
+          '<div class="fb-chips">' + OPTIONS.map((o) => '<button type="button" class="fb-chip" aria-pressed="' + picked.includes(o) + '">' + o + "</button>").join("") + "</div>" +
+          '<textarea id="fbMemo" rows="3" maxlength="500" placeholder="바라는 점이나 원하는 기능을 자유롭게 적어 주세요 (안 적어도 돼요)"></textarea>' +
+          '<div class="fb-btns"><button type="button" class="fb-btn fb-later">다음에 하기</button><button type="button" class="fb-btn fb-send">보내기</button></div>';
+        const memoEl = card.querySelector("#fbMemo");
+        memoEl.value = memo;
+        const send = card.querySelector(".fb-send");
+        const chosen = () => [...card.querySelectorAll('.fb-chip[aria-pressed="true"]')].map((b) => b.textContent);
+        const sync = () => { send.disabled = !chosen().length && !memoEl.value.trim(); };
+        card.querySelectorAll(".fb-chip").forEach((b) => b.addEventListener("click", () => {
+          b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") === "true" ? "false" : "true");
+          sync();
+        }));
+        memoEl.addEventListener("input", sync);
+        sync();
+        card.querySelector(".fb-later").addEventListener("click", () => close(false));
+        send.addEventListener("click", async () => {
+          const sel = chosen(), memo = memoEl.value.trim();
+          const text = "[" + game + " 피드백] " + MAKER + "님께\n" +
+            (sel.length ? "• " + sel.join("\n• ") + "\n" : "") +
+            (memo ? "💬 " + memo + "\n" : "") +
+            (context ? "(" + context + ")" : "");
+          send.disabled = true;
+          const how = await deliver(text.trim());
+          if (how === "aborted") { form(sel, memo); return; }
+          done(how, text.trim());
+        });
+        card.querySelector(".fb-chip").focus({ preventScroll: true });
+      }
+
+      function done(how, text) {
+        const msg = how === "shared"
+          ? "고마워요! 보낸 의견은 " + MAKER + "님이 다음 버전을 만들 때 참고할 거예요."
+          : how === "copied"
+            ? "의견을 복사했어요. 이 게임 링크를 보내 준 " + MAKER + "님과의 카톡 대화방에 붙여 넣어 보내 주세요."
+            : "아래 글을 길게 눌러 복사한 뒤, 이 게임 링크를 보내 준 " + MAKER + "님과의 카톡 대화방에 보내 주세요.";
+        card.innerHTML = "<h3>" + (how === "shared" ? "보냈어요!" : "거의 다 됐어요!") + "</h3><p>" + msg + "</p>" +
+          '<textarea readonly rows="5"></textarea>' +
+          '<div class="fb-btns"><button type="button" class="fb-btn fb-send">닫기</button></div>';
+        const ta = card.querySelector("textarea");
+        ta.value = text;
+        if (how === "manual") { ta.focus(); ta.select(); }
+        const btn = card.querySelector(".fb-send");
+        btn.addEventListener("click", () => close(true));
+        if (how !== "manual") btn.focus({ preventScroll: true });
+      }
+
+      form();
+    });
+  }
+
+  // Once per visit and game: ask when the player leaves after finishing at least one game.
+  const memo = {};
+  function asked(game) {
+    if (memo[game]) return true;
+    try { return sessionStorage.getItem("fb_asked:" + game) === "1"; } catch (e) { return false; }
+  }
+  function askOnce(opts) {
+    if (!opts || asked(opts.game) || document.querySelector(".fb-overlay")) return Promise.resolve(false);
+    memo[opts.game] = true;
+    try { sessionStorage.setItem("fb_asked:" + opts.game, "1"); } catch (e) {}
+    return open(opts);
+  }
+  // On a computer, leaving starts with the pointer going off the top of the window (to the tab's close button).
+  // getOpts returns the popup options, or null when it is not a good moment.
+  function onLeave(getOpts) {
+    document.addEventListener("mouseout", (e) => {
+      if (e.relatedTarget || e.clientY > 0) return;
+      const opts = getOpts();
+      if (opts) askOnce(opts);
+    });
+  }
+  return { open, askOnce, onLeave };
+})();
+</script>
+<!-- feedback:end -->
+</body>
+</html>

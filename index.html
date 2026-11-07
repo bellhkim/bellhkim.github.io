@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>김종현의 오락실</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="은하 순찰대, 냥멍 팡팡, 고스톱, 나의 전생은 누구였을까. 네 게임을 한곳에서!">
+<meta property="og:type" content="website">
+<meta property="og:title" content="김종현의 오락실 — 게임 네 개, 링크 하나">
+<meta property="og:description" content="슈팅, 동물 퍼즐, 고스톱, 철학 전생 테스트. 골라서 바로 시작!">
+<meta name="theme-color" content="#16123a">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Jua&family=Gowun+Dodum&display=swap">
+<style>
+/* Layout: a neon arcade at night. Marquee sign with chasing bulbs, then four cabinet cards, each with a small living scene. Single dark look by choice. */
+:root {
+  --night: #16123a;
+  --night2: #241c5c;
+  --ink: #fdf7ff;
+  --dim: #c9c0f2;
+  --neon: #ff4fa3;
+  --gold: #ffd25a;
+  --cyan: #4fe3ff;
+  --display: "Black Han Sans", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --round: "Jua", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --body: "Gowun Dodum", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  color-scheme: dark;
+}
+html { min-height: 100%; }
+body {
+  margin: 0; min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(255, 79, 163, 0.28), transparent 55%),
+    radial-gradient(ellipse at 10% 110%, rgba(79, 227, 255, 0.18), transparent 50%),
+    linear-gradient(180deg, var(--night2), var(--night) 60%);
+  background-color: var(--night);
+  color: var(--ink);
+  font-family: var(--body);
+  overflow-x: hidden;
+}
+a { color: inherit; }
+.wrap {
+  position: relative; z-index: 1;
+  max-width: 1180px; margin: 0 auto; box-sizing: border-box;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 26px 40px;
+  display: flex; flex-direction: column; align-items: center; gap: 22px;
+}
+
+/* ---------- floating icons in the background ---------- */
+.floaters { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+.floaters span { position: absolute; top: 105%; font-size: 26px; opacity: 0.35; animation: rise linear infinite; filter: drop-shadow(0 0 6px rgba(255,255,255,0.3)); }
+@keyframes rise { to { transform: translateY(-125vh) rotate(360deg); } }
+.twinkle { position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  background-image: radial-gradient(1.5px 1.5px at 12% 18%, #fff, transparent), radial-gradient(1.5px 1.5px at 72% 12%, #fff, transparent), radial-gradient(1px 1px at 36% 42%, #fff, transparent), radial-gradient(1.5px 1.5px at 88% 54%, #fff, transparent), radial-gradient(1px 1px at 22% 78%, #fff, transparent), radial-gradient(1.5px 1.5px at 60% 86%, #fff, transparent), radial-gradient(1px 1px at 52% 24%, #fff, transparent);
+  animation: twinkle 3s ease-in-out infinite alternate; }
+@keyframes twinkle { from { opacity: 0.35; } to { opacity: 0.9; } }
+
+/* ---------- marquee sign ---------- */
+.sign {
+  position: relative; text-align: center; padding: 22px 26px 18px; border-radius: 26px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  box-shadow: inset 0 0 0 3px rgba(255, 79, 163, 0.65), 0 0 30px rgba(255, 79, 163, 0.35);
+  max-width: 100%; box-sizing: border-box;
+}
+.bulbs { position: absolute; inset: 7px; border-radius: 20px; pointer-events: none;
+  background:
+    radial-gradient(circle, var(--gold) 0 3px, transparent 4px) 0 0 / 22px 22px repeat-x,
+    radial-gradient(circle, var(--gold) 0 3px, transparent 4px) 11px 100% / 22px 22px repeat-x;
+  animation: chase 0.8s steps(2) infinite; opacity: 0.9; }
+@keyframes chase { to { background-position: 22px 0, -11px 100%; } }
+.sign .eyebrow { font-family: var(--round); letter-spacing: 0.3em; color: var(--cyan); font-size: 13px; text-shadow: 0 0 8px var(--cyan); }
+.sign h1 {
+  margin: 4px 0 2px; font-family: var(--display); font-weight: 400; line-height: 1.05;
+  font-size: clamp(34px, 9.5vw, 78px); letter-spacing: 0.02em; word-break: keep-all;
+  color: #fff; text-shadow: 0 0 6px #fff, 0 0 18px var(--neon), 0 0 36px var(--neon);
+  animation: flicker 6s infinite; text-wrap: balance;
+}
+@keyframes flicker { 0%, 18%, 22%, 62%, 64%, 100% { opacity: 1; } 20%, 63% { opacity: 0.55; } }
+.sign .joystick { display: inline-block; animation: wiggle 1.6s ease-in-out infinite; }
+@keyframes wiggle { 0%, 100% { transform: rotate(-12deg); } 50% { transform: rotate(12deg); } }
+.sign p { margin: 6px 0 0; color: var(--dim); font-size: 16px; word-break: keep-all; }
+.credit { font-family: var(--round); color: var(--gold); font-size: 15px; margin-top: 6px; }
+.coin-hint { font-family: var(--round); font-size: 14px; color: var(--dim); display: flex; align-items: center; gap: 8px; }
+.coin-hint .coin { display: inline-block; animation: spin 1.6s linear infinite; }
+@keyframes spin { 0% { transform: rotateY(0); } 100% { transform: rotateY(360deg); } }
+
+/* ---------- cabinet cards ---------- */
+.games { width: 100%; display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 640px) { .games { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 1100px) { .games { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.game {
+  display: flex; flex-direction: column; text-decoration: none; min-width: 0;
+  border-radius: 22px; overflow: hidden; background: rgba(255,255,255,0.06);
+  box-shadow: inset 0 0 0 2px var(--c), 0 0 22px color-mix(in srgb, var(--c) 35%, transparent), 0 10px 24px rgba(0,0,0,0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.game:hover, .game:focus-visible { transform: translateY(-6px) rotate(-0.6deg); box-shadow: inset 0 0 0 3px var(--c), 0 0 34px var(--c), 0 14px 30px rgba(0,0,0,0.4); outline: none; }
+.game:active { transform: scale(0.98); }
+.scene { position: relative; height: 150px; overflow: hidden; }
+.info { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.info h2 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 26px; color: #fff; text-shadow: 0 0 10px var(--c); }
+.info p { margin: 0; color: var(--dim); font-size: 15px; line-height: 1.5; }
+.tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tags span { font-family: var(--round); font-size: 12px; padding: 2px 9px; border-radius: 999px; background: rgba(255,255,255,0.1); color: #fff; }
+.mine { font-family: var(--round); font-size: 14px; color: var(--gold); min-height: 18px; }
+.play { margin-top: auto; align-self: flex-start; font-family: var(--display); font-size: 18px; color: #1b1240; background: var(--c); padding: 8px 18px; border-radius: 999px; box-shadow: 0 4px 0 rgba(0,0,0,0.3); display: inline-flex; gap: 6px; align-items: center; }
+.play i { font-style: normal; display: inline-block; animation: nudge 1s ease-in-out infinite; }
+@keyframes nudge { 50% { transform: translateX(4px); } }
+
+/* scene 1: 은하 순찰대 */
+.s-shooter { background: radial-gradient(ellipse at 50% 120%, #2b1d66, #070818 70%); }
+.s-shooter::before { content: ""; position: absolute; inset: -150px 0 0 0;
+  background-image: radial-gradient(1.5px 4px at 20% 10%, #fff, transparent), radial-gradient(1px 3px at 60% 30%, #fff, transparent), radial-gradient(1.5px 5px at 85% 60%, #fff, transparent), radial-gradient(1px 3px at 40% 80%, #fff, transparent), radial-gradient(1px 3px at 10% 55%, #fff, transparent);
+  background-size: 100% 150px; animation: stream 1.2s linear infinite; }
+@keyframes stream { to { transform: translateY(150px); } }
+.rocket { position: absolute; left: 50%; bottom: 14px; font-size: 40px; transform: translateX(-50%) rotate(-45deg); animation: dodge 2.6s ease-in-out infinite; }
+@keyframes dodge { 0%, 100% { margin-left: -40px; } 50% { margin-left: 40px; } }
+.laser { position: absolute; bottom: 52px; width: 3px; height: 16px; border-radius: 2px; background: var(--cyan); box-shadow: 0 0 8px var(--cyan); animation: shoot 0.9s linear infinite; }
+@keyframes shoot { from { transform: translateY(0); opacity: 1; } to { transform: translateY(-120px); opacity: 0; } }
+.alien { position: absolute; top: 12px; font-size: 26px; animation: hover 1.8s ease-in-out infinite; }
+@keyframes hover { 50% { transform: translateY(8px) rotate(8deg); } }
+
+/* scene 2: 냥멍 팡팡 */
+.s-puzzle { background: linear-gradient(170deg, #bfe6ff, #ffe0ef); display: grid; place-items: center; }
+.mini { display: grid; grid-template-columns: repeat(4, 34px); gap: 5px; transform: rotate(-4deg); }
+.mini b { width: 34px; height: 34px; border-radius: 30%; display: grid; place-items: center; font-size: 22px; font-weight: 400; box-shadow: inset 0 -3px 0 rgba(0,0,0,0.12), inset 0 2px 0 rgba(255,255,255,0.6); animation: bop 2.4s ease-in-out infinite; }
+@keyframes bop { 0%, 70%, 100% { transform: scale(1); } 78% { transform: scale(1.3) rotate(-10deg); } 86% { transform: scale(0.85); } }
+.pang { position: absolute; right: 14px; top: 10px; font-family: var(--display); color: #ff5d8f; font-size: 26px; text-shadow: 0 2px 0 #fff; animation: pang 2.4s ease-in-out infinite; }
+@keyframes pang { 0%, 60% { transform: scale(0); opacity: 0; } 75% { transform: scale(1.2) rotate(-8deg); opacity: 1; } 100% { transform: scale(1); opacity: 0; } }
+
+/* scene 3: 고스톱 */
+.s-gostop { background: radial-gradient(ellipse at 50% 40%, #2c7a50, #123826); }
+.fan { position: absolute; left: 50%; top: 18px; width: 0; height: 0; }
+.fan img { position: absolute; width: 64px; height: 98px; left: -32px; top: 0; border-radius: 6px; box-shadow: 0 6px 14px rgba(0,0,0,0.45); transform-origin: 50% 130%; animation: deal 3.2s ease-in-out infinite; }
+.fan img:nth-child(1) { --r: -24deg; }
+.fan img:nth-child(2) { --r: 0deg; animation-delay: 0.15s; }
+.fan img:nth-child(3) { --r: 24deg; animation-delay: 0.3s; }
+@keyframes deal { 0%, 100% { transform: rotate(0deg); } 30%, 70% { transform: rotate(var(--r)); } }
+.chip { position: absolute; right: 16px; bottom: 12px; font-size: 26px; animation: hover 1.4s ease-in-out infinite; }
+.go { position: absolute; left: 14px; bottom: 10px; font-family: var(--display); font-size: 22px; color: var(--gold); text-shadow: 0 2px 0 #7a1016; animation: pang 3.2s ease-in-out infinite; }
+
+/* scene 4: 나의 전생은 누구였을까 */
+.s-past { background: radial-gradient(ellipse at 50% 30%, rgba(217,180,91,0.25), transparent 60%), #14121b; display: grid; place-items: center; }
+.seals { position: relative; width: 78px; height: 78px; }
+.seals b { position: absolute; inset: 0; display: grid; place-items: center; font-family: "Song Myung", serif; font-weight: 400; font-size: 46px; color: #fff3e0; border-radius: 14px; box-shadow: inset 0 0 0 3px rgba(255,255,255,0.25), 0 0 22px rgba(217,180,91,0.45); opacity: 0; animation: stamp 9.6s infinite; }
+@keyframes stamp { 0% { opacity: 0; transform: scale(1.8) rotate(-20deg); } 3% { opacity: 1; transform: scale(1) rotate(-4deg); } 22% { opacity: 1; transform: scale(1) rotate(-4deg); } 25%, 100% { opacity: 0; transform: scale(0.8) rotate(-4deg); } }
+.orbit { position: absolute; left: 50%; top: 50%; width: 130px; height: 130px; margin: -65px 0 0 -65px; border-radius: 50%; border: 1px dashed rgba(217,180,91,0.4); animation: orbit 8s linear infinite; }
+.orbit::before, .orbit::after { content: "✦"; position: absolute; color: #d9b45b; font-size: 16px; }
+.orbit::before { top: -9px; left: 50%; }
+.orbit::after { bottom: -9px; left: 40%; content: "☯"; }
+@keyframes orbit { to { transform: rotate(360deg); } }
+
+.foot { color: var(--dim); font-size: 13px; text-align: center; max-width: 62ch; line-height: 1.6; }
+.game:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
+/* ---------- one screen: everything fits the phone without scrolling ---------- */
+.wrap { height: 100vh; height: 100dvh; min-height: 520px; gap: 10px;
+  padding-top: max(10px, env(safe-area-inset-top, 0px)); padding-bottom: max(10px, env(safe-area-inset-bottom, 0px)); }
+.sign { width: 100%; padding: 12px 18px 10px; border-radius: 22px; flex: none; }
+.bulbs { inset: 5px; }
+.sign .eyebrow { font-size: 11px; }
+.sign h1 { font-size: clamp(28px, min(8.5vw, 7vh), 64px); margin: 2px 0; }
+.sign p { font-size: 14px; margin-top: 2px; }
+.credit { font-size: 13px; margin-top: 2px; }
+.bar { flex: none; display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.coin-hint { font-size: 13px; }
+.share-btn { appearance: none; border: 0; cursor: pointer; font-family: var(--display); font-size: 16px; color: #2a1a00;
+  background: linear-gradient(180deg, #ffe27a, #ffbf3a); padding: 7px 16px; border-radius: 999px;
+  box-shadow: 0 3px 0 #b36b00, 0 0 16px rgba(255, 210, 90, 0.5); display: inline-flex; align-items: center; gap: 6px; }
+.share-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 #b36b00; }
+.share-btn:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+.share-btn span { display: inline-block; animation: wiggle 1.6s ease-in-out infinite; }
+.games { flex: 1; min-height: 0; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: minmax(0, 1fr); gap: 10px; }
+@media (min-width: 1000px) { .games { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; } }
+.game { border-radius: 18px; min-height: 0; }
+.scene { height: auto; flex: 1; min-height: 64px; }
+.info { flex: none; padding: 8px 10px 10px; gap: 4px; }
+.info h2 { font-size: clamp(17px, 4.8vw, 24px); line-height: 1.15; word-break: keep-all; }
+.info p { font-size: 13px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; word-break: keep-all; }
+.tags { display: none; }
+.mine { font-size: 12px; min-height: 0; }
+.mine:empty { display: none; }
+.play { font-size: 15px; padding: 6px 13px; margin-top: 2px; }
+.mini { grid-template-columns: repeat(4, 30px); gap: 4px; }
+.mini b { width: 30px; height: 30px; font-size: 19px; }
+.fan { top: max(10px, calc(50% - 46px)); }
+.fan img { width: 50px; height: 77px; left: -25px; }
+.seals { width: 60px; height: 60px; }
+.seals b { font-size: 36px; border-radius: 12px; }
+.orbit { width: 100px; height: 100px; margin: -50px 0 0 -50px; }
+.rocket { font-size: 34px; bottom: 8px; }
+.alien { font-size: 22px; top: 8px; }
+.foot { flex: none; margin: 0; font-size: 12px; }
+@media (max-width: 999px) and (max-height: 780px) { .info p { display: none; } }
+@media (max-width: 999px) { .sign .eyebrow { display: none; } }
+.sign { padding-top: 16px; padding-bottom: 14px; }
+@media (max-height: 620px) { .sign p, .sign .eyebrow, .foot { display: none; } }
+@media (min-width: 1000px) and (min-height: 700px) {
+  .sign h1 { font-size: clamp(40px, 7vh, 72px); }
+  .info { padding: 12px 14px 14px; gap: 6px; }
+  .info h2 { font-size: 24px; }
+  .info p { font-size: 14px; }
+  .tags { display: flex; }
+  .play { font-size: 17px; padding: 8px 16px; }
+}
+
+/* ---------- share panel ---------- */
+.share-panel { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center;
+  padding: 16px; background: rgba(10, 8, 30, 0.6); }
+.share-panel[hidden] { display: none; }
+.share-card { width: min(380px, 100%); box-sizing: border-box; background: #fffdf8; color: #2b2233; border-radius: 20px;
+  padding: 20px 18px 16px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 14px 40px rgba(0,0,0,0.45);
+  animation: popIn 0.3s cubic-bezier(.3, 1.4, .5, 1); }
+@keyframes popIn { from { transform: scale(0.85); opacity: 0; } }
+.share-card h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 22px; }
+.share-card p { margin: 0; font-size: 15px; line-height: 1.5; color: #6a5f74; word-break: keep-all; }
+.share-card textarea { width: 100%; box-sizing: border-box; min-height: 92px; resize: none; border: 1.5px solid #d9d0e2; border-radius: 12px;
+  padding: 10px 12px; font: 14px var(--body); color: #2b2233; background: #fff; user-select: text; -webkit-user-select: text; }
+.share-card .row { display: flex; gap: 8px; }
+.share-card button { flex: 1; appearance: none; border: 0; cursor: pointer; border-radius: 12px; padding: 12px 10px; font-family: var(--display); font-size: 17px; }
+.share-card .copy { background: #ffc93a; color: #2a1a00; }
+.share-card .close { background: #eee8f2; color: #2b2233; }
+.share-card button:focus-visible { outline: 3px solid #7c5cff; outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; }
+  .seals b:first-child { opacity: 1; }
+  .floaters { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="twinkle" aria-hidden="true"></div>
+<div class="floaters" id="floaters" aria-hidden="true"></div>
+
+<main class="wrap">
+  <header class="sign">
+    <div class="bulbs" aria-hidden="true"></div>
+    <div class="eyebrow">INSERT COIN · PRESS START</div>
+    <h1><span class="joystick" aria-hidden="true">🕹️</span> <span style="white-space:nowrap">김종현의 오락실</span></h1>
+    <p>무엇부터 해 볼까요? 카드를 누르면 바로 시작해요.</p>
+    <div class="credit">만든 사람 · 김종현</div>
+  </header>
+  <div class="bar">
+    <div class="coin-hint"><span class="coin" aria-hidden="true">🪙</span> 게임 4개 · 설치 없이 바로</div>
+    <button type="button" class="share-btn" id="shareBtn"><span aria-hidden="true">📣</span> 친구에게 공유하기</button>
+  </div>
+
+  <nav class="games" aria-label="게임 고르기">
+    <a class="game" href="shooter/index.html" style="--c: #4fe3ff">
+      <div class="scene s-shooter" aria-hidden="true">
+        <span class="alien" style="left: 18%">👾</span>
+        <span class="alien" style="left: 68%; animation-delay: -0.9s">👾</span>
+        <span class="laser" style="left: 46%"></span>
+        <span class="laser" style="left: 54%; animation-delay: -0.45s"></span>
+        <span class="rocket">🚀</span>
+      </div>
+      <div class="info">
+        <h2>은하 순찰대</h2>
+        <p>손가락으로 비행기를 움직이면 총알은 자동! 5스테이지마다 보스가 나와요.</p>
+        <div class="tags"><span>슈팅</span><span>한 판 1~3분</span></div>
+        <div class="mine" id="mine-shooter"></div>
+        <span class="play">출격 <i>▶</i></span>
+      </div>
+    </a>
+
+    <a class="game" href="puzzle/index.html" style="--c: #ff8fc0">
+      <div class="scene s-puzzle" aria-hidden="true">
+        <div class="mini" id="mini"></div>
+        <span class="pang">팡!</span>
+      </div>
+      <div class="info">
+        <h2>냥멍 팡팡</h2>
+        <p>같은 동물 셋을 맞춰 팡! 720단계, 스킬과 아이템, 특수 블록 합체 폭발.</p>
+        <div class="tags"><span>퍼즐</span><span>720단계</span></div>
+        <div class="mine" id="mine-puzzle"></div>
+        <span class="play">팡팡 시작 <i>▶</i></span>
+      </div>
+    </a>
+
+    <a class="game" href="gostop/index.html" style="--c: #ffd25a">
+      <div class="scene s-gostop" aria-hidden="true">
+        <div class="fan"><img src="gostop/cards/00.jpg" alt=""><img src="gostop/cards/28.jpg" alt=""><img src="gostop/cards/44.jpg" alt=""></div>
+        <span class="go">고!</span>
+        <span class="chip">🃏</span>
+      </div>
+      <div class="info">
+        <h2>고스톱</h2>
+        <p>컴퓨터와 맞고 한 판. 쪽·뻑·따닥·폭탄, 그리고 조커 김종현!</p>
+        <div class="tags"><span>화투</span><span>가상 판돈</span></div>
+        <div class="mine" id="mine-gostop"></div>
+        <span class="play">한 판 치기 <i>▶</i></span>
+      </div>
+    </a>
+
+    <a class="game" href="past_life_game/web/index.html" style="--c: #d9b45b">
+      <div class="scene s-past" aria-hidden="true">
+        <div class="orbit"></div>
+        <div class="seals" id="seals"></div>
+      </div>
+      <div class="info">
+        <h2>나의 전생은 누구였을까</h2>
+        <p>스무 개의 철학 딜레마로 알아보는 나와 닮은 가상의 전생 인물.</p>
+        <div class="tags"><span>테스트</span><span>5분</span></div>
+        <div class="mine" id="mine-past"></div>
+        <span class="play">알아보기 <i>▶</i></span>
+      </div>
+    </a>
+  </nav>
+
+  <p class="foot">게임 첫 화면의 <b>끝내기</b>를 누르면 여기로 돌아와요.</p>
+</main>
+
+<div class="share-panel" id="sharePanel" role="dialog" aria-modal="true" aria-labelledby="shareTitle" hidden>
+  <div class="share-card">
+    <h3 id="shareTitle">친구에게 오락실 소개하기</h3>
+    <p id="shareMsg"></p>
+    <textarea id="shareText" readonly rows="4"></textarea>
+    <div class="row"><button type="button" class="close" id="shareClose">닫기</button><button type="button" class="copy" id="shareCopy">초대 글 복사</button></div>
+  </div>
+</div>
+
+<script>
+(() => {
+  "use strict";
+  const $ = (id) => document.getElementById(id);
+  const read = (k, d) => { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } };
+
+  // drifting icons
+  const icons = ["🕹️", "🎮", "⭐", "👾", "🪙", "🎲", "🐱", "🚀", "🃏", "🔮", "🐶", "✨"];
+  const box = $("floaters");
+  icons.forEach((ic, i) => {
+    const s = document.createElement("span");
+    s.textContent = ic;
+    s.style.left = ((i * 41) % 96) + "%";
+    s.style.fontSize = 20 + ((i * 7) % 18) + "px";
+    s.style.animationDuration = 16 + ((i * 5) % 14) + "s";
+    s.style.animationDelay = -((i * 2.7) % 24) + "s";
+    box.appendChild(s);
+  });
+
+  // puzzle scene: animal tiles popping one after another
+  const animals = [["🐱", "#ffb36b"], ["🐶", "#8ccaff"], ["🐰", "#ffb3d0"], ["🐻", "#c6a8ff"], ["🐥", "#ffe066"], ["🐸", "#8fe08a"]];
+  const mini = $("mini");
+  for (let i = 0; i < 8; i++) {
+    const [e, c] = animals[(i * 5) % animals.length];
+    const b = document.createElement("b");
+    b.textContent = e;
+    b.style.background = c;
+    b.style.animationDelay = (i * 0.3) + "s";
+    mini.appendChild(b);
+  }
+
+  // past-life scene: seals stamping in turn
+  const seals = [["史", "#7a5c2e"], ["醫", "#4f7a4a"], ["旗", "#a83232"], ["和", "#4a7a6e"]];
+  seals.forEach(([ch, color], i) => {
+    const b = document.createElement("b");
+    b.textContent = ch;
+    b.style.background = color;
+    b.style.animationDelay = (i * 2.4) + "s";
+    $("seals").appendChild(b);
+  });
+
+  // share: phone share sheet when allowed, otherwise copy the invitation for KakaoTalk
+  const ARCADE_URL = "https://bellhkim.github.io/";
+  const pageUrl = () => /claude/.test(location.hostname) || location.protocol === "file:" ? ARCADE_URL : location.href.split("#")[0];
+  const inviteText = () => "🕹️ 김종현의 오락실에 놀러 와!\n🚀 은하 순찰대 · 🐱 냥멍 팡팡 · 🎴 고스톱 · 🔮 나의 전생은 누구였을까\n설치 없이 링크만 누르면 바로 시작해 👇\n" + pageUrl();
+  const panel = $("sharePanel"), ta = $("shareText");
+  async function copy(text) {
+    try { await navigator.clipboard.writeText(text); return true; } catch (e) {}
+    try { ta.value = text; ta.focus(); ta.select(); return document.execCommand("copy"); } catch (e) { return false; }
+  }
+  function showPanel(ok) {
+    ta.value = inviteText();
+    $("shareMsg").textContent = ok
+      ? "초대 글을 복사했어요! 카카오톡 대화방에 붙여 넣어 보내 주세요."
+      : "아래 글을 길게 눌러 복사한 뒤, 카카오톡 대화방에 붙여 넣어 보내 주세요.";
+    panel.hidden = false;
+    if (ok) $("shareClose").focus(); else { ta.focus(); ta.select(); }
+  }
+  $("shareBtn").addEventListener("click", async () => {
+    const text = inviteText();
+    if (navigator.share) {
+      try { await navigator.share({ title: "김종현의 오락실", text }); return; }
+      catch (e) { if (e && e.name === "AbortError") return; }
+    }
+    showPanel(await copy(text));
+  });
+  $("shareCopy").addEventListener("click", async () => {
+    const ok = await copy(ta.value);
+    $("shareMsg").textContent = ok ? "초대 글을 복사했어요! 카톡에 붙여 넣으면 돼요." : "아래 글을 길게 눌러 복사해 주세요.";
+  });
+  const hidePanel = () => { panel.hidden = true; $("shareBtn").focus(); };
+  $("shareClose").addEventListener("click", hidePanel);
+  panel.addEventListener("click", (e) => { if (e.target === panel) hidePanel(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !panel.hidden) hidePanel(); });
+
+  // my records, read from each game's saved data on this device
+  const best = read("gp_best", 0);
+  if (best) $("mine-shooter").textContent = "🏆 최고 " + best.toLocaleString("ko-KR") + "점";
+  const progress = read("nm_progress", {});
+  const stars = Object.values(progress).reduce((a, v) => a + v, 0);
+  if (stars) {
+    let n = 1;
+    while (progress[n] > 0) n++;
+    $("mine-puzzle").textContent = "⭐ 별 " + stars + "개 · " + n + "단계 도전 중";
+  }
+  const money = read("gs_money", null), rec = read("gs_record", null);
+  if (rec && rec.w + rec.l + rec.d) $("mine-gostop").textContent = (money != null ? "💰 " + money.toLocaleString("ko-KR") + "원 · " : "🎴 ") + rec.w + "승 " + rec.l + "패";
+  const hist = read("pl_history", []);
+  const names = { scholar: "기록하는 사관", healer: "역병 속의 치유자", merchant: "길 위의 상인", guardian: "변방의 수호자", judge: "저울을 든 판관", rebel: "깃발을 든 대장장이", monk: "산사의 수행자", navigator: "별을 읽는 항해사", matriarch: "종가의 안주인", performer: "남사당패의 꼭두쇠", artisan: "다리를 놓는 장인", mediator: "두 언어의 역관" };
+  if (hist.length && names[hist[0].id]) $("mine-past").textContent = "🔮 지난 결과: " + names[hist[0].id];
+})();
+</script>
+</body>
+</html>
