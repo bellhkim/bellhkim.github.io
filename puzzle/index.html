@@ -445,6 +445,66 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
 .collect { position: fixed; left: 0; top: 0; width: calc(30px * var(--u)); height: calc(30px * var(--u)); margin: calc(-15px * var(--u)) 0 0 calc(-15px * var(--u)); border-radius: calc(10px * var(--u)); display: grid; place-items: center; font-size: calc(19px * var(--u)); pointer-events: none; z-index: 17; box-shadow: 0 2px 8px rgba(58,46,79,0.25); }
 
 /* ---------- modal ---------- */
+/* ---------- chapter bonus game ---------- */
+.bonus { position: fixed; inset: 0; z-index: 40; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none;
+  background: radial-gradient(ellipse at 50% 115%, var(--bc, #ffb0d0) 0%, transparent 55%), linear-gradient(180deg, #2a1d5c, #5b2d86 60%, #a8407f); }
+.bonus[hidden] { display: none; }
+.bonus.shake { animation: shake3 0.45s; }
+.bonus-hud { position: absolute; top: max(12px, env(safe-area-inset-top, 0px)); left: 16px; right: 16px; z-index: 2; pointer-events: none;
+  display: flex; flex-direction: column; gap: 6px; color: #fff; text-align: center; font-family: var(--display); }
+.bonus-hud h2 { margin: 0; font-weight: 400; font-size: 26px; text-shadow: 0 3px 0 rgba(0,0,0,0.25); }
+.bonus-time { height: 12px; border-radius: 999px; background: rgba(255,255,255,0.22); overflow: hidden; }
+.bonus-time i { display: block; height: 100%; background: linear-gradient(90deg, #ffd25a, #ff5d8f); transform-origin: left; }
+.bonus-tally { display: flex; justify-content: center; gap: 14px; font-size: 20px; }
+.balloon { position: absolute; bottom: -100px; width: 76px; height: 100px; margin-left: -38px; border: 0; padding: 0; background: none; cursor: pointer;
+  animation: balloonUp var(--d) linear forwards; touch-action: none; -webkit-tap-highlight-color: transparent; }
+.balloon .bb { position: relative; display: grid; place-items: center; width: 68px; height: 80px; margin: 0 auto; border-radius: 50% 50% 46% 46%; font-size: 34px;
+  box-shadow: inset -8px -10px 0 rgba(0,0,0,0.13), inset 8px 8px 0 rgba(255,255,255,0.35); }
+.balloon::after { content: ""; position: absolute; left: 50%; top: 80px; width: 1.5px; height: 22px; background: rgba(255,255,255,0.6); }
+.balloon.star .bb { box-shadow: inset -8px -10px 0 rgba(0,0,0,0.1), inset 8px 8px 0 rgba(255,255,255,0.5), 0 0 22px #ffe27a; }
+.balloon.pop { animation-play-state: paused; pointer-events: none; }
+.balloon.pop .bb { animation: bpop 0.25s ease-out forwards; }
+.balloon.pop::after { opacity: 0; }
+@keyframes balloonUp { from { transform: translateY(0) rotate(-6deg); } 50% { transform: translateY(-55vh) rotate(6deg); } to { transform: translateY(calc(-100vh - 140px)) rotate(-4deg); } }
+@keyframes bpop { to { transform: scale(1.9); opacity: 0; } }
+.float-txt { position: absolute; z-index: 3; pointer-events: none; white-space: nowrap; font-family: var(--display); font-size: 22px; color: #fff;
+  text-shadow: 0 2px 0 rgba(0,0,0,0.35); transform: translate(-50%, -50%); animation: floatUp 0.9s ease-out forwards; }
+.float-txt.bad { color: #bfc6d6; }
+.float-txt.gold { color: #ffe27a; font-size: 28px; }
+@keyframes floatUp { to { transform: translate(-50%, -170%); opacity: 0; } }
+.bonus-center { position: absolute; inset: 0; z-index: 3; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px;
+  padding: 16px; color: #fff; text-align: center; }
+.bonus-center .ic-big { font-size: 72px; animation: wobble 1.2s ease-in-out infinite; }
+.bonus-center h3 { margin: 0; font-family: var(--display); font-weight: 400; font-size: clamp(30px, 8vw, 46px); text-shadow: 0 4px 0 rgba(0,0,0,0.25); animation: zoomIn 0.5s cubic-bezier(.3,1.6,.5,1) both; }
+.bonus-center p { margin: 0; font-size: 17px; line-height: 1.55; opacity: 0.95; word-break: keep-all; }
+.bonus-center .count { font-family: var(--display); font-size: 110px; line-height: 1; color: #ffe27a; text-shadow: 0 6px 0 rgba(0,0,0,0.25); animation: zoomIn 0.45s cubic-bezier(.3,1.6,.5,1) both; }
+@keyframes zoomIn { from { transform: scale(0.2); opacity: 0; } }
+@keyframes wobble { 0%, 100% { transform: rotate(-5deg); } 50% { transform: rotate(5deg) scale(1.06); } }
+.chests { display: flex; gap: 14px; justify-content: center; }
+.chest { appearance: none; border: 0; cursor: pointer; width: 96px; height: 112px; border-radius: 20px; font-size: 58px; display: grid; place-items: center; align-content: center;
+  background: rgba(255,255,255,0.14); box-shadow: 0 0 0 3px rgba(255,210,90,0.65), 0 0 24px rgba(255,210,90,0.45); animation: wobble 1.2s ease-in-out infinite; color: #fff; }
+.chest:nth-child(2) { animation-delay: 0.2s; }
+.chest:nth-child(3) { animation-delay: 0.4s; }
+.chest small { display: block; font-family: var(--display); font-size: 14px; }
+.chest.open { animation: chestOpen 0.6s cubic-bezier(.3,1.6,.5,1) both; background: rgba(255,226,122,0.35); box-shadow: 0 0 0 4px #ffe27a, 0 0 40px #ffe27a; }
+.chest.dim { animation: none; opacity: 0.45; }
+.chest:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+@keyframes chestOpen { from { transform: scale(0.7) rotate(-10deg); } to { transform: scale(1.15); } }
+.reward-list { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.reward-list span { background: #fff4d6; color: #6b4300; border-radius: 999px; padding: 5px 11px; font-family: var(--display); font-size: 15px; }
+.days { display: flex; gap: 6px; justify-content: center; }
+.days span { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: #eee6f2; color: var(--muted); font-family: var(--display); font-size: 14px; }
+.days span.on { background: var(--sun); color: #6b4300; box-shadow: 0 2px 0 #e8a400; }
+.days span.gift { font-size: 16px; }
+.bonus-note { font-family: var(--display); color: var(--berry) !important; font-size: calc(18px * var(--u)) !important; animation: zoomIn 0.5s both; }
+/* Friday night invite on the map */
+.friday { width: 100%; box-sizing: border-box; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 18px; color: #fff;
+  background: linear-gradient(135deg, #ff5d8f, #ff9b4a); box-shadow: 0 4px 0 rgba(0,0,0,0.15); }
+.friday[hidden] { display: none; }
+.friday .ic { font-size: 30px; animation: wobble 1.2s ease-in-out infinite; }
+.friday b { display: block; font-family: var(--display); font-weight: 400; font-size: 18px; }
+.friday small { display: block; font-size: 13px; opacity: 0.95; }
+.friday button { margin-left: auto; flex: none; appearance: none; border: 0; cursor: pointer; border-radius: 999px; background: #fff; color: #ff3d7f; font-family: var(--display); font-size: 15px; padding: 8px 12px; }
 .overlay {
   position: fixed; inset: 0;
   display: flex; align-items: center; justify-content: center;
@@ -522,6 +582,7 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
   </div>
   <div class="total-stars">모은 별 <b id="totalStars">0</b> / <span id="maxStars">0</span></div>
   <div class="wallet"><span class="coins">🪙 <b id="coins">0</b></span><button class="shop-btn" id="shopBtn">🛒 상점</button><button class="shop-btn quit" id="quitAppBtn">끝내기</button></div>
+  <div class="friday" id="friday" hidden></div>
   <div class="skill-info" id="skillInfo"></div>
   <div class="worlds" id="worlds" role="tablist"></div>
   <div class="levels" id="levels"></div>
@@ -538,6 +599,9 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
       <li>성공하면 남은 횟수만큼 <b>피날레</b> 폭죽이 터져요. 남은 횟수가 많을수록 별이 많아요.</li>
       <li><b>121단계부터</b>는 🔗 사슬(맞춰서 풀기)과 🥚 알(맨 아래로 내려보내기)이 나오고, 🔨 망치 · 🔀 섞기 · ⏱️ 이동 추가 <b>스킬</b>을 쓸 수 있어요.</li>
       <li><b>2부(241단계~)</b>에는 ⚡ 번개, <b>3부(481단계~)</b>에는 🌈 무지개 스킬이 더해지고, 철 상자와 빙하가 나와요.</li>
+      <li>챕터(15단계)를 처음 끝까지 깨면 <b>🎈 보너스 게임</b>이 바로 시작돼요. 풍선을 터뜨리고 보물 상자를 골라 선물을 받아요.</li>
+      <li>아이템은 상점 말고도 <b>단계 성공 선물</b>, <b>매일 출석 선물</b>, <b>보너스 게임</b>, <b>금요일 친구 초대</b>로 받을 수 있어요.</li>
+      <li>매주 <b>금요일 밤 9시부터</b>는 불금 팡팡 타임! 단계를 깨면 코인이 2배예요.</li>
       <li>별을 120 · 360 · 720개 모으면 <b>스킬 레벨</b>이 올라 망치가 커지고 이동 추가가 늘어요.</li>
       <li>단계를 깨면 🪙 <b>코인</b>을 받아요. <b>🛒 상점</b>에서 출발 아이템(💣 폭탄 · 🌈 무지개 · 👟 이동 +3), 실패했을 때 쓰는 💖 이어하기를 사고, 스킬의 시작 개수를 늘릴 수 있어요.</li>
     </ul>
@@ -575,6 +639,7 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
 <canvas id="fx"></canvas>
 <div class="ambient" id="ambient" aria-hidden="true"></div>
 
+<div class="bonus" id="bonus" hidden></div>
 <div class="overlay" id="result" hidden>
   <div class="card" id="resultCard"></div>
 </div>
@@ -692,10 +757,10 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
     g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
     o.connect(g).connect(actx.destination); o.start(t); o.stop(t + dur + 0.02);
   }
-  function noise(dur, vol, freq) {
+  function noise(dur, vol, freq, delay = 0, ftype = "lowpass") {
     if (!actx || muted || !noiseBuf) return;
-    const t = actx.currentTime, s = actx.createBufferSource(), f = actx.createBiquadFilter(), g = actx.createGain();
-    s.buffer = noiseBuf; f.type = "lowpass"; f.frequency.setValueAtTime(freq, t);
+    const t = actx.currentTime + delay, s = actx.createBufferSource(), f = actx.createBiquadFilter(), g = actx.createGain();
+    s.buffer = noiseBuf; f.type = ftype; f.frequency.setValueAtTime(freq, t);
     g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
     s.connect(f).connect(g).connect(actx.destination); s.start(t); s.stop(t + dur);
   }
@@ -712,9 +777,120 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
     crate: () => { noise(0.18, 0.22, 1400); tone(160, 0.12, "square", 0.04, 0.7); },
     combo: (n) => [0, 4, 7, 12].slice(0, Math.min(4, n)).forEach((st, i) => tone(523 * Math.pow(2, (st + n) / 12), 0.25, "triangle", 0.06, 1.01, i * 0.06)),
     fever: () => [523, 659, 784, 1046, 1318].forEach((f, i) => tone(f, 0.22, "square", 0.04, 1.01, i * 0.07)),
-    win: () => [523, 659, 784, 1046].forEach((f, i) => tone(f, 0.25, "triangle", 0.09, 1.01, i * 0.12)),
-    lose: () => [392, 330, 262].forEach((f, i) => tone(f, 0.3, "triangle", 0.08, 0.98, i * 0.16))
+    // drum roll, brass fanfare, cymbal crash and a shower of sparkles
+    win: () => {
+      if (!actx || muted) return;
+      for (let i = 0; i < 12; i++) noise(0.07, 0.08 + i * 0.018, 2600, i * 0.04);
+      const t0 = 0.5;
+      [[523, 0], [523, 0.11], [523, 0.22], [659, 0.36], [784, 0.62]].forEach(([f, d]) => {
+        tone(f, 0.2, "square", 0.05, 1, t0 + d); tone(f / 2, 0.22, "triangle", 0.09, 1, t0 + d);
+      });
+      [523, 659, 784, 1046].forEach((f) => { tone(f, 1.4, "sawtooth", 0.022, 1, t0 + 0.88); tone(f, 1.4, "triangle", 0.05, 1, t0 + 0.88); });
+      tone(131, 1.2, "triangle", 0.18, 1, t0 + 0.88);
+      noise(1.3, 0.22, 5000, t0 + 0.88, "highpass");
+      tone(90, 0.35, "sine", 0.3, 0.4, t0 + 0.88);
+      [1568, 1976, 2349, 3136, 2637, 3520].forEach((f, i) => tone(f, 0.16, "triangle", 0.035, 1, t0 + 1.05 + i * 0.07));
+    },
+    // the sad trombone: wah, wah, wah, waaah... then a thud
+    lose: () => {
+      if (!actx || muted) return;
+      [[392, 0, 0.42], [370, 0.48, 0.42], [349, 0.96, 0.42], [330, 1.44, 1.35]].forEach(([f, d, dur], i) => trombone(f, d, dur, i === 3));
+      tone(70, 0.6, "sine", 0.28, 0.5, 2.85);
+      noise(0.5, 0.25, 260, 2.85);
+    },
+    coin: () => { tone(988, 0.06, "square", 0.045); tone(1319, 0.2, "square", 0.045, 1, 0.06); },
+    jackpot: () => {
+      [784, 988, 1175, 1568, 1976, 2349].forEach((f, i) => tone(f, 0.14, "square", 0.045, 1, i * 0.045));
+      for (let i = 0; i < 6; i++) { tone(1976, 0.05, "square", 0.03, 1, 0.3 + i * 0.07); tone(2637, 0.1, "square", 0.03, 1, 0.33 + i * 0.07); }
+      noise(0.9, 0.16, 5500, 0.28, "highpass");
+    },
+    storm: () => { noise(0.8, 0.45, 600); tone(70, 0.6, "sawtooth", 0.08, 0.5); tone(1800, 0.12, "square", 0.03, 0.2); },
+    bonus: () => {
+      for (let i = 0; i < 16; i++) noise(0.06, 0.06 + i * 0.012, 3000, i * 0.035);
+      tone(262, 0.7, "sawtooth", 0.04, 4, 0.1);
+      [523, 659, 784, 1046, 1318].forEach((f, i) => tone(f, 0.25, "square", 0.045, 1, 0.65 + i * 0.07));
+      noise(0.9, 0.18, 5000, 0.95, "highpass");
+    },
+    chest: () => { noise(0.5, 0.12, 900, 0, "bandpass"); [659, 831, 988, 1319].forEach((f, i) => tone(f, 0.5, "triangle", 0.06, 1, 0.15 + i * 0.05)); }
   };
+  function trombone(freq, delay, dur, wobble) {
+    if (!actx || muted) return;
+    const t = actx.currentTime + delay, o = actx.createOscillator(), f = actx.createBiquadFilter(), g = actx.createGain();
+    o.type = "sawtooth"; o.frequency.setValueAtTime(freq * 1.02, t); o.frequency.linearRampToValueAtTime(freq, t + 0.08);
+    o.frequency.linearRampToValueAtTime(freq * (wobble ? 0.9 : 0.97), t + dur);
+    if (wobble) {
+      const lfo = actx.createOscillator(), lg = actx.createGain();
+      lfo.frequency.setValueAtTime(6, t); lg.gain.setValueAtTime(9, t);
+      lfo.connect(lg).connect(o.frequency); lfo.start(t); lfo.stop(t + dur + 0.05);
+    }
+    f.type = "lowpass"; f.frequency.setValueAtTime(1100, t); f.Q.setValueAtTime(5, t);
+    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(0.13, t + 0.05);
+    g.gain.setValueAtTime(0.13, t + dur * 0.7); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    o.connect(f).connect(g).connect(actx.destination); o.start(t); o.stop(t + dur + 0.05);
+  }
+
+  // ---------- background music: a bouncy chiptune made on the fly ----------
+  const bgm = (() => {
+    const pitch = (st) => 523.25 * Math.pow(2, st / 12);
+    // eight bars of eighth notes over C - Am - F - G (null = rest)
+    const MEL = [0, 4, 7, 4, 12, 7, 4, 7, 9, 12, 9, 7, 4, 7, 9, null, 5, 9, 12, 14, 12, 9, 5, null, 7, 11, 14, 12, 11, 7, 2, null,
+      12, 11, 12, 16, 14, 12, 7, null, 9, 12, 16, 12, 9, 7, 4, null, 5, 9, 12, 17, 16, 14, 12, null, 14, 12, 11, 7, 11, 14, 12, null];
+    const BASS = [-24, -27, -31, -29, -24, -27, -31, -29];
+    let timer = 0, step = 0, nextT = 0, mode = "level", fast = false, bus = null, wanted = false;
+    function voice(freq, t, dur, type, vol) {
+      const o = actx.createOscillator(), g = actx.createGain();
+      o.type = type; o.frequency.setValueAtTime(freq, t);
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.012); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g).connect(bus); o.start(t); o.stop(t + dur + 0.02);
+    }
+    function hat(t, vol) {
+      if (!noiseBuf) return;
+      const s = actx.createBufferSource(), f = actx.createBiquadFilter(), g = actx.createGain();
+      s.buffer = noiseBuf; f.type = "highpass"; f.frequency.setValueAtTime(7000, t);
+      g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.05);
+      s.connect(f).connect(g).connect(bus); s.start(t); s.stop(t + 0.06);
+    }
+    function kick(t) {
+      const o = actx.createOscillator(), g = actx.createGain();
+      o.frequency.setValueAtTime(150, t); o.frequency.exponentialRampToValueAtTime(45, t + 0.12);
+      g.gain.setValueAtTime(0.22, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.14);
+      o.connect(g).connect(bus); o.start(t); o.stop(t + 0.16);
+    }
+    function tick() {
+      const bonus = mode === "bonus", tr = bonus ? 7 : 0;
+      const eighth = 60 / (bonus ? 172 : fast ? 152 : 126) / 2;
+      while (nextT < actx.currentTime + 0.2) {
+        const i = step % MEL.length, bar = Math.floor(i / 8), pos = i % 8, m = MEL[i];
+        if (m !== null) voice(pitch(m + tr), nextT, eighth * 0.85, "square", 0.028);
+        if (pos % 2 === 0) voice(pitch(BASS[bar] + tr + (pos === 2 || pos === 6 ? 7 : 0)), nextT, eighth * 1.7, "triangle", 0.1);
+        if (pos % 2 === 1 || bonus || fast) hat(nextT, pos % 2 ? 0.035 : 0.018);
+        if (pos === 0 || pos === 4 || (bonus && pos % 2 === 0)) kick(nextT);
+        nextT += eighth; step++;
+      }
+    }
+    function run() {
+      if (timer || !actx) return;
+      if (!bus) { bus = actx.createGain(); bus.connect(actx.destination); }
+      bus.gain.cancelScheduledValues(actx.currentTime);
+      bus.gain.setValueAtTime(muted ? 0 : 0.85, actx.currentTime);
+      step = 0; nextT = actx.currentTime + 0.08;
+      timer = setInterval(tick, 50); tick();
+    }
+    function halt(fade) {
+      if (!timer) return;
+      clearInterval(timer); timer = 0;
+      const t = actx.currentTime;
+      bus.gain.cancelScheduledValues(t); bus.gain.setValueAtTime(bus.gain.value, t); bus.gain.linearRampToValueAtTime(0, t + fade);
+    }
+    document.addEventListener("visibilitychange", () => { if (document.hidden) halt(0.05); else if (wanted) run(); });
+    return {
+      start(m = "level") { initAudio(); mode = m; fast = false; wanted = true; if (!document.hidden) run(); },
+      stop(fade = 0.25) { wanted = false; halt(fade); },
+      setFast(v) { fast = v; },
+      mute(v) { if (bus && actx) { bus.gain.cancelScheduledValues(actx.currentTime); bus.gain.setValueAtTime(v || !timer ? 0 : 0.85, actx.currentTime); } },
+      get playing() { return !!timer; }
+    };
+  })();
   function paintMute() { $("muteBtn").textContent = muted ? "×" : "♪"; }
   paintMute();
 
@@ -843,12 +1019,16 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
 
   // ---------- coins, items and skill upgrades ----------
   let coins = store.get("nm_coins", 300); // a small welcome purse
-  let items = store.get("nm_items", { bomb: 0, rainbow: 0, moves: 0, heart: 0 });
+  let items = Object.assign({ bomb: 0, line: 0, rainbow: 0, moves: 0, hammer: 0, clover: 0, heart: 0 }, store.get("nm_items", {}));
+  let lucky = false; // 🍀 clover in play: coins x2 for this level
   let skillUp = store.get("nm_skillup", { hammer: 0, shuffle: 0, plus: 0, bolt: 0, rainbow: 0 });
   const ITEMS = {
     bomb: { ic: "💣", name: "폭탄 출발", desc: "판에 폭탄 블록 2개를 깔고 시작해요", price: 120 },
+    line: { ic: "⚡", name: "줄무늬 출발", desc: "줄무늬 블록 2개를 깔고 시작해요", price: 110 },
     rainbow: { ic: "🌈", name: "무지개 출발", desc: "무지개 블록 1개를 들고 시작해요", price: 200 },
     moves: { ic: "👟", name: "이동 +3 출발", desc: "이동 횟수 3번을 더 받고 시작해요", price: 100 },
+    hammer: { ic: "🔨", name: "망치 +2", desc: "망치 스킬을 2번 더 쓸 수 있어요 (121단계부터)", price: 150 },
+    clover: { ic: "🍀", name: "행운 클로버", desc: "그 단계를 깨면 코인을 2배로 받아요", price: 90 },
     heart: { ic: "💖", name: "이어하기", desc: "실패했을 때 이동 5번을 더 받아 계속해요", price: 250 }
   };
   const SKILL_UP_PRICE = [300, 700]; // start with 2, then 3 charges
@@ -857,6 +1037,20 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
     plus: { ic: "⏱️", name: "이동 추가", from: SKILL_LEVEL }, bolt: { ic: "⚡", name: "번개", from: BOLT_LEVEL },
     rainbow: { ic: "🌈", name: "무지개", from: RAINBOW_LEVEL }
   };
+  // gifts: level clears, daily visits, chapter bonus games and Friday invites hand out items
+  const DROP_TABLE = [["moves", 24], ["bomb", 20], ["line", 20], ["clover", 14], ["hammer", 10], ["rainbow", 7], ["heart", 5]];
+  function rollItem(rare = false) {
+    const table = DROP_TABLE.map(([k, w]) => [k, rare && (k === "rainbow" || k === "heart") ? w * 4 : w]);
+    let r = Math.random() * table.reduce((a, [, w]) => a + w, 0);
+    for (const [k, w] of table) if ((r -= w) < 0) return k;
+    return "moves";
+  }
+  const grant = (k, n = 1) => { items[k] = (items[k] || 0) + n; };
+  const itemSpan = (k, n = 1) => "<span>" + ITEMS[k].ic + " " + ITEMS[k].name + (n > 1 ? " ×" + n : "") + "</span>";
+  const dayKey = (d = new Date()) => d.getFullYear() + "-" + (d.getMonth() + 1) + "-" + d.getDate();
+  // 불금 팡팡 타임: Friday from 9 pm, coins x2
+  const fridayNow = (d = new Date()) => ({ fri: d.getDay() === 5, night: d.getDay() === 5 && d.getHours() >= 21 });
+
   function saveWallet() {
     store.set("nm_coins", coins);
     store.set("nm_items", items);
@@ -1170,7 +1364,7 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
   // before a level: choose start items, if any are owned
   function prepareLevel(n) {
     if (window.appShell) appShell.enter(); // full screen while playing hides the address bar where allowed
-    const owned = ["bomb", "rainbow", "moves"].filter((k) => items[k] > 0);
+    const owned = ["bomb", "line", "rainbow", "moves", "hammer", "clover"].filter((k) => items[k] > 0 && (k !== "hammer" || n >= SKILL_LEVEL));
     if (!owned.length) return startLevel(n, {});
     const ch = CHAPTERS[Math.min(CHAPTERS.length - 1, Math.floor((n - 1) / PER_CHAPTER))];
     showCard("<h2>" + n + "단계</h2><p>" + ch.icon + " " + ch.name + " · 쓸 출발 아이템을 골라 주세요</p>" +
@@ -1185,6 +1379,9 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
     const used = [];
     if (boosts.moves) { moves += 3; updateHud(); used.push("👟 이동 +3"); }
     if (boosts.bomb) { addRandomSpecials(2, ["bomb"]); used.push("💣 폭탄 2개"); }
+    if (boosts.line) { addRandomSpecials(2, ["h", "v"]); used.push("⚡ 줄무늬 2개"); }
+    if (boosts.hammer) { skills.hammer += 2; renderSkills(); used.push("🔨 망치 +2"); }
+    if (boosts.clover) { lucky = true; used.push("🍀 코인 2배"); }
     if (boosts.rainbow) {
       const normal = [];
       for (const row of grid) for (const t of row) if (t && t.kind >= 0 && !t.special && !t.locked) normal.push(t);
@@ -1198,6 +1395,9 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
   function startLevel(n, boosts = {}) {
     for (const k of Object.keys(boosts)) if (boosts[k]) { items[k]--; }
     saveWallet();
+    lucky = false;
+    bgm.start("level");
+    if (fridayNow().night) setTimeout(() => toast("🎉 불금 팡팡 타임! 깨면 코인 2배"), 1200);
     setTheme(worldOf(n));
     $("mapScreen").hidden = true;
     $("gameScreen").hidden = false;
@@ -2001,6 +2201,7 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
     if (feverActive) feverMoves--;
     updateHud();
     updateFever();
+    bgm.setFast(feverMoves > 0);
   }
   const goalsDone = () => Object.values(goals).every((v) => v <= 0);
 
@@ -2231,29 +2432,219 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
     if (!progress[level] || progress[level] < starsEarned) { progress[level] = starsEarned; store.set("nm_progress", progress); }
     if (skillLevel() > lvBefore) setTimeout(() => toast("스킬 레벨 업! Lv" + skillLevel() + " · " + SKILL_PERKS[skillLevel()]), 1600);
     const firstClear = !store.get("nm_cleared", {})[level];
-    const gain = 40 + starsEarned * 30 + Math.min(100, Math.floor(score / 2000) * 5) + (firstClear ? 50 : 0);
+    const mult = (lucky ? 2 : 1) * (fridayNow().night ? 2 : 1);
+    const gain = (40 + starsEarned * 30 + Math.min(100, Math.floor(score / 2000) * 5) + (firstClear ? 50 : 0)) * mult;
     coins += gain;
+    const drop = Math.random() < 0.25 + starsEarned * 0.15 ? rollItem(starsEarned === 3) : null;
+    if (drop) grant(drop);
+    const chapterEnd = level % PER_CHAPTER === 0 && firstClear;
     const cleared = store.get("nm_cleared", {}); cleared[level] = 1; store.set("nm_cleared", cleared);
     saveWallet();
+    bgm.stop(0.15);
     sfx.win();
     if (movesLeft > 0) await finale();
     const last = level >= LEVEL_COUNT;
+    const chName = CHAPTERS[Math.floor((level - 1) / PER_CHAPTER)].name;
+    const why = [lucky ? "🍀 클로버" : "", fridayNow().night ? "🎉 불금" : ""].filter(Boolean).join(" · ");
     showCard(
       "<h2>" + level + "단계 성공!</h2>" +
       '<div class="stars">' + [1, 2, 3].map((i) => (i <= starsEarned ? '<span class="on">★</span>' : "<span>★</span>")).join("") + "</div>" +
       '<div class="big">' + score.toLocaleString("ko-KR") + "</div>" +
       "<p>남은 횟수 " + movesLeft + "번이 피날레로 터졌어요</p>" +
-      '<div class="coin-gain">🪙 +' + gain + (firstClear ? " (첫 클리어 보너스 포함)" : "") + "</div>" +
-      '<div class="btns">' +
-      (last ? "" : '<button class="btn" data-act="next">다음 단계</button>') +
-      '<button class="btn share" data-act="share">친구에게 자랑하기</button>' +
-      '<button class="btn alt" data-act="map">단계 고르기</button>' +
-      "</div>" +
+      '<div class="coin-gain">🪙 +' + gain + (why ? " (" + why + " 2배)" : firstClear ? " (첫 클리어 보너스 포함)" : "") + "</div>" +
+      (drop ? '<div class="reward-list"><span>🎁 선물 발견!</span>' + itemSpan(drop) + "</div>" : "") +
+      (chapterEnd
+        ? '<p class="bonus-note">🎉 ' + chName + " 완주! 곧 보너스 게임이 시작돼요</p>" +
+          '<div class="btns"><button class="btn" data-act="bonus">🎈 보너스 게임 바로 시작</button></div>'
+        : '<div class="btns">' +
+          (last ? "" : '<button class="btn" data-act="next">다음 단계</button>') +
+          '<button class="btn share" data-act="share">친구에게 자랑하기</button>' +
+          '<button class="btn alt" data-act="map">단계 고르기</button>' +
+          "</div>") +
       '<textarea class="share-text" id="shareText" rows="3" readonly hidden></textarea>',
       { stars: starsEarned }, 300
     );
     levelsPlayed++;
+    if (chapterEnd) { const lv = level; bonusTimer = setTimeout(() => startBonus(lv), 4200); }
   }
+
+  // ---------- chapter bonus game: balloon rush, then a treasure chest ----------
+  let bonusTimer = 0;
+  async function startBonus(lv) {
+    clearTimeout(bonusTimer);
+    const box = $("bonus");
+    if (!box.hidden) return;
+    $("result").hidden = true;
+    const chI = Math.floor((lv - 1) / PER_CHAPTER), ch = CHAPTERS[chI];
+    const got = { coins: 0, items: {} };
+    box.style.setProperty("--bc", ch.color);
+    box.hidden = false;
+    box.innerHTML = '<div class="bonus-center"><div class="ic-big">' + ch.icon + "</div><h3>" + ch.name + " 완주!</h3>" +
+      "<p>보너스 게임 · 🎈 선물 풍선을 톡톡 터뜨려요<br>🪙 코인 · 🎁 아이템 · ⭐ 대박! 단, ⛈️ 먹구름은 피하세요</p>" +
+      '<div class="count" id="bCount">3</div></div>';
+    initAudio();
+    sfx.bonus();
+    await sleep(900);
+    for (const n of [3, 2, 1]) {
+      const c = $("bCount");
+      if (c) { c.textContent = n; c.style.animation = "none"; void c.offsetWidth; c.style.animation = ""; }
+      tone(n === 1 ? 880 : 660, 0.14, "square", 0.05);
+      await sleep(750);
+    }
+    tone(1320, 0.35, "square", 0.06);
+    bgm.start("bonus");
+    await balloonRush(box, got);
+    bgm.stop(0.2);
+    await chestPick(box, got);
+    coins += got.coins;
+    for (const k of Object.keys(got.items)) grant(k, got.items[k]);
+    saveWallet();
+    box.hidden = true;
+    box.innerHTML = "";
+    const list = Object.keys(got.items).map((k) => itemSpan(k, got.items[k])).join("");
+    sfx.win();
+    showCard("<h2>🎉 보너스 결과</h2><p>" + ch.icon + " " + ch.name + " 완주 선물을 받았어요</p>" +
+      '<div class="coin-gain">🪙 +' + got.coins + "</div>" +
+      (list ? '<div class="reward-list">' + list + "</div>" : "") +
+      '<div class="btns">' + (lv < LEVEL_COUNT ? '<button class="btn" data-act="next">다음 챕터로!</button>' : "") +
+      '<button class="btn alt" data-act="map">단계 고르기</button></div>', lastResult, 200);
+  }
+  function balloonRush(box, got) {
+    return new Promise((resolve) => {
+      const DUR = 15000, COLORS = ["#ff7aa8", "#ffd25a", "#7fd3ff", "#9be37a", "#c6a8ff", "#ffa66b"];
+      box.innerHTML = '<div class="bonus-hud"><h2>🎈 선물 풍선 러시</h2><div class="bonus-time"><i id="bTime"></i></div>' +
+        '<div class="bonus-tally"><span>🪙 <b id="bCoins">0</b></span><span>🎁 <b id="bItems">0</b></span></div></div>';
+      let end = performance.now() + DUR, spawnAt = 0, itemCount = 0, done = false;
+      const say = (x, y, txt, cls = "") => {
+        const d = document.createElement("div");
+        d.className = "float-txt " + cls; d.textContent = txt; d.style.left = x + "px"; d.style.top = y + "px";
+        box.appendChild(d); setTimeout(() => d.remove(), 900);
+      };
+      function pop(b, type) {
+        if (done) return;
+        const r = b.getBoundingClientRect(), x = r.left + r.width / 2, y = r.top + r.height / 3;
+        b.classList.add("pop"); setTimeout(() => b.remove(), 260);
+        if (type === "coin") { const v = 10 + Math.floor(Math.random() * 3) * 5; got.coins += v; say(x, y, "+" + v); sfx.coin(); }
+        else if (type === "star") { got.coins += 60; say(x, y, "⭐ 대박 +60", "gold"); sfx.jackpot(); buzz(30); }
+        else if (type === "gift") { const k = rollItem(); got.items[k] = (got.items[k] || 0) + 1; itemCount++; say(x, y, ITEMS[k].ic + " " + ITEMS[k].name); sfx.make(); }
+        else { end -= 2000; say(x, y, "⛈️ -2초", "bad"); sfx.storm(); box.classList.remove("shake"); void box.offsetWidth; box.classList.add("shake"); buzz(90); }
+        $("bCoins").textContent = got.coins; $("bItems").textContent = itemCount;
+      }
+      function spawn() {
+        const r = Math.random(), type = r < 0.05 ? "star" : r < 0.2 ? "gift" : r < 0.35 ? "storm" : "coin";
+        const b = document.createElement("button");
+        b.type = "button"; b.className = "balloon " + type;
+        b.setAttribute("aria-label", { coin: "코인 풍선", gift: "선물 풍선", star: "대박 풍선", storm: "먹구름" }[type]);
+        const col = type === "storm" ? "#5b6274" : type === "star" ? "#ffcf3a" : pickOne(COLORS);
+        b.innerHTML = '<span class="bb" style="background:' + col + '">' + { coin: "🪙", gift: "🎁", star: "⭐", storm: "⛈️" }[type] + "</span>";
+        b.style.left = 10 + Math.random() * 80 + "%";
+        b.style.setProperty("--d", (type === "star" ? 2.3 : 3.1 + Math.random() * 1.6) + "s");
+        b.addEventListener("pointerdown", (e) => { e.preventDefault(); pop(b, type); }, { once: true });
+        b.addEventListener("animationend", (e) => { if (e.target === b) b.remove(); });
+        box.appendChild(b);
+      }
+      const loop = (t) => {
+        const left = end - t;
+        $("bTime").style.transform = "scaleX(" + Math.max(0, left / DUR) + ")";
+        if (t >= spawnAt) { spawn(); spawnAt = t + 280 + Math.random() * 240; }
+        if (left <= 0) {
+          done = true;
+          box.querySelectorAll(".balloon").forEach((b) => b.remove());
+          resolve();
+          return;
+        }
+        requestAnimationFrame(loop);
+      };
+      requestAnimationFrame(loop);
+    });
+  }
+  function chestPick(box, got) {
+    return new Promise((resolve) => {
+      const prizes = [
+        { big: true, coins: 300, items: { rainbow: 1, heart: 1 } },
+        { coins: 120, items: { [rollItem()]: 2 } },
+        { coins: 80, items: { [rollItem()]: 1 } }
+      ].sort(() => Math.random() - 0.5);
+      box.innerHTML = '<div class="bonus-center"><h3>🎁 보물 상자를 골라요!</h3><p>셋 중 하나에 👑 왕 보물이 들어 있어요</p>' +
+        '<div class="chests">' + [0, 1, 2].map((i) => '<button type="button" class="chest" data-i="' + i + '" aria-label="보물 상자 ' + (i + 1) + '">🎁</button>').join("") + "</div>" +
+        '<div id="chestOut"></div></div>';
+      let picked = false;
+      box.querySelectorAll(".chest").forEach((btn) => btn.addEventListener("click", () => {
+        if (picked) return;
+        picked = true;
+        const i = +btn.dataset.i, p = prizes[i];
+        box.querySelectorAll(".chest").forEach((c, j) => {
+          c.innerHTML = (prizes[j].big ? "👑" : "💰") + "<small>" + (prizes[j].big ? "왕 보물" : "🪙 " + prizes[j].coins) + "</small>";
+          c.classList.add(j === i ? "open" : "dim");
+        });
+        got.coins += p.coins;
+        for (const k of Object.keys(p.items)) got.items[k] = (got.items[k] || 0) + p.items[k];
+        if (p.big) { sfx.jackpot(); buzz([40, 40, 80]); } else sfx.chest();
+        $("chestOut").innerHTML = '<div class="reward-list"><span>🪙 ' + p.coins + "</span>" + Object.keys(p.items).map((k) => itemSpan(k, p.items[k])).join("") + "</div>" +
+          '<div class="btns" style="margin-top:12px"><button type="button" class="btn" id="chestOk">' + (p.big ? "👑 왕 보물 받기!" : "받기!") + "</button></div>";
+        $("chestOk").focus({ preventScroll: true });
+        $("chestOk").addEventListener("click", resolve, { once: true });
+      }));
+    });
+  }
+
+  // ---------- daily visit gift ----------
+  function dailyGift() {
+    const today = dayKey(), d = store.get("nm_daily", { date: "", streak: 0 });
+    if (d.date === today) return false;
+    const streak = d.date === dayKey(new Date(Date.now() - 864e5)) ? (d.streak % 7) + 1 : 1;
+    store.set("nm_daily", { date: today, streak });
+    const c = 30 + streak * 20, gifts = {};
+    gifts[rollItem(streak === 7)] = 1;
+    if (streak === 7) gifts.rainbow = (gifts.rainbow || 0) + 1;
+    coins += c;
+    for (const k of Object.keys(gifts)) grant(k, gifts[k]);
+    saveWallet();
+    showCard("<h2>📅 출석 선물</h2><p>" + (streak === 1 ? "오늘도 와 줬네요!" : streak + "일 연속으로 왔어요!") + " 7일째엔 🌈 무지개 선물</p>" +
+      '<div class="days">' + [1, 2, 3, 4, 5, 6, 7].map((i) => '<span class="' + (i <= streak ? "on" : "") + (i === 7 ? " gift" : "") + '">' + (i === 7 ? "🌈" : i) + "</span>").join("") + "</div>" +
+      '<div class="coin-gain">🪙 +' + c + "</div>" +
+      '<div class="reward-list">' + Object.keys(gifts).map((k) => itemSpan(k, gifts[k])).join("") + "</div>" +
+      '<div class="btns"><button class="btn" data-act="close">받기!</button></div>', {}, 500);
+    return true;
+  }
+
+  // ---------- Friday night: invite friends on KakaoTalk ----------
+  function renderFriday() {
+    const el = $("friday"), f = fridayNow();
+    if (!f.fri) { el.hidden = true; return; }
+    const invited = store.get("nm_fri_invited", "") === dayKey();
+    el.hidden = false;
+    el.innerHTML = '<span class="ic" aria-hidden="true">🎉</span><span><b>' + (f.night ? "불금 팡팡 타임! 코인 2배" : "오늘 밤 9시, 불금 팡팡 타임") + "</b><small>" +
+      (invited ? "초대 선물을 받았어요 · 친구랑 같이 하면 더 재밌어요" : "친구를 카톡으로 초대하면 🪙100 + 🎁 선물") + "</small></span>" +
+      '<button type="button" id="friInvite">카톡 초대</button>';
+    $("friInvite").addEventListener("click", inviteFriends);
+  }
+  function inviteFriends() {
+    const url = /^https?:$/.test(location.protocol) && !/claude/.test(location.hostname) ? location.href.split("#")[0] : "https://bellhkim.github.io/puzzle/";
+    const text = "🎉 불금 팡팡 타임! 금요일 밤 9시부터 냥멍 팡팡 코인 2배래 🐱🐶\n" + unlockedUpTo() + "단계까지 왔어. 같이 하자!\n" + url;
+    const reward = () => {
+      if (store.get("nm_fri_invited", "") === dayKey()) return;
+      store.set("nm_fri_invited", dayKey());
+      const k = rollItem(true);
+      coins += 100; grant(k); saveWallet();
+      sfx.jackpot();
+      setTimeout(() => toast("초대 선물: 🪙100 + " + ITEMS[k].ic + " " + ITEMS[k].name), 400);
+      renderFriday();
+    };
+    const manual = () => {
+      showCard("<h2>📣 친구 초대</h2><p>아래 글을 길게 눌러 복사한 뒤 카톡 대화방에 보내 주세요.</p>" +
+        '<textarea class="share-text" readonly rows="4">' + text.replace(/&/g, "&amp;").replace(/</g, "&lt;") + "</textarea>" +
+        '<div class="btns"><button class="btn" data-act="close">보냈어요!</button></div>', {}, 0);
+      reward();
+    };
+    const copy = () => {
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(() => { toast("초대 글을 복사했어요! 카톡에 붙여넣으세요"); reward(); }).catch(manual);
+      else manual();
+    };
+    if (navigator.share) navigator.share({ title: "냥멍 팡팡", text }).then(reward).catch((e) => { if (!e || e.name !== "AbortError") copy(); });
+    else copy();
+  }
+  window.__nmBonus = (lv) => startBonus(lv);
 
   // feedback: once per visit, when the player leaves after at least one finished level
   let levelsPlayed = 0;
@@ -2273,6 +2664,7 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
     clearHint();
     feverMoves = 0;
     document.body.classList.remove("fever");
+    bgm.stop(0.15);
     sfx.lose();
     const names = { ice: "얼음", crate: "상자", lock: "사슬", egg: "알" };
     const left = Object.keys(goals).filter((k) => goals[k] > 0)
@@ -2320,6 +2712,7 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
     else if (act.startsWith("up:")) { upgradeSkill(act.slice(3)); openShop(); }
     else if (act === "map") leaveToMap();
     else if (act === "share") share();
+    else if (act === "bonus") { const lv = level; startBonus(lv); }
     else if (act === "close") { $("result").hidden = true; if (!$("mapScreen").hidden) renderMap(); }
   });
 
@@ -2336,6 +2729,7 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
     renderSkills();
     bigText("💖 이어하기! +5", "big");
     sfx.make();
+    bgm.start("level");
     busy = false;
     scheduleHint();
   }
@@ -2395,6 +2789,8 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
   }
 
   function goMap() {
+    bgm.stop();
+    renderFriday();
     mapWorld = worldOf(Math.min(LEVEL_COUNT, unlockedUpTo()));
     ended = true;
     clearHint();
@@ -2497,52 +2893,15 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
     if (window.gameFeedback) await gameFeedback.askOnce(feedbackOpts());
     if (window.appShell) appShell.leaveApp();
   });
-  $("muteBtn").addEventListener("click", () => { muted = !muted; store.set("nm_muted", muted); paintMute(); });
+  $("muteBtn").addEventListener("click", () => { muted = !muted; store.set("nm_muted", muted); paintMute(); bgm.mute(muted); });
 
   renderMap();
+  renderFriday();
+  setTimeout(() => { if ($("result").hidden && $("gameScreen").hidden) dailyGift(); }, 600);
 })();
 </script>
 <!-- feedback:start -->
-<!-- feedback popup: shared by every game; inlined before <!-- appshell:start -->
-<!-- app shell: full screen while playing, and a way out; inlined before </body> of each game page -->
-<script>
-// Browsers never let a page remove the address bar itself. Full screen mode hides it where the
-// browser allows it (computers, Android Chrome, KakaoTalk on Android); iPhone Safari does not.
-window.appShell = (() => {
-  const el = document.documentElement;
-  const isFull = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
-  // call from a tap (browsers only allow full screen right after a user gesture)
-  function enter() {
-    if (isFull()) return;
-    try {
-      const p = el.requestFullscreen ? el.requestFullscreen({ navigationUI: "hide" }) : el.webkitRequestFullscreen && el.webkitRequestFullscreen();
-      if (p && p.catch) p.catch(() => {});
-    } catch (e) {}
-  }
-  function exit() {
-    if (!isFull()) return;
-    try {
-      const p = document.exitFullscreen ? document.exitFullscreen() : document.webkitExitFullscreen && document.webkitExitFullscreen();
-      if (p && p.catch) p.catch(() => {});
-    } catch (e) {}
-  }
-  // leave the game altogether: back to the page or chat the link was opened from
-  function leaveApp() {
-    exit();
-    const close = () => {
-      if (/KAKAOTALK/i.test(navigator.userAgent)) location.href = "kakaotalk://inappbrowser/close";
-      else { try { window.close(); } catch (e) {} }
-    };
-    if (history.length > 1) {
-      history.back();
-      setTimeout(() => { if (!document.hidden) close(); }, 500);
-    } else close();
-  }
-  return { enter, exit, isFull, leaveApp };
-})();
-</script>
-<!-- appshell:end -->
-</body> of each game page -->
+<!-- feedback popup: shared by every game; inlined before </body> of each game page -->
 <style>
 .fb-overlay {
   position: fixed; inset: 0; z-index: 1000;
@@ -2710,5 +3069,44 @@ window.gameFeedback = (() => {
 })();
 </script>
 <!-- feedback:end -->
+<!-- appshell:start -->
+<!-- app shell: full screen while playing, and a way out; inlined before </body> of each game page -->
+<script>
+// Browsers never let a page remove the address bar itself. Full screen mode hides it where the
+// browser allows it (computers, Android Chrome, KakaoTalk on Android); iPhone Safari does not.
+window.appShell = (() => {
+  const el = document.documentElement;
+  const isFull = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
+  // call from a tap (browsers only allow full screen right after a user gesture)
+  function enter() {
+    if (isFull()) return;
+    try {
+      const p = el.requestFullscreen ? el.requestFullscreen({ navigationUI: "hide" }) : el.webkitRequestFullscreen && el.webkitRequestFullscreen();
+      if (p && p.catch) p.catch(() => {});
+    } catch (e) {}
+  }
+  function exit() {
+    if (!isFull()) return;
+    try {
+      const p = document.exitFullscreen ? document.exitFullscreen() : document.webkitExitFullscreen && document.webkitExitFullscreen();
+      if (p && p.catch) p.catch(() => {});
+    } catch (e) {}
+  }
+  // leave the game altogether: back to the page or chat the link was opened from
+  function leaveApp() {
+    exit();
+    const close = () => {
+      if (/KAKAOTALK/i.test(navigator.userAgent)) location.href = "kakaotalk://inappbrowser/close";
+      else { try { window.close(); } catch (e) {} }
+    };
+    if (history.length > 1) {
+      history.back();
+      setTimeout(() => { if (!document.hidden) close(); }, 500);
+    } else close();
+  }
+  return { enter, exit, isFull, leaveApp };
+})();
+</script>
+<!-- appshell:end -->
 </body>
 </html>

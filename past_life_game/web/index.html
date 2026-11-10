@@ -1407,46 +1407,7 @@ const DATA = {"questions":{
 })();
 </script>
 <!-- feedback:start -->
-<!-- feedback popup: shared by every game; inlined before <!-- appshell:start -->
-<!-- app shell: full screen while playing, and a way out; inlined before </body> of each game page -->
-<script>
-// Browsers never let a page remove the address bar itself. Full screen mode hides it where the
-// browser allows it (computers, Android Chrome, KakaoTalk on Android); iPhone Safari does not.
-window.appShell = (() => {
-  const el = document.documentElement;
-  const isFull = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
-  // call from a tap (browsers only allow full screen right after a user gesture)
-  function enter() {
-    if (isFull()) return;
-    try {
-      const p = el.requestFullscreen ? el.requestFullscreen({ navigationUI: "hide" }) : el.webkitRequestFullscreen && el.webkitRequestFullscreen();
-      if (p && p.catch) p.catch(() => {});
-    } catch (e) {}
-  }
-  function exit() {
-    if (!isFull()) return;
-    try {
-      const p = document.exitFullscreen ? document.exitFullscreen() : document.webkitExitFullscreen && document.webkitExitFullscreen();
-      if (p && p.catch) p.catch(() => {});
-    } catch (e) {}
-  }
-  // leave the game altogether: back to the page or chat the link was opened from
-  function leaveApp() {
-    exit();
-    const close = () => {
-      if (/KAKAOTALK/i.test(navigator.userAgent)) location.href = "kakaotalk://inappbrowser/close";
-      else { try { window.close(); } catch (e) {} }
-    };
-    if (history.length > 1) {
-      history.back();
-      setTimeout(() => { if (!document.hidden) close(); }, 500);
-    } else close();
-  }
-  return { enter, exit, isFull, leaveApp };
-})();
-</script>
-<!-- appshell:end -->
-</body> of each game page -->
+<!-- feedback popup: shared by every game; inlined before </body> of each game page -->
 <style>
 .fb-overlay {
   position: fixed; inset: 0; z-index: 1000;
@@ -1614,5 +1575,44 @@ window.gameFeedback = (() => {
 })();
 </script>
 <!-- feedback:end -->
+<!-- appshell:start -->
+<!-- app shell: full screen while playing, and a way out; inlined before </body> of each game page -->
+<script>
+// Browsers never let a page remove the address bar itself. Full screen mode hides it where the
+// browser allows it (computers, Android Chrome, KakaoTalk on Android); iPhone Safari does not.
+window.appShell = (() => {
+  const el = document.documentElement;
+  const isFull = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
+  // call from a tap (browsers only allow full screen right after a user gesture)
+  function enter() {
+    if (isFull()) return;
+    try {
+      const p = el.requestFullscreen ? el.requestFullscreen({ navigationUI: "hide" }) : el.webkitRequestFullscreen && el.webkitRequestFullscreen();
+      if (p && p.catch) p.catch(() => {});
+    } catch (e) {}
+  }
+  function exit() {
+    if (!isFull()) return;
+    try {
+      const p = document.exitFullscreen ? document.exitFullscreen() : document.webkitExitFullscreen && document.webkitExitFullscreen();
+      if (p && p.catch) p.catch(() => {});
+    } catch (e) {}
+  }
+  // leave the game altogether: back to the page or chat the link was opened from
+  function leaveApp() {
+    exit();
+    const close = () => {
+      if (/KAKAOTALK/i.test(navigator.userAgent)) location.href = "kakaotalk://inappbrowser/close";
+      else { try { window.close(); } catch (e) {} }
+    };
+    if (history.length > 1) {
+      history.back();
+      setTimeout(() => { if (!document.hidden) close(); }, 500);
+    } else close();
+  }
+  return { enter, exit, isFull, leaveApp };
+})();
+</script>
+<!-- appshell:end -->
 </body>
 </html>
