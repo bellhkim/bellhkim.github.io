@@ -31,14 +31,17 @@ BALLS = range(1, 46)
 # ---------- fetching ----------
 def http_get(url):
     req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/json, text/html"})
-    with urllib.request.urlopen(req, timeout=20) as r:
+    with urllib.request.urlopen(req, timeout=10) as r:
         return r.read().decode("utf-8", "replace")
 
 
 def fetch_json(no):
     """동행복권 JSON endpoint."""
     body = http_get(f"https://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo={no}")
-    d = json.loads(body)
+    try:
+        d = json.loads(body)
+    except ValueError:
+        raise ValueError("not JSON: " + " ".join(body[:160].split()))
     if d.get("returnValue") != "success":
         return None
     return {"no": d["drwNo"], "date": d["drwNoDate"], "nums": sorted(d[f"drwtNo{i}"] for i in range(1, 7)), "bonus": d["bnusNo"]}
@@ -61,7 +64,7 @@ def fetch(no):
             if d and d["no"] == no and len(set(d["nums"])) == 6 and all(1 <= n <= 45 for n in d["nums"] + [d["bonus"]]):
                 return d
         except Exception as e:  # network or format trouble: try the next source
-            print(f"  draw {no}: {f.__name__} failed: {e}")
+            print(f"  draw {no}: {f.__name__} failed: {e}", flush=True)
     return None
 
 
@@ -74,18 +77,23 @@ def update_draws(draws, today):
     have = {d["no"] for d in draws}
     latest = expected_latest(today)
     start = (max(have) + 1) if have else max(1, latest - 10 * 53 - 5)  # first run: a bit over 10 years
-    added = 0
+    added, misses = 0, 0
+    print(f"fetching draws {start}..{latest}", flush=True)
     for no in range(start, latest + 1):
         if no in have:
             continue
         d = fetch(no)
         if not d:
-            print(f"  draw {no}: not available yet")
-            if no == latest:  # tonight's draw may not be published yet
+            print(f"  draw {no}: not available", flush=True)
+            misses += 1
+            if no == latest or misses >= 3:  # tonight's draw may not be out yet; 3 misses in a row = site unreachable
                 break
             continue
+        misses = 0
         draws.append(d)
         added += 1
+        if added % 50 == 0:
+            print(f"  ...{added} draws (up to {no})", flush=True)
         time.sleep(0.25)
     draws.sort(key=lambda d: d["no"])
     return added
