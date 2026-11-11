@@ -177,10 +177,13 @@ h2 { font-family: var(--display); font-weight: 400; font-size: 34px; margin: 0; 
   <div class="card">
     <div class="eyebrow">GALAXY PATROL</div>
     <h1>은하<br>순찰대</h1>
-    <p class="how"><b>화면을 드래그</b>해서 비행기를 움직이세요.<br>총알은 자동으로 나가요.<br>PC는 <b>방향키 / WASD</b></p>
+    <p class="how"><b>화면을 드래그</b>해서 비행기를 움직이세요.<br>총알은 자동으로 나가요. P를 모으면 최대 <b>10줄기</b>까지!<br>PC는 <b>방향키 / WASD</b></p>
     <div class="legend">
       <span><i style="background:#ffcc3d">P</i>화력</span>
       <span><i style="background:#57e8ff">S</i>방어막</span>
+      <span><i style="background:#8dff8a">W</i>윙맨 2대</span>
+      <span><i style="background:#ff9b3d">R</i>고속 직진탄</span>
+      <span><i style="background:#c08cff">X</i>12줄기 확산</span>
       <span><i style="background:#ff4f7b">♥</i>체력</span>
     </div>
     <div class="stats" id="menuBest"></div>
@@ -278,6 +281,7 @@ h2 { font-family: var(--display); font-weight: 400; font-size: 34px; margin: 0; 
     shot: () => beep(880, 0.05, "square", 0.015, -300),
     hit: () => beep(220, 0.06, "square", 0.03, -100),
     boom: () => beep(140, 0.25, "sawtooth", 0.06, -110),
+    power: () => { [523, 659, 784, 1046].forEach((f, i) => setTimeout(() => beep(f, 0.09, "square", 0.05), i * 55)); },
     item: () => { beep(660, 0.08, "triangle", 0.07); setTimeout(() => beep(990, 0.1, "triangle", 0.07), 70); },
     hurt: () => beep(100, 0.35, "sawtooth", 0.09, -60),
     boss: () => beep(70, 0.8, "sawtooth", 0.08, 40)
@@ -300,7 +304,7 @@ h2 { font-family: var(--display); font-weight: 400; font-size: 34px; margin: 0; 
   makeStars();
 
   function reset() {
-    player = { x: W / 2, y: H - 90, r: 12, hp: 3, inv: 0, power: 1, shield: 0, fire: 0 };
+    player = { x: W / 2, y: H - 90, r: 12, hp: 3, inv: 0, power: 1, shield: 0, fire: 0, wing: 0, wingFire: 0, rapid: 0, spread: 0, wings: [{ x: W / 2 - 40, y: H - 80 }, { x: W / 2 + 40, y: H - 80 }] };
     bullets = []; ebullets = []; enemies = []; items = []; parts = []; popups = [];
     score = 0; kills = 0; stage = 0; shake = 0; time = 0; boss = null;
     nextStage();
@@ -435,6 +439,7 @@ h2 { font-family: var(--display); font-weight: 400; font-size: 34px; margin: 0; 
     if (e.type === "boss") {
       items.push({ x: e.x - 30, y: e.y, kind: "P", vy: 70 });
       items.push({ x: e.x + 30, y: e.y, kind: "H", vy: 70 });
+      items.push({ x: e.x, y: e.y - 20, kind: pickOne(["W", "R", "X"]), vy: 60 });
       // clear bullets as a reward
       ebullets.forEach((b) => burst(b.x, b.y, "#ff4f7b", 2, 60));
       ebullets = [];
@@ -442,12 +447,49 @@ h2 { font-family: var(--display); font-weight: 400; font-size: 34px; margin: 0; 
       const chance = e.type === "tank" ? 0.6 : e.type === "gunner" ? 0.22 : 0.06;
       if (r < chance) {
         const k = Math.random();
-        const kind = k < 0.55 ? "P" : k < 0.8 ? "S" : "H";
+        const kind = k < 0.42 ? "P" : k < 0.54 ? "S" : k < 0.64 ? "H" : k < 0.76 ? "W" : k < 0.88 ? "R" : "X";
         items.push({ x: e.x, y: e.y, kind, vy: 80 });
       }
     }
     if (e === boss) boss = null;
   }
+
+  const pickOne = (a) => a[Math.floor(Math.random() * a.length)];
+
+  // 화력 단계별 탄막: [x 위치, 각도]. 7단계는 10줄기
+  function fanShots(n, width) {
+    const out = [];
+    for (let i = 0; i < n; i++) out.push([(i - (n - 1) / 2) * 3, (i - (n - 1) / 2) * (width / Math.max(1, n - 1))]);
+    return out;
+  }
+  const PATTERNS = [
+    null,
+    [[0, 0]],
+    [[-7, 0], [7, 0]],
+    [[0, 0], [-10, -0.18], [10, 0.18]],
+    [[-5, 0], [5, 0], [-12, -0.22], [12, 0.22]],
+    [[-5, 0], [5, 0], [-11, -0.16], [11, 0.16], [-15, -0.34], [15, 0.34]],
+    [[-5, 0], [5, 0], [-10, -0.14], [10, 0.14], [-14, -0.3], [14, 0.3], [-18, -0.48], [18, 0.48]],
+    [[-6, 0], [6, 0], [-10, -0.12], [10, 0.12], [-14, -0.26], [14, 0.26], [-17, -0.42], [17, 0.42], [-20, -0.6], [20, 0.6]]
+  ];
+  const MAX_POWER = PATTERNS.length - 1;
+  function fireVolley() {
+    if (player.rapid > 0) {
+      // 고속 직진탄: 빠르고 굵은 일직선 탄이 촘촘하게
+      const lanes = Math.min(4, 2 + Math.floor(player.power / 3));
+      for (let i = 0; i < lanes; i++) bullets.push({ x: player.x + (i - (lanes - 1) / 2) * 7, y: player.y - 16, vx: 0, vy: -980, r: 5, kind: "rapid" });
+      player.fire = 0.065;
+    } else {
+      const shots = player.spread > 0 ? fanShots(12, 1.5) : PATTERNS[player.power];
+      for (const [dx, a] of shots) bullets.push({ x: player.x + dx, y: player.y - 14, vx: Math.sin(a) * 560, vy: -560 * Math.cos(a), r: 4, kind: player.spread > 0 ? "spread" : "" });
+      player.fire = player.power >= 6 || player.spread > 0 ? 0.14 : 0.12;
+    }
+    sfx.shot();
+  }
+
+  // used by automated tests: drop an item right on the ship
+  window.__gpGive = (kind) => { if (player) items.push({ x: player.x, y: player.y, kind, vy: 0 }); };
+  window.__gpState = () => player && { power: player.power, wing: player.wing, rapid: player.rapid, spread: player.spread, bullets: bullets.length };
 
   function hurtPlayer() {
     if (player.inv > 0) return;
@@ -487,13 +529,33 @@ h2 { font-family: var(--display); font-weight: 400; font-size: 34px; margin: 0; 
 
     // player auto-fire
     player.fire -= dt;
-    if (player.fire <= 0) {
-      player.fire = 0.12;
-      const p = player.power;
-      const sp = -560;
-      const shots = p === 1 ? [[0, 0]] : p === 2 ? [[-7, 0], [7, 0]] : p === 3 ? [[0, 0], [-10, -0.18], [10, 0.18]] : [[-5, 0], [5, 0], [-12, -0.22], [12, 0.22]];
-      for (const [dx, a] of shots) bullets.push({ x: player.x + dx, y: player.y - 14, vx: Math.sin(a) * -sp, vy: sp * Math.cos(a), r: 4 });
-      sfx.shot();
+    if (player.fire <= 0) fireVolley();
+    if (player.rapid > 0) player.rapid -= dt;
+    if (player.spread > 0) player.spread -= dt;
+    // 윙맨: 양옆에서 따라오며 함께 쏜다
+    const side = [-42, 42];
+    player.wings.forEach((w, i) => {
+      const tx = player.x + side[i], ty = player.y + 10 + Math.sin(time * 4 + i * Math.PI) * 4;
+      const k = Math.min(1, dt * 10);
+      w.x += (tx - w.x) * k; w.y += (ty - w.y) * k;
+    });
+    if (player.wing > 0) {
+      player.wing -= dt;
+      player.wingFire -= dt;
+      if (player.wingFire <= 0) {
+        player.wingFire = 0.16;
+        for (const w of player.wings) {
+          bullets.push({ x: w.x, y: w.y - 10, vx: 0, vy: -640, r: 4, kind: "wing" });
+          // 가장 가까운 적을 향해 한 발 더
+          let near = null, nd = Infinity;
+          for (const e of enemies) { const d = dist2(e, w); if (!e.dead && e.y > 0 && d < nd) { nd = d; near = e; } }
+          if (near && near.y < w.y) {
+            const a = Math.atan2(near.y - w.y, near.x - w.x);
+            bullets.push({ x: w.x, y: w.y - 10, vx: Math.cos(a) * 560, vy: Math.sin(a) * 560, r: 3.5, kind: "wing" });
+          }
+        }
+      }
+      if (player.wing <= 0) { popup(player.x, player.y - 40, "윙맨 귀환", "#8dff8a"); burst(player.wings[0].x, player.wings[0].y, "#8dff8a", 10, 120); burst(player.wings[1].x, player.wings[1].y, "#8dff8a", 10, 120); }
     }
 
     // spawn
@@ -613,9 +675,15 @@ h2 { font-family: var(--display); font-weight: 400; font-size: 34px; margin: 0; 
         it.dead = true;
         sfx.item();
         if (it.kind === "P") {
-          if (player.power < 4) { player.power++; popup(it.x, it.y, "화력 UP", "#ffcc3d"); }
+          if (player.power < MAX_POWER) { player.power++; popup(it.x, it.y, player.power === MAX_POWER ? "화력 MAX! 10줄기" : "화력 UP · " + PATTERNS[player.power].length + "줄기", "#ffcc3d"); }
           else { score += 200; popup(it.x, it.y, "+200", "#ffcc3d"); }
         } else if (it.kind === "S") { player.shield = 1; popup(it.x, it.y, "방어막", "#57e8ff"); }
+        else if (it.kind === "W") {
+          if (player.wing <= 0) player.wings.forEach((w) => { w.x = player.x; w.y = player.y + 30; });
+          player.wing = 20; popup(it.x, it.y, "윙맨 2대 출격!", "#8dff8a"); sfx.power();
+        }
+        else if (it.kind === "R") { player.rapid = 10; player.spread = 0; popup(it.x, it.y, "고속 직진탄!", "#ff9b3d"); sfx.power(); }
+        else if (it.kind === "X") { player.spread = 10; player.rapid = 0; popup(it.x, it.y, "12줄기 확산탄!", "#c08cff"); sfx.power(); }
         else if (it.kind === "H") {
           if (player.hp < 5) { player.hp++; popup(it.x, it.y, "체력 +1", "#ff4f7b"); }
           else { score += 200; popup(it.x, it.y, "+200", "#ff4f7b"); }
@@ -635,7 +703,7 @@ h2 { font-family: var(--display); font-weight: 400; font-size: 34px; margin: 0; 
   }
 
   // ---------- render ----------
-  function drawShip(x, y, blink) {
+  function drawShip(x, y, blink, bodyColor = "#eef0ff") {
     if (blink) return;
     ctx.save();
     ctx.translate(x, y);
@@ -644,7 +712,7 @@ h2 { font-family: var(--display); font-weight: 400; font-size: 34px; margin: 0; 
     ctx.fillStyle = "#ffcc3d";
     ctx.beginPath(); ctx.moveTo(-5, 12); ctx.lineTo(0, 12 + f); ctx.lineTo(5, 12); ctx.fill();
     // body
-    ctx.fillStyle = "#eef0ff";
+    ctx.fillStyle = bodyColor;
     ctx.beginPath();
     ctx.moveTo(0, -18); ctx.lineTo(7, -2); ctx.lineTo(16, 10); ctx.lineTo(6, 8); ctx.lineTo(4, 13);
     ctx.lineTo(-4, 13); ctx.lineTo(-6, 8); ctx.lineTo(-16, 10); ctx.lineTo(-7, -2); ctx.closePath();
@@ -721,7 +789,7 @@ h2 { font-family: var(--display); font-weight: 400; font-size: 34px; margin: 0; 
 
     // items
     for (const it of items) {
-      const col = it.kind === "P" ? "#ffcc3d" : it.kind === "S" ? "#57e8ff" : "#ff4f7b";
+      const col = { P: "#ffcc3d", S: "#57e8ff", H: "#ff4f7b", W: "#8dff8a", R: "#ff9b3d", X: "#c08cff" }[it.kind];
       ctx.fillStyle = col;
       ctx.beginPath(); ctx.arc(it.x, it.y, 11 + Math.sin(time * 8) * 1.5, 0, Math.PI * 2); ctx.fill();
       ctx.fillStyle = "#070818";
@@ -733,11 +801,27 @@ h2 { font-family: var(--display); font-weight: 400; font-size: 34px; margin: 0; 
     for (const e of enemies) drawEnemy(e);
 
     // player bullets
-    ctx.fillStyle = "#57e8ff";
-    for (const b of bullets) { ctx.fillRect(b.x - 1.5, b.y - 7, 3, 12); }
+    for (const b of bullets) {
+      if (b.kind === "rapid") {
+        ctx.fillStyle = "#ff9b3d"; ctx.fillRect(b.x - 2.5, b.y - 12, 5, 20);
+        ctx.fillStyle = "#fff4d6"; ctx.fillRect(b.x - 1, b.y - 11, 2, 18);
+      } else if (b.kind === "wing") {
+        ctx.fillStyle = "#8dff8a"; ctx.beginPath(); ctx.arc(b.x, b.y, 3, 0, Math.PI * 2); ctx.fill();
+      } else {
+        ctx.fillStyle = b.kind === "spread" ? "#c08cff" : "#57e8ff"; ctx.fillRect(b.x - 1.5, b.y - 7, 3, 12);
+      }
+    }
 
     // player
     if (state === "play" || state === "pause") {
+      if (player.wing > 0 && (player.wing > 3 || Math.floor(time * 8) % 2 === 0)) {
+        for (const w of player.wings) {
+          ctx.save(); ctx.translate(w.x, w.y); ctx.scale(0.62, 0.62);
+          ctx.shadowColor = "#8dff8a"; ctx.shadowBlur = 12;
+          drawShip(0, 0, false, "#c9ffc6");
+          ctx.restore();
+        }
+      }
       drawShip(player.x, player.y, player.inv > 0 && Math.floor(time * 16) % 2 === 0);
       if (player.shield > 0) {
         ctx.strokeStyle = `rgba(87,232,255,${0.5 + Math.sin(time * 6) * 0.25})`;
@@ -774,6 +858,18 @@ h2 { font-family: var(--display); font-weight: 400; font-size: 34px; margin: 0; 
       ctx.fillText(p.text, p.x, p.y);
     }
     ctx.globalAlpha = 1;
+
+    // active power-up timers
+    const timers = [[player.wing, "윙맨", "#8dff8a", 20], [player.rapid, "고속탄", "#ff9b3d", 10], [player.spread, "확산탄", "#c08cff", 10]].filter((t) => t[0] > 0);
+    if (state === "play" && player.power > 1) timers.unshift([1, "화력 " + player.power + (player.power === MAX_POWER ? " MAX" : ""), "#ffcc3d", 1]);
+    ctx.font = "13px 'Do Hyeon', sans-serif"; ctx.textAlign = "left";
+    timers.forEach(([v, name, col, max], i) => {
+      const y = H - 18 - i * 18;
+      ctx.fillStyle = "rgba(255,255,255,0.12)"; ctx.fillRect(10, y + 6, 60, 3);
+      ctx.fillStyle = col; ctx.fillRect(10, y + 6, 60 * Math.min(1, v / max), 3);
+      ctx.fillText(name, 10, y);
+    });
+    ctx.textAlign = "center";
 
     // boss bar
     if (boss) {

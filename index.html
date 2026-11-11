@@ -343,6 +343,14 @@ a { color: inherit; }
       </ul>
     </section>
     <section>
+      <h4>🚀 은하 순찰대</h4>
+      <ul>
+        <li><b>W 윙맨</b>: 보조 비행기 2대가 양옆에서 20초 동안 같이 쏴요 (가까운 적 조준탄까지!)</li>
+        <li><b>화력 7단계</b>: P를 모으면 6 → 8 → 최대 <b>10줄기</b>로 퍼져요</li>
+        <li><b>R 고속 직진탄</b>: 굵고 빠른 탄이 일직선으로 쏟아져요 · <b>X 확산탄</b>: 12줄기 부채꼴</li>
+      </ul>
+    </section>
+    <section>
       <h4>🎴 고스톱</h4>
       <ul>
         <li>😎 조커 김종현 한 장이 <b>삼피</b>가 됐어요</li>
@@ -444,7 +452,7 @@ a { color: inherit; }
   const hidePanel = () => { panel.hidden = true; $("shareBtn").focus(); };
 
   // update notice: shows on arrival until the player picks 다시 안 보기 (a new NOTICE_ID shows it again)
-  const NOTICE_ID = "2026-11";
+  const NOTICE_ID = "2026-11b";
   const notice = $("noticePanel");
   const openNotice = () => { notice.hidden = false; $("noticeOk").focus({ preventScroll: true }); };
   const closeNotice = (forever) => {
