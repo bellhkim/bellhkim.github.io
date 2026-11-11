@@ -68,6 +68,46 @@ def fetch(no):
     return None
 
 
+# Public mirror of the official results (a GitHub Pages project that republishes 동행복권 data as JSON).
+# The official site often blocks or times out for overseas servers such as GitHub Actions.
+MIRROR_ALL = "https://smok95.github.io/lotto/results/all.json"
+
+
+def pick(d, *keys):
+    for k in keys:
+        if k in d and d[k] not in (None, ""):
+            return d[k]
+    return None
+
+
+def normalise(d):
+    """Accept the field names different sources use for one draw."""
+    no = pick(d, "draw_no", "drwNo", "drw_no", "round", "no")
+    nums = pick(d, "numbers", "nums", "winning_numbers")
+    if nums is None and "drwtNo1" in d:
+        nums = [d[f"drwtNo{i}"] for i in range(1, 7)]
+    bonus = pick(d, "bonus_no", "bnusNo", "bonus", "bonus_number")
+    date = str(pick(d, "date", "drwNoDate", "draw_date") or "")[:10]
+    try:
+        out = {"no": int(no), "date": date, "nums": sorted(int(n) for n in nums), "bonus": int(bonus)}
+    except (TypeError, ValueError):
+        return None
+    ok = len(set(out["nums"])) == 6 and all(1 <= n <= 45 for n in out["nums"] + [out["bonus"]]) and len(date) == 10
+    return out if ok else None
+
+
+def fetch_mirror():
+    try:
+        data = json.loads(http_get(MIRROR_ALL))
+    except Exception as e:
+        print(f"mirror failed: {e}", flush=True)
+        return []
+    items = data if isinstance(data, list) else pick(data, "results", "data", "draws") or []
+    out = [d for d in (normalise(x) for x in items if isinstance(x, dict)) if d]
+    print(f"mirror: {len(out)} draws" + ("" if out else f" (could not read; first item: {str(items[:1])[:300]})"), flush=True)
+    return out
+
+
 def expected_latest(today):
     """The newest draw number that should exist by today (draws are Saturday evening KST)."""
     return (today - FIRST_DRAW).days // 7 + 1
@@ -76,8 +116,15 @@ def expected_latest(today):
 def update_draws(draws, today):
     have = {d["no"] for d in draws}
     latest = expected_latest(today)
-    start = (max(have) + 1) if have else max(1, latest - 10 * 53 - 5)  # first run: a bit over 10 years
-    added, misses = 0, 0
+    floor = max(1, latest - 10 * 53 - 5)  # keep a bit over 10 years
+    mirrored = 0
+    for d in fetch_mirror():
+        if d["no"] >= floor and d["no"] not in have:
+            draws.append(d); have.add(d["no"]); mirrored += 1
+    if mirrored:
+        print(f"added {mirrored} draws from the mirror", flush=True)
+    start = (max(have) + 1) if have else floor
+    added, misses = mirrored, 0
     print(f"fetching draws {start}..{latest}", flush=True)
     for no in range(start, latest + 1):
         if no in have:
