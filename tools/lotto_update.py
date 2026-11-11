@@ -259,7 +259,11 @@ def predict(draws):
             break
     best = best or weighted_pick(rng, weights)
     bonus = weighted_pick(rng, {n: w for n, w in weights.items() if n not in best}, 1)[0]
-    main = {"id": "main", "name": "이번 주 추천", "method": "최근일수록 무게를 더 준 10년 빈도로 뽑은 뒤, 과거 당첨 조합의 합계·홀짝·고저 분포에 맞춘 몬테카를로 조합", "nums": best, "bonus": bonus}
+    sets.append({"id": "weighted", "name": "가중 몬테카를로", "method": "최근일수록 무게를 더 준 10년 빈도로 뽑은 뒤, 과거 당첨 조합의 합계·홀짝·고저 분포에 맞춘 조합", "nums": best, "bonus": bonus})
+    # 대표 번호: 최근 10년 동안 기대 횟수보다 가장 적게 나온 6개, 보너스는 7번째로 적게 나온 번호
+    least = sorted(BALLS, key=lambda n: (f10[n], n))
+    exp10 = len(d10) * 6 / 45
+    main = {"id": "main", "name": "이번 주 추천 · 가장 안 나온 수", "method": "최근 10년 " + str(len(d10)) + "회 추첨에서 가장 적게 나온 6개 (번호당 기대 " + str(round(exp10)) + "회 · 실제 " + str(f10[least[0]]) + "~" + str(f10[least[5]]) + "회)", "nums": sorted(least[:6]), "bonus": least[6]}
     return {
         "generatedAt": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
         "target": {"no": target_no, "date": target_date.isoformat()},

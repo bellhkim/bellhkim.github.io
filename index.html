@@ -224,6 +224,18 @@ a { color: inherit; }
 .share-card button { flex: 1; appearance: none; border: 0; cursor: pointer; border-radius: 12px; padding: 12px 10px; font-family: var(--display); font-size: 17px; }
 .share-card .copy { background: #ffc93a; color: #2a1a00; }
 .share-card .close { background: #eee8f2; color: #2b2233; }
+.notice-btn { appearance: none; border: 0; cursor: pointer; font-family: var(--round); font-size: 14px; color: #fff;
+  background: rgba(255,255,255,0.12); box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.35); padding: 6px 12px; border-radius: 999px; }
+.notice-btn:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+.notice-card { width: min(440px, 100%); max-height: calc(100dvh - 32px); overflow-y: auto; overscroll-behavior: contain; }
+.notice-card .date { font-family: var(--round); font-size: 13px; color: #8a7f96; }
+.notice-card section { display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; border-radius: 14px; background: #f6f1fb; }
+.notice-card h4 { margin: 0; font-family: var(--display); font-weight: 400; font-size: 18px; color: #2b2233; }
+.notice-card ul { margin: 0; padding-left: 18px; font-size: 14px; line-height: 1.55; color: #4b4257; word-break: keep-all; }
+.notice-card li b { color: #2b2233; }
+.notice-card .row { position: sticky; bottom: -16px; margin: 0 -18px -16px; padding: 10px 18px 16px; background: #fffdf8; box-shadow: 0 -8px 12px -8px rgba(43,34,51,0.18); }
+.notice-card .later { background: #eee8f2; color: #2b2233; }
+.notice-card .ok { background: #ff4fa3; color: #fff; }
 .share-card button:focus-visible { outline: 3px solid #7c5cff; outline-offset: 2px; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -248,6 +260,7 @@ a { color: inherit; }
   <div class="bar">
     <div class="coin-hint"><span class="coin" aria-hidden="true">🪙</span> 게임 4개 · 설치 없이 바로</div>
     <button type="button" class="share-btn" id="shareBtn"><span aria-hidden="true">📣</span> 친구에게 공유하기</button>
+    <button type="button" class="notice-btn" id="noticeBtn">📢 새 소식</button>
   </div>
 
   <nav class="games" aria-label="게임 고르기">
@@ -314,6 +327,40 @@ a { color: inherit; }
 
   <p class="foot">게임 첫 화면의 <b>끝내기</b>를 누르면 여기로 돌아와요.</p>
 </main>
+
+<div class="share-panel" id="noticePanel" role="dialog" aria-modal="true" aria-labelledby="noticeTitle" hidden>
+  <div class="share-card notice-card">
+    <h3 id="noticeTitle">📢 오락실 업데이트 소식</h3>
+    <div class="date">2026년 11월 · 만든 사람 김종현</div>
+    <section>
+      <h4>🐱 냥멍 팡팡</h4>
+      <ul>
+        <li><b>챕터 보너스 게임</b>: 챕터를 처음 끝까지 깨면 🎈 선물 풍선 러시와 🎁 보물 상자가 저절로 시작돼요</li>
+        <li><b>새 아이템</b>: ⚡ 줄무늬 출발 · 🔨 망치 +2 · 🍀 행운 클로버(코인 2배)</li>
+        <li>아이템은 <b>단계 성공 선물</b>, <b>매일 출석 선물</b>(7일 연속이면 🌈), 보너스 게임, 금요일 친구 초대로도 받아요</li>
+        <li>경쾌한 <b>배경 음악</b>, 더 극적인 성공 팡파르와 실패 효과음</li>
+        <li>매주 <b>금요일 밤 9시~자정</b>은 불금 팡팡 타임: 단계를 깨면 코인 2배!</li>
+      </ul>
+    </section>
+    <section>
+      <h4>🎴 고스톱</h4>
+      <ul>
+        <li>😎 조커 김종현 한 장이 <b>삼피</b>가 됐어요</li>
+        <li><b>자뻑</b>: 내가 싼 뻑을 내가 먹으면 상대 피 2장!</li>
+        <li>판마다 <b>김종현 미션</b>: 성공하면 이기든 지든 +3,000원</li>
+        <li><b>30점 이상</b>으로 이기면 🍀 행운 카드: 최근 10년 로또 기록에서 가장 안 나온 번호 (재미로만 봐 주세요!)</li>
+      </ul>
+    </section>
+    <section>
+      <h4>🕹️ 오락실</h4>
+      <ul>
+        <li>로그인 없이 <b>bellhkim.github.io</b> 하나로 네 게임을 바로</li>
+        <li>📣 공유하기 버튼으로 카톡에 친구 초대</li>
+      </ul>
+    </section>
+    <div class="row"><button type="button" class="later" id="noticeHide">다시 안 보기</button><button type="button" class="ok" id="noticeOk">확인</button></div>
+  </div>
+</div>
 
 <div class="share-panel" id="sharePanel" role="dialog" aria-modal="true" aria-labelledby="shareTitle" hidden>
   <div class="share-card">
@@ -395,6 +442,21 @@ a { color: inherit; }
     $("shareMsg").textContent = ok ? "초대 글을 복사했어요! 카톡에 붙여 넣으면 돼요." : "아래 글을 길게 눌러 복사해 주세요.";
   });
   const hidePanel = () => { panel.hidden = true; $("shareBtn").focus(); };
+
+  // update notice: shows on arrival until the player picks 다시 안 보기 (a new NOTICE_ID shows it again)
+  const NOTICE_ID = "2026-11";
+  const notice = $("noticePanel");
+  const openNotice = () => { notice.hidden = false; $("noticeOk").focus({ preventScroll: true }); };
+  const closeNotice = (forever) => {
+    if (forever) { try { localStorage.setItem("hub_notice_hidden", JSON.stringify(NOTICE_ID)); } catch (e) {} }
+    notice.hidden = true;
+  };
+  $("noticeOk").addEventListener("click", () => closeNotice(false));
+  $("noticeHide").addEventListener("click", () => closeNotice(true));
+  $("noticeBtn").addEventListener("click", openNotice);
+  notice.addEventListener("click", (e) => { if (e.target === notice) closeNotice(false); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !notice.hidden) closeNotice(false); });
+  if (read("hub_notice_hidden", "") !== NOTICE_ID) setTimeout(openNotice, 500);
   $("shareClose").addEventListener("click", hidePanel);
   panel.addEventListener("click", (e) => { if (e.target === panel) hidePanel(); });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !panel.hidden) hidePanel(); });
