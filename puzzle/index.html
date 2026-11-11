@@ -497,6 +497,7 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
 .days span.on { background: var(--sun); color: #6b4300; box-shadow: 0 2px 0 #e8a400; }
 .days span.gift { font-size: 16px; }
 .btn.lucky { background: linear-gradient(135deg, #fff1a8, #ffc23a) !important; color: #3a2400 !important; box-shadow: 0 4px 0 #b37400, 0 0 20px rgba(255, 210, 90, 0.6); animation: wobble 1.4s ease-in-out infinite; }
+.card p.streak { font-family: var(--display); color: #e8590c; font-size: calc(16px * var(--u)); }
 .bonus-note { font-family: var(--display); color: var(--berry) !important; font-size: calc(18px * var(--u)) !important; animation: zoomIn 0.5s both; }
 /* Friday night invite on the map */
 .friday { width: 100%; box-sizing: border-box; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 18px; color: #fff;
@@ -603,7 +604,7 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
       <li>챕터(15단계)를 처음 끝까지 깨면 <b>🎈 보너스 게임</b>이 바로 시작돼요. 풍선을 터뜨리고 보물 상자를 골라 선물을 받아요.</li>
       <li>아이템은 상점 말고도 <b>단계 성공 선물</b>, <b>매일 출석 선물</b>, <b>보너스 게임</b>, <b>금요일 친구 초대</b>로 받을 수 있어요.</li>
       <li>매주 <b>금요일 밤 9시부터</b>는 불금 팡팡 타임! 단계를 깨면 코인이 2배예요.</li>
-      <li>한 단계에서 <b>15,000점</b>을 넘기면 🍀 <b>행운 카드</b>: 이번 주 로또 분석 번호를 알려 줘요 (재미로만!).</li>
+      <li>한 단계에서 <b>15,000점</b>을 넘기거나 실패 없이 <b>5판 연속 성공</b>하면 🍀 <b>행운 카드</b>: 이번 주 로또 분석 번호를 알려 줘요 (재미로만!).</li>
       <li>별을 120 · 360 · 720개 모으면 <b>스킬 레벨</b>이 올라 망치가 커지고 이동 추가가 늘어요.</li>
       <li>단계를 깨면 🪙 <b>코인</b>을 받아요. <b>🛒 상점</b>에서 출발 아이템(💣 폭탄 · 🌈 무지개 · 👟 이동 +3), 실패했을 때 쓰는 💖 이어하기를 사고, 스킬의 시작 개수를 늘릴 수 있어요.</li>
     </ul>
@@ -2440,6 +2441,8 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
     const drop = Math.random() < 0.25 + starsEarned * 0.15 ? rollItem(starsEarned === 3) : null;
     if (drop) grant(drop);
     const chapterEnd = level % PER_CHAPTER === 0 && firstClear;
+    winStreak++; store.set("nm_streak", winStreak);
+    luckyReason = winStreak % LUCKY_STREAK === 0 ? winStreak + "연속 성공" : score >= LUCKY_SCORE ? LUCKY_SCORE.toLocaleString("ko-KR") + "점 돌파" : "";
     const cleared = store.get("nm_cleared", {}); cleared[level] = 1; store.set("nm_cleared", cleared);
     saveWallet();
     bgm.stop(0.15);
@@ -2455,7 +2458,8 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
       "<p>남은 횟수 " + movesLeft + "번이 피날레로 터졌어요</p>" +
       '<div class="coin-gain">🪙 +' + gain + (why ? " (" + why + " 2배)" : firstClear ? " (첫 클리어 보너스 포함)" : "") + "</div>" +
       (drop ? '<div class="reward-list"><span>🎁 선물 발견!</span>' + itemSpan(drop) + "</div>" : "") +
-      (score >= LUCKY_SCORE && window.luckyCard ? '<button class="btn lucky" data-act="lucky">🍀 ' + LUCKY_SCORE.toLocaleString("ko-KR") + "점 돌파! 행운 카드 열기</button>" : "") +
+      (luckyReason && window.luckyCard ? '<button class="btn lucky" data-act="lucky">🍀 ' + luckyReason + "! 행운 카드 열기</button>" : "") +
+      (!luckyReason && winStreak > 1 ? '<p class="streak">🔥 ' + winStreak + "연속 성공 · " + (LUCKY_STREAK - winStreak % LUCKY_STREAK) + "판 더 이기면 행운 카드</p>" : "") +
       (chapterEnd
         ? '<p class="bonus-note">🎉 ' + chName + " 완주! 곧 보너스 게임이 시작돼요</p>" +
           '<div class="btns"><button class="btn" data-act="bonus">🎈 보너스 게임 바로 시작</button></div>'
@@ -2474,6 +2478,9 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
   // ---------- chapter bonus game: balloon rush, then a treasure chest ----------
   let bonusTimer = 0;
   const LUCKY_SCORE = 15000; // 한 단계에서 이 점수를 넘기면 행운 카드 (이번 주 로또 분석 번호)
+  const LUCKY_STREAK = 5;     // 실패 없이 5판 연속 성공해도 행운 카드
+  let winStreak = store.get("nm_streak", 0);
+  let luckyReason = "";
   async function startBonus(lv) {
     clearTimeout(bonusTimer);
     const box = $("bonus");
@@ -2670,6 +2677,8 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
     document.body.classList.remove("fever");
     bgm.stop(0.15);
     sfx.lose();
+    const lostStreak = winStreak;
+    winStreak = 0; store.set("nm_streak", 0);
     const names = { ice: "얼음", crate: "상자", lock: "사슬", egg: "알" };
     const left = Object.keys(goals).filter((k) => goals[k] > 0)
       .map((k) => (names[k] || ANIMALS[+k.slice(1)]) + " " + goals[k] + "개").join(", ");
@@ -2680,6 +2689,7 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
       "<h2>아쉬워요!</h2>" +
       "<p>" + left + "만 더 하면 됐어요.</p>" +
       '<div class="coin-gain">🪙 +10</div>' +
+      (lostStreak > 1 ? '<p class="streak">💔 ' + lostStreak + "연속 성공 기록이 끊겼어요</p>" : "") +
       '<div class="btns">' +
       (canContinue ? '<button class="btn share" data-act="continue">💖 이어하기 · 이동 +5 (' + (items.heart > 0 ? "보유 " + items.heart + "개" : "🪙" + ITEMS.heart.price) + ")</button>" : "") +
       '<button class="btn" data-act="retry">다시 하기</button>' +
@@ -2717,7 +2727,7 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
     else if (act === "map") leaveToMap();
     else if (act === "share") share();
     else if (act === "bonus") { const lv = level; startBonus(lv); }
-    else if (act === "lucky") { clearTimeout(bonusTimer); window.luckyCard.open({ game: "냥멍 팡팡", reason: level + "단계 " + score.toLocaleString("ko-KR") + "점", muted }); e.target.closest("button").remove(); }
+    else if (act === "lucky") { clearTimeout(bonusTimer); window.luckyCard.open({ game: "냥멍 팡팡", reason: luckyReason, muted }); e.target.closest("button").remove(); }
     else if (act === "close") { $("result").hidden = true; if (!$("mapScreen").hidden) renderMap(); }
   });
 
@@ -3114,7 +3124,7 @@ window.appShell = (() => {
 </script>
 <!-- appshell:end -->
 <!-- lucky:start -->
-<!-- lucky card: this week's lotto-style numbers as a reward; inlined before the closing body tag of 은하 순찰대 and 냥멍 팡팡 -->
+<!-- lucky card: this week's lotto-style numbers as a reward; inlined before the closing body tag of every game -->
 <style>
 .lk-overlay { position: fixed; inset: 0; z-index: 1001; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(12, 10, 24, 0.6); }
 .lk-card { width: min(380px, 100%); max-height: 100%; overflow-y: auto; overscroll-behavior: contain; box-sizing: border-box; background: #fffdf3; color: #3a2400;
@@ -3146,6 +3156,9 @@ window.appShell = (() => {
 .lk-btn { flex: 1; appearance: none; border: 0; cursor: pointer; border-radius: 12px; padding: 12px 10px; font: 400 17px "Black Han Sans", "Jua", sans-serif; }
 .lk-copy { background: #ffc23a; color: #3a2400; }
 .lk-close { background: #f1e8d4; color: #3a2400; }
+.lk-text { width: 100%; box-sizing: border-box; min-height: 120px; resize: none; border: 1.5px solid #e6d3a6; border-radius: 12px; padding: 8px 10px;
+  font: 13px/1.5 "Gowun Dodum", sans-serif; color: #3a2400; background: #fff; user-select: text; -webkit-user-select: text; }
+.lk-text[hidden] { display: none; }
 .lk-reveal:focus-visible, .lk-btn:focus-visible { outline: 3px solid #7c5cff; outline-offset: 2px; }
 </style>
 <script>
@@ -3208,19 +3221,28 @@ window.luckyCard = (() => {
       const ball = (n, i) => '<span class="lk-ball c' + Math.min(5, Math.ceil(n / 10)) + '" style="animation-delay:' + i * 0.35 + 's">' + n + "</span>";
       card.innerHTML = "<h3>🍀 " + head + "</h3>" +
         '<div class="lk-balls">' + nums.map(ball).join("") + '<span class="lk-plus">+</span>' + ball(bonus, 6) + "</div>" + foot +
-        '<div class="lk-btns"><button type="button" class="lk-btn lk-close">닫기</button><button type="button" class="lk-btn lk-copy">번호 복사</button></div>';
+        '<textarea class="lk-text" readonly hidden></textarea>' +
+        '<div class="lk-btns"><button type="button" class="lk-btn lk-close">닫기</button><button type="button" class="lk-btn lk-copy">번호 전부 복사</button></div>';
       if (!muted) for (let i = 0; i < 7; i++) ding(i);
       try {
         const list = JSON.parse(localStorage.getItem("lucky_history") || "[]");
         list.unshift({ game, nums, bonus, draw: p ? p.target.no : null, at: Date.now() });
         localStorage.setItem("lucky_history", JSON.stringify(list.slice(0, 10)));
       } catch (e) {}
-      const text = "🍀 " + game + " " + reason + " 기념 " + (p ? "제" + p.target.no + "회 " : "") + "행운 번호: " + nums.join(", ") + " + 보너스 " + bonus + "\n(지난 당첨 기록을 재미로 분석한 번호예요)";
+      // every set on the card goes into the copy, one per line
+      const site = /^https?:$/.test(location.protocol) && !/claude/.test(location.hostname) ? location.origin + "/" : "https://bellhkim.github.io/";
+      const lines = ["🍀 " + game + " " + reason + " 기념 " + (p ? "제" + p.target.no + "회 (" + p.target.date + ") " : "") + "행운 번호",
+        "⭐ " + (p ? p.main.name : "행운 번호") + ": " + nums.join(", ") + " + 보너스 " + bonus];
+      if (p) for (const s of p.sets) lines.push("• " + s.name + ": " + s.nums.join(", ") + (s.bonus ? " + 보너스 " + s.bonus : ""));
+      lines.push("(지난 당첨 기록을 재미로 분석한 번호예요. 당첨 확률은 어떤 번호든 같아요)", site);
+      const text = lines.join("\n");
       card.querySelector(".lk-close").addEventListener("click", close);
       const copyBtn = card.querySelector(".lk-copy");
+      const ta = card.querySelector(".lk-text");
       copyBtn.addEventListener("click", () => {
-        const done = () => { copyBtn.textContent = "복사했어요!"; };
-        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done).catch(() => { copyBtn.textContent = "길게 눌러 복사"; });
+        const manual = () => { ta.value = text; ta.hidden = false; ta.focus(); ta.select(); copyBtn.textContent = "글을 길게 눌러 복사"; };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(() => { copyBtn.textContent = "전부 복사했어요!"; }).catch(manual);
+        else manual();
       });
       copyBtn.focus({ preventScroll: true });
     });

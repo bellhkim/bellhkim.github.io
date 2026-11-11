@@ -340,7 +340,7 @@ a { color: inherit; }
         <li>아이템은 <b>단계 성공 선물</b>, <b>매일 출석 선물</b>(7일 연속이면 🌈), 보너스 게임, 금요일 친구 초대로도 받아요</li>
         <li>경쾌한 <b>배경 음악</b>, 더 극적인 성공 팡파르와 실패 효과음</li>
         <li>매주 <b>금요일 밤 9시~자정</b>은 불금 팡팡 타임: 단계를 깨면 코인 2배!</li>
-        <li>한 단계에서 <b>15,000점</b>을 넘기면 🍀 행운 카드!</li>
+        <li>한 단계 <b>15,000점</b> 또는 <b>5판 연속 성공</b>이면 🍀 행운 카드!</li>
       </ul>
     </section>
     <section>
@@ -349,7 +349,7 @@ a { color: inherit; }
         <li><b>W 윙맨</b>: 보조 비행기 2대가 양옆에서 20초 동안 같이 쏴요 (가까운 적 조준탄까지!)</li>
         <li><b>화력 7단계</b>: P를 모으면 6 → 8 → 최대 <b>10줄기</b>로 퍼져요</li>
         <li><b>R 고속 직진탄</b>: 굵고 빠른 탄이 일직선으로 쏟아져요 · <b>X 확산탄</b>: 12줄기 부채꼴</li>
-        <li><b>10,000점</b>을 넘기면 🍀 행운 카드!</li>
+        <li><b>10,000점</b> 또는 <b>보스 2마리 격파</b>면 🍀 행운 카드!</li>
       </ul>
     </section>
     <section>
@@ -358,12 +358,19 @@ a { color: inherit; }
         <li>😎 조커 김종현 한 장이 <b>삼피</b>가 됐어요</li>
         <li><b>자뻑</b>: 내가 싼 뻑을 내가 먹으면 상대 피 2장!</li>
         <li>판마다 <b>김종현 미션</b>: 성공하면 이기든 지든 +3,000원</li>
-        <li><b>30점 이상</b>으로 이기면 🍀 행운 카드: 최근 10년 로또 기록에서 가장 안 나온 번호 (재미로만 봐 주세요!)</li>
+        <li><b>30점 이상</b> 승리 또는 <b>3연승</b>이면 🍀 행운 카드: 최근 10년 로또 기록에서 가장 안 나온 번호 (재미로만 봐 주세요!)</li>
+      </ul>
+    </section>
+    <section>
+      <h4>🔮 나의 전생은 누구였을까</h4>
+      <ul>
+        <li>테스트를 끝까지 하면 🍀 행운 카드 보너스!</li>
       </ul>
     </section>
     <section>
       <h4>🕹️ 오락실</h4>
       <ul>
+        <li>🍀 행운 카드의 <b>번호 전부 복사</b>: 추천 번호와 분석 번호를 한 번에 카톡으로</li>
         <li>로그인 없이 <b>bellhkim.github.io</b> 하나로 네 게임을 바로</li>
         <li>📣 공유하기 버튼으로 카톡에 친구 초대</li>
       </ul>
@@ -454,7 +461,7 @@ a { color: inherit; }
   const hidePanel = () => { panel.hidden = true; $("shareBtn").focus(); };
 
   // update notice: shows on arrival until the player picks 다시 안 보기 (a new NOTICE_ID shows it again)
-  const NOTICE_ID = "2026-11c";
+  const NOTICE_ID = "2026-11d";
   const notice = $("noticePanel");
   const openNotice = () => { notice.hidden = false; $("noticeOk").focus({ preventScroll: true }); };
   const closeNotice = (forever) => {
