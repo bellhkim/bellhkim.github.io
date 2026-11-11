@@ -496,6 +496,7 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
 .days span { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: #eee6f2; color: var(--muted); font-family: var(--display); font-size: 14px; }
 .days span.on { background: var(--sun); color: #6b4300; box-shadow: 0 2px 0 #e8a400; }
 .days span.gift { font-size: 16px; }
+.btn.lucky { background: linear-gradient(135deg, #fff1a8, #ffc23a) !important; color: #3a2400 !important; box-shadow: 0 4px 0 #b37400, 0 0 20px rgba(255, 210, 90, 0.6); animation: wobble 1.4s ease-in-out infinite; }
 .bonus-note { font-family: var(--display); color: var(--berry) !important; font-size: calc(18px * var(--u)) !important; animation: zoomIn 0.5s both; }
 /* Friday night invite on the map */
 .friday { width: 100%; box-sizing: border-box; display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 18px; color: #fff;
@@ -602,6 +603,7 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
       <li>챕터(15단계)를 처음 끝까지 깨면 <b>🎈 보너스 게임</b>이 바로 시작돼요. 풍선을 터뜨리고 보물 상자를 골라 선물을 받아요.</li>
       <li>아이템은 상점 말고도 <b>단계 성공 선물</b>, <b>매일 출석 선물</b>, <b>보너스 게임</b>, <b>금요일 친구 초대</b>로 받을 수 있어요.</li>
       <li>매주 <b>금요일 밤 9시부터</b>는 불금 팡팡 타임! 단계를 깨면 코인이 2배예요.</li>
+      <li>한 단계에서 <b>15,000점</b>을 넘기면 🍀 <b>행운 카드</b>: 이번 주 로또 분석 번호를 알려 줘요 (재미로만!).</li>
       <li>별을 120 · 360 · 720개 모으면 <b>스킬 레벨</b>이 올라 망치가 커지고 이동 추가가 늘어요.</li>
       <li>단계를 깨면 🪙 <b>코인</b>을 받아요. <b>🛒 상점</b>에서 출발 아이템(💣 폭탄 · 🌈 무지개 · 👟 이동 +3), 실패했을 때 쓰는 💖 이어하기를 사고, 스킬의 시작 개수를 늘릴 수 있어요.</li>
     </ul>
@@ -2453,6 +2455,7 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
       "<p>남은 횟수 " + movesLeft + "번이 피날레로 터졌어요</p>" +
       '<div class="coin-gain">🪙 +' + gain + (why ? " (" + why + " 2배)" : firstClear ? " (첫 클리어 보너스 포함)" : "") + "</div>" +
       (drop ? '<div class="reward-list"><span>🎁 선물 발견!</span>' + itemSpan(drop) + "</div>" : "") +
+      (score >= LUCKY_SCORE && window.luckyCard ? '<button class="btn lucky" data-act="lucky">🍀 ' + LUCKY_SCORE.toLocaleString("ko-KR") + "점 돌파! 행운 카드 열기</button>" : "") +
       (chapterEnd
         ? '<p class="bonus-note">🎉 ' + chName + " 완주! 곧 보너스 게임이 시작돼요</p>" +
           '<div class="btns"><button class="btn" data-act="bonus">🎈 보너스 게임 바로 시작</button></div>'
@@ -2470,6 +2473,7 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
 
   // ---------- chapter bonus game: balloon rush, then a treasure chest ----------
   let bonusTimer = 0;
+  const LUCKY_SCORE = 15000; // 한 단계에서 이 점수를 넘기면 행운 카드 (이번 주 로또 분석 번호)
   async function startBonus(lv) {
     clearTimeout(bonusTimer);
     const box = $("bonus");
@@ -2713,6 +2717,7 @@ body.fever .board { box-shadow: 0 0 0 6px rgba(255,255,255,0.85), 0 0 34px 6px r
     else if (act === "map") leaveToMap();
     else if (act === "share") share();
     else if (act === "bonus") { const lv = level; startBonus(lv); }
+    else if (act === "lucky") { clearTimeout(bonusTimer); window.luckyCard.open({ game: "냥멍 팡팡", reason: level + "단계 " + score.toLocaleString("ko-KR") + "점", muted }); e.target.closest("button").remove(); }
     else if (act === "close") { $("result").hidden = true; if (!$("mapScreen").hidden) renderMap(); }
   });
 
@@ -3108,5 +3113,121 @@ window.appShell = (() => {
 })();
 </script>
 <!-- appshell:end -->
+<!-- lucky:start -->
+<!-- lucky card: this week's lotto-style numbers as a reward; inlined before the closing body tag of 은하 순찰대 and 냥멍 팡팡 -->
+<style>
+.lk-overlay { position: fixed; inset: 0; z-index: 1001; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(12, 10, 24, 0.6); }
+.lk-card { width: min(380px, 100%); max-height: 100%; overflow-y: auto; overscroll-behavior: contain; box-sizing: border-box; background: #fffdf3; color: #3a2400;
+  border-radius: 22px; padding: 20px 18px 16px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;
+  box-shadow: 0 0 0 3px #ffc23a, 0 14px 40px rgba(0,0,0,0.45); font-family: "Gowun Dodum", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  animation: lkIn 0.35s cubic-bezier(.3,1.5,.5,1); }
+@keyframes lkIn { from { transform: scale(0.8) rotate(-3deg); opacity: 0; } }
+.lk-card h3 { margin: 0; font: 400 24px/1.2 "Black Han Sans", "Jua", "Apple SD Gothic Neo", sans-serif; }
+.lk-card p { margin: 0; font-size: 14px; line-height: 1.5; color: #7a5a2a; word-break: keep-all; }
+.lk-reveal { appearance: none; border: 0; cursor: pointer; width: 100%; padding: 22px 16px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; gap: 4px;
+  background: linear-gradient(135deg, #fff1a8, #ffc23a); color: #3a2400; font: 400 22px "Black Han Sans", "Jua", sans-serif;
+  box-shadow: 0 4px 0 #b37400, 0 0 24px rgba(255, 210, 90, 0.6); animation: lkGlow 1.2s ease-in-out infinite; }
+.lk-reveal small { font: 13px "Gowun Dodum", sans-serif; opacity: 0.85; }
+@keyframes lkGlow { 50% { transform: scale(1.03) rotate(-1deg); } }
+.lk-balls { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; align-items: center; }
+.lk-ball { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font: 400 18px "Black Han Sans", sans-serif; color: #fff;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.35); box-shadow: inset -4px -5px 0 rgba(0,0,0,0.18), inset 4px 4px 0 rgba(255,255,255,0.35); animation: lkBall 0.5s cubic-bezier(.3,1.6,.5,1) both; }
+.lk-ball.c1 { background: #f2b500; } .lk-ball.c2 { background: #4fb3e8; } .lk-ball.c3 { background: #f25f5f; } .lk-ball.c4 { background: #9a9a9a; } .lk-ball.c5 { background: #8cc63f; }
+.lk-plus { font: 400 20px "Black Han Sans", sans-serif; color: #7a5a2a; }
+@keyframes lkBall { from { transform: scale(0) rotate(-180deg); opacity: 0; } }
+.lk-note { font-size: 12px !important; color: #9a7a4a !important; }
+.lk-sets { width: 100%; font-size: 13px; color: #6b5a48; text-align: left; }
+.lk-sets summary { cursor: pointer; text-align: center; font-family: "Black Han Sans", sans-serif; color: #8a6b4a; }
+.lk-set { display: grid; grid-template-columns: auto 1fr; gap: 0 8px; padding: 6px 0; border-top: 1px dashed #e6d3a6; }
+.lk-set b { font: 400 14px "Black Han Sans", sans-serif; }
+.lk-set span { font-variant-numeric: tabular-nums; font-weight: 700; text-align: right; }
+.lk-set small { grid-column: 1 / -1; color: #8a6b4a; font-size: 12px; }
+.lk-btns { display: flex; gap: 8px; width: 100%; }
+.lk-btn { flex: 1; appearance: none; border: 0; cursor: pointer; border-radius: 12px; padding: 12px 10px; font: 400 17px "Black Han Sans", "Jua", sans-serif; }
+.lk-copy { background: #ffc23a; color: #3a2400; }
+.lk-close { background: #f1e8d4; color: #3a2400; }
+.lk-reveal:focus-visible, .lk-btn:focus-visible { outline: 3px solid #7c5cff; outline-offset: 2px; }
+</style>
+<script>
+// 행운 카드: lotto/predict.json holds this week's numbers, rebuilt every Saturday from past draws.
+window.luckyCard = (() => {
+  const URL_ = /^https?:$/.test(location.protocol) && !/claude/.test(location.hostname)
+    ? new URL("../lotto/predict.json", location.href).href : "https://bellhkim.github.io/lotto/predict.json";
+  const esc = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  async function load() {
+    try {
+      const r = await fetch(URL_, { cache: "no-cache" });
+      if (!r.ok) return null;
+      const p = await r.json();
+      return p && p.main && p.main.nums && p.main.nums.length === 6 ? p : null;
+    } catch (e) { return null; }
+  }
+  let actx = null;
+  function ding(i) {
+    try {
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      const t = actx.currentTime + i * 0.35, o = actx.createOscillator(), g = actx.createGain();
+      o.type = "square"; o.frequency.setValueAtTime(660 + i * 90, t);
+      g.gain.setValueAtTime(0.05, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.18);
+      o.connect(g).connect(actx.destination); o.start(t); o.stop(t + 0.2);
+    } catch (e) {}
+  }
+  // game: name for the copy text; reason: why the card was earned (e.g. "12,340점 달성")
+  function open({ game, reason, muted = false }) {
+    if (document.querySelector(".lk-overlay")) return;
+    const ov = document.createElement("div");
+    ov.className = "lk-overlay";
+    ov.setAttribute("role", "dialog"); ov.setAttribute("aria-modal", "true"); ov.setAttribute("aria-label", "행운의 보너스 카드");
+    ov.innerHTML = '<div class="lk-card"><h3>🍀 행운의 보너스 카드</h3><p>' + esc(reason) + "! 김종현이 준비한 이번 주 행운 번호예요.</p>" +
+      '<button type="button" class="lk-reveal">카드 열기<small>눌러서 번호를 확인하세요</small></button></div>';
+    document.body.appendChild(ov);
+    const card = ov.querySelector(".lk-card"), reveal = ov.querySelector(".lk-reveal");
+    const close = () => { ov.remove(); document.removeEventListener("keydown", onKey, true); };
+    const onKey = (e) => { if (e.key === "Escape") { e.stopPropagation(); close(); } };
+    document.addEventListener("keydown", onKey, true);
+    reveal.focus({ preventScroll: true });
+    reveal.addEventListener("click", async () => {
+      reveal.disabled = true;
+      reveal.querySelector("small").textContent = "지난 당첨 번호를 분석하는 중…";
+      const p = await load();
+      let nums, bonus, head, foot;
+      if (p) {
+        nums = p.main.nums; bonus = p.main.bonus;
+        head = "제" + p.target.no + "회 (" + p.target.date.slice(5).replace("-", "/") + ") · " + esc(p.main.name);
+        foot = '<p class="lk-note">' + esc(p.main.method) + "</p>" +
+          '<details class="lk-sets"><summary>다른 분석 번호 보기</summary>' +
+          p.sets.map((s) => '<div class="lk-set"><b>' + esc(s.name) + "</b><span>" + s.nums.join(" · ") + "</span><small>" + esc(s.method) + "</small></div>").join("") +
+          "</details>" + '<p class="lk-note">' + esc(p.note) + "</p>";
+      } else {
+        const pool = Array.from({ length: 45 }, (_, i) => i + 1);
+        for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
+        nums = pool.slice(0, 6).sort((a, b) => a - b); bonus = pool[6];
+        head = "김종현이 뽑아 준 행운 번호";
+        foot = '<p class="lk-note">분석 자료를 불러오지 못해 무작위로 뽑았어요. 재미로만 봐 주세요.</p>';
+      }
+      const ball = (n, i) => '<span class="lk-ball c' + Math.min(5, Math.ceil(n / 10)) + '" style="animation-delay:' + i * 0.35 + 's">' + n + "</span>";
+      card.innerHTML = "<h3>🍀 " + head + "</h3>" +
+        '<div class="lk-balls">' + nums.map(ball).join("") + '<span class="lk-plus">+</span>' + ball(bonus, 6) + "</div>" + foot +
+        '<div class="lk-btns"><button type="button" class="lk-btn lk-close">닫기</button><button type="button" class="lk-btn lk-copy">번호 복사</button></div>';
+      if (!muted) for (let i = 0; i < 7; i++) ding(i);
+      try {
+        const list = JSON.parse(localStorage.getItem("lucky_history") || "[]");
+        list.unshift({ game, nums, bonus, draw: p ? p.target.no : null, at: Date.now() });
+        localStorage.setItem("lucky_history", JSON.stringify(list.slice(0, 10)));
+      } catch (e) {}
+      const text = "🍀 " + game + " " + reason + " 기념 " + (p ? "제" + p.target.no + "회 " : "") + "행운 번호: " + nums.join(", ") + " + 보너스 " + bonus + "\n(지난 당첨 기록을 재미로 분석한 번호예요)";
+      card.querySelector(".lk-close").addEventListener("click", close);
+      const copyBtn = card.querySelector(".lk-copy");
+      copyBtn.addEventListener("click", () => {
+        const done = () => { copyBtn.textContent = "복사했어요!"; };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done).catch(() => { copyBtn.textContent = "길게 눌러 복사"; });
+      });
+      copyBtn.focus({ preventScroll: true });
+    });
+  }
+  return { open };
+})();
+</script>
+<!-- lucky:end -->
 </body>
 </html>

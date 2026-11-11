@@ -340,6 +340,7 @@ a { color: inherit; }
         <li>아이템은 <b>단계 성공 선물</b>, <b>매일 출석 선물</b>(7일 연속이면 🌈), 보너스 게임, 금요일 친구 초대로도 받아요</li>
         <li>경쾌한 <b>배경 음악</b>, 더 극적인 성공 팡파르와 실패 효과음</li>
         <li>매주 <b>금요일 밤 9시~자정</b>은 불금 팡팡 타임: 단계를 깨면 코인 2배!</li>
+        <li>한 단계에서 <b>15,000점</b>을 넘기면 🍀 행운 카드!</li>
       </ul>
     </section>
     <section>
@@ -348,6 +349,7 @@ a { color: inherit; }
         <li><b>W 윙맨</b>: 보조 비행기 2대가 양옆에서 20초 동안 같이 쏴요 (가까운 적 조준탄까지!)</li>
         <li><b>화력 7단계</b>: P를 모으면 6 → 8 → 최대 <b>10줄기</b>로 퍼져요</li>
         <li><b>R 고속 직진탄</b>: 굵고 빠른 탄이 일직선으로 쏟아져요 · <b>X 확산탄</b>: 12줄기 부채꼴</li>
+        <li><b>10,000점</b>을 넘기면 🍀 행운 카드!</li>
       </ul>
     </section>
     <section>
@@ -452,7 +454,7 @@ a { color: inherit; }
   const hidePanel = () => { panel.hidden = true; $("shareBtn").focus(); };
 
   // update notice: shows on arrival until the player picks 다시 안 보기 (a new NOTICE_ID shows it again)
-  const NOTICE_ID = "2026-11b";
+  const NOTICE_ID = "2026-11c";
   const notice = $("noticePanel");
   const openNotice = () => { notice.hidden = false; $("noticeOk").focus({ preventScroll: true }); };
   const closeNotice = (forever) => {
