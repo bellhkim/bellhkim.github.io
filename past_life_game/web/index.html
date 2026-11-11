@@ -136,6 +136,41 @@ details .inner b { color: var(--gold); font-weight: 400; }
 .hist { appearance: none; display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 10px 14px; color: var(--paper); cursor: pointer; font-size: 16px; }
 .hist .seal { width: 36px; height: 36px; font-size: 20px; border-radius: 8px; }
 .hist small { display: block; color: var(--dim); font-size: 13px; }
+/* reveal: the seals spin like a wheel of lives, then one stamps down */
+.reveal { min-height: calc(100vh - 84px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; text-align: center; }
+.reveal .wheel { width: 150px; height: 150px; display: grid; place-items: center; position: relative; }
+.reveal .wheel .seal { position: absolute; inset: 0; font-size: 84px; border-radius: 18px; }
+.reveal .wheel .seal.final { animation: stampBig 0.8s cubic-bezier(.3,1.6,.5,1) both; }
+@keyframes stampBig { 0% { transform: scale(2.6) rotate(-25deg); opacity: 0; } 60% { transform: scale(0.92) rotate(-4deg); opacity: 1; } 100% { transform: scale(1) rotate(-4deg); } }
+.reveal .ring { position: absolute; inset: -26px; border-radius: 50%; border: 1px dashed rgba(217,180,91,0.45); animation: spinRing 6s linear infinite; }
+@keyframes spinRing { to { transform: rotate(360deg); } }
+.reveal .line { font-family: var(--display); color: var(--gold); font-size: clamp(20px, 5vw, 28px); min-height: 1.4em; animation: fade 0.6s ease; }
+.reveal .sub { color: var(--dim); font-size: 15px; min-height: 1.3em; }
+.reveal .skip { appearance: none; background: none; border: 0; color: var(--dim); font-size: 14px; text-decoration: underline; cursor: pointer; }
+/* friendship match */
+.match { background: linear-gradient(135deg, rgba(217,180,91,0.16), rgba(143,134,168,0.14)); border: 1px solid rgba(217,180,91,0.5); border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+.match h2 { margin: 0; }
+.match .pair { display: flex; align-items: center; justify-content: center; gap: 14px; }
+.match .pair .seal { width: 64px; height: 64px; font-size: 36px; border-radius: 12px; }
+.match .pair .who { font-size: 13px; color: var(--dim); text-align: center; }
+.match .pair .who b { display: block; color: var(--paper); font-weight: 400; font-family: var(--display); font-size: 16px; }
+.match .heart { font-size: 28px; animation: beat 1s ease-in-out infinite; }
+@keyframes beat { 50% { transform: scale(1.25); } }
+.match .pct { font-family: var(--display); color: var(--gold); font-size: clamp(40px, 11vw, 60px); text-align: center; line-height: 1; }
+.match .kind { text-align: center; font-family: var(--display); font-size: 20px; }
+.match p { margin: 0; line-height: 1.7; }
+.match .btn { margin-top: 4px; }
+/* collection of past lives */
+.dex h3 { font-size: 20px; display: flex; justify-content: space-between; align-items: baseline; }
+.dex h3 small { color: var(--gold); font-family: var(--body); font-size: 14px; }
+.dex .grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+@media (max-width: 420px) { .dex .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.dex .cell { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; color: var(--dim); text-align: center; line-height: 1.25; word-break: keep-all; }
+.dex .cell .seal { width: 44px; height: 44px; font-size: 24px; border-radius: 9px; }
+.dex .cell.locked .seal { background: #2a2636 !important; color: #5d5670; box-shadow: inset 0 0 0 2px #3a3448; }
+.dex .cell.new .seal { box-shadow: 0 0 0 3px var(--gold), 0 0 18px rgba(217,180,91,0.7); }
+.dexnote { text-align: center; font-family: var(--display); color: var(--gold); font-size: 18px; }
+@media (prefers-reduced-motion: reduce) { .reveal .ring, .match .heart, .reveal .wheel .seal.final { animation: none; } }
 .linkbanner { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; background: rgba(217,180,91,0.12); border: 1px solid rgba(217,180,91,0.45); border-radius: 14px; padding: 12px 14px; margin-bottom: 14px; }
 .linkbanner .btn { width: auto; padding: 10px 16px; font-size: 16px; }
 .kakao { background: #fee500; color: #191600; }
@@ -1216,6 +1251,33 @@ const DATA = {"questions":{
       try { localStorage.setItem("pl_history", JSON.stringify(list.slice(0, 10))); } catch (e) {}
     }
   };
+  // 전생 도감: which of the 12 lives this device has met (first seen time)
+  const dex = {
+    get() { try { return JSON.parse(localStorage.getItem("pl_dex") || "{}"); } catch (e) { return {}; } },
+    add(id) {
+      const d = this.get(), isNew = !d[id];
+      if (isNew) { d[id] = Date.now(); try { localStorage.setItem("pl_dex", JSON.stringify(d)); } catch (e) {} }
+      return isNew;
+    }
+  };
+  for (const x of saved.list()) dex.add(x.id); // results from before the 도감 existed count too
+  // a friend's result opened from their link, kept for the 궁합 after you take the test
+  const friend = {
+    get() { try { const f = JSON.parse(localStorage.getItem("pl_friend") || "null"); return f && decode(f.code) ? f : null; } catch (e) { return null; } },
+    set(code) { try { localStorage.setItem("pl_friend", JSON.stringify({ code, at: Date.now() })); } catch (e) {} }
+  };
+  let actx = null;
+  function note(freq, at, dur, type = "sine", vol = 0.06) {
+    try {
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      if (actx.state === "suspended") actx.resume();
+      const t = actx.currentTime + at, o = actx.createOscillator(), g = actx.createGain();
+      o.type = type; o.frequency.setValueAtTime(freq, t);
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g).connect(actx.destination); o.start(t); o.stop(t + dur + 0.05);
+    } catch (e) {}
+  }
+  const gong = () => { note(98, 0, 3.2, "sine", 0.22); note(196, 0, 2.4, "triangle", 0.06); note(147, 0.02, 2.8, "sine", 0.08); note(392, 0.05, 1.4, "sine", 0.03); };
   const fmtDate = (t) => { const d = new Date(t); return d.getFullYear() + "." + (d.getMonth() + 1) + "." + d.getDate(); };
 
   function intro() {
@@ -1231,6 +1293,7 @@ const DATA = {"questions":{
       '<button class="btn" id="start">첫 번째 딜레마로</button>' +
       '<button class="btn ghost" id="quitApp">끝내기</button>' +
       (Object.keys(answers).length && Object.keys(answers).length < order.length ? '<button class="btn ghost" id="resume">이어서 하기 (' + Object.keys(answers).length + "/" + order.length + ")</button>" : "") +
+      dexHTML() +
       pastHTML() +
       "</div>";
     document.getElementById("start").onclick = () => { if (window.appShell) appShell.enter(); answers = {}; store.set("pl_answers", answers); idx = 0; question(); };
@@ -1242,6 +1305,16 @@ const DATA = {"questions":{
       if (a) { answers = a; result("saved"); }
     }));
     if (location.hash) { try { history.replaceState(null, "", location.pathname + location.search); } catch (e) { location.hash = ""; } }
+  }
+
+  function dexHTML(newId) {
+    const d = dex.get(), n = C.characters.filter((c) => d[c.id]).length;
+    if (!n && !newId) return "";
+    return '<div class="dex"><h3>전생 도감 <small>' + n + " / " + C.characters.length + (n === C.characters.length ? " · 완성! 🎉" : "") + "</small></h3>" +
+      '<div class="grid">' + C.characters.map((c) => d[c.id]
+        ? '<div class="cell' + (c.id === newId ? " new" : "") + '" title="' + esc(c.summary) + '"><span class="seal" style="background:' + c.color + '">' + esc(c.seal) + "</span>" + esc(c.name) + "</div>"
+        : '<div class="cell locked"><span class="seal">?</span>???</div>').join("") + "</div>" +
+      (n < C.characters.length ? '<p class="small">다른 기분, 다른 날에 다시 답하면 다른 전생을 만날 수도 있어요.</p>' : "") + "</div>";
   }
 
   function pastHTML() {
@@ -1270,7 +1343,7 @@ const DATA = {"questions":{
       app.querySelectorAll(".opt").forEach((x) => x.classList.toggle("on", x === b));
       setTimeout(() => {
         if (idx + 1 < order.length) { idx++; question(); }
-        else result();
+        else reveal();
       }, 220);
     }));
     const back = document.getElementById("back");
@@ -1306,22 +1379,88 @@ const DATA = {"questions":{
     return "<p><b>핵심 논점</b> · " + esc(e.core) + "</p><p><b>논증</b> · " + esc(e.argument) + "</p><p><b>반론</b> · " + esc(e.counter) + "</p><p><b>이 게임에서의 쓰임</b> · " + esc(e.game_use) + '</p><p class="refs">참고: ' + e.references.map(esc).join(" / ") + "</p>";
   }
 
+  // the wheel of lives spins, slows, and one seal stamps down with a gong
+  function reveal() {
+    const r = E.buildResult(Q, C, P, answers), ch = r.character;
+    const lines = ["스무 개의 선택을 모았어요", "판단의 결을 여섯 갈래로 읽는 중…", "아주 먼 옛날, " + ch.era + "…", ch.region + "의 어느 하루"];
+    app.innerHTML = '<div class="reveal fade"><div class="wheel"><span class="ring"></span><span class="seal" id="spin"></span></div>' +
+      '<div class="line" id="rvLine"></div><div class="sub" id="rvSub"></div><button class="skip" id="rvSkip">건너뛰기</button></div>';
+    window.scrollTo(0, 0);
+    let done = false, timer = 0;
+    const finish = () => { if (done) return; done = true; clearTimeout(timer); result(); };
+    document.getElementById("rvSkip").onclick = finish;
+    const spin = document.getElementById("spin"), cs = C.characters;
+    let i = 0, delay = 60, t = 0;
+    const step = () => {
+      if (done) return;
+      const c = cs[i++ % cs.length];
+      spin.style.background = c.color; spin.textContent = c.seal;
+      note(420 + (i % 6) * 70, 0, 0.06, "triangle", 0.03);
+      t += delay;
+      const li = Math.min(lines.length - 1, Math.floor(t / 900));
+      const lineEl = document.getElementById("rvLine");
+      if (lineEl && lineEl.dataset.i !== String(li)) { lineEl.dataset.i = li; lineEl.textContent = lines[li]; lineEl.style.animation = "none"; void lineEl.offsetWidth; lineEl.style.animation = ""; }
+      if (t < 3200) { delay = Math.min(380, delay * 1.09); timer = setTimeout(step, delay); return; }
+      // stamp
+      spin.className = "seal final"; spin.style.background = ch.color; spin.textContent = ch.seal;
+      document.getElementById("rvLine").textContent = "당신의 전생은…";
+      document.getElementById("rvSub").textContent = "「" + ch.name + "」";
+      gong();
+      if (navigator.vibrate) try { navigator.vibrate([30, 60, 120]); } catch (e) {}
+      timer = setTimeout(finish, 1900);
+    };
+    step();
+  }
+
+  // 궁합: two judgment profiles, closer = higher
+  function matchHTML(r, ch, chars, f) {
+    const fa = decode(f.code);
+    const fr = E.buildResult(Q, C, P, fa), fc = fr.character;
+    const diffs = E.DIMS.map((d, i) => ({ name: Q.dimensions[i].name, gap: Math.abs(r.profile[d] - fr.profile[d]), both: (r.profile[d] + fr.profile[d]) / 2 }));
+    const dist = Math.sqrt(diffs.reduce((a, x) => a + x.gap * x.gap, 0));
+    const pct = Math.max(20, Math.min(99, Math.round(100 - dist * 0.8)));
+    const same = diffs.slice().sort((a, b) => a.gap - b.gap || b.both - a.both)[0], apart = diffs.slice().sort((a, b) => b.gap - a.gap)[0];
+    const kind = pct >= 85 ? ["💛 영혼의 단짝", "같은 시대, 같은 편에서 등을 맡기고 살았을 사이예요."]
+      : pct >= 70 ? ["🤝 서로를 알아본 오랜 벗", "말하지 않아도 서로의 선택을 짐작하던 사이예요."]
+      : pct >= 55 ? ["⚔️ 티격태격 맞수", "자주 부딪히지만 그래서 서로를 단단하게 만든 사이예요."]
+      : ["🌗 정반대라 끌리는 인연", "서로에게 없는 것을 가진, 그래서 자꾸 눈이 가는 사이예요."];
+    const sameChar = fc.id === ch.id;
+    const story = sameChar
+      ? "두 사람 모두 「" + ch.name + "」! 같은 삶을 산 두 사람이 다시 만난 셈이에요."
+      : "「" + fc.name + "」(" + fc.era + ") × 「" + ch.name + "」(" + ch.era + ")의 만남. " + kind[1];
+    return { pct, fc, html: '<section class="block match"><h2>💞 친구와 전생 궁합</h2>' +
+      '<div class="pair"><div class="who"><span class="seal" style="background:' + fc.color + '">' + esc(fc.seal) + "</span><b>" + esc(fc.name) + "</b>친구의 전생</div>" +
+      '<span class="heart" aria-hidden="true">💗</span>' +
+      '<div class="who"><span class="seal" style="background:' + ch.color + '">' + esc(ch.seal) + "</span><b>" + esc(ch.name) + "</b>나의 전생</div></div>" +
+      '<div class="pct">' + pct + '%</div><div class="kind">' + kind[0] + "</div>" +
+      "<p>" + esc(story) + "</p>" +
+      "<p>두 사람은 <b>" + esc(same.name) + "</b>에서 가장 닮았고, <b>" + esc(apart.name) + "</b>에서 가장 달라요 (차이 " + Math.round(apart.gap) + ").</p>" +
+      '<p class="small">궁합은 두 사람의 판단 프로필이 얼마나 가까운지로 계산한 놀이용 점수예요.</p>' +
+      '<button class="btn" id="matchShare">궁합 결과 친구에게 보내기</button></section>' };
+  }
+
   // from: "play" (just finished), "link" (opened from a shared link) or "saved" (from the list of past results)
   function result(from = "play") {
     const r = E.buildResult(Q, C, P, answers);
     const ch = r.character;
     const chars = Object.fromEntries(C.characters.map((c) => [c.id, c]));
     const code = encode(answers);
-    if (from === "play") { saved.add(code, ch); store.set("pl_answers", {}); }
+    let isNewLife = false;
+    if (from === "play") { saved.add(code, ch); store.set("pl_answers", {}); isNewLife = dex.add(ch.id); }
+    if (from === "link") friend.set(code);
+    const fr = from === "play" ? friend.get() : null;
+    const match = fr && fr.code !== code ? matchHTML(r, ch, chars, fr) : null;
     if (location.hash !== "#r-" + code) location.hash = "r-" + code;
     const blocks = [];
-    if (from === "link") blocks.push('<div class="linkbanner"><span>링크로 열어 본 전생 결과예요. 당신의 전생도 궁금하지 않나요?</span><button class="btn" id="tryBtn">나도 테스트하기</button></div>');
+    if (from === "link") blocks.push('<div class="linkbanner"><span>친구가 보낸 전생 결과예요. 나도 테스트하면 <b>친구와의 전생 궁합</b>이 나와요!</span><button class="btn" id="tryBtn">나도 테스트하고 궁합 보기</button></div>');
     blocks.push(
       '<div class="eyebrow">가상 인물 · 가상 생애 · 철학적 추론 결과</div>' +
       '<div class="hero"><div class="seal" style="background:' + ch.color + '">' + esc(ch.seal) + '</div><div><div class="small">당신의 전생은</div><h1>' + esc(ch.name) + " " + ch.emoji + '</h1><div class="meta">' + esc(ch.era) + " · " + esc(ch.region) + '</div><div class="meta">' + esc(ch.occupation) + "</div></div></div>" +
       (r.co_top.length > 1 ? '<div class="cotop">판단 프로필이 ' + r.co_top.slice(1).map((id) => "'" + esc(chars[id].name) + "'").join(", ") + "와도 거의 같은 거리에 있어요. 두 삶이 겹쳐 보이는 결과예요.</div>" : "") +
-      '<div class="quote">“' + esc(ch.quote) + "”</div>"
+      '<div class="quote">“' + esc(ch.quote) + "”</div>" +
+      (isNewLife ? '<div class="dexnote">📖 전생 도감에 새 인물 등록! (' + Object.keys(dex.get()).length + " / " + C.characters.length + ")</div>" : "")
     );
+    if (match) blocks.push(match.html);
     blocks.push('<section class="block"><h2>당신의 전생 이야기</h2><div class="story">' + ch.story.map((p) => "<p>" + esc(p) + "</p>").join("") + "</div>" +
       '<div class="facts"><div class="fact"><span>삶의 방식</span><span>' + esc(ch.life) + '</span></div><div class="fact"><span>핵심 사건</span><span>' + esc(ch.key_event) + '</span></div><div class="fact"><span>삶의 갈등</span><span>' + esc(ch.conflict) + "</span></div></div>" +
       '<div class="personal" style="margin-top:16px">' + r.personal.map((p) => "<p>" + esc(p) + "</p>").join("") + "</div></section>");
@@ -1348,6 +1487,7 @@ const DATA = {"questions":{
     blocks.push('<section class="block"><h2>공유 카드</h2><div class="share"><div class="seal" style="background:' + ch.color + '">' + esc(ch.seal) + '</div><div class="small">나의 전생은</div><h3>' + esc(ch.name) + '</h3><div class="quote" style="margin:4px 0 6px;font-size:20px">' + esc(ch.summary) + '</div><div class="small">' + esc(ch.era) + " · 나의 전생은 누구였을까</div></div>" +
       '<div class="actions">' + (from === "play" ? '<button class="btn lucky" id="luckyBtn">🍀 테스트 완료 보너스 · 행운 카드 열기</button>' : "") + '<button class="btn kakao" id="meBtn">카톡 나에게 보내기 (결과 저장)</button><button class="btn" id="shareBtn">친구에게 이 테스트 추천하기</button><textarea class="share-text" id="shareText" rows="5" readonly hidden></textarea><button class="btn ghost" id="again">' + (from === "link" ? "나도 테스트하기" : "처음부터 다시 하기") + "</button></div>" +
       '<p class="small">결과는 이 기기에도 저장돼서 첫 화면의 \'지난 결과\'에서 다시 볼 수 있어요. 카톡으로 보낸 결과 링크를 누르면 어느 기기에서든 같은 결과가 열려요. 공유 문구에는 이름이나 연락처 같은 개인 정보가 들어가지 않아요.</p></section>');
+    if (from !== "link") blocks.push('<section class="block">' + dexHTML(isNewLife ? ch.id : null) + "</section>");
     app.innerHTML = '<div class="fade">' + blocks.join("") + "</div>";
     window.scrollTo(0, 0);
     const restart = () => { if (window.appShell) appShell.exit(); answers = {}; store.set("pl_answers", answers); intro(); askFeedback(); };
@@ -1363,7 +1503,12 @@ const DATA = {"questions":{
     document.getElementById("shareBtn").onclick = () => share(
       "🔮 나의 전생은 「" + ch.name + "」 " + ch.emoji + "이래!\n" + ch.summary + " (" + ch.era + ")\n\n" +
       "스무 개의 철학 딜레마로 알아보는 전생 테스트 「나의 전생은 누구였을까」\n" +
-      "5분이면 끝나. 너의 전생은 누구였을지 궁금하지 않아? 👇\n" + testUrl() + "\n\n내 결과 보기 👉 " + link,
+      "5분이면 끝나. 아래 내 결과 링크로 들어가서 테스트하면 우리 둘의 전생 궁합도 나와 👇\n" + link,
+      "복사했어요! 친구에게 카톡으로 보내 보세요");
+    const ms = document.getElementById("matchShare");
+    if (ms) ms.onclick = () => share(
+      "💞 우리 전생 궁합 " + match.pct + "%!\n친구의 전생 「" + match.fc.name + "」 × 나의 전생 「" + ch.name + "」\n\n" +
+      "나의 전생 결과 👉 " + link + "\n너도 다른 친구랑 궁합 봐 봐 👉 " + testUrl(),
       "복사했어요! 친구에게 카톡으로 보내 보세요");
     const luckyBtn = document.getElementById("luckyBtn");
     if (luckyBtn && window.luckyCard) luckyBtn.onclick = () => { window.luckyCard.open({ game: "나의 전생은 누구였을까", reason: "테스트 완료 · 전생은 " + ch.name }); luckyBtn.remove(); };
@@ -1399,7 +1544,7 @@ const DATA = {"questions":{
   }
 
   // used by automated tests
-  window.__pl = { answer: (a) => { answers = a; result(); } };
+  window.__pl = { answer: (a) => { answers = a; result(); }, reveal: (a) => { answers = a; reveal(); }, encode: (a) => encode(a) };
   // a #r-… link opens that result; our own hash updates (same result) are ignored
   function route(initial) {
     const m = /^#r-([ABCD]{20})$/.exec(location.hash);
