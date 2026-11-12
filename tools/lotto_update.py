@@ -234,16 +234,19 @@ def predict(draws):
             "chi2": round(chi, 1),  # about 44 on average for a fair machine (44 degrees of freedom)
             "sumMean": round(mean, 1), "sumSd": round(sd, 1),
         }
-        sets.append({"id": "hot-" + key, "name": label + " 최다 출현", "method": "대수의 법칙: " + str(len(ds)) + "회 추첨에서 가장 많이 나온 6개", "nums": top(f)})
+        sets.append({"id": "hot-" + key, "name": label + " 최다 출현", "method": "대수의 법칙: " + str(len(ds)) + "회 추첨에서 가장 많이 나온 6개", "nums": top(f),
+                     "name_en": "Most drawn, last " + str(years) + (" year" if years == 1 else " years"), "method_en": "Law of large numbers: the 6 drawn most often in " + str(len(ds)) + " draws"})
     # 미출현 회귀: numbers absent the longest over the last 3 years, measured against the expected gap
     d3 = window_draws(draws, 3, latest_date)
     g = gaps(d3)
-    sets.append({"id": "overdue", "name": "오래 쉰 번호", "method": "평균 회귀: 최근 3년 중 가장 오래 안 나온 6개 (평균 간격 7.5회)", "nums": top(g)})
+    sets.append({"id": "overdue", "name": "오래 쉰 번호", "method": "평균 회귀: 최근 3년 중 가장 오래 안 나온 6개 (평균 간격 7.5회)", "nums": top(g),
+                 "name_en": "Longest absent", "method_en": "Regression to the mean: the 6 absent longest in the last 3 years (average gap 7.5 draws)"})
     # 종합 점수: 10년·1년 빈도와 공백을 표준점수로 합친 순위
     f10, f1 = frequencies(window_draws(draws, 10, latest_date)), frequencies(window_draws(draws, 1, latest_date))
     z10, z1, zg = zscores(f10), zscores(f1), zscores(g)
     combo = {n: z10[n] + 0.7 * z1[n] + 0.5 * zg[n] for n in BALLS}
-    sets.append({"id": "zscore", "name": "종합 점수", "method": "10년 빈도 + 1년 빈도 + 공백을 표준점수로 더한 상위 6개", "nums": top(combo)})
+    sets.append({"id": "zscore", "name": "종합 점수", "method": "10년 빈도 + 1년 빈도 + 공백을 표준점수로 더한 상위 6개", "nums": top(combo),
+                 "name_en": "Combined score", "method_en": "Top 6 by z-scores of 10-year frequency, 1-year frequency and absence"})
     # 대표 번호: 최근 가중 빈도로 뽑고, 과거 당첨 조합의 모양(합계·홀짝·고저·연번)에 맞는 것만 남기는 몬테카를로
     d10 = window_draws(draws, 10, latest_date)
     weights = {n: 1.0 for n in BALLS}
@@ -259,17 +262,20 @@ def predict(draws):
             break
     best = best or weighted_pick(rng, weights)
     bonus = weighted_pick(rng, {n: w for n, w in weights.items() if n not in best}, 1)[0]
-    sets.append({"id": "weighted", "name": "가중 몬테카를로", "method": "최근일수록 무게를 더 준 10년 빈도로 뽑은 뒤, 과거 당첨 조합의 합계·홀짝·고저 분포에 맞춘 조합", "nums": best, "bonus": bonus})
+    sets.append({"id": "weighted", "name": "가중 몬테카를로", "method": "최근일수록 무게를 더 준 10년 빈도로 뽑은 뒤, 과거 당첨 조합의 합계·홀짝·고저 분포에 맞춘 조합", "nums": best, "bonus": bonus,
+                 "name_en": "Weighted Monte Carlo", "method_en": "Drawn by 10-year frequency weighted toward recent draws, kept only if its sum, odd/even and high/low mix look like past winners"})
     # 대표 번호: 최근 10년 동안 기대 횟수보다 가장 적게 나온 6개, 보너스는 7번째로 적게 나온 번호
     least = sorted(BALLS, key=lambda n: (f10[n], n))
     exp10 = len(d10) * 6 / 45
-    main = {"id": "main", "name": "이번 주 추천 · 가장 안 나온 수", "method": "최근 10년 " + str(len(d10)) + "회 추첨에서 가장 적게 나온 6개 (번호당 기대 " + str(round(exp10)) + "회 · 실제 " + str(f10[least[0]]) + "~" + str(f10[least[5]]) + "회)", "nums": sorted(least[:6]), "bonus": least[6]}
+    main = {"id": "main", "name": "이번 주 추천 · 가장 안 나온 수", "method": "최근 10년 " + str(len(d10)) + "회 추첨에서 가장 적게 나온 6개 (번호당 기대 " + str(round(exp10)) + "회 · 실제 " + str(f10[least[0]]) + "~" + str(f10[least[5]]) + "회)", "nums": sorted(least[:6]), "bonus": least[6],
+            "name_en": "This week's pick · least drawn", "method_en": "The 6 drawn least in the last 10 years (" + str(len(d10)) + " draws; about " + str(round(exp10)) + " expected each, actually " + str(f10[least[0]]) + "-" + str(f10[least[5]]) + ")"}
     return {
         "generatedAt": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
         "target": {"no": target_no, "date": target_date.isoformat()},
         "basedOn": {"no": latest["no"], "date": latest["date"], "nums": latest["nums"], "bonus": latest["bonus"], "totalDraws": len(draws)},
         "main": main, "sets": sets, "windows": windows,
         "note": "추첨은 매번 독립적이라 어떤 조합이든 당첨 확률은 8,145,060분의 1로 같아요. 지난 기록을 재미로 요약한 번호예요.",
+        "note_en": "Every draw is independent, so every combination has the same 1 in 8,145,060 chance. These numbers just summarise past draws for fun.",
     }
 
 

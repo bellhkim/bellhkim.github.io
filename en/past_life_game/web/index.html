@@ -1,0 +1,1072 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Who Was I in a Past Life?</title>
+<meta name="description" content="An imagined past life read from twenty philosophical dilemmas.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Who Was I in a Past Life? — another self revealed by philosophy">
+<meta property="og:description" content="Answer twenty dilemmas and meet the imagined past life most like you, and hear their story.">
+<meta name="theme-color" content="#14121b">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Song+Myung&display=swap">
+<style>
+/* Layout: one narrow reading column on an ink-dark night; a red-seal "portrait" for each character; result reads top to bottom like a scroll. Single dark look by choice. */
+:root {
+  --ink: #14121b;
+  --panel: #211d2b;
+  --line: #3a3448;
+  --paper: #efe6d2;
+  --dim: #a89f8c;
+  --gold: #d9b45b;
+  --display: "Song Myung", "Gowun Batang", "Apple SD Gothic Neo", serif;
+  --body: "Gowun Batang", "Apple SD Gothic Neo", "Malgun Gothic", serif;
+  color-scheme: dark;
+}
+[hidden] { display: none !important; }
+html { height: 100%; }
+body {
+  margin: 0; min-height: 100%;
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(217, 180, 91, 0.12), transparent 55%),
+    radial-gradient(ellipse at 80% 110%, rgba(120, 90, 160, 0.14), transparent 50%),
+    var(--ink);
+  background-attachment: fixed;
+  color: var(--paper);
+  font-family: var(--body);
+  line-height: 1.75;
+  -webkit-tap-highlight-color: transparent;
+}
+.wrap { max-width: 720px; margin: 0 auto; box-sizing: border-box; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 56px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.25; text-wrap: balance; margin: 0; }
+.eyebrow { color: var(--gold); letter-spacing: 0.3em; font-size: 12px; }
+.small { color: var(--dim); font-size: 14px; }
+button { font-family: var(--body); }
+button:focus-visible, summary:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.btn { appearance: none; border: 0; border-radius: 14px; padding: 15px 18px; font-size: 18px; cursor: pointer; background: var(--gold); color: #241a05; font-weight: 700; width: 100%; }
+.btn.lucky { background: linear-gradient(135deg, #fff1a8, #ffc23a); color: #3a2400; box-shadow: 0 0 20px rgba(255, 210, 90, 0.45); animation: luckyGlow 1.4s ease-in-out infinite; }
+@keyframes luckyGlow { 50% { transform: scale(1.02); } }
+@media (prefers-reduced-motion: reduce) { .btn.lucky { animation: none; } }
+.btn.ghost { background: transparent; color: var(--paper); border: 1px solid var(--line); font-weight: 400; }
+
+/* intro */
+.intro { min-height: calc(100vh - 84px); display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+.intro h1 { font-size: clamp(40px, 10vw, 68px); }
+.intro .sub { font-family: var(--display); color: var(--gold); font-size: clamp(20px, 4.5vw, 28px); }
+.credit { color: var(--dim); }
+.credit b { color: var(--gold); font-weight: 400; font-family: var(--display); font-size: 1.1em; }
+.lede { font-size: 17px; max-width: 60ch; }
+.disclaimer { color: var(--dim); font-size: 14px; border-left: 2px solid rgba(217,180,91,0.4); padding-left: 12px; margin: 0; max-width: 62ch; }
+.seals { display: flex; gap: 8px; flex-wrap: wrap; }
+.seal { display: grid; place-items: center; font-family: var(--display); color: #fff3e0; border-radius: 12px; box-shadow: inset 0 0 0 3px rgba(255,255,255,0.22), 0 8px 24px rgba(0,0,0,0.5); flex: none; }
+.seals .seal { width: 40px; height: 40px; font-size: 22px; border-radius: 8px; opacity: 0.85; }
+
+/* question */
+.progress { height: 4px; background: var(--line); border-radius: 999px; overflow: hidden; margin: 8px 0 22px; }
+.progress i { display: block; height: 100%; background: var(--gold); transition: width 0.3s ease; }
+.qhead { display: flex; justify-content: space-between; align-items: center; font-size: 14px; color: var(--dim); font-variant-numeric: tabular-nums; }
+.qcard { background: var(--panel); border: 1px solid rgba(217,180,91,0.22); border-radius: 18px; padding: 22px 22px 20px; margin-bottom: 16px; }
+.qcard h2 { font-size: clamp(26px, 6vw, 34px); margin: 6px 0 10px; }
+.qcard .situation { font-size: 18px; margin: 0 0 8px; }
+.options { display: flex; flex-direction: column; gap: 10px; }
+.opt { appearance: none; text-align: left; display: flex; gap: 12px; align-items: baseline; background: rgba(255,255,255,0.03); border: 1px solid var(--line); color: var(--paper); border-radius: 14px; padding: 14px 16px; font-size: 17px; line-height: 1.6; cursor: pointer; transition: border-color 0.15s, background 0.15s, transform 0.15s; }
+.opt b { font-family: var(--display); color: var(--gold); font-weight: 400; font-size: 19px; }
+.opt:hover { border-color: rgba(217,180,91,0.6); }
+.opt.on { background: rgba(217,180,91,0.16); border-color: var(--gold); }
+.opt:active { transform: scale(0.99); }
+.qnav { display: flex; justify-content: space-between; margin-top: 16px; }
+.linkbtn { appearance: none; background: none; border: 0; color: var(--dim); font-size: 15px; cursor: pointer; padding: 8px 0; }
+.fade { animation: fade 0.35s ease; }
+@keyframes fade { from { opacity: 0; transform: translateY(8px); } }
+
+/* result */
+.hero { display: flex; gap: 22px; align-items: center; flex-wrap: wrap; margin: 14px 0 6px; }
+.hero .seal { width: 120px; height: 120px; font-size: 70px; border-radius: 16px; transform: rotate(-4deg); animation: stamp 0.7s cubic-bezier(.3,1.6,.5,1) both; }
+@keyframes stamp { from { transform: rotate(-20deg) scale(1.8); opacity: 0; } }
+.hero h1 { font-size: clamp(34px, 8vw, 50px); }
+.meta { color: var(--dim); }
+.quote { font-family: var(--display); color: var(--gold); font-size: clamp(20px, 4.6vw, 26px); margin: 20px 0 6px; }
+section.block { margin-top: 34px; }
+section.block > h2 { font-size: 26px; margin-bottom: 10px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+section.block > h2 small { font-family: var(--body); font-size: 13px; color: var(--dim); letter-spacing: 0.05em; }
+.story p { font-size: 18px; margin: 0 0 14px; max-width: 64ch; }
+.facts { display: grid; gap: 8px; margin-top: 8px; }
+.fact { display: grid; grid-template-columns: 84px 1fr; gap: 10px; align-items: baseline; }
+.fact span:first-child { color: var(--gold); font-size: 13px; border: 1px solid rgba(217,180,91,0.45); border-radius: 999px; text-align: center; padding: 1px 0; }
+.personal p { margin: 0 0 10px; }
+.conflict { background: var(--panel); border-radius: 14px; padding: 16px 18px; margin-bottom: 10px; border-left: 3px solid var(--gold); }
+.conflict h3 { font-size: 20px; margin-bottom: 6px; }
+.conflict .ev { color: var(--dim); font-size: 14px; margin-top: 8px; }
+.profile { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; align-items: center; }
+@media (max-width: 560px) { .profile { grid-template-columns: 1fr; } }
+.radar { width: 100%; max-width: 340px; margin: 0 auto; display: block; }
+.bars { display: grid; gap: 10px; }
+.bar .top { display: flex; justify-content: space-between; font-size: 15px; font-variant-numeric: tabular-nums; }
+.bar .track { height: 8px; background: var(--line); border-radius: 999px; position: relative; overflow: hidden; }
+.bar .track i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--gold); border-radius: 999px; }
+.bar .track em { position: absolute; top: -2px; bottom: -2px; width: 2px; background: #b9b0d0; }
+.legend { display: flex; gap: 14px; font-size: 13px; color: var(--dim); justify-content: center; flex-wrap: wrap; }
+.legend span::before { content: ""; display: inline-block; width: 12px; height: 3px; margin-right: 6px; vertical-align: middle; background: var(--c); }
+details { background: var(--panel); border-radius: 14px; padding: 4px 18px; margin-bottom: 10px; }
+summary { cursor: pointer; padding: 12px 0; font-family: var(--display); font-size: 19px; list-style: none; display: flex; justify-content: space-between; gap: 10px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: "＋"; color: var(--gold); font-family: var(--body); }
+details[open] summary::after { content: "－"; }
+details .inner { padding-bottom: 14px; }
+details .inner p { margin: 0 0 8px; }
+details .inner b { color: var(--gold); font-weight: 400; }
+.refs { color: var(--dim); font-size: 13px; }
+.evidence h3 { font-size: 19px; margin: 14px 0 6px; }
+.evidence ul { margin: 0; padding-left: 20px; }
+.evidence li { margin-bottom: 4px; }
+.alt { margin-bottom: 14px; }
+.alt .top { display: flex; justify-content: space-between; font-variant-numeric: tabular-nums; }
+.alt .track { height: 6px; background: var(--line); border-radius: 999px; overflow: hidden; margin: 4px 0; }
+.alt .track i { display: block; height: 100%; background: linear-gradient(90deg, #8f86a8, var(--gold)); }
+.cotop { background: rgba(217,180,91,0.12); border: 1px solid rgba(217,180,91,0.4); border-radius: 12px; padding: 10px 14px; margin-top: 14px; font-size: 15px; }
+.share { background: linear-gradient(140deg, #2b2338, #1b1824); border: 1px solid rgba(217,180,91,0.4); border-radius: 18px; padding: 26px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.share .seal { width: 84px; height: 84px; font-size: 48px; margin-bottom: 6px; }
+.share h3 { font-size: 30px; }
+.actions { display: grid; gap: 10px; margin-top: 14px; }
+.toast { position: fixed; left: 50%; bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); transform: translateX(-50%); background: var(--paper); color: var(--ink); padding: 10px 18px; border-radius: 999px; font-size: 15px; z-index: 50; max-width: calc(100% - 32px); text-align: center; }
+.history { display: grid; gap: 8px; }
+.history h3 { font-size: 20px; }
+.hist { appearance: none; display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 10px 14px; color: var(--paper); cursor: pointer; font-size: 16px; }
+.hist .seal { width: 36px; height: 36px; font-size: 20px; border-radius: 8px; }
+.hist small { display: block; color: var(--dim); font-size: 13px; }
+/* reveal: the seals spin like a wheel of lives, then one stamps down */
+.reveal { min-height: calc(100vh - 84px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; text-align: center; }
+.reveal .wheel { width: 150px; height: 150px; display: grid; place-items: center; position: relative; }
+.reveal .wheel .seal { position: absolute; inset: 0; font-size: 84px; border-radius: 18px; }
+.reveal .wheel .seal.final { animation: stampBig 0.8s cubic-bezier(.3,1.6,.5,1) both; }
+@keyframes stampBig { 0% { transform: scale(2.6) rotate(-25deg); opacity: 0; } 60% { transform: scale(0.92) rotate(-4deg); opacity: 1; } 100% { transform: scale(1) rotate(-4deg); } }
+.reveal .ring { position: absolute; inset: -26px; border-radius: 50%; border: 1px dashed rgba(217,180,91,0.45); animation: spinRing 6s linear infinite; }
+@keyframes spinRing { to { transform: rotate(360deg); } }
+.reveal .line { font-family: var(--display); color: var(--gold); font-size: clamp(20px, 5vw, 28px); min-height: 1.4em; animation: fade 0.6s ease; }
+.reveal .sub { color: var(--dim); font-size: 15px; min-height: 1.3em; }
+.reveal .skip { appearance: none; background: none; border: 0; color: var(--dim); font-size: 14px; text-decoration: underline; cursor: pointer; }
+/* friendship match */
+.match { background: linear-gradient(135deg, rgba(217,180,91,0.16), rgba(143,134,168,0.14)); border: 1px solid rgba(217,180,91,0.5); border-radius: 18px; padding: 18px; display: flex; flex-direction: column; gap: 10px; }
+.match h2 { margin: 0; }
+.match .pair { display: flex; align-items: center; justify-content: center; gap: 14px; }
+.match .pair .seal { width: 64px; height: 64px; font-size: 36px; border-radius: 12px; }
+.match .pair .who { font-size: 13px; color: var(--dim); text-align: center; }
+.match .pair .who b { display: block; color: var(--paper); font-weight: 400; font-family: var(--display); font-size: 16px; }
+.match .heart { font-size: 28px; animation: beat 1s ease-in-out infinite; }
+@keyframes beat { 50% { transform: scale(1.25); } }
+.match .pct { font-family: var(--display); color: var(--gold); font-size: clamp(40px, 11vw, 60px); text-align: center; line-height: 1; }
+.match .kind { text-align: center; font-family: var(--display); font-size: 20px; }
+.match p { margin: 0; line-height: 1.7; }
+.match .btn { margin-top: 4px; }
+/* collection of past lives */
+.dex h3 { font-size: 20px; display: flex; justify-content: space-between; align-items: baseline; }
+.dex h3 small { color: var(--gold); font-family: var(--body); font-size: 14px; }
+.dex .grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 8px; }
+@media (max-width: 420px) { .dex .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.dex .cell { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 11px; color: var(--dim); text-align: center; line-height: 1.25; word-break: keep-all; }
+.dex .cell .seal { width: 44px; height: 44px; font-size: 24px; border-radius: 9px; }
+.dex .cell.locked .seal { background: #2a2636 !important; color: #5d5670; box-shadow: inset 0 0 0 2px #3a3448; }
+.dex .cell.new .seal { box-shadow: 0 0 0 3px var(--gold), 0 0 18px rgba(217,180,91,0.7); }
+.dexnote { text-align: center; font-family: var(--display); color: var(--gold); font-size: 18px; }
+@media (prefers-reduced-motion: reduce) { .reveal .ring, .match .heart, .reveal .wheel .seal.final { animation: none; } }
+.linkbanner { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; background: rgba(217,180,91,0.12); border: 1px solid rgba(217,180,91,0.45); border-radius: 14px; padding: 12px 14px; margin-bottom: 14px; }
+.linkbanner .btn { width: auto; padding: 10px 16px; font-size: 16px; }
+.kakao { background: #fee500; color: #191600; }
+.share-text { width: 100%; box-sizing: border-box; font: 14px var(--body); background: var(--ink); color: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 10px; resize: none; }
+@media (prefers-reduced-motion: reduce) { .fade, .hero .seal { animation: none; } }
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+<div class="toast" id="toast" hidden></div>
+
+<script>
+const DATA = {"questions":{"version": "1.0", "dimensions": [{"id": "J", "name": "Justice and principle", "desc": "How much you value fairness, rules and responsibility"}, {"id": "C", "name": "Community", "desc": "How you weigh your own interest against the community's"}, {"id": "K", "name": "Inquiry and knowledge", "desc": "How much you put truth-seeking, learning and analysis first"}, {"id": "B", "name": "Courage and action", "desc": "How ready you are to take risks and act"}, {"id": "R", "name": "Care and relationships", "desc": "How much you value family, friends and the vulnerable"}, {"id": "F", "name": "Freedom and independence", "desc": "How much you value questioning authority and judging for yourself"}], "themes": {"distribution": "Justice and distribution", "rules": "Rules and responsibility", "risk": "Risk and sacrifice", "truth": "Truth and knowledge", "power": "Power and resistance", "loyalty": "Bonds and loyalty", "identity": "Death and identity"}, "display_order": ["q01", "q04", "q07", "q10", "q13", "q16", "q19", "q02", "q05", "q08", "q11", "q14", "q17", "q20", "q03", "q06", "q09", "q12", "q15", "q18"], "questions": [{"id": "q01", "theme": "distribution", "title": "The Hungry Winter", "situation": "The village is running out of food. The storehouse cannot feed everyone, and saving some first means the rest go hungry. You hold the key to the storehouse.", "prompt": "Choose the first thing you do.", "debate": "A classic problem of distribution where equal shares for all collide head-on with saving the greatest number. Protecting the weakest first echoes Rawls's argument for putting 'the least advantaged' first.", "options": [{"id": "A", "text": "Share a minimum ration fairly with every villager.", "note": "A choice that values justice, community and principle", "scores": {"J": 2, "C": 1, "K": 0, "B": 0, "R": 1, "F": 0}, "stance": "deont", "tags": ["principle"]}, {"id": "B", "text": "Give first to the group that can save the most lives.", "note": "A choice that values outcomes and survival", "scores": {"J": 0, "C": 2, "K": 1, "B": 1, "R": 0, "F": 0}, "stance": "util", "tags": ["outcome"]}, {"id": "C", "text": "Protect the weakest first: the old, the sick and the children.", "note": "A choice that values care and responsibility to the vulnerable", "scores": {"J": 0, "C": 1, "K": 0, "B": 0, "R": 2, "F": 0}, "stance": "care", "tags": []}, {"id": "D", "text": "Put down the key and let the villagers decide together.", "note": "A choice that values autonomy, participation and shared power", "scores": {"J": 1, "C": 1, "K": 0, "B": 0, "R": 0, "F": 2}, "stance": "liberty", "tags": []}]}, {"id": "q02", "theme": "distribution", "title": "Gold After the Battle", "situation": "After the battle the lord sends down a chest of gold. A few soldiers risked their lives on the front line; many more carried food and weapons behind them. Sharing it out is your job.", "prompt": "How do you share the gold?", "debate": "Aristotle saw distributive justice as 'in proportion to each one's merit'. But what counts as merit, and when need or the common good should come before merit, is still argued over today.", "options": [{"id": "A", "text": "Share it according to each one's deeds.", "note": "A choice that values reward in proportion to merit", "scores": {"J": 2, "C": 0, "K": 0, "B": 1, "R": 0, "F": 0}, "stance": "virtue", "tags": ["principle"]}, {"id": "B", "text": "Share it equally. We fought this battle together.", "note": "A choice that values equality and solidarity", "scores": {"J": 1, "C": 2, "K": 0, "B": 0, "R": 0, "F": 0}, "stance": "deont", "tags": []}, {"id": "C", "text": "Send it first to the families of the fallen.", "note": "A choice that values care for those who lost someone", "scores": {"J": 0, "C": 1, "K": 0, "B": 0, "R": 2, "F": 0}, "stance": "care", "tags": []}, {"id": "D", "text": "Melt the gold and rebuild the broken bridge.", "note": "A choice that puts the common good before personal reward", "scores": {"J": -1, "C": 2, "K": 1, "B": 0, "R": 0, "F": 0}, "stance": "util", "tags": ["outcome", "community"]}]}, {"id": "q03", "theme": "distribution", "title": "The Well That Never Runs Dry", "situation": "The drought is in its third month. Every well in the village has dried up, except the one in your own yard.", "prompt": "What do you do with the well?", "debate": "Locke held that what you mix your labour with becomes yours, but added that 'enough, and as good' must be left for others. When everyone is thirsty, how far should private property be protected?", "options": [{"id": "A", "text": "Throw the gate open and let anyone draw water.", "note": "A choice that gives up what is yours for the community", "scores": {"J": 0, "C": 2, "K": 0, "B": 0, "R": 1, "F": 0}, "stance": "care", "tags": ["community"]}, {"id": "B", "text": "Set turns and rules: so many buckets a day for each household.", "note": "A choice that sets fair rules", "scores": {"J": 2, "C": 1, "K": 1, "B": 0, "R": 0, "F": 0}, "stance": "deont", "tags": ["principle"]}, {"id": "C", "text": "Give to family and relatives first, then share what is left with the neighbours.", "note": "A choice that protects those closest first", "scores": {"J": 0, "C": -1, "K": 0, "B": 0, "R": 2, "F": 1}, "stance": "care", "tags": ["kin"]}, {"id": "D", "text": "Charge a little for the water and use the money to dig a new well.", "note": "A choice that calculates long-term outcomes", "scores": {"J": -1, "C": 1, "K": 1, "B": 0, "R": 0, "F": 1}, "stance": "util", "tags": ["outcome"]}]}, {"id": "q04", "theme": "rules", "title": "The Secret in the Exam Hall", "situation": "At the civil service exam you see an old friend cheating. Your friend says it is the last chance to restore a ruined family.", "prompt": "What do you do?", "debate": "Kant would ask, 'Could everyone do this?' Care ethics, on the other hand, says to look first at the concrete relationship and the person's circumstances rather than abstract rules.", "options": [{"id": "A", "text": "Tell the proctor the truth.", "note": "A choice that upholds rules and fairness", "scores": {"J": 2, "C": 1, "K": 0, "B": 0, "R": -1, "F": 0}, "stance": "deont", "tags": ["principle", "community"]}, {"id": "B", "text": "Persuade your friend to confess.", "note": "A choice that helps the other person do the right thing", "scores": {"J": 1, "C": 0, "K": 0, "B": 1, "R": 1, "F": 0}, "stance": "virtue", "tags": []}, {"id": "C", "text": "Look away. You know your friend's situation better than anyone.", "note": "A choice that puts the relationship before principle", "scores": {"J": -2, "C": 0, "K": 0, "B": 0, "R": 2, "F": 0}, "stance": "care", "tags": ["kin"]}, {"id": "D", "text": "Expose the flaw in an exam system that makes cheating so easy.", "note": "A choice that criticises the system rather than the person", "scores": {"J": 1, "C": 0, "K": 1, "B": 0, "R": 0, "F": 2}, "stance": "liberty", "tags": ["conscience"]}]}, {"id": "q05", "theme": "rules", "title": "The Closed Gate", "situation": "The lord has made a new law: once the sun sets, the gate stays shut. You are the gatekeeper, and a refugee family arriving late at night is pounding on the gate. Rumour says bandits are outside.", "prompt": "At the gate, you…", "debate": "The duty to obey the law collides with the duty to save the lives in front of you. When a law's purpose (safety inside the walls) and its letter (no opening at night) part ways, which to follow is an old question of legal philosophy.", "options": [{"id": "A", "text": "Keep the gate shut as the law says. The safety of everyone inside is at stake too.", "note": "A choice that keeps to the rules", "scores": {"J": 2, "C": 1, "K": 0, "B": -1, "R": -1, "F": 0}, "stance": "deont", "tags": ["obey", "principle"]}, {"id": "B", "text": "Open the gate quietly and let them in.", "note": "A choice that puts the person in front of you above the law", "scores": {"J": -1, "C": 0, "K": 0, "B": 1, "R": 2, "F": 1}, "stance": "care", "tags": ["conscience"]}, {"id": "C", "text": "Rush to tell your superior and wait for permission.", "note": "A choice that looks for an answer within procedure", "scores": {"J": 1, "C": 1, "K": 1, "B": 0, "R": 0, "F": -1}, "stance": "deont", "tags": ["obey", "caution"]}, {"id": "D", "text": "Step outside the gate and stay with the family all night.", "note": "A choice that takes on risk to keep both the law and the people", "scores": {"J": 1, "C": 0, "K": 0, "B": 2, "R": 1, "F": 0}, "stance": "virtue", "tags": ["risk"]}]}, {"id": "q06", "theme": "rules", "title": "The Teacher's Error", "situation": "You find a decisive error in the research your teacher has built over a lifetime. Next month your teacher is to receive the nation's highest prize.", "prompt": "What do you do with this?", "debate": "Revealing the truth collides with repaying a debt of gratitude. Once you think about when and how to disclose it, you see that honesty takes many shapes.", "options": [{"id": "A", "text": "Make it public at once. Truth comes first.", "note": "A choice that holds truth as a principle", "scores": {"J": 1, "C": 0, "K": 2, "B": 0, "R": -1, "F": 1}, "stance": "deont", "tags": ["truth", "principle"]}, {"id": "B", "text": "Tell your teacher quietly first.", "note": "A choice that handles the truth within the relationship", "scores": {"J": 0, "C": 0, "K": 1, "B": 0, "R": 2, "F": 0}, "stance": "care", "tags": []}, {"id": "C", "text": "Correct it together after the prize is awarded.", "note": "A choice that picks the order that harms everyone least", "scores": {"J": -1, "C": 1, "K": 1, "B": 0, "R": 1, "F": 0}, "stance": "util", "tags": ["outcome", "comfort"]}, {"id": "D", "text": "Go your own way and publish research that refutes it.", "note": "A choice that breaks free of authority", "scores": {"J": 0, "C": 0, "K": 1, "B": 1, "R": -1, "F": 2}, "stance": "liberty", "tags": ["conscience"]}]}, {"id": "q07", "theme": "risk", "title": "The Child in the River", "situation": "A stranger's child is swept away by the swollen river. You are not a strong swimmer.", "prompt": "In that moment, you…", "debate": "Aristotle saw courage as the mean between recklessness and cowardice. The same rescue can be courage or recklessness depending on whether practical wisdom reads the situation.", "options": [{"id": "A", "text": "Jump in without a second thought.", "note": "A choice that acts despite the danger", "scores": {"J": 0, "C": 0, "K": -1, "B": 2, "R": 2, "F": 0}, "stance": "virtue", "tags": ["risk"]}, {"id": "B", "text": "Shout for people and look for a rope.", "note": "A choice that solves it together", "scores": {"J": 0, "C": 2, "K": 1, "B": 0, "R": 1, "F": 0}, "stance": "util", "tags": ["caution"]}, {"id": "C", "text": "Read the current, run downstream and hold out a long pole.", "note": "A choice that uses judgement and action together", "scores": {"J": 0, "C": 0, "K": 2, "B": 1, "R": 1, "F": 0}, "stance": "virtue", "tags": []}, {"id": "D", "text": "If I get hurt my family falls apart. Run to the village for help.", "note": "A choice that weighs your own and your family's safety first", "scores": {"J": 0, "C": 0, "K": 0, "B": -2, "R": 1, "F": 1}, "stance": "self", "tags": ["kin", "caution"]}]}, {"id": "q08", "theme": "risk", "title": "To the Plague Town", "situation": "Plague has broken out in the next town and someone must carry medicine there. Whoever goes may never come back.", "prompt": "Who should go?", "debate": "Philosophy calls sacrifice beyond duty 'supererogation'. It deserves praise, but it cannot be demanded of everyone.", "options": [{"id": "A", "text": "Volunteer to go yourself.", "note": "A choice that takes on risk for the community", "scores": {"J": 0, "C": 1, "K": 0, "B": 2, "R": 1, "F": 0}, "stance": "virtue", "tags": ["risk", "community"]}, {"id": "B", "text": "Stay with your family, but pay for all the medicine and supplies.", "note": "A choice that protects family while helping another way", "scores": {"J": 0, "C": 1, "K": 0, "B": -1, "R": 2, "F": 0}, "stance": "care", "tags": ["kin", "caution"]}, {"id": "C", "text": "Propose drawing lots fairly.", "note": "A choice that shares the risk fairly", "scores": {"J": 2, "C": 1, "K": 0, "B": 0, "R": 0, "F": 0}, "stance": "deont", "tags": ["principle"]}, {"id": "D", "text": "Find someone who has survived the plague and send them.", "note": "A choice that weighs the odds of success", "scores": {"J": 0, "C": 1, "K": 2, "B": 0, "R": 0, "F": 0}, "stance": "util", "tags": ["outcome"]}]}, {"id": "q09", "theme": "risk", "title": "Colleagues Punished in Your Place", "situation": "Your mistake set the granary on fire. When the culprit could not be found, your co-workers were sentenced to a flogging instead.", "prompt": "What do you do?", "debate": "What does it mean to take responsibility? The courage to own a mistake, the solidarity to solve it together and the criticism that asks whether the punishment is just can all be called 'responsibility'.", "options": [{"id": "A", "text": "Step forward and say it was your fault.", "note": "A choice that takes responsibility by principle", "scores": {"J": 2, "C": 0, "K": 0, "B": 2, "R": 1, "F": 0}, "stance": "deont", "tags": ["principle", "risk"]}, {"id": "B", "text": "Talk it over with your co-workers first and find a way together.", "note": "A choice that looks for a shared solution", "scores": {"J": 0, "C": 2, "K": 0, "B": 0, "R": 1, "F": 0}, "stance": "care", "tags": []}, {"id": "C", "text": "Protest that a law flogging people for one mistake is wrong.", "note": "A choice that questions whether the punishment is just", "scores": {"J": 1, "C": 0, "K": 0, "B": 1, "R": 0, "F": 2}, "stance": "liberty", "tags": ["conscience"]}, {"id": "D", "text": "Quietly look after your co-workers' families to repay the debt.", "note": "A choice that makes amends out of sight", "scores": {"J": -1, "C": 0, "K": 0, "B": -1, "R": 2, "F": 0}, "stance": "care", "tags": ["caution"]}]}, {"id": "q10", "theme": "truth", "title": "The Record of Victory", "situation": "The king orders the last war recorded as a 'great victory'. As the official chronicler, you know it was a crushing defeat in which countless people died.", "prompt": "Brush in hand, you…", "debate": "In the Republic, Plato speaks of a 'noble lie' for the stability of the community. Kant, by contrast, held that lying treats others merely as a means. Which comes first, the truth of the record or the stability of the community?", "options": [{"id": "A", "text": "Record it exactly as you saw it.", "note": "A choice that guards the truth", "scores": {"J": 2, "C": 0, "K": 2, "B": 1, "R": -1, "F": 0}, "stance": "deont", "tags": ["truth", "conscience"]}, {"id": "B", "text": "Write as ordered, but hide the true record elsewhere.", "note": "A choice that endures now and waits for a later day", "scores": {"J": -1, "C": 0, "K": 2, "B": 0, "R": 0, "F": 1}, "stance": "util", "tags": ["outcome", "caution"]}, {"id": "C", "text": "Obey the king. The people's morale matters too.", "note": "A choice that puts the community's stability first", "scores": {"J": -1, "C": 2, "K": -1, "B": 0, "R": 1, "F": 0}, "stance": "util", "tags": ["obey", "comfort"]}, {"id": "D", "text": "Break your brush and leave office.", "note": "A choice that steps away rather than join the lie", "scores": {"J": 1, "C": 0, "K": 0, "B": 0, "R": 0, "F": 2}, "stance": "liberty", "tags": ["conscience"]}]}, {"id": "q11", "theme": "truth", "title": "The Forbidden Medical Book", "situation": "There is a book that tells how to cure the disease. But it is banned, and anyone caught reading it is branded a heretic.", "prompt": "What do you do with the book?", "debate": "In On Liberty, Mill argued that freedom of thought and discussion is essential for finding the truth. But using untested knowledge right away puts other people's lives at stake.", "options": [{"id": "A", "text": "Read it in secret and heal the sick.", "note": "A choice that puts outcomes above rules", "scores": {"J": -1, "C": 0, "K": 2, "B": 1, "R": 1, "F": 0}, "stance": "util", "tags": ["outcome", "risk"]}, {"id": "B", "text": "Publicly ask for the ban to be lifted.", "note": "A choice that demands freedom of knowledge", "scores": {"J": 0, "C": 0, "K": 1, "B": 1, "R": 0, "F": 2}, "stance": "liberty", "tags": ["conscience"]}, {"id": "C", "text": "A ban is a ban. Don't read it.", "note": "A choice that follows the established order", "scores": {"J": 2, "C": 1, "K": -1, "B": -1, "R": 0, "F": 0}, "stance": "deont", "tags": ["obey", "caution"]}, {"id": "D", "text": "Test it with a few people you trust, then use it little by little.", "note": "A choice that handles knowledge with care", "scores": {"J": 0, "C": 1, "K": 1, "B": 0, "R": 1, "F": 0}, "stance": "virtue", "tags": ["caution"]}]}, {"id": "q12", "theme": "truth", "title": "The Last Question", "situation": "An old man on the brink of death asks: \"Is my son coming home alive from the war?\" You know his son was killed in battle.", "prompt": "What do you tell him?", "debate": "Kant said you must not lie even to a murderer at the door, and drew many objections. Utilitarianism holds a lie may be allowed if it reduces suffering. It is the classic scene where truth and comfort collide.", "options": [{"id": "A", "text": "Tell him the truth.", "note": "A choice that holds to truth as a principle", "scores": {"J": 2, "C": 0, "K": 1, "B": 0, "R": -1, "F": 0}, "stance": "deont", "tags": ["truth", "principle"]}, {"id": "B", "text": "Take his hand and say, \"He'll be home soon.\"", "note": "A choice that gives peace in the final moment", "scores": {"J": -1, "C": 0, "K": 0, "B": 0, "R": 2, "F": 0}, "stance": "care", "tags": ["comfort", "outcome"]}, {"id": "C", "text": "Say \"I'm not sure,\" and stay by his side to the end.", "note": "A choice that avoids both the lie and the wound", "scores": {"J": 1, "C": 0, "K": 0, "B": 0, "R": 1, "F": 0}, "stance": "virtue", "tags": ["caution"]}, {"id": "D", "text": "Tell him how bravely his son fought to the end.", "note": "A choice that delivers the truth in a comforting way", "scores": {"J": 0, "C": 0, "K": 1, "B": 1, "R": 1, "F": 0}, "stance": "virtue", "tags": ["truth"]}]}, {"id": "q13", "theme": "power", "title": "An Invitation to a Secret Meeting", "situation": "A secret circle plotting to overthrow a ruler who tramples the people asks you to join. If it fails, your whole family will be in danger.", "prompt": "Your answer?", "debate": "Hobbes thought a strong sovereign better than chaos; in the Second Treatise, Locke argued that when a government betrays its trust the people have a right to resist.", "options": [{"id": "A", "text": "Join them.", "note": "A choice that stands against unjust power", "scores": {"J": 1, "C": 0, "K": 0, "B": 2, "R": -1, "F": 2}, "stance": "liberty", "tags": ["risk", "conscience"]}, {"id": "B", "text": "Refuse, and submit a lawful petition instead.", "note": "A choice that seeks change within the order", "scores": {"J": 2, "C": 1, "K": 0, "B": -1, "R": 0, "F": 0}, "stance": "deont", "tags": ["obey", "caution"]}, {"id": "C", "text": "Keep your distance for your family's sake.", "note": "A choice that protects your family's safety first", "scores": {"J": 0, "C": 0, "K": 0, "B": -1, "R": 2, "F": -1}, "stance": "self", "tags": ["kin", "caution"]}, {"id": "D", "text": "Don't join, but keep a record of everything.", "note": "A choice to remain a witness", "scores": {"J": 0, "C": 0, "K": 2, "B": 0, "R": 0, "F": 1}, "stance": "virtue", "tags": ["truth"]}]}, {"id": "q14", "theme": "power", "title": "The Price of High Office", "situation": "The new ruler offers you a high post — if you hand over your old comrades' secrets.", "prompt": "Your choice?", "debate": "The thought 'I'll change things from the inside' raises the question of whether the end can justify the means. Philosophers sometimes call this the problem of 'dirty hands'.", "options": [{"id": "A", "text": "Refuse flatly.", "note": "A choice that keeps principle and faith", "scores": {"J": 2, "C": 0, "K": 0, "B": 1, "R": 1, "F": 0}, "stance": "deont", "tags": ["principle"]}, {"id": "B", "text": "Accept, and change the world from within.", "note": "A choice that compromises for a greater result", "scores": {"J": -1, "C": 1, "K": 1, "B": 1, "R": -1, "F": -1}, "stance": "util", "tags": ["outcome", "obey"]}, {"id": "C", "text": "Warn your comrades and flee together.", "note": "A choice that protects your comrades", "scores": {"J": 0, "C": 0, "K": 0, "B": 1, "R": 2, "F": 1}, "stance": "care", "tags": ["kin"]}, {"id": "D", "text": "Expose the offer to the world.", "note": "A choice that openly defies power", "scores": {"J": 1, "C": 0, "K": 0, "B": 2, "R": -1, "F": 2}, "stance": "liberty", "tags": ["conscience", "risk"]}]}, {"id": "q15", "theme": "power", "title": "Taxes in a Year of Famine", "situation": "Even in a famine year, the king has doubled taxes. You are the official who collects them.", "prompt": "What do you do?", "debate": "In Civil Disobedience, Thoreau wrote that there is a duty not to obey unjust laws. Others object that breaking the law can collapse order and hurt the weakest most.", "options": [{"id": "A", "text": "Refuse to collect.", "note": "A choice that refuses an unjust order", "scores": {"J": 1, "C": 0, "K": 0, "B": 1, "R": 0, "F": 2}, "stance": "liberty", "tags": ["conscience", "risk"]}, {"id": "B", "text": "Collect, but secretly leave out the poorest households.", "note": "A choice that quietly protects the vulnerable", "scores": {"J": -1, "C": 1, "K": 0, "B": 0, "R": 2, "F": 0}, "stance": "care", "tags": ["outcome"]}, {"id": "C", "text": "Collect by the law, but petition for lower taxes.", "note": "A choice that keeps order while seeking to correct it", "scores": {"J": 2, "C": 1, "K": 0, "B": 0, "R": 0, "F": -1}, "stance": "deont", "tags": ["obey", "principle"]}, {"id": "D", "text": "Publish the ledgers to show where the taxes go.", "note": "A choice that uses transparency as a weapon", "scores": {"J": 1, "C": 0, "K": 2, "B": 0, "R": 0, "F": 1}, "stance": "liberty", "tags": ["truth"]}]}, {"id": "q16", "theme": "loyalty", "title": "Your Brother's Trial", "situation": "You are the district judge. Today the accused standing before you is your own younger brother.", "prompt": "With the verdict ahead, you…", "debate": "In the Analects, Confucius says it is upright for father and son to cover for each other's wrongs. It is where equality before the law collides head-on with loyalty to family.", "options": [{"id": "A", "text": "Judge strictly by the law.", "note": "A choice that puts the law before family", "scores": {"J": 2, "C": 1, "K": 0, "B": 0, "R": -2, "F": 0}, "stance": "deont", "tags": ["principle", "community"]}, {"id": "B", "text": "Step down from this trial.", "note": "A choice that sets judgement aside to keep things fair", "scores": {"J": 1, "C": 0, "K": 1, "B": 0, "R": 0, "F": 0}, "stance": "virtue", "tags": ["caution"]}, {"id": "C", "text": "Weigh his circumstances and reduce the sentence.", "note": "A choice that protects family", "scores": {"J": -1, "C": 0, "K": 0, "B": 0, "R": 2, "F": 0}, "stance": "care", "tags": ["kin"]}, {"id": "D", "text": "Go with your brother to the victim, ask forgiveness and make amends.", "note": "A choice that puts restoration before punishment", "scores": {"J": 1, "C": 1, "K": 0, "B": 1, "R": 1, "F": 0}, "stance": "virtue", "tags": []}]}, {"id": "q17", "theme": "loyalty", "title": "War and an Ailing Parent", "situation": "War has broken out and every able man in the village is leaving. If you go too, your sick parents will be left alone.", "prompt": "What do you do?", "debate": "In Existentialism Is a Humanism, Sartre tells of a student who brought him this very dilemma. His answer: 'No ethical theory will choose for you. You choose, and the choice makes you.'", "options": [{"id": "A", "text": "March off. Without the community there is no family.", "note": "A choice that puts responsibility to the community first", "scores": {"J": 0, "C": 2, "K": 0, "B": 1, "R": -1, "F": 0}, "stance": "util", "tags": ["community", "risk"]}, {"id": "B", "text": "Stay with your parents.", "note": "A choice that puts responsibility to family first", "scores": {"J": 0, "C": -1, "K": 0, "B": 0, "R": 2, "F": 0}, "stance": "care", "tags": ["kin"]}, {"id": "C", "text": "Stay and take charge of the village's food and wounded.", "note": "A choice that looks for a way to keep both", "scores": {"J": 0, "C": 1, "K": 1, "B": 0, "R": 1, "F": 0}, "stance": "virtue", "tags": []}, {"id": "D", "text": "First ask whether this war is just, and oppose it.", "note": "A choice that questions the war's legitimacy", "scores": {"J": 1, "C": 0, "K": 0, "B": 1, "R": 0, "F": 2}, "stance": "liberty", "tags": ["conscience"]}]}, {"id": "q18", "theme": "loyalty", "title": "Your Friend Is Wrong", "situation": "At the village meeting an old friend makes a mistaken argument. Your friend's standing is on the line.", "prompt": "What do you do?", "debate": "In the Nicomachean Ethics, Aristotle said friends and truth are both dear, but it is right to honour truth more. It later became the saying 'Plato is my friend, but truth is a better friend.'", "options": [{"id": "A", "text": "Give the counter-evidence right there.", "note": "A choice that puts truth before the relationship", "scores": {"J": 1, "C": 0, "K": 1, "B": 1, "R": -1, "F": 1}, "stance": "deont", "tags": ["truth"]}, {"id": "B", "text": "Talk to your friend privately after the meeting.", "note": "A choice that tells the truth while keeping the relationship", "scores": {"J": 0, "C": 0, "K": 1, "B": 0, "R": 2, "F": 0}, "stance": "care", "tags": ["comfort"]}, {"id": "C", "text": "Quietly pass the evidence to someone else to raise.", "note": "A choice that avoids conflict but secures the result", "scores": {"J": 0, "C": 1, "K": 1, "B": -1, "R": 0, "F": 0}, "stance": "util", "tags": ["caution"]}, {"id": "D", "text": "Take your friend's side. Friendship comes first.", "note": "A choice that puts loyalty first", "scores": {"J": -1, "C": -1, "K": 0, "B": 0, "R": 2, "F": 0}, "stance": "care", "tags": ["kin"]}]}, {"id": "q19", "theme": "identity", "title": "The Potion of Forgetting", "situation": "There is a mysterious potion. Drink it and you lose every memory you have, and begin a new life without pain.", "prompt": "What do you do with the potion?", "debate": "Locke held that continuous memory makes the same person. Hume suspected the 'self' is only a bundle of perceptions, and Buddhism says the stream of action continues without a fixed self. Would you still be you without your memories?", "options": [{"id": "A", "text": "Don't drink it. My memories are me.", "note": "A choice that sees identity as continuous memory", "scores": {"J": 1, "C": 0, "K": 2, "B": 0, "R": 0, "F": 0}, "stance": null, "lens": "locke", "tags": []}, {"id": "B", "text": "Drink it. I am who I am now, not my memories.", "note": "A choice that lets go of a fixed self", "scores": {"J": 0, "C": 0, "K": 0, "B": 1, "R": 0, "F": 2}, "stance": null, "lens": "buddhism", "tags": ["risk"]}, {"id": "C", "text": "Ask to keep just your memories of the people you love.", "note": "A choice that keeps the self found in relationships", "scores": {"J": 0, "C": 0, "K": 0, "B": 0, "R": 2, "F": 0}, "stance": null, "lens": "relation", "tags": []}, {"id": "D", "text": "Write your memories down first, then drink.", "note": "A choice that carries the self on through a record", "scores": {"J": 0, "C": 1, "K": 1, "B": 0, "R": 0, "F": 1}, "stance": null, "lens": "hume", "tags": []}]}, {"id": "q20", "theme": "identity", "title": "The One Thing You Leave", "situation": "It is the last day of your life. You can leave just one thing to the world.", "prompt": "What do you leave?", "debate": "In Plato's Phaedo, Socrates speaks of the philosophical life even as he faces death. What we leave behind may be a principle, a relationship, knowledge, or the fact that we lived our one life as our own.", "options": [{"id": "A", "text": "The promises and principles you kept to the end.", "note": "A choice that sees principle as a life's legacy", "scores": {"J": 2, "C": 0, "K": 0, "B": 1, "R": 0, "F": 0}, "stance": null, "lens": "principle", "tags": []}, {"id": "B", "text": "The village you built together and its people.", "note": "A choice that sees community as the legacy", "scores": {"J": 0, "C": 2, "K": 0, "B": 0, "R": 1, "F": 0}, "stance": null, "lens": "relation", "tags": []}, {"id": "C", "text": "One truth discovered over a lifetime.", "note": "A choice that sees knowledge as the legacy", "scores": {"J": 0, "C": 0, "K": 2, "B": 0, "R": 0, "F": 1}, "stance": null, "lens": "locke", "tags": []}, {"id": "D", "text": "The fact that you lived bound to no one.", "note": "A choice that sees freedom as the legacy", "scores": {"J": 0, "C": 0, "K": 0, "B": 1, "R": 0, "F": 2}, "stance": null, "lens": "buddhism", "tags": []}]}]},"characters":{"version": "1.0", "alpha": {"J": 1, "C": 1, "K": 1, "B": 1, "R": 1, "F": 1}, "tie_margin": 3, "shrink": 0.3, "note": "target is computed by tools/calibrate.py by simulating answers with each character's weights. All character stories are fiction; none are real people.", "dimension_lines": {"top": {"J": "In your answers, a refusal to bend your principles showed most strongly. For {name} in the story, it was the reference point to return to whenever things wavered.", "C": "In your answers, thinking first of how people live together showed most strongly. For {name} in the story, it was the habit of counting 'us' before 'me'.", "K": "In your answers, a need to keep asking and questioning showed most strongly. For {name} in the story, it was the habit of stopping long before what others walked past.", "B": "In your answers, action that comes before fear showed most strongly. For {name} in the story, it was a body that moved first whenever crisis came.", "R": "In your answers, looking after those close to you and the vulnerable first showed most strongly. For {name} in the story, it was a heart that never forgot a single face.", "F": "In your answers, refusing to take anyone's word at face value showed most strongly. For {name} in the story, it was the stubbornness to make a path instead of following one."}, "low": "By contrast, your '{dim}' answers were the quietest. That isn't a lack — it means that in this story, that place was given over to other values."}, "characters": [{"id": "scholar", "name": "The Chronicling Historian", "seal": "史", "emoji": "📜", "color": "#7a5c2e", "era": "14th century · late Goryeo", "region": "Gaegyeong", "occupation": "Royal chronicler (sagwan)", "life": "A life of writing down everything seen and heard at the king's side", "summary": "The one who wrote the truth down", "story": ["As Goryeo was fading, a young chronicler in the palace at Gaegyeong recorded the king's words and deeds every day. He believed that with a single brush he guarded something that would outlast the powerful. On the day the king trampled farmers' fields on a hunt, on the days ministers slandered one another, his record left nothing out.", "One year the king ordered him to rewrite a defeat in the northern campaign as a victory. He submitted the draft as ordered, and each night copied the true record and hid it deep in a mountain temple. When it came to light decades later, the names of forgotten soldiers finally found their place."], "key_event": "The night he received the royal order to rewrite, and decided to keep two records", "conflict": "He believed guarding the truth was always right, yet the thought that the hidden record could endanger his family and students tormented him for years.", "quote": "If we don't write it down today, tomorrow no one will remember.", "plato_echo": "If old documents or handwriting draw you in for no reason", "karma": "Seeing, writing, leaving behind", "weights": {"K": 1.0, "J": 0.8, "F": 0.5, "R": -0.2, "C": 0.1}, "target": {"J": 55, "C": 34, "K": 50, "B": 43, "R": 33, "F": 46}}, {"id": "healer", "name": "The Healer in the Plague", "seal": "醫", "emoji": "🌿", "color": "#4f7a4a", "era": "1348 · the Black Death", "region": "A mountain village in Tuscany", "occupation": "Herbal healer", "life": "A life of gathering herbs and staying beside sick neighbours", "summary": "The one who stayed to the end", "story": ["In the year the Black Death swept through Italy, a woman who worked with herbs lived in a Tuscan mountain village. When the doctors fled the cities, she cooled the burning foreheads of her neighbours in smoke of mugwort and rosemary.", "Even before diseases she could not cure, she made it her work never to let anyone die alone. When the villagers wanted to send the sick outside the village, she turned a barn at the edge of town into an infirmary and spent the winter there."], "key_event": "Standing alone against the village council that wanted the sick driven out, and turning a barn into an infirmary", "conflict": "Her wish to care for one more person collided every day with her duty to protect the whole village from the disease. Even protecting her own safety felt like selfishness to her.", "quote": "Even when you can't heal, you can stay beside them.", "plato_echo": "If the scent of herbs or holding a sick person's hand feels strangely familiar", "karma": "Staying beside", "weights": {"R": 1.0, "C": 0.7, "B": 0.4, "K": 0.3}, "target": {"J": 38, "C": 46, "K": 34, "B": 40, "R": 57, "F": 31}}, {"id": "merchant", "name": "The Merchant of the Road", "seal": "商", "emoji": "🐫", "color": "#a8642a", "era": "8th century · Tang dynasty", "region": "The Silk Road, from Samarkand to Chang'an", "occupation": "Leader of a Sogdian caravan", "life": "A life leading camel trains across borders and languages", "summary": "The one who joined roads and trust", "story": ["Born in Samarkand, he first crossed the desert with a camel train at fourteen. Carrying silk and silver, spices and paper, he learned to bargain in five languages and to tell at a glance whether a stranger could be trusted.", "His caravan dug wells and built rest houses in every oasis town. Making a profit was the trade, but if the road collapsed there would be no trade — that was his reckoning. Even after settling in Chang'an he kept the common fund for merchants from home to the end."], "key_event": "Lending his camels to a foreign caravan robbed by bandits. That trust saved his life years later.", "conflict": "He loved the freedom of being tied to nowhere, yet the roads and people he built up bound him ever more to one place. The tug of war between freedom and responsibility lasted all his life.", "quote": "A good deal brings both people back again.", "plato_echo": "If maps or unfamiliar market alleys draw you in for no reason", "karma": "Giving and receiving trust", "weights": {"F": 0.6, "C": 0.7, "K": 0.5, "B": -0.3, "J": -0.2}, "target": {"J": 43, "C": 44, "K": 51, "B": 36, "R": 39, "F": 41}}, {"id": "guardian", "name": "The Frontier Guardian", "seal": "守", "emoji": "🛡️", "color": "#5b6b7a", "era": "5th century · Goguryeo", "region": "A border fortress in Liaodong", "occupation": "Deputy commander of a fortress", "life": "A life of standing first before danger and resting last", "summary": "The one who stood at the front", "story": ["At Goguryeo's western edge, in a small fortress overlooking the Liaodong plain, there was a deputy commander. Whenever the enemy came he stood at the very front of the gate, and he knew by heart the name of everyone in the village below.", "One winter the lord of the fortress ordered the village abandoned and the gate barred. Looking for a way to protect the village without disobeying, he split his troops and spent the night moving the refugees to a valley behind the fortress. When the enemy arrived the next morning, the village was empty."], "key_event": "The winter night the order to bar the gate came, when he moved the refugees to the valley", "conflict": "He always walked a tightrope between obeying orders and his conscience telling him to protect the people before him. His duty as a soldier and his feelings as a man weighed down the tip of his sword.", "quote": "Walls are built of stone, but what they guard is people.", "plato_echo": "If your heart races looking down over wide fields from a height", "karma": "Standing in front", "weights": {"B": 1.0, "R": 0.6, "J": 0.5, "C": 0.4, "F": -0.3}, "target": {"J": 52, "C": 37, "K": 35, "B": 53, "R": 47, "F": 31}}, {"id": "judge", "name": "The Judge with the Scales", "seal": "判", "emoji": "⚖️", "color": "#3d4f7a", "era": "11th century · Northern Song", "region": "A small county south of the Yangtze", "occupation": "County magistrate, governor and judge in one", "life": "A life of keeping the county in order with law and ledgers", "summary": "The one whose scales never tipped", "story": ["In the Northern Song, a new magistrate arrived in a county south of the Yangtze. On his first day he brought out every ledger in the office and checked them through the night, finding where the missing grain had gone: into the storehouses of the local gentry.", "He judged high and low by the same law. To anyone who brought a bribe, he wrote the exact amount into the verdict. Long after he left, people still spoke of 'the scales of those days'."], "key_event": "A verdict that punished the county's most powerful family by the law", "conflict": "He tried to apply the same law to everyone, but there were moments when the law could not save a person. With every verdict he wrestled between keeping principle and weighing the circumstances in front of him.", "quote": "When the scales tip, the weakest fall first.", "plato_echo": "If you feel an odd calm setting rules or putting ledgers in order", "karma": "Dividing fairly", "weights": {"J": 1.0, "C": 0.6, "K": 0.4, "R": -0.3, "F": -0.2}, "target": {"J": 62, "C": 45, "K": 38, "B": 39, "R": 34, "F": 31}}, {"id": "rebel", "name": "The Blacksmith with the Banner", "seal": "旗", "emoji": "🚩", "color": "#a83232", "era": "1381 · the English Peasants' Revolt", "region": "The villages of Kent", "occupation": "Blacksmith and speaker of the revolt", "life": "A life of crying out in the square and gathering people on the road", "summary": "The one who raised a banner against injustice", "story": ["In the summer of 1381, when a third poll tax was laid on England, the peasants of Kent rose up. Among them was a young blacksmith who went about reciting the words of the wandering preacher John Ball. In every village square he cried the question again: \"When Adam delved and Eve span, who was then the gentleman?\"", "At his call his neighbours took up hammers and sickles and marched to London. The king promised to meet their demands, but the promise was broken and the revolt ended in blood. Yet the question he left in the squares never faded."], "key_event": "The day he gave the first speech against the poll tax and the villagers raised banners behind him", "conflict": "Standing against unjust power was right, but the price paid by those who followed him was too high. He could never let go of the fact that a voice crying for freedom puts other people's lives at stake.", "quote": "Who was the master from the beginning?", "plato_echo": "If your body burns first in the face of injustice", "karma": "Raising your voice against injustice", "weights": {"F": 1.0, "B": 0.7, "J": 0.5, "C": 0.4}, "target": {"J": 52, "C": 33, "K": 34, "B": 54, "R": 37, "F": 53}}, {"id": "monk", "name": "The Mountain Monk", "seal": "禪", "emoji": "🪷", "color": "#6a5a8c", "era": "8th century · Unified Silla", "region": "A small hermitage on Namsan, Gyeongju", "occupation": "A monk who copied scriptures and listened to people's troubles", "life": "A life a little apart from the world, asking, listening and thinking", "summary": "The one who asked and listened", "story": ["When Unified Silla was at its height, a monk lived in a small hermitage among the rocks of Namsan in Gyeongju. By day he copied scriptures, and in the evening he listened to the troubles of people who climbed the mountain. Royalty and slaves sat in the same place before him.", "All his life he asked whether there truly is such a thing as 'I'. He never said he had found the answer, but those who visited him went down the mountain with lighter faces. What he left was not a book but a small Buddha carved into a rock."], "key_event": "Declining to head a great temple in the capital and choosing to stay at the hermitage", "conflict": "He wanted to ease the world's suffering, but never became sure whether the way was to go into its midst or to stand apart. Keeping his stillness sometimes felt like turning away.", "quote": "As long as someone is asking, the answer need not hurry.", "plato_echo": "If time seems to stop at a quiet mountain temple or before an old stone Buddha", "karma": "Asking and listening", "weights": {"K": 0.8, "R": 0.5, "F": 0.5, "B": -0.6, "C": -0.2}, "target": {"J": 40, "C": 30, "K": 46, "B": 36, "R": 53, "F": 39}}, {"id": "navigator", "name": "The Star-Reading Navigator", "seal": "星", "emoji": "🧭", "color": "#2e5f7a", "era": "15th century · the Indian Ocean trade", "region": "From the Arabian Sea to the East African coast", "occupation": "Navigator of a dhow", "life": "A life of calculating stars and winds to cross seas no one had sailed", "summary": "The one who found the way by the stars", "story": ["In the 15th-century Indian Ocean, dhows came and went on the monsoon winds. On one of them was a navigator who measured the height of the stars in finger-widths. On every crossing he noted the stars and currents in his notebook, and drew sea routes more accurate than anyone's.", "Ship owners called him 'the scholar of the sea'. When storms came he lowered the sails before anyone, and though he knew a dangerous route was faster, he would not stake his sailors' lives on it. Instead he chose to cross the danger alone first."], "key_event": "The voyage when he left his crew in port and tested a new route first in a small boat", "conflict": "His longing to know the unknown always collided with the weight of responsibility for the lives aboard. He hoped his curiosity would never cost anyone else.", "quote": "The sea can be calculated — but humbly.", "plato_echo": "If the constellations or the horizon fill you with a longing you can't explain", "karma": "Measuring and recording the unknown", "weights": {"K": 1.0, "B": 0.7, "F": 0.3, "J": -0.4, "R": -0.2}, "target": {"J": 42, "C": 38, "K": 54, "B": 45, "R": 38, "F": 41}}, {"id": "matriarch", "name": "The Matriarch of the Clan", "seal": "家", "emoji": "🏮", "color": "#8c4a3a", "era": "18th century · late Joseon", "region": "A head family's house in Andong", "occupation": "Head wife running the great household and the clan's affairs", "life": "A life of single-handedly running dozens of family members and guests, rites and famine years", "summary": "The one who fed everyone", "story": ["In late Joseon, a woman married at eighteen into the head family of a clan in Andong. Running a household of over a hundred, endless guests and ancestral rites all year round, she never took the bundle of storehouse keys from her waist.", "In a year of great famine the clan elders wanted the storehouse kept shut. She opened the ledgers, calculated what the clan needed to get by, and cooked the rest into porridge for the villagers. That winter, no one in the village starved."], "key_event": "The famine winter she opened the storehouse and shared porridge with the village", "conflict": "She was always weighing the duty to protect the household against caring for people outside it. Being called strict with family and generous to strangers stayed with her as both praise and wound.", "quote": "A storehouse isn't there to be locked — it's there so you know when to open it.", "plato_echo": "If an old hanok house or a crowded holiday kitchen strangely puts you at ease", "karma": "Embracing and feeding", "weights": {"R": 1.0, "C": 0.8, "J": 0.4, "F": -0.5, "B": -0.2}, "target": {"J": 44, "C": 48, "K": 32, "B": 36, "R": 55, "F": 28}}, {"id": "performer", "name": "The Troupe Leader", "seal": "樂", "emoji": "🎭", "color": "#b0457a", "era": "19th century · late Joseon", "region": "Market towns and mountain passes of Gyeonggi and Chungcheong", "occupation": "Head (kkokdusoe) of a travelling performance troupe", "life": "A life wandering from market to market sharing laughter and satire", "summary": "The one who held people with laughter", "story": ["In late Joseon, on market days a namsadang troupe would come over the mountain pass. Its leader made people laugh with tightrope walking and mask plays, and turned the market upside down mimicking the nobles and corrupt officials.", "He took in the children who joined the troupe as his own. Children with nowhere to go, children thrown out of home, children without even a name were all one family in his troupe. When the magistrate banned the shows, he simply moved on to the next market and never stopped the play."], "key_event": "Crossing the pass all night to dodge the magistrate's ban and putting on the show at the next market", "conflict": "Freedom tied to nowhere kept him alive, but the children he took in needed a place to stay. Between a wandering life and a family to protect, he was always on the road.", "quote": "While we laugh, there are no nobles and no commoners.", "plato_echo": "If your body moves first to drumbeats or the rhythm of a mask dance", "karma": "Holding people with laughter", "weights": {"F": 0.9, "R": 0.8, "J": -0.7, "B": 0.3, "C": -0.2}, "target": {"J": 37, "C": 30, "K": 32, "B": 45, "R": 55, "F": 41}}, {"id": "artisan", "name": "The Bridge Builder", "seal": "匠", "emoji": "🌉", "color": "#6b6b5a", "era": "2nd century · Roman Empire", "region": "Province of Gaul (today's southern France)", "occupation": "Master builder leading the stonemasons", "life": "A life of shaping stone into roads and waterways for people", "summary": "The one who built a bridge for all to cross", "story": ["When the Roman Empire was at its widest, stonemasons were raising an aqueduct by a river in Gaul. The master who led them measured even the tilt of each stone himself, and knew every worker's name and home town.", "He did not carve his own name into the bridge. Instead, on the day it was finished, he watched for a long time as villagers and workers crossed the river together. The waterway he built supplied the city for hundreds of years."], "key_event": "When the governor told him to hurry, he delayed the work three months to lay the foundations again", "conflict": "He worked believing he did it for everyone, but some days he had to ignore each worker's exhaustion for the sake of that 'everyone'. The reckoning between the common good and each person's share never let him go.", "quote": "A good bridge outlives the one who built it.", "plato_echo": "If your fingertips itch before an old stone bridge or a finely made building", "karma": "Building what all will share", "weights": {"C": 1.0, "K": 0.6, "J": 0.3, "F": -0.2}, "target": {"J": 51, "C": 53, "K": 44, "B": 37, "R": 36, "F": 27}}, {"id": "mediator", "name": "The Interpreter of Two Tongues", "seal": "和", "emoji": "🤝", "color": "#4a7a6e", "era": "17th century · between Joseon and Japan", "region": "The Japan House (Waegwan) at Dongnae, Busan", "occupation": "Interpreter between Joseon and Japan", "life": "A life of joining the words of two worlds without taking either side", "summary": "The one who joined two worlds", "story": ["Some decades after the Imjin War, an interpreter at the Japan House in Dongnae, Busan, spoke both Korean and Japanese. The wounds of war had not yet healed, but he chose and re-chose every word so the two peoples could sit face to face again.", "He knew no negotiation ends on justice alone, on profit alone or on goodwill alone. So he leaned on no single value and weighed the scales afresh each time. People called him spineless — and also the most trustworthy man they knew."], "key_event": "Mediating all night between an envoy and a Tsushima official to keep the negotiation alive", "conflict": "Taking no one's side also meant being fully accepted by no one. Keeping the balance was his greatest talent and his deepest loneliness.", "quote": "Carrying words across is carrying hearts across.", "plato_echo": "If you naturally end up as the bridge between very different people", "karma": "Joining and fitting together", "calibration": "mean", "target": {"J": 47, "C": 39, "K": 38, "B": 41, "R": 44, "F": 38}}]},"philosophy":{"version": "1.0", "disclaimer": "This game does not determine real past lives. It is play for philosophical thought experiments and self-reflection, and every character and story is fiction. Scores are only values calculated by the game's rules from the leanings in your answers; they do not fix your personality or beliefs, and they are not the probability of a past life.", "entries": [{"id": "plato", "name": "Plato", "thinkers": "Plato (427–347 BC)", "core": "The soul's pre-existence and recollection", "argument": "In the Meno, Plato argues that learning is 'recollection': the soul remembering what it already knew before birth. In the Phaedo he uses this to argue that the soul existed before the body.", "counter": "Since Aristotle, many philosophers have held that knowledge comes from experience. Familiarity is fully explained by experience and imagination in this life, not memories of a past one.", "game_use": "The 'strangely familiar' feeling in your result story is a narrative device borrowed from the theory of recollection. It is not a claim of real memory.", "references": ["Plato, Meno 81a–86c", "Plato, Phaedo 72e–77a", "Plato, Republic Book 10, the Myth of Er"]}, {"id": "aristotle", "name": "Aristotle's virtue ethics", "thinkers": "Aristotle (384–322 BC)", "core": "Virtue, character and practical wisdom", "argument": "Right action comes from good character rather than rules or calculation. Courage is the mean between recklessness and cowardice, and practical wisdom is the ability to see the mean that fits the situation.", "counter": "Because the mean differs with every situation, virtue ethics is criticised for giving no concrete answer when you actually have to decide.", "game_use": "Used to interpret choices that 'read the situation and find a balance' in the risk-and-sacrifice and bonds-and-loyalty questions.", "references": ["Aristotle, Nicomachean Ethics Book 2 (the mean), Book 3 ch. 6–9 (courage), Book 6 (practical wisdom)"]}, {"id": "utilitarianism", "name": "Bentham and Mill's utilitarianism", "thinkers": "Jeremy Bentham (1748–1832), John Stuart Mill (1806–1873)", "core": "Consequences and the greatest happiness of the greatest number", "argument": "An act is right or wrong according to how much happiness its consequences create and how much suffering they reduce. Everyone's happiness counts equally, as one.", "counter": "It can conclude that the rights of a few may be sacrificed for the benefit of the many. There is also the problem that consequences cannot all be known in advance.", "game_use": "The basis for classing choices that save more people or calculate long-term outcomes as 'judgement by consequences'.", "references": ["Jeremy Bentham, An Introduction to the Principles of Morals and Legislation (1789)", "John Stuart Mill, Utilitarianism (1863)"]}, {"id": "kant", "name": "Kant's ethics of duty", "thinkers": "Immanuel Kant (1724–1804)", "core": "Duty and universal moral principles", "argument": "Right action comes from principle, not consequences. Act on a principle everyone could follow, and never treat a person merely as a means.", "counter": "It doesn't say which to follow when principles clash. Kant's conclusion that you must not lie even to a murderer has been criticised as too rigid.", "game_use": "The basis for classing choices that keep rules and truth even when the outcome is bad as 'judgement by principle and duty'.", "references": ["Immanuel Kant, Groundwork of the Metaphysics of Morals (1785)", "Immanuel Kant, 'On a Supposed Right to Lie from Philanthropy' (1797)"]}, {"id": "care_ethics", "name": "Care ethics", "thinkers": "Carol Gilligan (1936–), Nel Noddings (1929–2022)", "core": "Relationships and the responsibility to respond", "argument": "Morality begins in concrete relationships rather than abstract principles. Responding to the needs of the vulnerable and keeping relationships whole is at the heart of ethics.", "counter": "Putting those close to you first can undermine fairness. How to account for responsibility to many strangers remains an open task.", "game_use": "The basis for classing choices that protect family, friends and the vulnerable first as 'judgement led by relationships and care'.", "references": ["Carol Gilligan, In a Different Voice (1982)", "Nel Noddings, Caring (1984)"]}, {"id": "mill_liberty", "name": "Mill's On Liberty", "thinkers": "John Stuart Mill (1806–1873)", "core": "Individual liberty and the value of debate", "argument": "As long as it harms no one else, individual liberty should not be restricted (the harm principle). Even wrong opinions must be spoken freely so that truth grows stronger.", "counter": "The boundary of what counts as 'harm' is unclear. Sometimes liberty must be limited to hold a community together or protect the vulnerable.", "game_use": "The basis for classing choices that question authority and judge for oneself as 'judgement valuing autonomy and criticism'.", "references": ["John Stuart Mill, On Liberty (1859), chapters 1–2"]}, {"id": "hobbes", "name": "Hobbes on self-preservation", "thinkers": "Thomas Hobbes (1588–1679)", "core": "Self-preservation and order", "argument": "Everyone has the right to protect their own life. In the end, people entrust their rights to a strong sovereign for the sake of self-preservation.", "counter": "Self-preservation alone struggles to explain sacrifice or solidarity for others. Locke countered that people may resist a sovereign who betrays its trust.", "game_use": "The basis for classing choices that weigh your own and your family's safety first as 'judgement that protects self and family'. These choices are not penalised.", "references": ["Thomas Hobbes, Leviathan (1651), chapters 13–14", "John Locke, Second Treatise of Government (1689), chapter 19"]}, {"id": "locke", "name": "Locke on personal identity", "thinkers": "John Locke (1632–1704)", "core": "Memory and personal identity", "argument": "Being the same person depends not on the same body or the same soul, but on continuous consciousness — especially memory.", "counter": "Thomas Reid's 'brave officer' counter-example shows one can be the same person even when memory breaks. Memories are also forgotten and distorted.", "game_use": "Supporting material asking whether a past life without memory can really be called 'me'. It is not a claim that the past-life character in this game is the same person as you.", "references": ["John Locke, An Essay Concerning Human Understanding, 2nd ed. (1694), Book 2 ch. 27 'Of Identity and Diversity'", "Thomas Reid, Essays on the Intellectual Powers of Man (1785), Essay 3 ch. 6"]}, {"id": "hume", "name": "Hume's bundle theory of the self", "thinkers": "David Hume (1711–1776)", "core": "Doubt about a fixed self", "argument": "However closely I look within, all I find are perceptions that never stop changing. The 'self' is a bundle of those perceptions; no single fixed self is ever observed.", "counter": "Critics say it cannot explain what binds the perceptions into a 'bundle'. Hume himself admitted in his appendix that he was not satisfied with this account.", "game_use": "The basis for explaining that a score made from twenty answers cannot fix a permanent 'you'. Another day may bring another result.", "references": ["David Hume, A Treatise of Human Nature (1739), Book 1 Part 4 Sect. 6 'Of Personal Identity', and Appendix"]}, {"id": "buddhism", "name": "Buddhist non-self and karma", "thinkers": "Early Buddhist tradition", "core": "A stream of action that continues without a fixed self", "argument": "There is no unchanging self (atman). Yet actions (karma) and their results continue through causes and conditions. The Questions of King Milinda compares this to a flame passed from one lamp to another.", "counter": "A long-standing objection asks, if there is no self, what receives the results of karma. Buddhism itself holds many interpretations of this.", "game_use": "A separate path that rereads your result not as 'who was reborn' but as 'which actions continue'.", "references": ["The Questions of King Milinda (Milindapañha) Book 2, the lamp and chariot similes", "Saṃyutta Nikāya 22:59, the Discourse on the Not-Self Characteristic"]}], "stances": {"util": {"label": "Judgement by consequences", "entry": "utilitarianism"}, "deont": {"label": "Judgement by principle and duty", "entry": "kant"}, "virtue": {"label": "Judgement seeking the right character for the situation", "entry": "aristotle"}, "care": {"label": "Judgement led by relationships and care", "entry": "care_ethics"}, "liberty": {"label": "Judgement valuing autonomy and criticism", "entry": "mill_liberty"}, "self": {"label": "Judgement that protects self and family", "entry": "hobbes"}}, "lenses": {"locke": {"entry": "locke", "text": "In 'The Potion of Forgetting' you put memory at the centre of identity, a choice close to Locke's view. Then can a past life with no memory left be called 'me'? That question is this game's greatest paradox."}, "hume": {"entry": "hume", "text": "In 'The Potion of Forgetting' you chose to keep your memories outside yourself, as a record. You saw the 'self' as a trail of traces rather than one thing in your head — something like Hume's bundle theory."}, "buddhism": {"entry": "buddhism", "text": "In 'The Potion of Forgetting' you chose this present moment over memory. Not clinging to a fixed self echoes the Buddhist idea of non-self."}, "relation": {"entry": "care_ethics", "text": "In 'The Potion of Forgetting' you wanted to keep at least your memories of the people you love. Finding the 'self' in relationships is close to the view of the person in care ethics."}}, "conflicts": [{"id": "community_kin", "a": "community", "b": "kin", "title": "Between duty to the community and personal bonds", "text": "At some moments you put those close to you second for the community's sake; at others you stepped back from the community's demands for family and friends. This game doesn't mark that down as a contradiction. In {name}'s life, too, these two weights never erased each other but stayed together to the end."}, {"id": "principle_outcome", "a": "principle", "b": "outcome", "title": "Between principle and consequences", "text": "In some situations you kept your principles even when the outcome was bad; in others you set them down for a better result. {name} stood in exactly the place where Kant and utilitarianism have argued for centuries."}, {"id": "truth_comfort", "a": "truth", "b": "comfort", "title": "Between truth and comfort", "text": "You believe the truth should be told, yet before certain people you chose comfort over truth. For {name}, too, truth was always right but not always kind."}, {"id": "conscience_obey", "a": "conscience", "b": "obey", "title": "Between conscience and obedience", "text": "You defied some orders and followed others. In {name}'s life, too, the line between how far to obey and where to refuse was drawn anew every time."}, {"id": "risk_caution", "a": "risk", "b": "caution", "title": "Between courage and caution", "text": "At some moments you leapt in without weighing things; at others you stepped back and calculated. Aristotle would say courage lies somewhere in between. {name}, too, felt for that middle ground all life long."}], "caveat_entry": "hume", "karma_entry": "buddhism", "echo_entry": "plato"}};
+</script>
+<script>
+// JavaScript port of engine/scoring.py, engine/inference.py and engine/narrative.py.
+// tests/test_web_parity.py checks that it gives the same results as the Python engine.
+(function (root) {
+  "use strict";
+  const DIMS = ["J", "C", "K", "B", "R", "F"];
+  const dimIndex = (d) => DIMS.indexOf(d);
+
+  function questionMap(Q) {
+    const m = {};
+    for (const q of Q.questions) m[q.id] = q;
+    return m;
+  }
+  function chosenOption(q, oid) {
+    const o = q.options.find((x) => x.id === oid);
+    if (!o) throw new Error(q.id + " has no option " + oid);
+    return o;
+  }
+  function rawScores(Q, answers) {
+    const qm = questionMap(Q), total = {};
+    for (const d of DIMS) total[d] = 0;
+    for (const qid of Object.keys(answers)) {
+      const o = chosenOption(qm[qid], answers[qid]);
+      for (const d of DIMS) total[d] += o.scores[d];
+    }
+    return total;
+  }
+  function scoreBounds(Q) {
+    const lo = {}, hi = {};
+    for (const d of DIMS) { lo[d] = 0; hi[d] = 0; }
+    for (const q of Q.questions) {
+      for (const d of DIMS) {
+        const vals = q.options.map((o) => o.scores[d]);
+        lo[d] += Math.min(...vals);
+        hi[d] += Math.max(...vals);
+      }
+    }
+    return [lo, hi];
+  }
+  function normalize(raw, bounds) {
+    const [lo, hi] = bounds, out = {};
+    for (const d of DIMS) {
+      const span = hi[d] - lo[d];
+      out[d] = span === 0 ? 0 : ((raw[d] - lo[d]) * 100) / span;
+    }
+    return out;
+  }
+  function stanceCounts(Q, answers) {
+    const qm = questionMap(Q), c = {};
+    for (const qid of Object.keys(answers)) {
+      const s = chosenOption(qm[qid], answers[qid]).stance;
+      if (s) c[s] = (c[s] || 0) + 1;
+    }
+    return c;
+  }
+  function tagHits(Q, answers) {
+    const qm = questionMap(Q), hits = {};
+    for (const qid of Q.display_order) {
+      if (!(qid in answers)) continue;
+      for (const t of chosenOption(qm[qid], answers[qid]).tags || []) (hits[t] = hits[t] || []).push(qid);
+    }
+    return hits;
+  }
+  function contributions(Q, answers, dim) {
+    const qm = questionMap(Q), order = {};
+    Q.display_order.forEach((qid, i) => { order[qid] = i; });
+    const rows = Object.keys(answers).map((qid) => [qid, answers[qid], chosenOption(qm[qid], answers[qid]).scores[dim]]);
+    rows.sort((a, b) => b[2] - a[2] || order[a[0]] - order[b[0]]);
+    return rows;
+  }
+
+  function distance(p, t, alpha) {
+    let s = 0;
+    for (const d of DIMS) s += alpha[d] * (p[d] - t[d]) ** 2;
+    return Math.sqrt(s);
+  }
+  function rank(prof, C) {
+    const rows = C.characters.map((ch, i) => {
+      const dist = distance(prof, ch.target, C.alpha);
+      return { id: ch.id, distance: dist, resonance: Math.max(0, 100 - dist), order: i };
+    });
+    rows.sort((a, b) => a.distance - b.distance || a.order - b.order);
+    return rows;
+  }
+  function coTop(ranked, margin) {
+    const best = ranked[0].distance;
+    return ranked.filter((r) => r.distance - best < margin).map((r) => r.id);
+  }
+
+  function hasBatchim(word) {
+    const w = word.trim();
+    const code = w.charCodeAt(w.length - 1) - 0xac00;
+    return code >= 0 && code <= 11171 && code % 28 !== 0;
+  }
+  function averageProfile(Q) {
+    const [lo, hi] = scoreBounds(Q), out = {};
+    for (const d of DIMS) {
+      let avg = 0;
+      for (const q of Q.questions) avg += q.options.reduce((a, o) => a + o.scores[d], 0) / q.options.length;
+      out[d] = ((avg - lo[d]) * 100) / (hi[d] - lo[d]);
+    }
+    return out;
+  }
+  const fmt = (s, vars) => s.replace(/\{(\w+)\}/g, (_, k) => vars[k]);
+
+  function buildResult(Q, C, P, answers) {
+    const qm = questionMap(Q);
+    const dimName = {};
+    for (const d of Q.dimensions) dimName[d.id] = d.name;
+    const chars = {};
+    for (const c of C.characters) chars[c.id] = c;
+    const entries = {};
+    for (const e of P.entries) entries[e.id] = e;
+
+    const raw = rawScores(Q, answers);
+    const prof = normalize(raw, scoreBounds(Q));
+    const ranked = rank(prof, C);
+    const top = chars[ranked[0].id];
+    const name = top.name;
+
+    const byStrength = DIMS.slice().sort((a, b) => prof[b] - prof[a] || dimIndex(a) - dimIndex(b));
+    const topDim = byStrength[0], lowDim = byStrength[DIMS.length - 1];
+    const lines = C.dimension_lines;
+    const personal = [fmt(lines.top[topDim], { name }), fmt(lines.low, { dim: dimName[lowDim] })];
+
+    const hits = tagHits(Q, answers);
+    const found = [];
+    P.conflicts.forEach((rule, i) => {
+      const a = hits[rule.a] || [], b = hits[rule.b] || [];
+      if (a.length && b.length) found.push([-(a.length + b.length), i, rule, a[0], b[0]]);
+    });
+    found.sort((x, y) => x[0] - y[0] || x[1] - y[1]);
+    const ev = (qid) => ({ qid, title: qm[qid].title, choice: chosenOption(qm[qid], answers[qid]).text });
+    const conflicts = found.slice(0, 2).map(([, , rule, qa, qb]) => ({
+      id: rule.id, title: rule.title, text: fmt(rule.text, { name }), evidence: [ev(qa), ev(qb)]
+    }));
+
+    const counts = stanceCounts(Q, answers);
+    const stanceOrder = Object.keys(P.stances);
+    const stances = Object.keys(counts)
+      .sort((a, b) => counts[b] - counts[a] || stanceOrder.indexOf(a) - stanceOrder.indexOf(b))
+      .slice(0, 2)
+      .map((s) => ({ id: s, label: P.stances[s].label, count: counts[s], entry: entries[P.stances[s].entry] }));
+
+    let identity = null;
+    for (const q of Q.questions) {
+      if (q.theme === "identity" && q.id in answers) {
+        const lens = chosenOption(q, answers[q.id]).lens;
+        if (lens in P.lenses) {
+          identity = { lens, text: P.lenses[lens].text, entry: entries[P.lenses[lens].entry] };
+          break;
+        }
+      }
+    }
+
+    const avg = averageProfile(Q);
+    let lean = DIMS.slice().sort((a, b) => (top.target[b] - avg[b]) - (top.target[a] - avg[a]) || dimIndex(a) - dimIndex(b));
+    if (DIMS.every((d) => Math.abs(top.target[d] - avg[d]) < 1)) lean = byStrength;
+    const evidence = lean.slice(0, 2).map((d) => ({
+      dim: d, dim_name: dimName[d], score: prof[d],
+      answers: contributions(Q, answers, d).filter((r) => r[2] > 0).slice(0, 3)
+        .map(([qid, oid, pts]) => ({ qid, title: qm[qid].title, choice: chosenOption(qm[qid], oid).text, points: pts }))
+    }));
+
+    const alternatives = ranked.slice(1, 3).map((r) => {
+      const alt = chars[r.id];
+      let d = DIMS[0], best = -1;
+      for (const x of DIMS) {
+        const diff = Math.abs(alt.target[x] - top.target[x]);
+        if (diff > best) { best = diff; d = x; }
+      }
+      const more = alt.target[d] > top.target[d];
+      return {
+        id: alt.id, name: alt.name, resonance: r.resonance,
+        why: "Had you valued '" + dimName[d] + "' a little " + (more ? "more" : "less") +
+          ", you would have been closer to '" + alt.name + "'."
+      };
+    });
+
+    const tops = stances.length ? stances[0].label : "balanced judgement";
+    const karma = "Read through the lens of karma, what continues is not a self called '" + name +
+      "' but a stream of action: '" + top.karma + "'. The judgement that appeared most often in your answers was '" + tops +
+      "'. Where that action leads depends on the choices you make from here.";
+    const echo = top.plato_echo + ", you might imagine it, in Plato's terms, as a moment of the soul 'recollecting' what it knew long ago. Of course, this is only a storytelling device.";
+
+    return {
+      data_version: Q.version, raw, profile: prof, ranking: ranked, co_top: coTop(ranked, C.tie_margin),
+      character: top, personal, conflicts, stances, identity,
+      caveat: entries[P.caveat_entry], karma, echo, evidence, alternatives, disclaimer: P.disclaimer,
+      share: "My past life was 「" + name + "」 — " + top.summary + ". (" + top.era + ", " + top.region + ")"
+    };
+  }
+
+  const api = { DIMS, rawScores, scoreBounds, normalize, rank, coTop, buildResult };
+  if (typeof module !== "undefined" && module.exports) module.exports = api;
+  else root.PastLife = api;
+})(this);
+
+</script>
+<script>
+(() => {
+  "use strict";
+  const { questions: Q, characters: C, philosophy: P } = DATA;
+  const E = window.PastLife;
+  const app = document.getElementById("app");
+  const qmap = Object.fromEntries(Q.questions.map((q) => [q.id, q]));
+  const order = Q.display_order.map((id) => qmap[id]);
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const store = {
+    get(k, d) { try { const v = sessionStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } },
+    set(k, v) { try { sessionStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  };
+  let answers = store.get("pl_answers", {});
+  let idx = 0;
+
+  // A result is the 20 answers in display order (e.g. ABDC…). It travels in the link as #r-ABDC…
+  // so a link sent to yourself or a friend reopens the very same result.
+  const ARTIFACT_URL = "https://bellhkim.github.io/en/past_life_game/web/";
+  function testUrl() {
+    const host = location.hostname || "";
+    return /^https?:$/.test(location.protocol) && !/claude/.test(host) ? location.href.split("#")[0] : ARTIFACT_URL;
+  }
+  const encode = (a) => order.map((q) => a[q.id] || "").join("");
+  function decode(code) {
+    if (!/^[ABCD]{20}$/.test(code || "")) return null;
+    const a = {};
+    order.forEach((q, i) => { a[q.id] = code[i]; });
+    return a;
+  }
+  const resultUrl = (a) => testUrl() + "#r-" + encode(a);
+  const saved = {
+    list() { try { return JSON.parse(localStorage.getItem("pl_history") || "[]"); } catch (e) { return []; } },
+    add(code, ch) {
+      const list = this.list().filter((x) => x.code !== code);
+      list.unshift({ code, id: ch.id, at: Date.now() });
+      try { localStorage.setItem("pl_history", JSON.stringify(list.slice(0, 10))); } catch (e) {}
+    }
+  };
+  // past-life collection: which of the 12 lives this device has met (first seen time)
+  const dex = {
+    get() { try { return JSON.parse(localStorage.getItem("pl_dex") || "{}"); } catch (e) { return {}; } },
+    add(id) {
+      const d = this.get(), isNew = !d[id];
+      if (isNew) { d[id] = Date.now(); try { localStorage.setItem("pl_dex", JSON.stringify(d)); } catch (e) {} }
+      return isNew;
+    }
+  };
+  for (const x of saved.list()) dex.add(x.id); // results from before the collection existed count too
+  // a friend's result opened from their link, kept for the match after you take the test
+  const friend = {
+    get() { try { const f = JSON.parse(localStorage.getItem("pl_friend") || "null"); return f && decode(f.code) ? f : null; } catch (e) { return null; } },
+    set(code) { try { localStorage.setItem("pl_friend", JSON.stringify({ code, at: Date.now() })); } catch (e) {} }
+  };
+  let actx = null;
+  function note(freq, at, dur, type = "sine", vol = 0.06) {
+    try {
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      if (actx.state === "suspended") actx.resume();
+      const t = actx.currentTime + at, o = actx.createOscillator(), g = actx.createGain();
+      o.type = type; o.frequency.setValueAtTime(freq, t);
+      g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + 0.02); g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+      o.connect(g).connect(actx.destination); o.start(t); o.stop(t + dur + 0.05);
+    } catch (e) {}
+  }
+  const gong = () => { note(98, 0, 3.2, "sine", 0.22); note(196, 0, 2.4, "triangle", 0.06); note(147, 0.02, 2.8, "sine", 0.08); note(392, 0.05, 1.4, "sine", 0.03); };
+  const fmtDate = (t) => { const d = new Date(t); return d.getFullYear() + "." + (d.getMonth() + 1) + "." + d.getDate(); };
+
+  function intro() {
+    app.innerHTML =
+      '<div class="intro fade">' +
+      '<div class="eyebrow">PAST LIFE · PHILOSOPHY</div>' +
+      "<h1>Who Was I<br>in a Past Life?</h1>" +
+      '<div class="sub">Another self, revealed by philosophy</div>' +
+      '<div class="credit">Made by <b>Kim Jonghyun</b></div>' +
+      '<p class="lede">Answer <b>' + order.length + " dilemmas</b> about power, justice, survival, loyalty, freedom and sacrifice. There are no right answers. We read the grain of judgement in your choices along six lines, then introduce the imagined person most like you and tell you their life.</p>" +
+      '<div class="seals" aria-hidden="true">' + C.characters.map((c) => '<span class="seal" style="background:' + c.color + '">' + esc(c.seal) + "</span>").join("") + "</div>" +
+      '<p class="disclaimer">' + esc(P.disclaimer) + "</p>" +
+      '<button class="btn" id="start">To the first dilemma</button>' +
+      '<button class="btn ghost" id="quitApp">Quit</button>' +
+      (Object.keys(answers).length && Object.keys(answers).length < order.length ? '<button class="btn ghost" id="resume">Resume (' + Object.keys(answers).length + "/" + order.length + ")</button>" : "") +
+      dexHTML() +
+      pastHTML() +
+      "</div>";
+    document.getElementById("start").onclick = () => { if (window.appShell) appShell.enter(); answers = {}; store.set("pl_answers", answers); idx = 0; question(); };
+    document.getElementById("quitApp").onclick = () => { askFeedback(); if (window.appShell) appShell.leaveApp(); };
+    const r = document.getElementById("resume");
+    if (r) r.onclick = () => { if (window.appShell) appShell.enter(); idx = order.findIndex((q) => !(q.id in answers)); question(); };
+    app.querySelectorAll(".hist").forEach((b) => b.addEventListener("click", () => {
+      const a = decode(b.dataset.code);
+      if (a) { answers = a; result("saved"); }
+    }));
+    if (location.hash) { try { history.replaceState(null, "", location.pathname + location.search); } catch (e) { location.hash = ""; } }
+  }
+
+  function dexHTML(newId) {
+    const d = dex.get(), n = C.characters.filter((c) => d[c.id]).length;
+    if (!n && !newId) return "";
+    return '<div class="dex"><h3>Past-life collection <small>' + n + " / " + C.characters.length + (n === C.characters.length ? " · complete! 🎉" : "") + "</small></h3>" +
+      '<div class="grid">' + C.characters.map((c) => d[c.id]
+        ? '<div class="cell' + (c.id === newId ? " new" : "") + '" title="' + esc(c.summary) + '"><span class="seal" style="background:' + c.color + '">' + esc(c.seal) + "</span>" + esc(c.name) + "</div>"
+        : '<div class="cell locked"><span class="seal">?</span>???</div>').join("") + "</div>" +
+      (n < C.characters.length ? '<p class="small">Answer again on another day, in another mood, and you may meet another past life.</p>' : "") + "</div>";
+  }
+
+  function pastHTML() {
+    const chars = Object.fromEntries(C.characters.map((c) => [c.id, c]));
+    const list = saved.list().filter((x) => chars[x.id] && decode(x.code)).slice(0, 5);
+    if (!list.length) return "";
+    return '<div class="history"><h3>Past results</h3>' + list.map((x) => {
+      const c = chars[x.id];
+      return '<button class="hist" data-code="' + x.code + '"><span class="seal" style="background:' + c.color + '">' + esc(c.seal) + "</span><span>" + esc(c.name) + "<small>" + fmtDate(x.at) + "</small></span></button>";
+    }).join("") + "</div>";
+  }
+
+  function question() {
+    const q = order[idx];
+    app.innerHTML =
+      '<div class="qhead"><span>Question ' + String(idx + 1).padStart(2, "0") + " · " + esc(Q.themes[q.theme]) + "</span><span>" + (idx + 1) + " / " + order.length + "</span></div>" +
+      '<div class="progress"><i style="width:' + (idx / order.length) * 100 + '%"></i></div>' +
+      '<div class="fade"><div class="qcard"><h2>' + esc(q.title) + '</h2><p class="situation">' + esc(q.situation) + '</p><div class="small">' + esc(q.prompt) + "</div></div>" +
+      '<div class="options" role="group" aria-label="Choices">' +
+      q.options.map((o) => '<button class="opt' + (answers[q.id] === o.id ? " on" : "") + '" data-o="' + o.id + '"><b>' + o.id + "</b><span>" + esc(o.text) + "</span></button>").join("") +
+      "</div>" +
+      '<div class="qnav">' + (idx > 0 ? '<button class="linkbtn" id="back">← Previous</button>' : "<span></span>") + '<button class="linkbtn" id="home">✕ Quit</button></div></div>';
+    app.querySelectorAll(".opt").forEach((b) => b.addEventListener("click", () => {
+      answers[q.id] = b.dataset.o;
+      store.set("pl_answers", answers);
+      app.querySelectorAll(".opt").forEach((x) => x.classList.toggle("on", x === b));
+      setTimeout(() => {
+        if (idx + 1 < order.length) { idx++; question(); }
+        else reveal();
+      }, 220);
+    }));
+    const back = document.getElementById("back");
+    if (back) back.onclick = () => { idx--; question(); };
+    document.getElementById("home").onclick = () => { if (window.appShell) appShell.exit(); intro(); askFeedback(); };
+    window.scrollTo(0, 0);
+    const first = app.querySelector(".opt.on") || app.querySelector(".opt");
+    if (first) first.focus({ preventScroll: true });
+  }
+
+  function radarSVG(prof, target) {
+    const cx = 160, cy = 150, R = 110;
+    const pt = (i, v) => {
+      const a = -Math.PI / 2 + (i * Math.PI) / 3;
+      return [cx + Math.cos(a) * R * v / 100, cy + Math.sin(a) * R * v / 100];
+    };
+    const poly = (vals) => vals.map((v, i) => pt(i, v).map((n) => n.toFixed(1)).join(",")).join(" ");
+    let s = '<svg class="radar" viewBox="0 0 320 300" role="img" aria-label="Hexagon chart of your judgement profile">';
+    for (const lv of [25, 50, 75, 100]) s += '<polygon points="' + poly(Array(6).fill(lv)) + '" fill="none" stroke="#3a3448" stroke-width="1"/>';
+    E.DIMS.forEach((d, i) => {
+      const [x, y] = pt(i, 100), [lx, ly] = pt(i, 122);
+      s += '<line x1="' + cx + '" y1="' + cy + '" x2="' + x.toFixed(1) + '" y2="' + y.toFixed(1) + '" stroke="#3a3448"/>';
+      const name = Q.dimensions[i].name.split("and ")[0].split("and ")[0];
+      s += '<text x="' + lx.toFixed(1) + '" y="' + (ly + 4).toFixed(1) + '" fill="#efe6d2" font-size="13" text-anchor="middle" font-family="Gowun Batang, serif">' + esc(name) + "</text>";
+    });
+    s += '<polygon points="' + poly(E.DIMS.map((d) => target[d])) + '" fill="rgba(143,134,168,0.15)" stroke="#b9b0d0" stroke-width="1.5" stroke-dasharray="4 3"/>';
+    s += '<polygon points="' + poly(E.DIMS.map((d) => prof[d])) + '" fill="rgba(217,180,91,0.28)" stroke="#d9b45b" stroke-width="2.5"/>';
+    E.DIMS.forEach((d, i) => { const [x, y] = pt(i, prof[d]); s += '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="3.5" fill="#d9b45b"/>'; });
+    return s + "</svg>";
+  }
+
+  function entryHTML(e) {
+    return "<p><b>Core idea</b> · " + esc(e.core) + "</p><p><b>Argument</b> · " + esc(e.argument) + "</p><p><b>Objection</b> · " + esc(e.counter) + "</p><p><b>How this game uses it</b> · " + esc(e.game_use) + '</p><p class="refs">References: ' + e.references.map(esc).join(" / ") + "</p>";
+  }
+
+  // the wheel of lives spins, slows, and one seal stamps down with a gong
+  function reveal() {
+    const r = E.buildResult(Q, C, P, answers), ch = r.character;
+    const lines = ["Twenty choices gathered", "Reading your judgement along six lines…", "Long, long ago, " + ch.era + "…", ch.region + ", one day"];
+    app.innerHTML = '<div class="reveal fade"><div class="wheel"><span class="ring"></span><span class="seal" id="spin"></span></div>' +
+      '<div class="line" id="rvLine"></div><div class="sub" id="rvSub"></div><button class="skip" id="rvSkip">Skip</button></div>';
+    window.scrollTo(0, 0);
+    let done = false, timer = 0;
+    const finish = () => { if (done) return; done = true; clearTimeout(timer); result(); };
+    document.getElementById("rvSkip").onclick = finish;
+    const spin = document.getElementById("spin"), cs = C.characters;
+    let i = 0, delay = 60, t = 0;
+    const step = () => {
+      if (done) return;
+      const c = cs[i++ % cs.length];
+      spin.style.background = c.color; spin.textContent = c.seal;
+      note(420 + (i % 6) * 70, 0, 0.06, "triangle", 0.03);
+      t += delay;
+      const li = Math.min(lines.length - 1, Math.floor(t / 900));
+      const lineEl = document.getElementById("rvLine");
+      if (lineEl && lineEl.dataset.i !== String(li)) { lineEl.dataset.i = li; lineEl.textContent = lines[li]; lineEl.style.animation = "none"; void lineEl.offsetWidth; lineEl.style.animation = ""; }
+      if (t < 3200) { delay = Math.min(380, delay * 1.09); timer = setTimeout(step, delay); return; }
+      // stamp
+      spin.className = "seal final"; spin.style.background = ch.color; spin.textContent = ch.seal;
+      document.getElementById("rvLine").textContent = "Your past life was…";
+      document.getElementById("rvSub").textContent = "「" + ch.name + "」";
+      gong();
+      if (navigator.vibrate) try { navigator.vibrate([30, 60, 120]); } catch (e) {}
+      timer = setTimeout(finish, 1900);
+    };
+    step();
+  }
+
+  // match: two judgement profiles, closer = higher
+  function matchHTML(r, ch, chars, f) {
+    const fa = decode(f.code);
+    const fr = E.buildResult(Q, C, P, fa), fc = fr.character;
+    const diffs = E.DIMS.map((d, i) => ({ name: Q.dimensions[i].name, gap: Math.abs(r.profile[d] - fr.profile[d]), both: (r.profile[d] + fr.profile[d]) / 2 }));
+    const dist = Math.sqrt(diffs.reduce((a, x) => a + x.gap * x.gap, 0));
+    const pct = Math.max(20, Math.min(99, Math.round(100 - dist * 0.8)));
+    const same = diffs.slice().sort((a, b) => a.gap - b.gap || b.both - a.both)[0], apart = diffs.slice().sort((a, b) => b.gap - a.gap)[0];
+    const kind = pct >= 85 ? ["💛 Soulmates", "You’d have lived side by side in the same age, trusting each other with your backs."]
+      : pct >= 70 ? ["🤝 Old friends who knew each other", "You could guess each other’s choices without a word."]
+      : pct >= 55 ? ["⚔️ Bickering rivals", "You clash often — and that is what made each of you stronger."]
+      : ["🌗 Opposites who attract", "Each has what the other lacks, so you keep looking each other’s way."];
+    const sameChar = fc.id === ch.id;
+    const story = sameChar
+      ? "You’re both 「" + ch.name + "」! Two people who lived the same life, meeting again."
+      : "「" + fc.name + "」(" + fc.era + ") × 「" + ch.name + "」(" + ch.era + ") meet. " + kind[1];
+    return { pct, fc, html: '<section class="block match"><h2>💞 Past-life match with your friend</h2>' +
+      '<div class="pair"><div class="who"><span class="seal" style="background:' + fc.color + '">' + esc(fc.seal) + "</span><b>" + esc(fc.name) + "</b> Friend’s past life</div>" +
+      '<span class="heart" aria-hidden="true">💗</span>' +
+      '<div class="who"><span class="seal" style="background:' + ch.color + '">' + esc(ch.seal) + "</span><b>" + esc(ch.name) + "</b> My past life</div></div>" +
+      '<div class="pct">' + pct + '%</div><div class="kind">' + kind[0] + "</div>" +
+      "<p>" + esc(story) + "</p>" +
+      "<p>You two are most alike in <b>" + esc(same.name) + "</b>, and most different in <b>" + esc(apart.name) + "</b> (gap " + Math.round(apart.gap) + ").</p>" +
+      '<p class="small">The match is a just-for-fun score based on how close your two judgement profiles are.</p>' +
+      '<button class="btn" id="matchShare">Send the match to your friend</button></section>' };
+  }
+
+  // from: "play" (just finished), "link" (opened from a shared link) or "saved" (from the list of past results)
+  function result(from = "play") {
+    const r = E.buildResult(Q, C, P, answers);
+    const ch = r.character;
+    const chars = Object.fromEntries(C.characters.map((c) => [c.id, c]));
+    const code = encode(answers);
+    let isNewLife = false;
+    if (from === "play") { saved.add(code, ch); store.set("pl_answers", {}); isNewLife = dex.add(ch.id); }
+    if (from === "link") friend.set(code);
+    const fr = from === "play" ? friend.get() : null;
+    const match = fr && fr.code !== code ? matchHTML(r, ch, chars, fr) : null;
+    if (location.hash !== "#r-" + code) location.hash = "r-" + code;
+    const blocks = [];
+    if (from === "link") blocks.push('<div class="linkbanner"><span>This is a friend’s past-life result. Take the test to see your <b>past-life match</b> with them!</span><button class="btn" id="tryBtn">Take the test and see our match</button></div>');
+    blocks.push(
+      '<div class="eyebrow">Imagined person · imagined life · a philosophical inference</div>' +
+      '<div class="hero"><div class="seal" style="background:' + ch.color + '">' + esc(ch.seal) + '</div><div><div class="small">Your past life was</div><h1>' + esc(ch.name) + " " + ch.emoji + '</h1><div class="meta">' + esc(ch.era) + " · " + esc(ch.region) + '</div><div class="meta">' + esc(ch.occupation) + "</div></div></div>" +
+      (r.co_top.length > 1 ? '<div class="cotop">Your judgement profile is almost as close to ' + r.co_top.slice(1).map((id) => "'" + esc(chars[id].name) + "'").join(", ") + "too. Two lives overlap in this result.</div>" : "") +
+      '<div class="quote">“' + esc(ch.quote) + "”</div>" +
+      (isNewLife ? '<div class="dexnote">📖 New life added to your collection! (' + Object.keys(dex.get()).length + " / " + C.characters.length + ")</div>" : "")
+    );
+    if (match) blocks.push(match.html);
+    blocks.push('<section class="block"><h2>Your past-life story</h2><div class="story">' + ch.story.map((p) => "<p>" + esc(p) + "</p>").join("") + "</div>" +
+      '<div class="facts"><div class="fact"><span>Way of life</span><span>' + esc(ch.life) + '</span></div><div class="fact"><span>Turning point</span><span>' + esc(ch.key_event) + '</span></div><div class="fact"><span>Inner conflict</span><span>' + esc(ch.conflict) + "</span></div></div>" +
+      '<div class="personal" style="margin-top:16px">' + r.personal.map((p) => "<p>" + esc(p) + "</p>").join("") + "</div></section>");
+    if (r.conflicts.length) {
+      blocks.push('<section class="block"><h2>Tensions between your choices <small>read as inner conflict, not as a penalty</small></h2>' +
+        r.conflicts.map((c) => '<div class="conflict"><h3>' + esc(c.title) + "</h3><div>" + esc(c.text) + '</div><div class="ev">' + c.evidence.map((e) => "「" + esc(e.title) + "」 " + esc(e.choice)).join(" ↔ ") + "</div></div>").join("") + "</section>");
+    }
+    blocks.push('<section class="block"><h2>Judgement profile</h2><div class="profile"><div>' + radarSVG(r.profile, ch.target) +
+      '<div class="legend"><span style="--c:#d9b45b">My answers</span><span style="--c:#b9b0d0">' + esc(ch.name) + ' baseline</span></div></div><div class="bars">' +
+      Q.dimensions.map((d) => '<div class="bar"><div class="top"><span>' + esc(d.name) + "</span><span>" + Math.round(r.profile[d.id]) + '</span></div><div class="track"><i style="width:' + r.profile[d.id] + '%"></i><em style="left:' + ch.target[d.id] + '%"></em></div></div>').join("") +
+      '</div></div><p class="small">0–100 is your position between the lowest and highest totals possible in this game’s questions. The vertical line on each bar is the character’s baseline. It is not an absolute measure of any psychological trait.</p></section>');
+    blocks.push('<section class="block"><h2>Philosophical reading</h2><p class="disclaimer" style="margin-bottom:12px">' + esc(r.disclaimer) + "</p>" +
+      r.stances.map((s, i) => "<details" + (i === 0 ? " open" : "") + "><summary>" + esc(s.label) + " · " + s.count + " times</summary><div class=\"inner\"><p>Of your answers, " + s.count + "were classed this way. The related thinking is <b>" + esc(s.entry.name) + "</b>. That doesn’t mean you follow this philosophy.</p>" + entryHTML(s.entry) + "</div></details>").join("") +
+      (r.identity ? "<details><summary>Memory and identity</summary><div class=\"inner\"><p>" + esc(r.identity.text) + "</p>" + entryHTML(r.identity.entry) + "</div></details>" : "") +
+      "<details><summary>Reread through karma</summary><div class=\"inner\"><p>" + esc(r.karma) + "</p></div></details>" +
+      "<details><summary>If it feels strangely familiar</summary><div class=\"inner\"><p>" + esc(r.echo) + "</p></div></details>" +
+      "<details><summary>Can you trust this result?</summary><div class=\"inner\"><p>A score made from twenty answers cannot pin down a fixed 'you'. Answer on another day, in another mood, and another character may appear.</p>" + entryHTML(r.caveat) + "</div></details></section>");
+    blocks.push('<section class="block evidence"><h2>Evidence</h2>' + r.evidence.map((ev) => "<h3>" + esc(ev.dim_name) + " " + Math.round(ev.score) + ' <span class="small">— \'' + esc(ch.name) + "'’s defining trait</span></h3>" +
+      (ev.answers.length ? "<ul>" + ev.answers.map((a) => "<li>「" + esc(a.title) + "」 " + esc(a.choice) + ' <span class="small">(+' + a.points + ")</span></li>").join("") + "</ul>" : '<p class="small">None of your answers added points here.</p>')).join("") + "</section>");
+    const bar = (nm, res) => '<div class="top"><span>' + esc(nm) + "</span><span>closeness " + Math.round(res) + '</span></div><div class="track"><i style="width:' + res + '%"></i></div>';
+    blocks.push('<section class="block"><h2>Other possibilities</h2><div class="alt">' + bar(ch.name, r.ranking[0].resonance) + "</div>" +
+      r.alternatives.map((a) => '<div class="alt">' + bar(a.name, a.resonance) + '<div class="small">' + esc(a.why) + "</div></div>").join("") +
+      '<p class="small">Closeness is 100 minus the distance between judgement profiles. It is not the probability of a past life.</p></section>');
+    blocks.push('<section class="block"><h2>Share card</h2><div class="share"><div class="seal" style="background:' + ch.color + '">' + esc(ch.seal) + '</div><div class="small">Who Was I</div><h3>' + esc(ch.name) + '</h3><div class="quote" style="margin:4px 0 6px;font-size:20px">' + esc(ch.summary) + '</div><div class="small">' + esc(ch.era) + " · Who Was I in a Past Life?</div></div>" +
+      '<div class="actions">' + (from === "play" ? '<button class="btn lucky" id="luckyBtn">🍀 Test-complete bonus · open a lucky card</button>' : "") + '<button class="btn kakao" id="meBtn">Send to myself (save result)</button><button class="btn" id="shareBtn">Recommend this test to a friend</button><textarea class="share-text" id="shareText" rows="5" readonly hidden></textarea><button class="btn ghost" id="again">' + (from === "link" ? "Take the test" : "Start over") + "</button></div>" +
+      '<p class="small">Your result is also saved on this device under \'Past results\' on the first screen. The result link you send opens the same result on any device. Shared messages never include personal details like your name or contacts.</p></section>');
+    if (from !== "link") blocks.push('<section class="block">' + dexHTML(isNewLife ? ch.id : null) + "</section>");
+    app.innerHTML = '<div class="fade">' + blocks.join("") + "</div>";
+    window.scrollTo(0, 0);
+    const restart = () => { if (window.appShell) appShell.exit(); answers = {}; store.set("pl_answers", answers); intro(); askFeedback(); };
+    document.getElementById("again").onclick = restart;
+    const tryBtn = document.getElementById("tryBtn");
+    if (tryBtn) tryBtn.onclick = restart;
+    const link = resultUrl(answers);
+    document.getElementById("meBtn").onclick = () => share(
+      "📜 [My past-life result · " + fmtDate(Date.now()) + "]\n" +
+      "My past life was 「" + ch.name + "」 " + ch.emoji + "\n" + ch.summary + " (" + ch.era + ", " + ch.region + ")\n" +
+      "“" + ch.quote + "”\n\nSee the result again 👉 " + link,
+      "Copied! Paste it into your 'notes-to-self chat'to keep your result");
+    document.getElementById("shareBtn").onclick = () => share(
+      "🔮 My past life was 「" + ch.name + "」 " + ch.emoji + "!\n" + ch.summary + " (" + ch.era + ")\n\n" +
+      "A past-life test from twenty philosophical dilemmas: 「Who Was I in a Past Life?」\n" +
+      "It takes 5 minutes. Open my result link below and take the test to see our past-life match 👇\n" + link,
+      "Copied! Send it to a friend");
+    const ms = document.getElementById("matchShare");
+    if (ms) ms.onclick = () => share(
+      "💞 Our past-life match: " + match.pct + "%!\nMy friend’s past life 「" + match.fc.name + "」 × mine 「" + ch.name + "」\n\n" +
+      "My past-life result 👉 " + link + "\nTry a match with another friend 👉 " + testUrl(),
+      "Copied! Send it to a friend");
+    const luckyBtn = document.getElementById("luckyBtn");
+    if (luckyBtn && window.luckyCard) luckyBtn.onclick = () => { window.luckyCard.open({ game: "Who Was I in a Past Life?", reason: "Test complete · past life: " + ch.name }); luckyBtn.remove(); };
+    else if (luckyBtn) luckyBtn.remove();
+    if (from === "play") { testsDone++; lastName = ch.name; }
+  }
+
+  // feedback: once per visit, when the player leaves after finishing the test at least once
+  let testsDone = 0, lastName = "";
+  const feedbackOpts = () => testsDone ? { game: "Who Was I in a Past Life?", context: testsDone + " done · last result: " + lastName, accent: "#d9b45b", ink: "#241a05" } : null;
+  const askFeedback = () => { if (window.gameFeedback) gameFeedback.askOnce(feedbackOpts()); };
+  if (window.gameFeedback) gameFeedback.onLeave(feedbackOpts);
+
+  let toastTimer = 0;
+  function toast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg; t.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { t.hidden = true; }, 2400);
+  }
+  function share(text, copiedMsg) {
+    const fallback = () => {
+      const ta = document.getElementById("shareText");
+      ta.value = text; ta.hidden = false; ta.focus(); ta.select();
+      toast("Long-press the text to copy it, then paste it into a chat");
+    };
+    const copy = () => {
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(() => toast(copiedMsg || "Copied! Paste it into a chat")).catch(fallback);
+      else fallback();
+    };
+    if (navigator.share) navigator.share({ title: "Who Was I in a Past Life?", text }).catch((err) => { if (!err || err.name !== "AbortError") copy(); });
+    else copy();
+  }
+
+  // used by automated tests
+  window.__pl = { answer: (a) => { answers = a; result(); }, reveal: (a) => { answers = a; reveal(); }, encode: (a) => encode(a) };
+  // a #r-… link opens that result; our own hash updates (same result) are ignored
+  function route(initial) {
+    const m = /^#r-([ABCD]{20})$/.exec(location.hash);
+    const a = m && decode(m[1]);
+    if (!a) return false;
+    if (initial || encode(answers) !== m[1]) { answers = a; result("link"); }
+    return true;
+  }
+  window.addEventListener("hashchange", () => route(false));
+  if (!route(true)) intro();
+})();
+</script>
+<!-- feedback:start -->
+<!-- feedback popup: shared by every game; inlined before </body> of each game page -->
+<style>
+.fb-overlay {
+  position: fixed; inset: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 20px;
+  background: rgba(12, 10, 24, 0.55);
+}
+.fb-card {
+  width: min(400px, 100%); max-height: 100%; overflow-y: auto; box-sizing: border-box;
+  background: #fffdf8; color: #2b2233;
+  border-radius: 20px; padding: 22px 20px 18px;
+  display: flex; flex-direction: column; gap: 12px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4);
+  font-family: "Gowun Dodum", "Do Hyeon", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  text-align: left;
+  animation: fbIn 0.3s cubic-bezier(.3, 1.4, .5, 1);
+}
+@keyframes fbIn { from { transform: scale(0.85); opacity: 0; } }
+.fb-card h3 { margin: 0; font: 400 24px/1.2 "Black Han Sans", "Jua", "Apple SD Gothic Neo", sans-serif; color: #2b2233; }
+.fb-card p { margin: 0; font-size: 15px; line-height: 1.5; color: #6a5f74; }
+.fb-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.fb-chip {
+  appearance: none; cursor: pointer;
+  border: 1.5px solid #d9d0e2; background: #fff; color: #2b2233;
+  border-radius: 999px; padding: 8px 12px;
+  font: 15px "Gowun Dodum", "Do Hyeon", "Apple SD Gothic Neo", sans-serif;
+}
+.fb-chip[aria-pressed="true"] { background: var(--fb-accent); border-color: var(--fb-accent); color: var(--fb-ink); }
+.fb-card textarea {
+  width: 100%; box-sizing: border-box; resize: vertical; min-height: 76px;
+  border: 1.5px solid #d9d0e2; border-radius: 12px; padding: 10px 12px;
+  font: 15px "Gowun Dodum", "Apple SD Gothic Neo", sans-serif; color: #2b2233; background: #fff;
+  user-select: text; -webkit-user-select: text;
+}
+.fb-btns { display: flex; gap: 8px; }
+.fb-btn {
+  flex: 1; appearance: none; border: 0; cursor: pointer;
+  border-radius: 12px; padding: 13px 10px;
+  font: 400 18px "Black Han Sans", "Jua", "Apple SD Gothic Neo", sans-serif;
+}
+.fb-later { background: #eee8f2; color: #2b2233; }
+.fb-send { background: var(--fb-accent); color: var(--fb-ink); }
+.fb-send:disabled { opacity: 0.45; cursor: default; }
+.fb-chip:focus-visible, .fb-btn:focus-visible, .fb-card textarea:focus-visible { outline: 3px solid #7c5cff; outline-offset: 2px; }
+</style>
+<script>
+// Ask the player what the maker should change. Games call askOnce() when the player leaves
+// (once per visit, after at least one finished game). Feedback reaches the maker through
+// KakaoTalk: the phone's share sheet when the page may open it, otherwise the
+// message is copied for the player to paste into the chat the game link came from.
+window.gameFeedback = (() => {
+  const MAKER = "Kim Jonghyun";
+  const OPTIONS = ["😄 It’s fun", "😵 Too hard", "😴 Too easy", "🐞 Found a bug", "✨ Please add a feature", "🎨 Change the design", "📱 The screen is awkward"];
+
+  async function deliver(text) {
+    if (navigator.share) {
+      try { await navigator.share({ text }); return "shared"; }
+      catch (e) { if (e && e.name === "AbortError") return "aborted"; }
+    }
+    try { await navigator.clipboard.writeText(text); return "copied"; } catch (e) {}
+    return "manual";
+  }
+
+  function open({ game, context = "", accent = "#ff5d8f", ink = "#ffffff" }) {
+    return new Promise((resolve) => {
+      const prevFocus = document.activeElement;
+      const ov = document.createElement("div");
+      ov.className = "fb-overlay";
+      ov.style.setProperty("--fb-accent", accent);
+      ov.style.setProperty("--fb-ink", ink);
+      ov.setAttribute("role", "dialog");
+      ov.setAttribute("aria-modal", "true");
+      ov.setAttribute("aria-label", MAKER + " — send feedback");
+      const card = document.createElement("div");
+      card.className = "fb-card";
+      ov.appendChild(card);
+      document.body.appendChild(ov);
+      const close = (sent) => {
+        ov.remove();
+        document.removeEventListener("keydown", onKey, true);
+        if (prevFocus && prevFocus.focus) try { prevFocus.focus({ preventScroll: true }); } catch (e) {}
+        resolve(sent);
+      };
+      const onKey = (e) => { if (e.key === "Escape") { e.stopPropagation(); close(false); } };
+      document.addEventListener("keydown", onKey, true);
+
+      function form(picked = [], memo = "") {
+        card.innerHTML =
+          "<h3>A word for the maker, " + MAKER + "</h3>" +
+          "<p>How was the game? Pick anything you’d like changed — as many as you like.</p>" +
+          '<div class="fb-chips">' + OPTIONS.map((o) => '<button type="button" class="fb-chip" aria-pressed="' + picked.includes(o) + '">' + o + "</button>").join("") + "</div>" +
+          '<textarea id="fbMemo" rows="3" maxlength="500" placeholder="Write any wishes or features you’d like (optional)"></textarea>' +
+          '<div class="fb-btns"><button type="button" class="fb-btn fb-later">Maybe later</button><button type="button" class="fb-btn fb-send">Send</button></div>';
+        const memoEl = card.querySelector("#fbMemo");
+        memoEl.value = memo;
+        const send = card.querySelector(".fb-send");
+        const chosen = () => [...card.querySelectorAll('.fb-chip[aria-pressed="true"]')].map((b) => b.textContent);
+        const sync = () => { send.disabled = !chosen().length && !memoEl.value.trim(); };
+        card.querySelectorAll(".fb-chip").forEach((b) => b.addEventListener("click", () => {
+          b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") === "true" ? "false" : "true");
+          sync();
+        }));
+        memoEl.addEventListener("input", sync);
+        sync();
+        card.querySelector(".fb-later").addEventListener("click", () => close(false));
+        send.addEventListener("click", async () => {
+          const sel = chosen(), memo = memoEl.value.trim();
+          const text = "[" + game + " feedback] To " + MAKER + "\n" +
+            (sel.length ? "• " + sel.join("\n• ") + "\n" : "") +
+            (memo ? "💬 " + memo + "\n" : "") +
+            (context ? "(" + context + ")" : "");
+          send.disabled = true;
+          const how = await deliver(text.trim());
+          if (how === "aborted") { form(sel, memo); return; }
+          done(how, text.trim());
+        });
+        card.querySelector(".fb-chip").focus({ preventScroll: true });
+      }
+
+      function done(how, text) {
+        const msg = how === "shared"
+          ? "Thank you! " + MAKER + " will use your feedback for the next version."
+          : how === "copied"
+            ? "Feedback copied. Paste it into your chat with " + MAKER + ", who sent you this game."
+            : "Long-press the text below to copy it, then send it to " + MAKER + ", who sent you this game.";
+        card.innerHTML = "<h3>" + (how === "shared" ? "Sent!" : "Almost done!") + "</h3><p>" + msg + "</p>" +
+          '<textarea readonly rows="5"></textarea>' +
+          '<div class="fb-btns"><button type="button" class="fb-btn fb-send">Close</button></div>';
+        const ta = card.querySelector("textarea");
+        ta.value = text;
+        if (how === "manual") { ta.focus(); ta.select(); }
+        const btn = card.querySelector(".fb-send");
+        btn.addEventListener("click", () => close(true));
+        if (how !== "manual") btn.focus({ preventScroll: true });
+      }
+
+      form();
+    });
+  }
+
+  // Once per visit and game: ask when the player leaves after finishing at least one game.
+  const memo = {};
+  function asked(game) {
+    if (memo[game]) return true;
+    try { return sessionStorage.getItem("fb_asked:" + game) === "1"; } catch (e) { return false; }
+  }
+  function askOnce(opts) {
+    if (!opts || asked(opts.game) || document.querySelector(".fb-overlay")) return Promise.resolve(false);
+    memo[opts.game] = true;
+    try { sessionStorage.setItem("fb_asked:" + opts.game, "1"); } catch (e) {}
+    return open(opts);
+  }
+  // On a computer, leaving starts with the pointer going off the top of the window (to the tab's close button).
+  // getOpts returns the popup options, or null when it is not a good moment.
+  function onLeave(getOpts) {
+    document.addEventListener("mouseout", (e) => {
+      if (e.relatedTarget || e.clientY > 0) return;
+      const opts = getOpts();
+      if (opts) askOnce(opts);
+    });
+  }
+  return { open, askOnce, onLeave };
+})();
+</script>
+<!-- feedback:end -->
+<!-- appshell:start -->
+<!-- app shell: full screen while playing, and a way out; inlined before </body> of each game page -->
+<script>
+// Browsers never let a page remove the address bar itself. Full screen mode hides it where the
+// browser allows it (computers, Android Chrome, KakaoTalk on Android); iPhone Safari does not.
+window.appShell = (() => {
+  const el = document.documentElement;
+  const isFull = () => !!(document.fullscreenElement || document.webkitFullscreenElement);
+  // call from a tap (browsers only allow full screen right after a user gesture)
+  function enter() {
+    if (isFull()) return;
+    try {
+      const p = el.requestFullscreen ? el.requestFullscreen({ navigationUI: "hide" }) : el.webkitRequestFullscreen && el.webkitRequestFullscreen();
+      if (p && p.catch) p.catch(() => {});
+    } catch (e) {}
+  }
+  function exit() {
+    if (!isFull()) return;
+    try {
+      const p = document.exitFullscreen ? document.exitFullscreen() : document.webkitExitFullscreen && document.webkitExitFullscreen();
+      if (p && p.catch) p.catch(() => {});
+    } catch (e) {}
+  }
+  // leave the game altogether: back to the page or chat the link was opened from
+  function leaveApp() {
+    exit();
+    const close = () => {
+      if (/KAKAOTALK/i.test(navigator.userAgent)) location.href = "kakaotalk://inappbrowser/close";
+      else { try { window.close(); } catch (e) {} }
+    };
+    if (history.length > 1) {
+      history.back();
+      setTimeout(() => { if (!document.hidden) close(); }, 500);
+    } else close();
+  }
+  return { enter, exit, isFull, leaveApp };
+})();
+</script>
+<!-- appshell:end -->
+<!-- lucky:start -->
+<!-- lucky card: this week's lotto-style numbers as a reward; inlined before the closing body tag of every game -->
+<style>
+.lk-overlay { position: fixed; inset: 0; z-index: 1001; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(12, 10, 24, 0.6); }
+.lk-card { width: min(380px, 100%); max-height: 100%; overflow-y: auto; overscroll-behavior: contain; box-sizing: border-box; background: #fffdf3; color: #3a2400;
+  border-radius: 22px; padding: 20px 18px 16px; display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;
+  box-shadow: 0 0 0 3px #ffc23a, 0 14px 40px rgba(0,0,0,0.45); font-family: "Gowun Dodum", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  animation: lkIn 0.35s cubic-bezier(.3,1.5,.5,1); }
+@keyframes lkIn { from { transform: scale(0.8) rotate(-3deg); opacity: 0; } }
+.lk-card h3 { margin: 0; font: 400 24px/1.2 "Black Han Sans", "Jua", "Apple SD Gothic Neo", sans-serif; }
+.lk-card p { margin: 0; font-size: 14px; line-height: 1.5; color: #7a5a2a; word-break: keep-all; }
+.lk-reveal { appearance: none; border: 0; cursor: pointer; width: 100%; padding: 22px 16px; border-radius: 16px; display: flex; flex-direction: column; align-items: center; gap: 4px;
+  background: linear-gradient(135deg, #fff1a8, #ffc23a); color: #3a2400; font: 400 22px "Black Han Sans", "Jua", sans-serif;
+  box-shadow: 0 4px 0 #b37400, 0 0 24px rgba(255, 210, 90, 0.6); animation: lkGlow 1.2s ease-in-out infinite; }
+.lk-reveal small { font: 13px "Gowun Dodum", sans-serif; opacity: 0.85; }
+@keyframes lkGlow { 50% { transform: scale(1.03) rotate(-1deg); } }
+.lk-balls { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; align-items: center; }
+.lk-ball { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; font: 400 18px "Black Han Sans", sans-serif; color: #fff;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.35); box-shadow: inset -4px -5px 0 rgba(0,0,0,0.18), inset 4px 4px 0 rgba(255,255,255,0.35); animation: lkBall 0.5s cubic-bezier(.3,1.6,.5,1) both; }
+.lk-ball.c1 { background: #f2b500; } .lk-ball.c2 { background: #4fb3e8; } .lk-ball.c3 { background: #f25f5f; } .lk-ball.c4 { background: #9a9a9a; } .lk-ball.c5 { background: #8cc63f; }
+.lk-plus { font: 400 20px "Black Han Sans", sans-serif; color: #7a5a2a; }
+@keyframes lkBall { from { transform: scale(0) rotate(-180deg); opacity: 0; } }
+.lk-note { font-size: 12px !important; color: #9a7a4a !important; }
+.lk-sets { width: 100%; font-size: 13px; color: #6b5a48; text-align: left; }
+.lk-sets summary { cursor: pointer; text-align: center; font-family: "Black Han Sans", sans-serif; color: #8a6b4a; }
+.lk-set { display: grid; grid-template-columns: auto 1fr; gap: 0 8px; padding: 6px 0; border-top: 1px dashed #e6d3a6; }
+.lk-set b { font: 400 14px "Black Han Sans", sans-serif; }
+.lk-set span { font-variant-numeric: tabular-nums; font-weight: 700; text-align: right; }
+.lk-set small { grid-column: 1 / -1; color: #8a6b4a; font-size: 12px; }
+.lk-btns { display: flex; gap: 8px; width: 100%; }
+.lk-btn { flex: 1; appearance: none; border: 0; cursor: pointer; border-radius: 12px; padding: 12px 10px; font: 400 17px "Black Han Sans", "Jua", sans-serif; }
+.lk-copy { background: #ffc23a; color: #3a2400; }
+.lk-close { background: #f1e8d4; color: #3a2400; }
+.lk-text { width: 100%; box-sizing: border-box; min-height: 120px; resize: none; border: 1.5px solid #e6d3a6; border-radius: 12px; padding: 8px 10px;
+  font: 13px/1.5 "Gowun Dodum", sans-serif; color: #3a2400; background: #fff; user-select: text; -webkit-user-select: text; }
+.lk-text[hidden] { display: none; }
+.lk-reveal:focus-visible, .lk-btn:focus-visible { outline: 3px solid #7c5cff; outline-offset: 2px; }
+</style>
+<script>
+// lucky card: lotto/predict.json holds this week's numbers, rebuilt every Saturday from past draws.
+window.luckyCard = (() => {
+  const URL_ = /^https?:$/.test(location.protocol) && !/claude/.test(location.hostname)
+    ? new URL("/lotto/predict.json", location.href).href : "https://bellhkim.github.io/lotto/predict.json";
+  // the English pages show the English names the weekly job writes next to the Korean ones
+  const EN = document.documentElement.lang === "en";
+  const tx = (o, k) => (EN && o[k + "_en"]) || o[k];
+  const esc = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;");
+  async function load() {
+    try {
+      const r = await fetch(URL_, { cache: "no-cache" });
+      if (!r.ok) return null;
+      const p = await r.json();
+      return p && p.main && p.main.nums && p.main.nums.length === 6 ? p : null;
+    } catch (e) { return null; }
+  }
+  let actx = null;
+  function ding(i) {
+    try {
+      actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+      const t = actx.currentTime + i * 0.35, o = actx.createOscillator(), g = actx.createGain();
+      o.type = "square"; o.frequency.setValueAtTime(660 + i * 90, t);
+      g.gain.setValueAtTime(0.05, t); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.18);
+      o.connect(g).connect(actx.destination); o.start(t); o.stop(t + 0.2);
+    } catch (e) {}
+  }
+  // game: name for the copy text; reason: why the card was earned (e.g. "12,340 points")
+  function open({ game, reason, muted = false }) {
+    if (document.querySelector(".lk-overlay")) return;
+    const ov = document.createElement("div");
+    ov.className = "lk-overlay";
+    ov.setAttribute("role", "dialog"); ov.setAttribute("aria-modal", "true"); ov.setAttribute("aria-label", "Lucky bonus card");
+    ov.innerHTML = '<div class="lk-card"><h3>🍀 Lucky bonus card</h3><p>' + esc(reason) + "! Here are this week’s lucky numbers from Dr. Kejay.</p>" +
+      '<button type="button" class="lk-reveal">Open the card<small>Tap to see your numbers</small></button></div>';
+    document.body.appendChild(ov);
+    const card = ov.querySelector(".lk-card"), reveal = ov.querySelector(".lk-reveal");
+    const close = () => { ov.remove(); document.removeEventListener("keydown", onKey, true); };
+    const onKey = (e) => { if (e.key === "Escape") { e.stopPropagation(); close(); } };
+    document.addEventListener("keydown", onKey, true);
+    reveal.focus({ preventScroll: true });
+    reveal.addEventListener("click", async () => {
+      reveal.disabled = true;
+      reveal.querySelector("small").textContent = "Analysing past winning numbers…";
+      const p = await load();
+      let nums, bonus, head, foot;
+      if (p) {
+        nums = p.main.nums; bonus = p.main.bonus;
+        head = "Draw #" + p.target.no + " (" + p.target.date.slice(5).replace("-", "/") + ") · " + esc(tx(p.main, "name"));
+        foot = '<p class="lk-note">' + esc(tx(p.main, "method")) + "</p>" +
+          '<details class="lk-sets"><summary>See the other analyses</summary>' +
+          p.sets.map((s) => '<div class="lk-set"><b>' + esc(tx(s, "name")) + "</b><span>" + s.nums.join(" · ") + "</span><small>" + esc(tx(s, "method")) + "</small></div>").join("") +
+          "</details>" + '<p class="lk-note">' + esc(tx(p, "note")) + "</p>";
+      } else {
+        const pool = Array.from({ length: 45 }, (_, i) => i + 1);
+        for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
+        nums = pool.slice(0, 6).sort((a, b) => a - b); bonus = pool[6];
+        head = "Lucky numbers from Dr. Kejay";
+        foot = '<p class="lk-note">Couldn’t load the analysis, so these are random. Just for fun.</p>';
+      }
+      const ball = (n, i) => '<span class="lk-ball c' + Math.min(5, Math.ceil(n / 10)) + '" style="animation-delay:' + i * 0.35 + 's">' + n + "</span>";
+      card.innerHTML = "<h3>🍀 " + head + "</h3>" +
+        '<div class="lk-balls">' + nums.map(ball).join("") + '<span class="lk-plus">+</span>' + ball(bonus, 6) + "</div>" + foot +
+        '<textarea class="lk-text" readonly hidden></textarea>' +
+        '<div class="lk-btns"><button type="button" class="lk-btn lk-close">Close</button><button type="button" class="lk-btn lk-copy">Copy all numbers</button></div>';
+      if (!muted) for (let i = 0; i < 7; i++) ding(i);
+      try {
+        const list = JSON.parse(localStorage.getItem("lucky_history") || "[]");
+        list.unshift({ game, nums, bonus, draw: p ? p.target.no : null, at: Date.now() });
+        localStorage.setItem("lucky_history", JSON.stringify(list.slice(0, 10)));
+      } catch (e) {}
+      // every set on the card goes into the copy, one per line
+      const site = (/^https?:$/.test(location.protocol) && !/claude/.test(location.hostname) ? location.origin + "/" : "https://bellhkim.github.io/") + (EN ? "en/" : "");
+      const lines = ["🍀 " + game + " " + reason + " — " + (p ? "Draw #" + p.target.no + " (" + p.target.date + ") " : "") + "lucky numbers",
+        "⭐ " + (p ? tx(p.main, "name") : "lucky numbers") + ": " + nums.join(", ") + " + bonus " + bonus];
+      if (p) for (const s of p.sets) lines.push("• " + tx(s, "name") + ": " + s.nums.join(", ") + (s.bonus ? " + bonus " + s.bonus : ""));
+      lines.push("(Numbers from a just-for-fun analysis of past draws. Every combination has the same odds.)", site);
+      const text = lines.join("\n");
+      card.querySelector(".lk-close").addEventListener("click", close);
+      const copyBtn = card.querySelector(".lk-copy");
+      const ta = card.querySelector(".lk-text");
+      copyBtn.addEventListener("click", () => {
+        const manual = () => { ta.value = text; ta.hidden = false; ta.focus(); ta.select(); copyBtn.textContent = "Long-press to copy"; };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(() => { copyBtn.textContent = "All copied!"; }).catch(manual);
+        else manual();
+      });
+      copyBtn.focus({ preventScroll: true });
+    });
+  }
+  return { open };
+})();
+</script>
+<!-- lucky:end -->
+</body>
+</html>

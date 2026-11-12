@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>김종현의 오락실</title>
+<title>Dr. Kejay의 오락실</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="은하 순찰대, 냥멍 팡팡, 고스톱, 나의 전생은 누구였을까. 네 게임을 한곳에서!">
 <meta property="og:type" content="website">
-<meta property="og:title" content="김종현의 오락실 — 게임 네 개, 링크 하나">
+<meta property="og:title" content="Dr. Kejay의 오락실 — 게임 네 개, 링크 하나">
 <meta property="og:description" content="슈팅, 동물 퍼즐, 고스톱, 철학 전생 테스트. 골라서 바로 시작!">
 <meta name="theme-color" content="#16123a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -72,6 +72,9 @@ a { color: inherit; }
     radial-gradient(circle, var(--gold) 0 3px, transparent 4px) 11px 100% / 22px 22px repeat-x;
   animation: chase 0.8s steps(2) infinite; opacity: 0.9; }
 @keyframes chase { to { background-position: 22px 0, -11px 100%; } }
+.lang-btn { position: absolute; top: 12px; right: 14px; z-index: 2; font-family: var(--round); font-size: 13px; color: #fff; text-decoration: none;
+  background: rgba(255,255,255,0.14); box-shadow: inset 0 0 0 1.5px rgba(255,255,255,0.4); padding: 4px 10px; border-radius: 999px; }
+.lang-btn:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 .sign .eyebrow { font-family: var(--round); letter-spacing: 0.3em; color: var(--cyan); font-size: 13px; text-shadow: 0 0 8px var(--cyan); }
 .sign h1 {
   margin: 4px 0 2px; font-family: var(--display); font-weight: 400; line-height: 1.05;
@@ -252,8 +255,9 @@ a { color: inherit; }
 <main class="wrap">
   <header class="sign">
     <div class="bulbs" aria-hidden="true"></div>
+    <a class="lang-btn" id="langBtn" href="en/" hreflang="en" lang="en" data-lang="en">🌐 English</a>
     <div class="eyebrow">INSERT COIN · PRESS START</div>
-    <h1><span class="joystick" aria-hidden="true">🕹️</span> <span style="white-space:nowrap">김종현의 오락실</span></h1>
+    <h1><span class="joystick" aria-hidden="true">🕹️</span> <span style="white-space:nowrap">Dr. Kejay의 오락실</span></h1>
     <p>무엇부터 해 볼까요? 카드를 누르면 바로 시작해요.</p>
     <div class="credit">만든 사람 · 김종현</div>
   </header>
@@ -373,6 +377,7 @@ a { color: inherit; }
     <section>
       <h4>🕹️ 오락실</h4>
       <ul>
+        <li>이름이 <b>Dr. Kejay의 오락실</b>로 바뀌었어요. 오른쪽 위 🌐 <b>English</b> 버튼으로 네 게임 모두 영어로 할 수 있어요</li>
         <li>🍀 행운 카드의 <b>번호 전부 복사</b>: 추천 번호와 분석 번호를 한 번에 카톡으로</li>
         <li>로그인 없이 <b>bellhkim.github.io</b> 하나로 네 게임을 바로</li>
         <li>📣 공유하기 버튼으로 카톡에 친구 초대</li>
@@ -395,6 +400,11 @@ a { color: inherit; }
 (() => {
   "use strict";
   const $ = (id) => document.getElementById(id);
+  // language: remember the choice; a visitor who picked English lands on the English arcade next time
+  try {
+    if (document.documentElement.lang === "ko" && localStorage.getItem("arcade_lang") === "en" && !/\/en\//.test(document.referrer)) location.replace("en/");
+  } catch (e) {}
+  $("langBtn").addEventListener("click", () => { try { localStorage.setItem("arcade_lang", $("langBtn").dataset.lang); } catch (e) {} });
   const read = (k, d) => { try { const v = localStorage.getItem(k); return v === null ? d : JSON.parse(v); } catch (e) { return d; } };
 
   // drifting icons
@@ -435,7 +445,7 @@ a { color: inherit; }
   // share: phone share sheet when allowed, otherwise copy the invitation for KakaoTalk
   const ARCADE_URL = "https://bellhkim.github.io/";
   const pageUrl = () => /claude/.test(location.hostname) || location.protocol === "file:" ? ARCADE_URL : location.href.split("#")[0];
-  const inviteText = () => "🕹️ 김종현의 오락실에 놀러 와!\n🚀 은하 순찰대 · 🐱 냥멍 팡팡 · 🎴 고스톱 · 🔮 나의 전생은 누구였을까\n설치 없이 링크만 누르면 바로 시작해 👇\n" + pageUrl();
+  const inviteText = () => "🕹️ Dr. Kejay의 오락실에 놀러 와!\n🚀 은하 순찰대 · 🐱 냥멍 팡팡 · 🎴 고스톱 · 🔮 나의 전생은 누구였을까\n설치 없이 링크만 누르면 바로 시작해 👇\n" + pageUrl();
   const panel = $("sharePanel"), ta = $("shareText");
   async function copy(text) {
     try { await navigator.clipboard.writeText(text); return true; } catch (e) {}
@@ -452,7 +462,7 @@ a { color: inherit; }
   $("shareBtn").addEventListener("click", async () => {
     const text = inviteText();
     if (navigator.share) {
-      try { await navigator.share({ title: "김종현의 오락실", text }); return; }
+      try { await navigator.share({ title: "Dr. Kejay의 오락실", text }); return; }
       catch (e) { if (e && e.name === "AbortError") return; }
     }
     showPanel(await copy(text));
@@ -464,7 +474,7 @@ a { color: inherit; }
   const hidePanel = () => { panel.hidden = true; $("shareBtn").focus(); };
 
   // update notice: shows on arrival until the player picks 다시 안 보기 (a new NOTICE_ID shows it again)
-  const NOTICE_ID = "2026-11e";
+  const NOTICE_ID = "2026-11f";
   const notice = $("noticePanel");
   const openNotice = () => { notice.hidden = false; $("noticeOk").focus({ preventScroll: true }); };
   const closeNotice = (forever) => {

@@ -3165,7 +3165,10 @@ window.appShell = (() => {
 // 행운 카드: lotto/predict.json holds this week's numbers, rebuilt every Saturday from past draws.
 window.luckyCard = (() => {
   const URL_ = /^https?:$/.test(location.protocol) && !/claude/.test(location.hostname)
-    ? new URL("../lotto/predict.json", location.href).href : "https://bellhkim.github.io/lotto/predict.json";
+    ? new URL("/lotto/predict.json", location.href).href : "https://bellhkim.github.io/lotto/predict.json";
+  // the English pages show the English names the weekly job writes next to the Korean ones
+  const EN = document.documentElement.lang === "en";
+  const tx = (o, k) => (EN && o[k + "_en"]) || o[k];
   const esc = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;");
   async function load() {
     try {
@@ -3206,11 +3209,11 @@ window.luckyCard = (() => {
       let nums, bonus, head, foot;
       if (p) {
         nums = p.main.nums; bonus = p.main.bonus;
-        head = "제" + p.target.no + "회 (" + p.target.date.slice(5).replace("-", "/") + ") · " + esc(p.main.name);
-        foot = '<p class="lk-note">' + esc(p.main.method) + "</p>" +
+        head = "제" + p.target.no + "회 (" + p.target.date.slice(5).replace("-", "/") + ") · " + esc(tx(p.main, "name"));
+        foot = '<p class="lk-note">' + esc(tx(p.main, "method")) + "</p>" +
           '<details class="lk-sets"><summary>다른 분석 번호 보기</summary>' +
-          p.sets.map((s) => '<div class="lk-set"><b>' + esc(s.name) + "</b><span>" + s.nums.join(" · ") + "</span><small>" + esc(s.method) + "</small></div>").join("") +
-          "</details>" + '<p class="lk-note">' + esc(p.note) + "</p>";
+          p.sets.map((s) => '<div class="lk-set"><b>' + esc(tx(s, "name")) + "</b><span>" + s.nums.join(" · ") + "</span><small>" + esc(tx(s, "method")) + "</small></div>").join("") +
+          "</details>" + '<p class="lk-note">' + esc(tx(p, "note")) + "</p>";
       } else {
         const pool = Array.from({ length: 45 }, (_, i) => i + 1);
         for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
@@ -3230,10 +3233,10 @@ window.luckyCard = (() => {
         localStorage.setItem("lucky_history", JSON.stringify(list.slice(0, 10)));
       } catch (e) {}
       // every set on the card goes into the copy, one per line
-      const site = /^https?:$/.test(location.protocol) && !/claude/.test(location.hostname) ? location.origin + "/" : "https://bellhkim.github.io/";
+      const site = (/^https?:$/.test(location.protocol) && !/claude/.test(location.hostname) ? location.origin + "/" : "https://bellhkim.github.io/") + (EN ? "en/" : "");
       const lines = ["🍀 " + game + " " + reason + " 기념 " + (p ? "제" + p.target.no + "회 (" + p.target.date + ") " : "") + "행운 번호",
-        "⭐ " + (p ? p.main.name : "행운 번호") + ": " + nums.join(", ") + " + 보너스 " + bonus];
-      if (p) for (const s of p.sets) lines.push("• " + s.name + ": " + s.nums.join(", ") + (s.bonus ? " + 보너스 " + s.bonus : ""));
+        "⭐ " + (p ? tx(p.main, "name") : "행운 번호") + ": " + nums.join(", ") + " + 보너스 " + bonus];
+      if (p) for (const s of p.sets) lines.push("• " + tx(s, "name") + ": " + s.nums.join(", ") + (s.bonus ? " + 보너스 " + s.bonus : ""));
       lines.push("(지난 당첨 기록을 재미로 분석한 번호예요. 당첨 확률은 어떤 번호든 같아요)", site);
       const text = lines.join("\n");
       card.querySelector(".lk-close").addEventListener("click", close);
