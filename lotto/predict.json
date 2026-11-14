@@ -1,38 +1,38 @@
 {
- "generatedAt": "2026-11-12T02:39:31+00:00",
+ "generatedAt": "2026-11-14T19:13:50+00:00",
  "target": {
-  "no": 1250,
-  "date": "2026-11-14"
+  "no": 1251,
+  "date": "2026-11-21"
  },
  "basedOn": {
-  "no": 1249,
-  "date": "2026-11-07",
+  "no": 1250,
+  "date": "2026-11-14",
   "nums": [
-   2,
-   11,
-   16,
-   25,
-   34,
-   35
+   1,
+   5,
+   18,
+   23,
+   27,
+   28
   ],
-  "bonus": 14,
-  "totalDraws": 536
+  "bonus": 8,
+  "totalDraws": 537
  },
  "main": {
   "id": "main",
   "name": "이번 주 추천 · 가장 안 나온 수",
-  "method": "최근 10년 522회 추첨에서 가장 적게 나온 6개 (번호당 기대 70회 · 실제 52~60회)",
+  "method": "최근 10년 522회 추첨에서 가장 적게 나온 6개 (번호당 기대 70회 · 실제 53~60회)",
   "nums": [
    4,
    5,
    8,
    20,
-   23,
-   25
+   25,
+   40
   ],
-  "bonus": 40,
+  "bonus": 23,
   "name_en": "This week's pick · least drawn",
-  "method_en": "The 6 drawn least in the last 10 years (522 draws; about 70 expected each, actually 52-60)"
+  "method_en": "The 6 drawn least in the last 10 years (522 draws; about 70 expected each, actually 53-60)"
  },
  "sets": [
   {
@@ -71,9 +71,9 @@
    "method": "대수의 법칙: 157회 추첨에서 가장 많이 나온 6개",
    "nums": [
     3,
-    7,
     13,
     16,
+    27,
     28,
     38
    ],
@@ -130,14 +130,14 @@
    "name": "가중 몬테카를로",
    "method": "최근일수록 무게를 더 준 10년 빈도로 뽑은 뒤, 과거 당첨 조합의 합계·홀짝·고저 분포에 맞춘 조합",
    "nums": [
-    7,
-    14,
-    16,
-    29,
-    34,
-    37
+    1,
+    12,
+    15,
+    32,
+    37,
+    45
    ],
-   "bonus": 12,
+   "bonus": 36,
    "name_en": "Weighted Monte Carlo",
    "method_en": "Drawn by 10-year frequency weighted toward recent draws, kept only if its sum, odd/even and high/low mix look like past winners"
   }
@@ -146,8 +146,8 @@
   "10y": {
    "label": "최근 10년",
    "draws": 522,
-   "from": "2016-11-12",
-   "to": "2026-11-07",
+   "from": "2016-11-19",
+   "to": "2026-11-14",
    "expected": 69.6,
    "hot": [
     12,
@@ -162,18 +162,18 @@
     5,
     8,
     20,
-    23,
-    25
+    25,
+    40
    ],
-   "chi2": 41.9,
+   "chi2": 41.2,
    "sumMean": 139.1,
    "sumSd": 30.1
   },
   "5y": {
    "label": "최근 5년",
    "draws": 261,
-   "from": "2021-11-13",
-   "to": "2026-11-07",
+   "from": "2021-11-20",
+   "to": "2026-11-14",
    "expected": 34.8,
    "hot": [
     3,
@@ -191,21 +191,21 @@
     41,
     43
    ],
-   "chi2": 38.7,
-   "sumMean": 138.5,
-   "sumSd": 29.5
+   "chi2": 37.9,
+   "sumMean": 138.3,
+   "sumSd": 29.6
   },
   "3y": {
    "label": "최근 3년",
    "draws": 157,
-   "from": "2023-11-11",
-   "to": "2026-11-07",
+   "from": "2023-11-18",
+   "to": "2026-11-14",
    "expected": 20.9,
    "hot": [
     3,
-    7,
     13,
     16,
+    27,
     28,
     38
    ],
@@ -213,19 +213,19 @@
     2,
     4,
     5,
-    18,
-    23,
+    10,
+    17,
     43
    ],
-   "chi2": 33.1,
-   "sumMean": 137.9,
-   "sumSd": 29.0
+   "chi2": 34.1,
+   "sumMean": 137.6,
+   "sumSd": 29.1
   },
   "1y": {
    "label": "최근 1년",
    "draws": 53,
-   "from": "2025-11-08",
-   "to": "2026-11-07",
+   "from": "2025-11-15",
+   "to": "2026-11-14",
    "expected": 7.1,
    "hot": [
     13,
@@ -243,9 +243,9 @@
     14,
     40
    ],
-   "chi2": 27.3,
-   "sumMean": 141.2,
-   "sumSd": 26.8
+   "chi2": 30.7,
+   "sumMean": 141.1,
+   "sumSd": 27.0
   }
  },
  "note": "추첨은 매번 독립적이라 어떤 조합이든 당첨 확률은 8,145,060분의 1로 같아요. 지난 기록을 재미로 요약한 번호예요.",
