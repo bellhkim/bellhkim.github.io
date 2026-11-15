@@ -959,6 +959,9 @@ window.appShell = (() => {
 .lk-ball.c1 { background: #f2b500; } .lk-ball.c2 { background: #4fb3e8; } .lk-ball.c3 { background: #f25f5f; } .lk-ball.c4 { background: #9a9a9a; } .lk-ball.c5 { background: #8cc63f; }
 .lk-plus { font: 400 20px "Black Han Sans", sans-serif; color: #7a5a2a; }
 @keyframes lkBall { from { transform: scale(0) rotate(-180deg); opacity: 0; } }
+.lk-last { width: 100%; box-sizing: border-box; padding: 8px 10px; border-radius: 12px; background: #fff4d6; font-size: 13px; line-height: 1.55; color: #6b4300; text-align: center; }
+.lk-last b { font-family: "Black Han Sans", sans-serif; font-weight: 400; }
+.lk-last .hit { display: inline-block; min-width: 20px; padding: 0 4px; border-radius: 999px; background: #ffc23a; color: #3a2400; font-weight: 700; }
 .lk-note { font-size: 12px !important; color: #9a7a4a !important; }
 .lk-sets { width: 100%; font-size: 13px; color: #6b5a48; text-align: left; }
 .lk-sets summary { cursor: pointer; text-align: center; font-family: "Black Han Sans", sans-serif; color: #8a6b4a; }
@@ -1024,7 +1027,12 @@ window.luckyCard = (() => {
       if (p) {
         nums = p.main.nums; bonus = p.main.bonus;
         head = "Draw #" + p.target.no + " (" + p.target.date.slice(5).replace("-", "/") + ") · " + esc(tx(p.main, "name"));
-        foot = '<p class="lk-note">' + esc(tx(p.main, "method")) + "</p>" +
+        const lw = p.lastWeek;
+        const lastHTML = lw ? '<div class="lk-last"><b>📢 Draw #' + lw.no + " (" + lw.date.slice(5).replace("-", "/") + ") results included</b><br>" +
+          lw.nums.map((n) => (lw.pick.includes(n) ? '<span class="hit">' + n + "</span>" : n)).join(" · ") + " + " + lw.bonus + "<br>" +
+          (lw.hits.length ? "Last week’s pick matched " + lw.hits.length + "" : "Last week’s pick matched none") +
+          (lw.bonusHit ? " · it also had the bonus number" : "") + "</div>" : "";
+        foot = lastHTML + '<p class="lk-note">' + esc(tx(p.main, "method")) + "</p>" +
           '<details class="lk-sets"><summary>See the other analyses</summary>' +
           p.sets.map((s) => '<div class="lk-set"><b>' + esc(tx(s, "name")) + "</b><span>" + s.nums.join(" · ") + "</span><small>" + esc(tx(s, "method")) + "</small></div>").join("") +
           "</details>" + '<p class="lk-note">' + esc(tx(p, "note")) + "</p>";
@@ -1050,6 +1058,7 @@ window.luckyCard = (() => {
       const site = (/^https?:$/.test(location.protocol) && !/claude/.test(location.hostname) ? location.origin + "/" : "https://bellhkim.github.io/") + (EN ? "en/" : "");
       const lines = ["🍀 " + game + " " + reason + " — " + (p ? "Draw #" + p.target.no + " (" + p.target.date + ") " : "") + "lucky numbers",
         "⭐ " + (p ? tx(p.main, "name") : "lucky numbers") + ": " + nums.join(", ") + " + bonus " + bonus];
+      if (p && p.lastWeek) lines.push("📢 Draw #" + p.lastWeek.no + " results: " + p.lastWeek.nums.join(", ") + " + bonus " + p.lastWeek.bonus + " (last week’s pick: " + p.lastWeek.hits.length + " matched)");
       if (p) for (const s of p.sets) lines.push("• " + tx(s, "name") + ": " + s.nums.join(", ") + (s.bonus ? " + bonus " + s.bonus : ""));
       lines.push("(Numbers from a just-for-fun analysis of past draws. Every combination has the same odds.)", site);
       const text = lines.join("\n");

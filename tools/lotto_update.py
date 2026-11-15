@@ -293,6 +293,14 @@ def main():
         sys.exit("no draws available: the lottery site could not be reached")
     path.write_text(json.dumps(draws, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     pred = predict(draws)
+    # last week's pick against the draw that just happened (the pick is reproducible: same draws, same seed)
+    if len(draws) > 60:
+        prev = predict(draws[:-1])["main"]
+        latest = draws[-1]
+        hits = sorted(set(prev["nums"]) & set(latest["nums"]))
+        pred["lastWeek"] = {"no": latest["no"], "date": latest["date"], "nums": latest["nums"], "bonus": latest["bonus"],
+                            "pick": prev["nums"], "pickBonus": prev["bonus"], "hits": hits,
+                            "bonusHit": latest["bonus"] in prev["nums"]}
     (out / "predict.json").write_text(json.dumps(pred, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"predict.json for draw {pred['target']['no']} ({pred['target']['date']}): {pred['main']['nums']} + {pred['main']['bonus']}")
 

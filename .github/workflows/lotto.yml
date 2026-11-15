@@ -6,6 +6,7 @@ on:
   schedule:
     - cron: "17 14 * * 6"   # Saturday 23:17 KST
     - cron: "17 0 * * 0"    # Sunday 09:17 KST
+    - cron: "47 3 * * 0"    # Sunday 12:47 KST (GitHub often starts scheduled runs hours late)
   workflow_dispatch:
 permissions:
   contents: write

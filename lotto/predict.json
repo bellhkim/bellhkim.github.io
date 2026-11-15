@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-15T06:30:12+00:00",
+ "generatedAt": "2026-11-15T15:55:52+00:00",
  "target": {
   "no": 1251,
   "date": "2026-11-21"
@@ -249,5 +249,32 @@
   }
  },
  "note": "추첨은 매번 독립적이라 어떤 조합이든 당첨 확률은 8,145,060분의 1로 같아요. 지난 기록을 재미로 요약한 번호예요.",
- "note_en": "Every draw is independent, so every combination has the same 1 in 8,145,060 chance. These numbers just summarise past draws for fun."
+ "note_en": "Every draw is independent, so every combination has the same 1 in 8,145,060 chance. These numbers just summarise past draws for fun.",
+ "lastWeek": {
+  "no": 1250,
+  "date": "2026-11-14",
+  "nums": [
+   1,
+   5,
+   18,
+   23,
+   27,
+   28
+  ],
+  "bonus": 8,
+  "pick": [
+   4,
+   5,
+   8,
+   20,
+   23,
+   25
+  ],
+  "pickBonus": 40,
+  "hits": [
+   5,
+   23
+  ],
+  "bonusHit": true
+ }
 }
