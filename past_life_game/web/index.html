@@ -1749,17 +1749,21 @@ window.appShell = (() => {
       if (p && p.catch) p.catch(() => {});
     } catch (e) {}
   }
-  // leave the game altogether: back to the page or chat the link was opened from
+  // leave the game: back to the arcade home
   function leaveApp() {
     exit();
-    const close = () => {
-      if (/KAKAOTALK/i.test(navigator.userAgent)) location.href = "kakaotalk://inappbrowser/close";
-      else { try { window.close(); } catch (e) {} }
-    };
-    if (history.length > 1) {
+    // back to the arcade home: the previous page when we came from it, otherwise open it.
+    // A game opened straight from a shared link (no arcade page behind it) used to close the
+    // KakaoTalk browser here, which left no way to reach the arcade home.
+    const en = document.documentElement.lang === "en";
+    const onSite = /^https?:$/.test(location.protocol) && !/claude/.test(location.hostname);
+    const home = (onSite ? location.origin + "/" : "https://bellhkim.github.io/") + (en ? "en/" : "");
+    let fromHome = false;
+    try { const r = new URL(document.referrer); fromHome = r.origin === location.origin && (r.pathname === "/" || r.pathname === "/index.html" || r.pathname === "/en/" || r.pathname === "/en/index.html"); } catch (e) {}
+    if (fromHome && history.length > 1) {
       history.back();
-      setTimeout(() => { if (!document.hidden) close(); }, 500);
-    } else close();
+      setTimeout(() => { if (!document.hidden) location.href = home; }, 600);
+    } else location.href = home;
   }
   return { enter, exit, isFull, leaveApp };
 })();
