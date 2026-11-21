@@ -1,38 +1,38 @@
 {
- "generatedAt": "2026-11-15T15:56:58+00:00",
+ "generatedAt": "2026-11-21T20:34:34+00:00",
  "target": {
-  "no": 1251,
-  "date": "2026-11-21"
+  "no": 1252,
+  "date": "2026-11-28"
  },
  "basedOn": {
-  "no": 1250,
-  "date": "2026-11-14",
+  "no": 1251,
+  "date": "2026-11-21",
   "nums": [
-   1,
-   5,
+   14,
    18,
-   23,
-   27,
-   28
+   19,
+   29,
+   40,
+   45
   ],
-  "bonus": 8,
-  "totalDraws": 537
+  "bonus": 1,
+  "totalDraws": 538
  },
  "main": {
   "id": "main",
   "name": "이번 주 추천 · 가장 안 나온 수",
-  "method": "최근 10년 522회 추첨에서 가장 적게 나온 6개 (번호당 기대 70회 · 실제 53~60회)",
+  "method": "최근 10년 522회 추첨에서 가장 적게 나온 6개 (번호당 기대 70회 · 실제 53~61회)",
   "nums": [
    4,
    5,
    8,
    20,
-   25,
-   40
+   23,
+   25
   ],
-  "bonus": 23,
+  "bonus": 40,
   "name_en": "This week's pick · least drawn",
-  "method_en": "The 6 drawn least in the last 10 years (522 draws; about 70 expected each, actually 53-60)"
+  "method_en": "The 6 drawn least in the last 10 years (522 draws; about 70 expected each, actually 53-61)"
  },
  "sets": [
   {
@@ -44,8 +44,8 @@
     13,
     16,
     18,
-    21,
-    38
+    38,
+    45
    ],
    "name_en": "Most drawn, last 10 years",
    "method_en": "Law of large numbers: the 6 drawn most often in 522 draws"
@@ -55,12 +55,12 @@
    "name": "최근 5년 최다 출현",
    "method": "대수의 법칙: 261회 추첨에서 가장 많이 나온 6개",
    "nums": [
-    3,
     6,
     13,
     16,
     35,
-    38
+    38,
+    45
    ],
    "name_en": "Most drawn, last 5 years",
    "method_en": "Law of large numbers: the 6 drawn most often in 261 draws"
@@ -70,9 +70,9 @@
    "name": "최근 3년 최다 출현",
    "method": "대수의 법칙: 157회 추첨에서 가장 많이 나온 6개",
    "nums": [
-    3,
     13,
     16,
+    19,
     27,
     28,
     38
@@ -130,14 +130,14 @@
    "name": "가중 몬테카를로",
    "method": "최근일수록 무게를 더 준 10년 빈도로 뽑은 뒤, 과거 당첨 조합의 합계·홀짝·고저 분포에 맞춘 조합",
    "nums": [
-    1,
-    12,
-    15,
+    3,
+    14,
+    22,
     32,
-    37,
-    45
+    36,
+    39
    ],
-   "bonus": 36,
+   "bonus": 20,
    "name_en": "Weighted Monte Carlo",
    "method_en": "Drawn by 10-year frequency weighted toward recent draws, kept only if its sum, odd/even and high/low mix look like past winners"
   }
@@ -146,65 +146,65 @@
   "10y": {
    "label": "최근 10년",
    "draws": 522,
-   "from": "2016-11-19",
-   "to": "2026-11-14",
+   "from": "2016-11-26",
+   "to": "2026-11-21",
    "expected": 69.6,
    "hot": [
     12,
     13,
     16,
     18,
-    21,
-    38
+    38,
+    45
    ],
    "cold": [
     4,
     5,
     8,
     20,
-    25,
-    40
+    23,
+    25
    ],
    "chi2": 41.2,
    "sumMean": 139.1,
-   "sumSd": 30.1
+   "sumSd": 30.2
   },
   "5y": {
    "label": "최근 5년",
    "draws": 261,
-   "from": "2021-11-20",
-   "to": "2026-11-14",
+   "from": "2021-11-27",
+   "to": "2026-11-21",
    "expected": 34.8,
    "hot": [
-    3,
     6,
     13,
     16,
     35,
-    38
+    38,
+    45
    ],
    "cold": [
     2,
+    4,
     5,
     10,
     39,
-    41,
     43
    ],
-   "chi2": 37.9,
-   "sumMean": 138.3,
+   "chi2": 40.2,
+   "sumMean": 138.4,
    "sumSd": 29.6
   },
   "3y": {
    "label": "최근 3년",
    "draws": 157,
-   "from": "2023-11-18",
-   "to": "2026-11-14",
+   "from": "2023-11-25",
+   "to": "2026-11-21",
    "expected": 20.9,
    "hot": [
-    3,
     13,
     16,
+    19,
     27,
     28,
     38
@@ -213,19 +213,19 @@
     2,
     4,
     5,
-    10,
     17,
+    22,
     43
    ],
-   "chi2": 34.1,
-   "sumMean": 137.6,
-   "sumSd": 29.1
+   "chi2": 33.1,
+   "sumMean": 137.9,
+   "sumSd": 29.2
   },
   "1y": {
    "label": "최근 1년",
    "draws": 53,
-   "from": "2025-11-15",
-   "to": "2026-11-14",
+   "from": "2025-11-22",
+   "to": "2026-11-21",
    "expected": 7.1,
    "hot": [
     13,
@@ -240,41 +240,40 @@
     5,
     6,
     12,
-    14,
-    40
+    26,
+    33
    ],
    "chi2": 30.7,
-   "sumMean": 141.1,
-   "sumSd": 27.0
+   "sumMean": 140.3,
+   "sumSd": 25.6
   }
  },
  "note": "추첨은 매번 독립적이라 어떤 조합이든 당첨 확률은 8,145,060분의 1로 같아요. 지난 기록을 재미로 요약한 번호예요.",
  "note_en": "Every draw is independent, so every combination has the same 1 in 8,145,060 chance. These numbers just summarise past draws for fun.",
  "lastWeek": {
-  "no": 1250,
-  "date": "2026-11-14",
+  "no": 1251,
+  "date": "2026-11-21",
   "nums": [
-   1,
-   5,
+   14,
    18,
-   23,
-   27,
-   28
+   19,
+   29,
+   40,
+   45
   ],
-  "bonus": 8,
+  "bonus": 1,
   "pick": [
    4,
    5,
    8,
    20,
-   23,
-   25
+   25,
+   40
   ],
-  "pickBonus": 40,
+  "pickBonus": 23,
   "hits": [
-   5,
-   23
+   40
   ],
-  "bonusHit": true
+  "bonusHit": false
  }
 }
